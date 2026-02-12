@@ -4,7 +4,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="text-center md:text-left">
-            <p className="font-heading text-lg font-bold text-gold tracking-wider">
+            <p className="font-heading text-lg font-bold text-accent tracking-wider">
               FILIP JAGODIČ
             </p>
             <p className="text-white/30 text-sm mt-1">
@@ -18,31 +18,31 @@ export default function Footer() {
           >
             <a
               href="#o-filipu"
-              className="text-white/40 hover:text-gold text-sm transition-colors"
+              className="text-white/40 hover:text-accent text-sm transition-colors"
             >
               O Filipu
             </a>
             <a
               href="#glasba"
-              className="text-white/40 hover:text-gold text-sm transition-colors"
+              className="text-white/40 hover:text-accent text-sm transition-colors"
             >
               Glasba
             </a>
             <a
               href="#zbirke"
-              className="text-white/40 hover:text-gold text-sm transition-colors"
+              className="text-white/40 hover:text-accent text-sm transition-colors"
             >
               Zbirke
             </a>
             <a
               href="#povezave"
-              className="text-white/40 hover:text-gold text-sm transition-colors"
+              className="text-white/40 hover:text-accent text-sm transition-colors"
             >
               Povezave
             </a>
             <a
               href="#kontakt"
-              className="text-white/40 hover:text-gold text-sm transition-colors"
+              className="text-white/40 hover:text-accent text-sm transition-colors"
             >
               Kontakt
             </a>

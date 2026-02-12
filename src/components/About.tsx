@@ -38,7 +38,7 @@ function AnimatedNumber({
   return (
     <span
       ref={ref}
-      className="font-heading text-4xl md:text-5xl font-bold text-gold"
+      className="font-heading text-4xl md:text-5xl font-bold text-accent"
     >
       {count}
       {suffix}
@@ -106,7 +106,7 @@ export default function About() {
       <div className="mx-auto max-w-7xl">
         {/* Section header */}
         <ScrollReveal className="text-center mb-16 md:mb-24">
-          <p className="text-gold text-sm font-medium tracking-[0.3em] uppercase mb-4">
+          <p className="text-accent text-sm font-medium tracking-[0.3em] uppercase mb-4">
             Spoznaj
           </p>
           <h2
@@ -115,7 +115,7 @@ export default function About() {
           >
             O Filipu
           </h2>
-          <div className="w-20 h-0.5 bg-gold mx-auto" />
+          <div className="w-20 h-0.5 bg-accent mx-auto" />
         </ScrollReveal>
 
         {/* Story */}
@@ -136,8 +136,8 @@ export default function About() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20 md:mb-28">
           {abilities.map((ability, index) => (
             <ScrollReveal key={ability.title} delay={0.1 * index}>
-              <div className="group p-8 rounded-2xl bg-surface border border-border hover:border-gold/30 transition-all duration-500">
-                <h3 className="font-heading text-xl md:text-2xl font-semibold text-gold mb-3">
+              <div className="group p-8 rounded-2xl bg-surface border border-border hover:border-accent/30 transition-all duration-500">
+                <h3 className="font-heading text-xl md:text-2xl font-semibold text-accent mb-3">
                   {ability.title}
                 </h3>
                 <p className="text-white/60 leading-relaxed">

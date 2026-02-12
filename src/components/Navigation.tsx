@@ -29,7 +29,7 @@ export default function Navigation() {
       aria-label="Glavna navigacija"
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? "bg-[#050505]/90 backdrop-blur-xl border-b border-border"
+          ? "bg-[#141618]/90 backdrop-blur-xl border-b border-border"
           : "bg-transparent"
       }`}
     >
@@ -37,7 +37,7 @@ export default function Navigation() {
         <div className="flex h-20 items-center justify-between">
           <a
             href="#"
-            className="font-heading text-xl font-bold tracking-wider text-gold"
+            className="font-heading text-xl font-bold tracking-wider text-accent"
             aria-label="Filip Jagodič — domov"
           >
             FILIP JAGODIČ
@@ -49,7 +49,7 @@ export default function Navigation() {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-white/60 transition-colors duration-300 hover:text-gold focus:text-gold focus:outline-none focus:underline"
+                className="text-sm font-medium text-white/60 transition-colors duration-300 hover:text-accent focus:text-accent focus:outline-none focus:underline"
               >
                 {link.label}
               </a>
@@ -91,7 +91,7 @@ export default function Navigation() {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            className="md:hidden bg-[#050505]/95 backdrop-blur-xl border-b border-border"
+            className="md:hidden bg-[#141618]/95 backdrop-blur-xl border-b border-border"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -102,7 +102,7 @@ export default function Navigation() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="text-lg text-white/70 hover:text-gold transition-colors"
+                  className="text-lg text-white/70 hover:text-accent transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.label}

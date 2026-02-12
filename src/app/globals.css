@@ -1,24 +1,25 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-gold: #C9A84C;
-  --color-gold-light: #E5D5A0;
-  --color-gold-dark: #8B7234;
-  --color-surface: #0C0C0C;
-  --color-surface-light: #151515;
-  --color-surface-lighter: #1E1E1E;
-  --color-border: #222222;
+  --color-accent: #D44040;
+  --color-accent-light: #E88888;
+  --color-accent-dark: #8B2525;
+  --color-base: #141618;
+  --color-surface: #1A1C20;
+  --color-surface-light: #22242A;
+  --color-surface-lighter: #2A2C34;
+  --color-border: #2E3038;
   --font-heading: var(--font-playfair);
   --font-body: var(--font-inter);
 }
 
 ::selection {
-  background-color: #C9A84C;
-  color: #050505;
+  background-color: #D44040;
+  color: #ffffff;
 }
 
 body {
-  background: #050505;
+  background: #141618;
   color: #F2F2F2;
   font-family: var(--font-body), system-ui, sans-serif;
 }
@@ -29,16 +30,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #050505;
+  background: #141618;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #333;
+  background: #3a3a3a;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #C9A84C;
+  background: #D44040;
 }
 
 /* Cinematic film grain overlay */
@@ -51,6 +52,6 @@ body {
   height: 100%;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.035;
+  opacity: 0.03;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }

@@ -72,7 +72,7 @@ export default function Music() {
       <div className="mx-auto max-w-7xl">
         {/* Section header */}
         <ScrollReveal className="text-center mb-16">
-          <p className="text-gold text-sm font-medium tracking-[0.3em] uppercase mb-4">
+          <p className="text-accent text-sm font-medium tracking-[0.3em] uppercase mb-4">
             Arhiv
           </p>
           <h2
@@ -81,7 +81,7 @@ export default function Music() {
           >
             Glasba
           </h2>
-          <div className="w-20 h-0.5 bg-gold mx-auto mb-6" />
+          <div className="w-20 h-0.5 bg-accent mx-auto mb-6" />
           <p className="text-white/50 max-w-2xl mx-auto">
             Zbirka Filipovih izvedb — od jazzovskih klasik do sodobnih
             uspešnic. Vsaka pesem je posneta v enem prehodu, brez popravkov.
@@ -97,10 +97,10 @@ export default function Music() {
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gold ${
+              className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent ${
                 activeCategory === cat.id
-                  ? "bg-gold text-black"
-                  : "bg-surface-light text-white/60 hover:text-white border border-border hover:border-gold/30"
+                  ? "bg-accent text-white"
+                  : "bg-surface-light text-white/60 hover:text-white border border-border hover:border-accent/30"
               }`}
               aria-pressed={activeCategory === cat.id}
             >
@@ -113,22 +113,22 @@ export default function Music() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredTracks.map((track, index) => (
             <ScrollReveal key={track.title} delay={0.1 * index}>
-              <article className="group p-6 rounded-2xl bg-[#050505] border border-border hover:border-gold/30 transition-all duration-500">
+              <article className="group p-6 rounded-2xl bg-[#141618] border border-border hover:border-accent/30 transition-all duration-500">
                 {/* Album art placeholder */}
                 <div className="w-full aspect-square rounded-xl bg-surface-lighter mb-5 flex items-center justify-center overflow-hidden relative">
                   <div
                     className="absolute inset-0 opacity-20"
                     style={{
                       background:
-                        "linear-gradient(135deg, #C9A84C 0%, #050505 100%)",
+                        "linear-gradient(135deg, #D44040 0%, #141618 100%)",
                     }}
                   />
                   <button
-                    className="relative z-10 w-16 h-16 bg-gold/90 rounded-full flex items-center justify-center hover:bg-gold hover:scale-110 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gold"
+                    className="relative z-10 w-16 h-16 bg-accent/90 rounded-full flex items-center justify-center hover:bg-accent hover:scale-110 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent"
                     aria-label={`Predvajaj ${track.title}`}
                   >
                     <svg
-                      className="w-6 h-6 text-black ml-1"
+                      className="w-6 h-6 text-white ml-1"
                       fill="currentColor"
                       viewBox="0 0 24 24"
                     >
@@ -138,7 +138,7 @@ export default function Music() {
                 </div>
 
                 <div>
-                  <h3 className="font-heading text-lg font-semibold text-white group-hover:text-gold transition-colors">
+                  <h3 className="font-heading text-lg font-semibold text-white group-hover:text-accent transition-colors">
                     {track.title}
                   </h3>
                   <p className="text-white/40 text-sm mt-1">
@@ -155,7 +155,7 @@ export default function Music() {
 
         {/* YouTube embed placeholder */}
         <ScrollReveal className="mt-16" delay={0.2}>
-          <div className="p-8 rounded-2xl bg-[#050505] border border-border text-center">
+          <div className="p-8 rounded-2xl bg-[#141618] border border-border text-center">
             <h3 className="font-heading text-2xl font-semibold mb-4">
               Video posnetki
             </h3>

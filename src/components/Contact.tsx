@@ -11,7 +11,7 @@ export default function Contact() {
     >
       <div className="mx-auto max-w-3xl text-center">
         <ScrollReveal>
-          <p className="text-gold text-sm font-medium tracking-[0.3em] uppercase mb-4">
+          <p className="text-accent text-sm font-medium tracking-[0.3em] uppercase mb-4">
             Povežimo se
           </p>
           <h2
@@ -20,7 +20,7 @@ export default function Contact() {
           >
             Kontakt
           </h2>
-          <div className="w-20 h-0.5 bg-gold mx-auto mb-8" />
+          <div className="w-20 h-0.5 bg-accent mx-auto mb-8" />
         </ScrollReveal>
 
         <ScrollReveal delay={0.2}>
@@ -33,7 +33,7 @@ export default function Contact() {
         <ScrollReveal delay={0.3}>
           <a
             href="mailto:kontakt@filipjagodic.si"
-            className="inline-flex items-center gap-3 px-10 py-5 bg-gold text-black font-semibold text-lg rounded-full hover:bg-gold-light transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-[#050505]"
+            className="inline-flex items-center gap-3 px-10 py-5 bg-accent text-white font-semibold text-lg rounded-full hover:bg-accent-light transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-[#141618]"
           >
             <svg
               className="w-5 h-5"

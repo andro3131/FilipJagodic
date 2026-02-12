@@ -34,7 +34,7 @@ export default function Links() {
     >
       <div className="mx-auto max-w-3xl">
         <ScrollReveal className="text-center mb-16">
-          <p className="text-gold text-sm font-medium tracking-[0.3em] uppercase mb-4">
+          <p className="text-accent text-sm font-medium tracking-[0.3em] uppercase mb-4">
             Spremljaj
           </p>
           <h2
@@ -43,7 +43,7 @@ export default function Links() {
           >
             Povezave
           </h2>
-          <div className="w-20 h-0.5 bg-gold mx-auto" />
+          <div className="w-20 h-0.5 bg-accent mx-auto" />
         </ScrollReveal>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -53,13 +53,13 @@ export default function Links() {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex flex-col items-center p-8 rounded-2xl bg-[#050505] border border-border hover:border-gold/30 transition-all duration-500 text-center focus:outline-none focus:ring-2 focus:ring-gold"
+                className="group flex flex-col items-center p-8 rounded-2xl bg-[#141618] border border-border hover:border-accent/30 transition-all duration-500 text-center focus:outline-none focus:ring-2 focus:ring-accent"
                 aria-label={`${link.name} — ${link.description}`}
               >
-                <div className="text-white/30 group-hover:text-gold transition-colors duration-300 mb-4">
+                <div className="text-white/30 group-hover:text-accent transition-colors duration-300 mb-4">
                   {link.icon}
                 </div>
-                <h3 className="font-heading text-xl font-semibold text-white group-hover:text-gold transition-colors mb-2">
+                <h3 className="font-heading text-xl font-semibold text-white group-hover:text-accent transition-colors mb-2">
                   {link.name}
                 </h3>
                 <p className="text-white/40 text-sm">{link.description}</p>

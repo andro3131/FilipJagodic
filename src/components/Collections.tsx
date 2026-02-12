@@ -58,7 +58,7 @@ export default function Collections() {
       <div className="mx-auto max-w-7xl">
         {/* Section header */}
         <ScrollReveal className="text-center mb-16 md:mb-24">
-          <p className="text-gold text-sm font-medium tracking-[0.3em] uppercase mb-4">
+          <p className="text-accent text-sm font-medium tracking-[0.3em] uppercase mb-4">
             Strast
           </p>
           <h2
@@ -67,13 +67,13 @@ export default function Collections() {
           >
             Zbirke
           </h2>
-          <div className="w-20 h-0.5 bg-gold mx-auto" />
+          <div className="w-20 h-0.5 bg-accent mx-auto" />
         </ScrollReveal>
 
         {/* Keyboards */}
         <div className="mb-20">
           <ScrollReveal>
-            <h3 className="font-heading text-2xl md:text-3xl font-semibold text-gold mb-8 text-center">
+            <h3 className="font-heading text-2xl md:text-3xl font-semibold text-accent mb-8 text-center">
               Klaviature
             </h3>
             <p className="text-white/50 text-center max-w-2xl mx-auto mb-12">
@@ -85,7 +85,7 @@ export default function Collections() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {keyboards.map((kb, index) => (
               <ScrollReveal key={kb.name} delay={0.1 * index}>
-                <div className="group p-6 rounded-2xl bg-surface border border-border hover:border-gold/30 transition-all duration-500">
+                <div className="group p-6 rounded-2xl bg-surface border border-border hover:border-accent/30 transition-all duration-500">
                   <div className="w-full aspect-[4/3] rounded-xl bg-surface-lighter mb-4 flex items-center justify-center">
                     <svg
                       className="w-12 h-12 text-white/10"
@@ -102,7 +102,7 @@ export default function Collections() {
                       />
                     </svg>
                   </div>
-                  <h4 className="font-semibold text-white group-hover:text-gold transition-colors">
+                  <h4 className="font-semibold text-white group-hover:text-accent transition-colors">
                     {kb.name}
                   </h4>
                   <p className="text-white/40 text-sm mt-1">
@@ -117,7 +117,7 @@ export default function Collections() {
         {/* Dictaphones */}
         <div>
           <ScrollReveal>
-            <h3 className="font-heading text-2xl md:text-3xl font-semibold text-gold mb-8 text-center">
+            <h3 className="font-heading text-2xl md:text-3xl font-semibold text-accent mb-8 text-center">
               Diktafoni
             </h3>
             <p className="text-white/50 text-center max-w-2xl mx-auto mb-12">
@@ -129,7 +129,7 @@ export default function Collections() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {dictaphones.map((d, index) => (
               <ScrollReveal key={d.name} delay={0.1 * index}>
-                <div className="group p-6 rounded-2xl bg-surface border border-border hover:border-gold/30 transition-all duration-500">
+                <div className="group p-6 rounded-2xl bg-surface border border-border hover:border-accent/30 transition-all duration-500">
                   <div className="w-full aspect-square rounded-xl bg-surface-lighter mb-4 flex items-center justify-center">
                     <svg
                       className="w-10 h-10 text-white/10"
@@ -146,7 +146,7 @@ export default function Collections() {
                       />
                     </svg>
                   </div>
-                  <h4 className="font-semibold text-white group-hover:text-gold transition-colors">
+                  <h4 className="font-semibold text-white group-hover:text-accent transition-colors">
                     {d.name}
                   </h4>
                   <p className="text-white/40 text-sm mt-1">{d.description}</p>
