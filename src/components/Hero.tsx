@@ -134,7 +134,7 @@ export default function Hero() {
                 backgroundClip: "text",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
-                animation: "shimmer 10s ease-in-out infinite",
+                animation: "shimmer-flash 3s ease-out forwards, shimmer-red 8s ease-in-out 3s infinite, float-text 7s ease-in-out 2s infinite",
                 filter: "drop-shadow(0 0 80px rgba(212, 64, 64, 0.25))",
               }}
             >
@@ -149,8 +149,7 @@ export default function Hero() {
                 backgroundClip: "text",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
-                animation: "shimmer 10s ease-in-out infinite",
-                animationDelay: "1s",
+                animation: "shimmer-flash 3s ease-out 1s forwards, shimmer-red 8s ease-in-out 4s infinite, float-text 8s ease-in-out 2.5s infinite",
                 paddingLeft: "4rem",
                 filter: "drop-shadow(0 0 80px rgba(212, 64, 64, 0.25))",
               }}
@@ -181,7 +180,7 @@ export default function Hero() {
               backgroundClip: "text",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
-              animation: "shimmer 10s ease-in-out infinite",
+              animation: "shimmer-flash 3s ease-out forwards, shimmer-red 8s ease-in-out 3s infinite, float-text 7s ease-in-out 2s infinite",
               filter:
                 "drop-shadow(0 0 30px rgba(212, 64, 64, 0.4)) drop-shadow(0 0 60px rgba(212, 64, 64, 0.2))",
             }}
@@ -197,8 +196,7 @@ export default function Hero() {
               backgroundClip: "text",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
-              animation: "shimmer 10s ease-in-out infinite",
-              animationDelay: "1s",
+              animation: "shimmer-flash 3s ease-out 1s forwards, shimmer-red 8s ease-in-out 4s infinite, float-text 8s ease-in-out 2.5s infinite",
               filter:
                 "drop-shadow(0 0 30px rgba(212, 64, 64, 0.4)) drop-shadow(0 0 60px rgba(212, 64, 64, 0.2))",
             }}
