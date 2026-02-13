@@ -2,11 +2,31 @@
 
 import { useRef, useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
+
+const FRAME_URLS = [
+  "https://res.cloudinary.com/dewf3zos0/image/upload/v1770971627/ezgif-frame-001_ydayyv.png",
+  "https://res.cloudinary.com/dewf3zos0/image/upload/v1770971624/ezgif-frame-002_fglnth.png",
+  "https://res.cloudinary.com/dewf3zos0/image/upload/v1770971625/ezgif-frame-003_pvlsvm.png",
+  "https://res.cloudinary.com/dewf3zos0/image/upload/v1770971646/ezgif-frame-004_iubyst.png",
+  "https://res.cloudinary.com/dewf3zos0/image/upload/v1770971647/ezgif-frame-005_dw7usu.png",
+  "https://res.cloudinary.com/dewf3zos0/image/upload/v1770971644/ezgif-frame-006_hewqdf.png",
+  "https://res.cloudinary.com/dewf3zos0/image/upload/v1770971647/ezgif-frame-007_trepm4.png",
+  "https://res.cloudinary.com/dewf3zos0/image/upload/v1770971643/ezgif-frame-008_i32dqx.png",
+  "https://res.cloudinary.com/dewf3zos0/image/upload/v1770971642/ezgif-frame-009_svg6ry.png",
+  "https://res.cloudinary.com/dewf3zos0/image/upload/v1770971646/ezgif-frame-010_iu6k9a.png",
+];
+
+const INTRO_END_FRAME = 4;
+const TOTAL_FRAMES = FRAME_URLS.length;
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const imagesRef = useRef<HTMLImageElement[]>([]);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
+  const [currentFrame, setCurrentFrame] = useState(0);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [introComplete, setIntroComplete] = useState(false);
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
     if (!sectionRef.current) return;
@@ -21,6 +41,95 @@ export default function Hero() {
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [handleMouseMove]);
+
+  // Preload all frame images
+  useEffect(() => {
+    const images: HTMLImageElement[] = [];
+    let loaded = 0;
+    FRAME_URLS.forEach((src, i) => {
+      const img = new window.Image();
+      img.crossOrigin = "anonymous";
+      img.src = src;
+      img.onload = () => {
+        loaded++;
+        if (loaded === TOTAL_FRAMES) {
+          imagesRef.current = images;
+          setImagesLoaded(true);
+        }
+      };
+      images[i] = img;
+    });
+  }, []);
+
+  // Draw current frame to canvas
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas || !imagesLoaded) return;
+    const ctx = canvas.getContext("2d");
+    const img = imagesRef.current[currentFrame];
+    if (!ctx || !img) return;
+
+    if (canvas.width !== img.naturalWidth) {
+      canvas.width = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+    }
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0);
+  }, [currentFrame, imagesLoaded]);
+
+  // Intro animation: frames 0 → 4 with easeOut
+  useEffect(() => {
+    if (!imagesLoaded) return;
+
+    const startTime = performance.now();
+    const delay = 300;
+    const duration = 1200;
+
+    let rafId: number;
+    const animate = (time: number) => {
+      const elapsed = time - startTime - delay;
+      if (elapsed < 0) {
+        rafId = requestAnimationFrame(animate);
+        return;
+      }
+
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const frame = Math.min(
+        Math.floor(eased * (INTRO_END_FRAME + 1)),
+        INTRO_END_FRAME
+      );
+      setCurrentFrame(frame);
+
+      if (progress < 1) {
+        rafId = requestAnimationFrame(animate);
+      } else {
+        setIntroComplete(true);
+      }
+    };
+
+    rafId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(rafId);
+  }, [imagesLoaded]);
+
+  // Scroll-based frames: 4 → 9
+  useEffect(() => {
+    if (!introComplete) return;
+
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const scrollRange = window.innerHeight * 0.5;
+      const progress = Math.min(Math.max(scrollY / scrollRange, 0), 1);
+      const frame =
+        INTRO_END_FRAME +
+        Math.round(progress * (TOTAL_FRAMES - 1 - INTRO_END_FRAME));
+      setCurrentFrame(frame);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [introComplete]);
 
   return (
     <section
@@ -65,7 +174,7 @@ export default function Hero() {
       {/* Main hero area — Filip image left, title right */}
       <div className="relative flex-1 flex items-center justify-center px-6 lg:px-12">
         <div className="relative flex items-center justify-between w-full max-w-7xl mx-auto gap-12" style={{ marginTop: "10vh" }}>
-          {/* LEFT: Filip's image with glow */}
+          {/* LEFT: Filip's image sequence with glow */}
           <div
             className="relative flex-shrink-0"
             style={{
@@ -95,16 +204,17 @@ export default function Hero() {
                 ease: [0.25, 0.4, 0.25, 1],
               }}
             >
-              <Image
-                src="https://res.cloudinary.com/dewf3zos0/image/upload/v1770930641/filip_xjenim.png"
-                alt="Filip Jagodič"
+              <canvas
+                ref={canvasRef}
                 width={600}
                 height={800}
-                priority
-                className="max-h-[80vh] w-auto object-contain"
+                className="max-h-[80vh] w-auto"
                 style={{
-                  filter: "drop-shadow(0 0 0.5px rgba(0,0,0,1)) drop-shadow(0 0 1.5px rgba(0,0,0,0.9)) drop-shadow(0 30px 100px rgba(0,0,0,0.8)) brightness(0.97) contrast(1.03)",
+                  filter:
+                    "drop-shadow(0 0 0.5px rgba(0,0,0,1)) drop-shadow(0 0 1.5px rgba(0,0,0,0.9)) drop-shadow(0 30px 100px rgba(0,0,0,0.8)) brightness(0.97) contrast(1.03)",
                 }}
+                role="img"
+                aria-label="Filip Jagodič"
               />
             </motion.div>
           </div>
