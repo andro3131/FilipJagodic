@@ -63,18 +63,11 @@ export default function Hero() {
       />
 
       {/* Main hero area — Filip image left, title right */}
-      <div className="relative flex-1 flex items-end justify-center px-6 lg:px-12 pb-32">
-        <div className="relative flex items-end justify-between w-full max-w-7xl mx-auto gap-12">
+      <div className="relative flex-1 flex items-center justify-center px-6 lg:px-12">
+        <div className="relative flex items-center justify-between w-full max-w-7xl mx-auto gap-12" style={{ marginTop: "10vh" }}>
           {/* LEFT: Filip's image with glow */}
-          <motion.div
+          <div
             className="relative flex-shrink-0"
-            initial={{ opacity: 0, x: -100, scale: 0.95 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
-            transition={{
-              duration: 1.2,
-              delay: 0.3,
-              ease: [0.25, 0.4, 0.25, 1],
-            }}
             style={{
               zIndex: 2,
               transform: `translate(${mouse.x * 25}px, ${mouse.y * 15}px)`,
@@ -82,32 +75,44 @@ export default function Hero() {
                 "transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
             }}
           >
-            {/* Subtle red glow behind Filip */}
+            {/* Large red glow behind Filip */}
             <div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] rounded-full pointer-events-none"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[180%] h-[180%] rounded-full pointer-events-none"
               style={{
                 background:
-                  "radial-gradient(circle, rgba(212, 64, 64, 0.2) 0%, rgba(212, 64, 64, 0.08) 40%, transparent 70%)",
+                  "radial-gradient(circle, rgba(212, 64, 64, 0.35) 0%, rgba(212, 64, 64, 0.15) 40%, rgba(212, 64, 64, 0.05) 60%, transparent 80%)",
+                filter: "blur(40px)",
               }}
               aria-hidden="true"
             />
 
-            <Image
-              src="https://res.cloudinary.com/dewf3zos0/image/upload/v1770930641/filip_xjenim.png"
-              alt="Filip Jagodič"
-              width={600}
-              height={800}
-              priority
-              className="max-h-[75vh] w-auto object-contain"
-              style={{
-                filter: "drop-shadow(0 25px 80px rgba(0,0,0,0.6))",
+            <motion.div
+              initial={{ opacity: 0, x: -100, scale: 0.95 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{
+                duration: 1.2,
+                delay: 0.3,
+                ease: [0.25, 0.4, 0.25, 1],
               }}
-            />
-          </motion.div>
+            >
+              <Image
+                src="https://res.cloudinary.com/dewf3zos0/image/upload/v1770930641/filip_xjenim.png"
+                alt="Filip Jagodič"
+                width={600}
+                height={800}
+                priority
+                className="max-h-[80vh] w-auto object-contain"
+                style={{
+                  filter: "drop-shadow(0 30px 100px rgba(0,0,0,0.8)) brightness(0.98) contrast(1.02)",
+                  mixBlendMode: "normal",
+                }}
+              />
+            </motion.div>
+          </div>
 
           {/* RIGHT: Title stacked vertically */}
           <motion.div
-            className="hidden lg:flex flex-col items-start justify-center flex-1 pl-16"
+            className="hidden lg:flex flex-col items-start justify-center flex-1 pl-20"
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{
@@ -122,7 +127,7 @@ export default function Hero() {
             }}
           >
             <h2
-              className="font-heading text-[7rem] xl:text-[9rem] 2xl:text-[11rem] font-bold leading-[0.85] tracking-tight mb-2 animate-gradient"
+              className="font-heading text-[7rem] xl:text-[9rem] 2xl:text-[11rem] font-bold leading-[0.85] tracking-tight mb-2"
               style={{
                 background:
                   "linear-gradient(110deg, #D44040 0%, #FF6B6B 25%, #FF8A8A 35%, #D44040 50%, #AA3333 65%, #D44040 80%, #FF6B6B 100%)",
@@ -136,7 +141,7 @@ export default function Hero() {
               FILIP
             </h2>
             <h2
-              className="font-heading text-[7rem] xl:text-[9rem] 2xl:text-[11rem] font-bold leading-[0.85] tracking-tight animate-gradient"
+              className="font-heading text-[7rem] xl:text-[9rem] 2xl:text-[11rem] font-bold leading-[0.85] tracking-tight"
               style={{
                 background:
                   "linear-gradient(110deg, #D44040 0%, #FF6B6B 25%, #FF8A8A 35%, #D44040 50%, #AA3333 65%, #D44040 80%, #FF6B6B 100%)",
@@ -146,6 +151,7 @@ export default function Hero() {
                 WebkitTextFillColor: "transparent",
                 animation: "shimmer 8s ease-in-out infinite",
                 animationDelay: "0.5s",
+                paddingLeft: "4rem",
               }}
             >
               JAGODIČ
