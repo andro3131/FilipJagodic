@@ -26,7 +26,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       aria-label="Uvod"
-      className="relative min-h-screen flex flex-col overflow-hidden"
+      className="relative min-h-screen flex flex-col overflow-x-clip"
     >
       {/* Accessible heading */}
       <h1 className="sr-only">Filip Jagodič — Glasba presega vse meje</h1>
@@ -127,31 +127,33 @@ export default function Hero() {
             }}
           >
             <h2
-              className="font-heading text-[7rem] xl:text-[9rem] 2xl:text-[11rem] font-bold leading-[0.85] tracking-tight mb-2"
+              className="font-heading text-[7rem] xl:text-[9rem] 2xl:text-[11rem] font-black leading-[0.85] tracking-[-0.03em] mb-2"
               style={{
                 background:
-                  "linear-gradient(110deg, #D44040 0%, #FF6B6B 25%, #FF8A8A 35%, #D44040 50%, #AA3333 65%, #D44040 80%, #FF6B6B 100%)",
+                  "linear-gradient(110deg, #AA3333 0%, #D44040 15%, #FF6B6B 30%, #FFDADA 48%, #FFFFFF 50%, #FFDADA 52%, #D44040 70%, #AA3333 85%, #C43838 100%)",
                 backgroundSize: "200% 100%",
                 backgroundClip: "text",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
-                animation: "shimmer 8s ease-in-out infinite",
+                animation: "shimmer 6s ease-in-out infinite",
+                filter: "drop-shadow(0 0 80px rgba(212, 64, 64, 0.25))",
               }}
             >
               FILIP
             </h2>
             <h2
-              className="font-heading text-[7rem] xl:text-[9rem] 2xl:text-[11rem] font-bold leading-[0.85] tracking-tight"
+              className="font-heading text-[7rem] xl:text-[9rem] 2xl:text-[11rem] font-black leading-[0.85] tracking-[-0.03em] pb-[0.2em]"
               style={{
                 background:
-                  "linear-gradient(110deg, #D44040 0%, #FF6B6B 25%, #FF8A8A 35%, #D44040 50%, #AA3333 65%, #D44040 80%, #FF6B6B 100%)",
+                  "linear-gradient(110deg, #AA3333 0%, #D44040 15%, #FF6B6B 30%, #FFDADA 48%, #FFFFFF 50%, #FFDADA 52%, #D44040 70%, #AA3333 85%, #C43838 100%)",
                 backgroundSize: "200% 100%",
                 backgroundClip: "text",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
-                animation: "shimmer 8s ease-in-out infinite",
+                animation: "shimmer 6s ease-in-out infinite",
                 animationDelay: "0.5s",
                 paddingLeft: "4rem",
+                filter: "drop-shadow(0 0 80px rgba(212, 64, 64, 0.25))",
               }}
             >
               JAGODIČ
@@ -172,31 +174,34 @@ export default function Hero() {
           style={{ zIndex: 3 }}
         >
           <h2
-            className="font-heading text-[3.5rem] sm:text-[5rem] md:text-[6rem] font-bold leading-none tracking-tight block"
+            className="font-heading text-[3.5rem] sm:text-[5rem] md:text-[6rem] font-black leading-none tracking-[-0.03em] block"
             style={{
               background:
-                "linear-gradient(135deg, #D44040 0%, #FF6B6B 25%, #D44040 50%, #AA3333 75%, #D44040 100%)",
+                "linear-gradient(135deg, #AA3333 0%, #D44040 15%, #FF6B6B 30%, #FFDADA 48%, #FFFFFF 50%, #FFDADA 52%, #D44040 70%, #AA3333 85%, #C43838 100%)",
               backgroundSize: "200% 200%",
               backgroundClip: "text",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
+              animation: "shimmer 6s ease-in-out infinite",
               filter:
-                "drop-shadow(0 0 30px rgba(212, 64, 64, 0.4)) drop-shadow(0 0 60px rgba(212, 64, 64, 0.2)) drop-shadow(0 4px 15px rgba(0, 0, 0, 0.5))",
+                "drop-shadow(0 0 30px rgba(212, 64, 64, 0.4)) drop-shadow(0 0 60px rgba(212, 64, 64, 0.2))",
             }}
           >
             FILIP
           </h2>
           <h2
-            className="font-heading text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] font-bold leading-none tracking-tight block"
+            className="font-heading text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] font-black leading-none tracking-[-0.03em] block pb-[0.2em]"
             style={{
               background:
-                "linear-gradient(135deg, #D44040 0%, #FF6B6B 25%, #D44040 50%, #AA3333 75%, #D44040 100%)",
+                "linear-gradient(135deg, #AA3333 0%, #D44040 15%, #FF6B6B 30%, #FFDADA 48%, #FFFFFF 50%, #FFDADA 52%, #D44040 70%, #AA3333 85%, #C43838 100%)",
               backgroundSize: "200% 200%",
               backgroundClip: "text",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
+              animation: "shimmer 6s ease-in-out infinite",
+              animationDelay: "0.5s",
               filter:
-                "drop-shadow(0 0 30px rgba(212, 64, 64, 0.4)) drop-shadow(0 0 60px rgba(212, 64, 64, 0.2)) drop-shadow(0 4px 15px rgba(0, 0, 0, 0.5))",
+                "drop-shadow(0 0 30px rgba(212, 64, 64, 0.4)) drop-shadow(0 0 60px rgba(212, 64, 64, 0.2))",
             }}
           >
             JAGODIČ
