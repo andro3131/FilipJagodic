@@ -34,14 +34,7 @@ export default function Navigation() {
       }`}
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="flex h-20 items-center justify-between">
-          <a
-            href="#"
-            className="font-heading text-xl font-bold tracking-wider text-accent"
-            aria-label="Filip Jagodič — domov"
-          >
-            FILIP JAGODIČ
-          </a>
+        <div className="flex h-20 items-center justify-end">
 
           {/* Desktop links */}
           <div className="hidden md:flex items-center gap-8">

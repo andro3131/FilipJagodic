@@ -161,7 +161,7 @@ export default function Hero() {
         >
           {/* LEFT: Filip's video with glow (no mouse parallax) */}
           <div
-            className="relative flex-shrink-0 -ml-20"
+            className="relative flex-shrink-0 -ml-32"
             style={{ zIndex: 2, marginTop: "10vh" }}
           >
             {/* Red glow behind video */}
@@ -184,7 +184,7 @@ export default function Hero() {
                 ease: [0.25, 0.4, 0.25, 1],
               }}
             >
-              <div className="relative w-[48vw] max-w-[660px] h-[78vh] max-h-[820px]">
+              <div className="relative w-[55vw] max-w-[760px] h-[85vh] max-h-[920px]">
                 <video
                   ref={videoRef}
                   muted
@@ -193,9 +193,9 @@ export default function Hero() {
                   className="w-full h-full object-cover object-top"
                   style={{
                     maskImage:
-                      "radial-gradient(ellipse 80% 78% at 50% 42%, black 50%, transparent 72%)",
+                      "radial-gradient(ellipse 75% 72% at 50% 42%, black 40%, transparent 65%)",
                     WebkitMaskImage:
-                      "radial-gradient(ellipse 80% 78% at 50% 42%, black 50%, transparent 72%)",
+                      "radial-gradient(ellipse 75% 72% at 50% 42%, black 40%, transparent 65%)",
                     filter: "brightness(0.95) contrast(1.05)",
                   }}
                   aria-label="Filip Jagodič"
@@ -206,7 +206,7 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* RIGHT: Title stacked vertically */}
+          {/* RIGHT: Title + slogan + buttons */}
           <motion.div
             className="hidden lg:flex flex-col items-start justify-center flex-1 -ml-4"
             initial={{ opacity: 0, x: 100 }}
@@ -239,7 +239,7 @@ export default function Hero() {
               FILIP
             </h2>
             <h2
-              className="font-heading text-[7rem] xl:text-[9rem] 2xl:text-[11rem] font-black leading-[0.85] tracking-[-0.03em] pb-[0.2em]"
+              className="font-heading text-[7rem] xl:text-[9rem] 2xl:text-[11rem] font-black leading-[0.85] tracking-[-0.03em]"
               style={{
                 background:
                   "linear-gradient(110deg, #D44040 0%, #C43838 30%, #D44040 44%, #FFE8E8 50%, #D44040 56%, #C43838 70%, #D44040 100%)",
@@ -255,6 +255,83 @@ export default function Hero() {
             >
               JAGODIČ
             </h2>
+
+            {/* Slogan + buttons under title, offset like JAGODIČ */}
+            <div className="mt-8 pl-16">
+              <motion.p
+                className="text-accent/80 text-sm md:text-base font-medium tracking-[0.3em] uppercase mb-2"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.8 }}
+              >
+                Glasbenik · Izvajalec · Zbiratelj
+              </motion.p>
+
+              <motion.p
+                className="text-xl md:text-2xl text-white/60 font-light mb-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 1 }}
+              >
+                {"Glasba presega vse meje".split(" ").map((word, i) => (
+                  <motion.span
+                    key={i}
+                    className="inline-block mr-2"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 0.6,
+                      delay: 1 + i * 0.1,
+                      ease: [0.25, 0.4, 0.25, 1],
+                    }}
+                  >
+                    {word}
+                  </motion.span>
+                ))}
+              </motion.p>
+
+              <motion.div
+                className="flex gap-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 1.2 }}
+              >
+                <a
+                  href="#glasba"
+                  className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-accent text-white font-semibold rounded-full overflow-hidden transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-base"
+                >
+                  <span className="relative z-10 flex items-center gap-3">
+                    <svg
+                      className="w-5 h-5"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                    Poslušaj glasbo
+                  </span>
+                  <span
+                    className="absolute inset-0 bg-gradient-to-r from-accent-light to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    aria-hidden="true"
+                  />
+                </a>
+                <a
+                  href="#o-filipu"
+                  className="group relative inline-flex items-center justify-center px-8 py-4 border-2 border-white/20 text-white font-semibold rounded-full overflow-hidden transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-base"
+                >
+                  <span className="relative z-10">Spoznaj Filipa</span>
+                  <span
+                    className="absolute inset-0 border-2 border-accent scale-0 group-hover:scale-100 transition-transform duration-500 ease-out rounded-full"
+                    aria-hidden="true"
+                  />
+                  <span
+                    className="absolute inset-0 bg-accent/10 scale-0 group-hover:scale-100 transition-transform duration-500 ease-out rounded-full"
+                    aria-hidden="true"
+                  />
+                </a>
+              </motion.div>
+            </div>
           </motion.div>
         </div>
 
@@ -317,86 +394,6 @@ export default function Hero() {
         }}
         aria-hidden="true"
       />
-
-      {/* Bottom content — below image, always visible */}
-      <div
-        className="relative pb-12 md:pb-16 text-center px-6"
-        style={{ zIndex: 4 }}
-      >
-        <motion.p
-          className="text-accent/80 text-sm md:text-base font-medium tracking-[0.3em] uppercase mb-3"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-        >
-          Glasbenik · Izvajalec · Zbiratelj
-        </motion.p>
-
-        <motion.p
-          className="text-xl md:text-2xl lg:text-3xl text-white/60 font-light mb-8 max-w-2xl mx-auto overflow-hidden"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1 }}
-        >
-          {"Glasba presega vse meje".split(" ").map((word, i) => (
-            <motion.span
-              key={i}
-              className="inline-block mr-2"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.6,
-                delay: 1 + i * 0.1,
-                ease: [0.25, 0.4, 0.25, 1],
-              }}
-            >
-              {word}
-            </motion.span>
-          ))}
-        </motion.p>
-
-        <motion.div
-          className="flex flex-col sm:flex-row gap-4 justify-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.2 }}
-        >
-          <a
-            href="#glasba"
-            className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-accent text-white font-semibold rounded-full overflow-hidden transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-base"
-          >
-            <span className="relative z-10 flex items-center gap-3">
-              <svg
-                className="w-5 h-5"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <path d="M8 5v14l11-7z" />
-              </svg>
-              Poslušaj glasbo
-            </span>
-            <span
-              className="absolute inset-0 bg-gradient-to-r from-accent-light to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              aria-hidden="true"
-            />
-          </a>
-          <a
-            href="#o-filipu"
-            className="group relative inline-flex items-center justify-center px-8 py-4 border-2 border-white/20 text-white font-semibold rounded-full overflow-hidden transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-base"
-          >
-            <span className="relative z-10">Spoznaj Filipa</span>
-            <span
-              className="absolute inset-0 border-2 border-accent scale-0 group-hover:scale-100 transition-transform duration-500 ease-out rounded-full"
-              aria-hidden="true"
-            />
-            <span
-              className="absolute inset-0 bg-accent/10 scale-0 group-hover:scale-100 transition-transform duration-500 ease-out rounded-full"
-              aria-hidden="true"
-            />
-          </a>
-        </motion.div>
-      </div>
 
       {/* Scroll indicator */}
       <motion.div
