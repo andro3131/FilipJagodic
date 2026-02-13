@@ -28,14 +28,21 @@ export default function Hero() {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [handleMouseMove]);
 
-  // Video metadata loaded — store duration and reset state for refresh
-  const handleLoadedMetadata = useCallback(() => {
+  // Wait until video is seekable before starting scrub
+  useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-    videoDurationRef.current = video.duration;
-    video.currentTime = 0.01;
-    setIntroComplete(false);
-    setVideoReady(true);
+
+    const onCanPlay = () => {
+      video.pause();
+      videoDurationRef.current = video.duration;
+      video.currentTime = 0.01;
+      setIntroComplete(false);
+      setVideoReady(true);
+    };
+
+    video.addEventListener("canplay", onCanPlay);
+    return () => video.removeEventListener("canplay", onCanPlay);
   }, []);
 
   // Intro: scrub first half with easeOutCubic (slows to stop)
@@ -171,7 +178,6 @@ export default function Hero() {
                   muted
                   playsInline
                   preload="auto"
-                  onLoadedMetadata={handleLoadedMetadata}
                   className="w-full h-full object-cover object-top"
                   style={{
                     maskImage:
@@ -190,7 +196,7 @@ export default function Hero() {
 
           {/* RIGHT: Title stacked vertically */}
           <motion.div
-            className="hidden lg:flex flex-col items-start justify-center flex-1 -ml-24"
+            className="hidden lg:flex flex-col items-start justify-center flex-1 -ml-4"
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{
@@ -205,7 +211,7 @@ export default function Hero() {
             }}
           >
             <h2
-              className="font-heading text-[7rem] xl:text-[9rem] 2xl:text-[11rem] font-black leading-[0.85] tracking-[-0.03em] mb-2"
+              className="font-heading text-[7rem] xl:text-[9rem] 2xl:text-[11rem] font-black leading-[0.85] tracking-[-0.03em] mb-6"
               style={{
                 background:
                   "linear-gradient(110deg, #D44040 0%, #C43838 30%, #D44040 44%, #FFE8E8 50%, #D44040 56%, #C43838 70%, #D44040 100%)",
