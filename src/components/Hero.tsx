@@ -62,101 +62,54 @@ export default function Hero() {
         aria-hidden="true"
       />
 
-      {/* Main hero area — title + image side by side */}
-      <div className="relative flex-1 flex items-center justify-center px-6">
-        <div className="relative flex items-center justify-center w-full max-w-7xl mx-auto">
-          {/* FILIP — slides in from left */}
+      {/* Main hero area — Filip image left, title right */}
+      <div className="relative flex-1 flex items-center justify-center px-6 lg:px-12">
+        <div className="relative flex items-center justify-between w-full max-w-7xl mx-auto gap-8">
+          {/* LEFT: Filip's image with glow */}
           <motion.div
-            className="hidden lg:flex items-center justify-end flex-1 pr-4 xl:pr-8"
-            initial={{ opacity: 0, x: -200 }}
-            animate={{ opacity: 1, x: 0 }}
+            className="relative flex-shrink-0"
+            initial={{ opacity: 0, x: -100, scale: 0.95 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
             transition={{
               duration: 1.2,
-              delay: 0.5,
+              delay: 0.3,
               ease: [0.25, 0.4, 0.25, 1],
             }}
             style={{
-              transform: `translate(${mouse.x * 12}px, ${mouse.y * 8}px)`,
-              transition:
-                "transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-            }}
-          >
-            <h2
-              className="font-heading text-[6rem] xl:text-[8rem] 2xl:text-[10rem] font-bold leading-none tracking-tight"
-              style={{
-                background:
-                  "linear-gradient(135deg, #D44040 0%, #FF6B6B 25%, #D44040 50%, #AA3333 75%, #D44040 100%)",
-                backgroundSize: "200% 200%",
-                backgroundClip: "text",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                filter:
-                  "drop-shadow(0 0 40px rgba(212, 64, 64, 0.4)) drop-shadow(0 0 80px rgba(212, 64, 64, 0.2)) drop-shadow(0 4px 20px rgba(0, 0, 0, 0.5))",
-              }}
-            >
-              FILIP
-            </h2>
-          </motion.div>
-
-          {/* Center: Glow + Rays + Filip's image */}
-          <div
-            className="relative flex-shrink-0"
-            style={{
               zIndex: 2,
-              transform: `translate(${mouse.x * 25}px, ${mouse.y * 15}px)`,
+              transform: `translate(${mouse.x * 20}px, ${mouse.y * 12}px)`,
               transition:
                 "transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
             }}
           >
             {/* Subtle red glow behind Filip */}
             <div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] rounded-full pointer-events-none"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] rounded-full pointer-events-none"
               style={{
                 background:
-                  "radial-gradient(circle, rgba(212, 64, 64, 0.15) 0%, rgba(212, 64, 64, 0.05) 40%, transparent 70%)",
+                  "radial-gradient(circle, rgba(212, 64, 64, 0.2) 0%, rgba(212, 64, 64, 0.08) 40%, transparent 70%)",
               }}
               aria-hidden="true"
             />
 
-            {/* Subtle light rays behind Filip */}
-            <div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] pointer-events-none"
+            <Image
+              src="https://res.cloudinary.com/dewf3zos0/image/upload/v1770930641/filip_xjenim.png"
+              alt="Filip Jagodič"
+              width={600}
+              height={800}
+              priority
+              className="max-h-[75vh] w-auto object-contain"
               style={{
-                background:
-                  "conic-gradient(from 0deg, transparent 0deg, rgba(212, 64, 64, 0.04) 10deg, transparent 20deg, transparent 40deg, rgba(212, 64, 64, 0.03) 50deg, transparent 60deg, transparent 90deg, rgba(212, 64, 64, 0.04) 100deg, transparent 110deg, transparent 140deg, rgba(212, 64, 64, 0.03) 150deg, transparent 160deg, transparent 180deg, rgba(212, 64, 64, 0.04) 190deg, transparent 200deg, transparent 230deg, rgba(212, 64, 64, 0.03) 240deg, transparent 250deg, transparent 280deg, rgba(212, 64, 64, 0.04) 290deg, transparent 300deg, transparent 330deg, rgba(212, 64, 64, 0.03) 340deg, transparent 350deg, transparent 360deg)",
-                opacity: 0.8,
+                filter:
+                  "drop-shadow(0 0 2px rgba(20,22,24,1)) drop-shadow(0 0 8px rgba(20,22,24,0.9)) drop-shadow(0 25px 80px rgba(0,0,0,0.6))",
               }}
-              aria-hidden="true"
             />
+          </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30, scale: 0.97 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{
-                duration: 1.2,
-                delay: 0.3,
-                ease: [0.25, 0.4, 0.25, 1],
-              }}
-            >
-              <Image
-                src="https://res.cloudinary.com/dewf3zos0/image/upload/v1770930641/filip_xjenim.png"
-                alt="Filip Jagodič"
-                width={700}
-                height={900}
-                priority
-                className="max-h-[70vh] w-auto object-contain"
-                style={{
-                  filter:
-                    "drop-shadow(0 0 1px rgba(20,22,24,1)) drop-shadow(0 0 2px rgba(20,22,24,1)) drop-shadow(0 0 4px rgba(20,22,24,0.8)) drop-shadow(0 20px 60px rgba(0,0,0,0.5))",
-                }}
-              />
-            </motion.div>
-          </div>
-
-          {/* JAGODIČ — slides in from right */}
+          {/* RIGHT: Title stacked vertically */}
           <motion.div
-            className="hidden lg:flex items-center justify-start flex-1 pl-4 xl:pl-8"
-            initial={{ opacity: 0, x: 200 }}
+            className="hidden lg:flex flex-col items-start justify-center flex-1"
+            initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{
               duration: 1.2,
@@ -164,22 +117,39 @@ export default function Hero() {
               ease: [0.25, 0.4, 0.25, 1],
             }}
             style={{
-              transform: `translate(${mouse.x * 12}px, ${mouse.y * 8}px)`,
+              transform: `translate(${mouse.x * 8}px, ${mouse.y * 6}px)`,
               transition:
                 "transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
             }}
           >
             <h2
-              className="font-heading text-[5rem] xl:text-[6.5rem] 2xl:text-[8rem] font-bold leading-none tracking-tight"
+              className="font-heading text-[7rem] xl:text-[9rem] 2xl:text-[11rem] font-bold leading-[0.85] tracking-tight mb-2"
               style={{
                 background:
-                  "linear-gradient(135deg, #D44040 0%, #FF6B6B 25%, #D44040 50%, #AA3333 75%, #D44040 100%)",
-                backgroundSize: "200% 200%",
+                  "linear-gradient(160deg, #FF6B6B 0%, #D44040 20%, #FF8A8A 40%, #D44040 60%, #AA3333 80%, #D44040 100%)",
+                backgroundSize: "300% 300%",
                 backgroundClip: "text",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 filter:
-                  "drop-shadow(0 0 40px rgba(212, 64, 64, 0.4)) drop-shadow(0 0 80px rgba(212, 64, 64, 0.2)) drop-shadow(0 4px 20px rgba(0, 0, 0, 0.5))",
+                  "drop-shadow(0 0 60px rgba(212, 64, 64, 0.6)) drop-shadow(0 0 120px rgba(212, 64, 64, 0.3)) drop-shadow(0 8px 32px rgba(0, 0, 0, 0.7))",
+                textShadow: "0 0 80px rgba(255, 107, 107, 0.3)",
+              }}
+            >
+              FILIP
+            </h2>
+            <h2
+              className="font-heading text-[7rem] xl:text-[9rem] 2xl:text-[11rem] font-bold leading-[0.85] tracking-tight"
+              style={{
+                background:
+                  "linear-gradient(160deg, #FF6B6B 0%, #D44040 20%, #FF8A8A 40%, #D44040 60%, #AA3333 80%, #D44040 100%)",
+                backgroundSize: "300% 300%",
+                backgroundClip: "text",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                filter:
+                  "drop-shadow(0 0 60px rgba(212, 64, 64, 0.6)) drop-shadow(0 0 120px rgba(212, 64, 64, 0.3)) drop-shadow(0 8px 32px rgba(0, 0, 0, 0.7))",
+                textShadow: "0 0 80px rgba(255, 107, 107, 0.3)",
               }}
             >
               JAGODIČ
