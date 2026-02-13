@@ -31,7 +31,7 @@ export default function Hero() {
       {/* Accessible heading */}
       <h1 className="sr-only">Filip Jagodič — Glasba presega vse meje</h1>
 
-      {/* Background gradient */}
+      {/* Background gradient with red glows */}
       <div
         className="absolute inset-[-40px]"
         style={{
@@ -40,6 +40,16 @@ export default function Hero() {
           transform: `translate(${mouse.x * 5}px, ${mouse.y * 5}px)`,
           transition: "transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
         }}
+      />
+
+      {/* Red ambient glows */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-40"
+        style={{
+          background:
+            "radial-gradient(ellipse 800px 600px at 20% 30%, rgba(212, 64, 64, 0.15), transparent 50%), radial-gradient(ellipse 600px 500px at 80% 70%, rgba(212, 64, 64, 0.12), transparent 50%)",
+        }}
+        aria-hidden="true"
       />
 
       {/* Vignette */}
@@ -71,15 +81,21 @@ export default function Hero() {
                 "transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
             }}
           >
-            <span
-              className="font-heading text-[6rem] xl:text-[8rem] 2xl:text-[10rem] font-bold leading-none tracking-tight text-accent"
+            <h2
+              className="font-heading text-[6rem] xl:text-[8rem] 2xl:text-[10rem] font-bold leading-none tracking-tight"
               style={{
-                textShadow:
-                  "0 0 60px rgba(212, 64, 64, 0.3), 0 0 120px rgba(212, 64, 64, 0.1)",
+                background:
+                  "linear-gradient(135deg, #D44040 0%, #FF6B6B 25%, #D44040 50%, #AA3333 75%, #D44040 100%)",
+                backgroundSize: "200% 200%",
+                backgroundClip: "text",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                filter:
+                  "drop-shadow(0 0 40px rgba(212, 64, 64, 0.4)) drop-shadow(0 0 80px rgba(212, 64, 64, 0.2)) drop-shadow(0 4px 20px rgba(0, 0, 0, 0.5))",
               }}
             >
               FILIP
-            </span>
+            </h2>
           </motion.div>
 
           {/* Center: Glow + Rays + Filip's image */}
@@ -153,15 +169,21 @@ export default function Hero() {
                 "transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
             }}
           >
-            <span
-              className="font-heading text-[5rem] xl:text-[6.5rem] 2xl:text-[8rem] font-bold leading-none tracking-tight text-accent"
+            <h2
+              className="font-heading text-[5rem] xl:text-[6.5rem] 2xl:text-[8rem] font-bold leading-none tracking-tight"
               style={{
-                textShadow:
-                  "0 0 60px rgba(212, 64, 64, 0.3), 0 0 120px rgba(212, 64, 64, 0.1)",
+                background:
+                  "linear-gradient(135deg, #D44040 0%, #FF6B6B 25%, #D44040 50%, #AA3333 75%, #D44040 100%)",
+                backgroundSize: "200% 200%",
+                backgroundClip: "text",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                filter:
+                  "drop-shadow(0 0 40px rgba(212, 64, 64, 0.4)) drop-shadow(0 0 80px rgba(212, 64, 64, 0.2)) drop-shadow(0 4px 20px rgba(0, 0, 0, 0.5))",
               }}
             >
               JAGODIČ
-            </span>
+            </h2>
           </motion.div>
         </div>
 
@@ -177,24 +199,36 @@ export default function Hero() {
           }}
           style={{ zIndex: 3 }}
         >
-          <span
-            className="font-heading text-[3.5rem] sm:text-[5rem] md:text-[6rem] font-bold leading-none tracking-tight text-accent block"
+          <h2
+            className="font-heading text-[3.5rem] sm:text-[5rem] md:text-[6rem] font-bold leading-none tracking-tight block"
             style={{
-              textShadow:
-                "0 0 40px rgba(212, 64, 64, 0.3), 0 0 80px rgba(212, 64, 64, 0.1)",
+              background:
+                "linear-gradient(135deg, #D44040 0%, #FF6B6B 25%, #D44040 50%, #AA3333 75%, #D44040 100%)",
+              backgroundSize: "200% 200%",
+              backgroundClip: "text",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              filter:
+                "drop-shadow(0 0 30px rgba(212, 64, 64, 0.4)) drop-shadow(0 0 60px rgba(212, 64, 64, 0.2)) drop-shadow(0 4px 15px rgba(0, 0, 0, 0.5))",
             }}
           >
             FILIP
-          </span>
-          <span
-            className="font-heading text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] font-bold leading-none tracking-tight text-accent block"
+          </h2>
+          <h2
+            className="font-heading text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] font-bold leading-none tracking-tight block"
             style={{
-              textShadow:
-                "0 0 40px rgba(212, 64, 64, 0.3), 0 0 80px rgba(212, 64, 64, 0.1)",
+              background:
+                "linear-gradient(135deg, #D44040 0%, #FF6B6B 25%, #D44040 50%, #AA3333 75%, #D44040 100%)",
+              backgroundSize: "200% 200%",
+              backgroundClip: "text",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              filter:
+                "drop-shadow(0 0 30px rgba(212, 64, 64, 0.4)) drop-shadow(0 0 60px rgba(212, 64, 64, 0.2)) drop-shadow(0 4px 15px rgba(0, 0, 0, 0.5))",
             }}
           >
             JAGODIČ
-          </span>
+          </h2>
         </motion.div>
       </div>
 
@@ -210,12 +244,26 @@ export default function Hero() {
         </motion.p>
 
         <motion.p
-          className="text-xl md:text-2xl lg:text-3xl text-white/60 font-light mb-8 max-w-2xl mx-auto"
+          className="text-xl md:text-2xl lg:text-3xl text-white/60 font-light mb-8 max-w-2xl mx-auto overflow-hidden"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1 }}
         >
-          Glasba presega vse meje
+          {"Glasba presega vse meje".split(" ").map((word, i) => (
+            <motion.span
+              key={i}
+              className="inline-block mr-2"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.6,
+                delay: 1 + i * 0.1,
+                ease: [0.25, 0.4, 0.25, 1],
+              }}
+            >
+              {word}
+            </motion.span>
+          ))}
         </motion.p>
 
         <motion.div
@@ -226,23 +274,37 @@ export default function Hero() {
         >
           <a
             href="#glasba"
-            className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-accent text-white font-semibold rounded-full hover:bg-accent-light transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-base"
+            className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-accent text-white font-semibold rounded-full overflow-hidden transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-base"
           >
-            <svg
-              className="w-5 h-5"
-              fill="currentColor"
-              viewBox="0 0 24 24"
+            <span className="relative z-10 flex items-center gap-3">
+              <svg
+                className="w-5 h-5"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="M8 5v14l11-7z" />
+              </svg>
+              Poslušaj glasbo
+            </span>
+            <span
+              className="absolute inset-0 bg-gradient-to-r from-accent-light to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
               aria-hidden="true"
-            >
-              <path d="M8 5v14l11-7z" />
-            </svg>
-            Poslušaj glasbo
+            />
           </a>
           <a
             href="#o-filipu"
-            className="inline-flex items-center justify-center px-8 py-4 border border-white/20 text-white font-semibold rounded-full hover:border-accent hover:text-accent transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-base"
+            className="group relative inline-flex items-center justify-center px-8 py-4 border-2 border-white/20 text-white font-semibold rounded-full overflow-hidden transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-base"
           >
-            Spoznaj Filipa
+            <span className="relative z-10">Spoznaj Filipa</span>
+            <span
+              className="absolute inset-0 border-2 border-accent scale-0 group-hover:scale-100 transition-transform duration-500 ease-out rounded-full"
+              aria-hidden="true"
+            />
+            <span
+              className="absolute inset-0 bg-accent/10 scale-0 group-hover:scale-100 transition-transform duration-500 ease-out rounded-full"
+              aria-hidden="true"
+            />
           </a>
         </motion.div>
       </div>
