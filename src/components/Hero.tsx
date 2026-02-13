@@ -4,7 +4,7 @@ import { useRef, useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 
 const VIDEO_URL =
-  "https://res.cloudinary.com/dewf3zos0/video/upload/v1770979432/Filip3_qcl9ul.mp4";
+  "https://res.cloudinary.com/dewf3zos0/video/upload/v1770980095/Filip5_xs4cua.mp4";
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -136,18 +136,13 @@ export default function Hero() {
       {/* Main hero area — Filip video left, title right */}
       <div className="relative flex-1 flex items-center justify-center px-6 lg:px-12">
         <div
-          className="relative flex items-center justify-between w-full max-w-7xl mx-auto gap-8"
+          className="relative flex items-center justify-between w-full max-w-7xl mx-auto gap-2"
           style={{ marginTop: "10vh" }}
         >
-          {/* LEFT: Filip's video with glow */}
+          {/* LEFT: Filip's video with glow (no mouse parallax) */}
           <div
             className="relative flex-shrink-0"
-            style={{
-              zIndex: 2,
-              transform: `translate(${mouse.x * 15}px, ${mouse.y * 10}px)`,
-              transition:
-                "transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-            }}
+            style={{ zIndex: 2 }}
           >
             {/* Red glow behind video */}
             <div
@@ -169,7 +164,7 @@ export default function Hero() {
                 ease: [0.25, 0.4, 0.25, 1],
               }}
             >
-              <div className="relative w-[45vw] max-w-[650px] h-[70vh] max-h-[780px]">
+              <div className="relative w-[55vw] max-w-[750px] h-[80vh] max-h-[850px]">
                 <video
                   ref={videoRef}
                   muted
@@ -179,11 +174,13 @@ export default function Hero() {
                   className="w-full h-full object-cover"
                   style={{
                     maskImage:
-                      "radial-gradient(ellipse 70% 75% at 50% 45%, rgba(0,0,0,1) 35%, rgba(0,0,0,0) 80%)",
+                      "linear-gradient(to top, transparent 0%, black 7%, black 100%), radial-gradient(ellipse 80% 85% at 50% 43%, black 40%, transparent 80%)",
                     WebkitMaskImage:
-                      "radial-gradient(ellipse 70% 75% at 50% 45%, rgba(0,0,0,1) 35%, rgba(0,0,0,0) 80%)",
+                      "linear-gradient(to top, transparent 0%, black 7%, black 100%), radial-gradient(ellipse 80% 85% at 50% 43%, black 40%, transparent 80%)",
+                    maskComposite: "intersect",
+                    WebkitMaskComposite: "source-in",
                     filter: "brightness(0.95) contrast(1.05)",
-                  }}
+                  } as React.CSSProperties}
                   aria-label="Filip Jagodič"
                 >
                   <source src={VIDEO_URL} type="video/mp4" />
@@ -194,7 +191,7 @@ export default function Hero() {
 
           {/* RIGHT: Title stacked vertically */}
           <motion.div
-            className="hidden lg:flex flex-col items-start justify-center flex-1 pl-12"
+            className="hidden lg:flex flex-col items-start justify-center flex-1 pl-2"
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{
