@@ -164,7 +164,7 @@ export default function Hero() {
                 ease: [0.25, 0.4, 0.25, 1],
               }}
             >
-              <div className="relative w-[50vw] max-w-[680px] h-[70vh] max-h-[750px]">
+              <div className="relative w-[50vw] max-w-[680px] h-[70vh] max-h-[750px] overflow-hidden">
                 <video
                   ref={videoRef}
                   muted
@@ -173,6 +173,7 @@ export default function Hero() {
                   onLoadedMetadata={handleLoadedMetadata}
                   className="w-full h-full object-cover object-top"
                   style={{
+                    transform: "scale(1.15)",
                     maskImage:
                       "radial-gradient(ellipse 85% 80% at 45% 40%, black 30%, transparent 70%)",
                     WebkitMaskImage:
