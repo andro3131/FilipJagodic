@@ -193,9 +193,9 @@ export default function Hero() {
                   className="w-full h-full object-cover object-top"
                   style={{
                     maskImage:
-                      "radial-gradient(ellipse 75% 72% at 50% 42%, black 40%, transparent 65%)",
+                      "radial-gradient(ellipse 82% 90% at 50% 46%, black 45%, transparent 68%)",
                     WebkitMaskImage:
-                      "radial-gradient(ellipse 75% 72% at 50% 42%, black 40%, transparent 65%)",
+                      "radial-gradient(ellipse 82% 90% at 50% 46%, black 45%, transparent 68%)",
                     filter: "brightness(0.95) contrast(1.05)",
                   }}
                   aria-label="Filip Jagodič"
@@ -239,7 +239,7 @@ export default function Hero() {
               FILIP
             </h2>
             <h2
-              className="font-heading text-[7rem] xl:text-[9rem] 2xl:text-[11rem] font-black leading-[0.85] tracking-[-0.03em]"
+              className="font-heading text-[7rem] xl:text-[9rem] 2xl:text-[11rem] font-black leading-[0.85] tracking-[-0.03em] pb-[0.2em]"
               style={{
                 background:
                   "linear-gradient(110deg, #D44040 0%, #C43838 30%, #D44040 44%, #FFE8E8 50%, #D44040 56%, #C43838 70%, #D44040 100%)",
@@ -257,7 +257,7 @@ export default function Hero() {
             </h2>
 
             {/* Slogan + buttons under title, offset like JAGODIČ */}
-            <div className="mt-8 pl-16">
+            <div className="mt-8 pl-[8rem]">
               <motion.p
                 className="text-accent/80 text-sm md:text-base font-medium tracking-[0.3em] uppercase mb-2"
                 initial={{ opacity: 0, y: 20 }}
