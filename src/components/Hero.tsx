@@ -4,7 +4,7 @@ import { useRef, useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 
 const VIDEO_URL =
-  "https://res.cloudinary.com/dewf3zos0/video/upload/v1770980459/Filip6_q0fsne.mp4";
+  "https://res.cloudinary.com/dewf3zos0/video/upload/v1770981874/Filip9_hczm30.mp4";
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -28,12 +28,13 @@ export default function Hero() {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [handleMouseMove]);
 
-  // Video metadata loaded — store duration and enable scrubbing
+  // Video metadata loaded — store duration and reset state for refresh
   const handleLoadedMetadata = useCallback(() => {
     const video = videoRef.current;
     if (!video) return;
     videoDurationRef.current = video.duration;
-    video.currentTime = 0;
+    video.currentTime = 0.01;
+    setIntroComplete(false);
     setVideoReady(true);
   }, []);
 
@@ -45,8 +46,8 @@ export default function Hero() {
 
     const introEnd = videoDurationRef.current / 2;
     const startTime = performance.now();
-    const animDuration = 2500;
-    const delay = 500;
+    const animDuration = 4000;
+    const delay = 600;
 
     let rafId: number;
     const animate = (time: number) => {
@@ -141,7 +142,7 @@ export default function Hero() {
         >
           {/* LEFT: Filip's video with glow (no mouse parallax) */}
           <div
-            className="relative flex-shrink-0"
+            className="relative flex-shrink-0 -ml-12"
             style={{ zIndex: 2 }}
           >
             {/* Red glow behind video */}
@@ -164,7 +165,7 @@ export default function Hero() {
                 ease: [0.25, 0.4, 0.25, 1],
               }}
             >
-              <div className="relative w-[50vw] max-w-[680px] h-[70vh] max-h-[750px] overflow-hidden">
+              <div className="relative w-[50vw] max-w-[700px] h-[75vh] max-h-[800px]">
                 <video
                   ref={videoRef}
                   muted
@@ -173,7 +174,6 @@ export default function Hero() {
                   onLoadedMetadata={handleLoadedMetadata}
                   className="w-full h-full object-cover object-top"
                   style={{
-                    transform: "scale(1.15)",
                     maskImage:
                       "radial-gradient(ellipse 85% 80% at 45% 40%, black 30%, transparent 70%)",
                     WebkitMaskImage:
