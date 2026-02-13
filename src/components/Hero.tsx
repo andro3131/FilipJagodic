@@ -4,7 +4,7 @@ import { useRef, useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 
 const VIDEO_URL =
-  "https://res.cloudinary.com/dewf3zos0/video/upload/v1770981874/Filip9_hczm30.mp4";
+  "https://res.cloudinary.com/dewf3zos0/video/upload/v1770982477/Filip12_et6lb2.mp4";
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -142,8 +142,8 @@ export default function Hero() {
         >
           {/* LEFT: Filip's video with glow (no mouse parallax) */}
           <div
-            className="relative flex-shrink-0 -ml-12"
-            style={{ zIndex: 2 }}
+            className="relative flex-shrink-0 -ml-20"
+            style={{ zIndex: 2, marginTop: "6vh" }}
           >
             {/* Red glow behind video */}
             <div
@@ -165,7 +165,7 @@ export default function Hero() {
                 ease: [0.25, 0.4, 0.25, 1],
               }}
             >
-              <div className="relative w-[50vw] max-w-[700px] h-[75vh] max-h-[800px]">
+              <div className="relative w-[48vw] max-w-[660px] h-[78vh] max-h-[820px]">
                 <video
                   ref={videoRef}
                   muted
@@ -175,9 +175,9 @@ export default function Hero() {
                   className="w-full h-full object-cover object-top"
                   style={{
                     maskImage:
-                      "radial-gradient(ellipse 85% 80% at 45% 40%, black 30%, transparent 70%)",
+                      "radial-gradient(ellipse 75% 72% at 50% 42%, black 40%, transparent 65%)",
                     WebkitMaskImage:
-                      "radial-gradient(ellipse 85% 80% at 45% 40%, black 30%, transparent 70%)",
+                      "radial-gradient(ellipse 75% 72% at 50% 42%, black 40%, transparent 65%)",
                     filter: "brightness(0.95) contrast(1.05)",
                   }}
                   aria-label="Filip Jagodič"
