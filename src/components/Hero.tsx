@@ -162,7 +162,7 @@ export default function Hero() {
           {/* LEFT: Filip's video with glow (no mouse parallax) */}
           <div
             className="relative flex-shrink-0 -ml-32"
-            style={{ zIndex: 2, marginTop: "7vh" }}
+            style={{ zIndex: 2, marginTop: "2vh" }}
           >
             {/* Red glow behind video */}
             <div
@@ -193,9 +193,9 @@ export default function Hero() {
                   className="w-full h-full object-cover object-top"
                   style={{
                     maskImage:
-                      "radial-gradient(ellipse 68% 82% at 50% 52%, black 35%, transparent 65%)",
+                      "radial-gradient(ellipse 68% 82% at 50% 54%, black 35%, transparent 65%)",
                     WebkitMaskImage:
-                      "radial-gradient(ellipse 68% 82% at 50% 52%, black 35%, transparent 65%)",
+                      "radial-gradient(ellipse 68% 82% at 50% 54%, black 35%, transparent 65%)",
                     filter: "brightness(0.95) contrast(1.05)",
                   }}
                   aria-label="Filip Jagodič"
