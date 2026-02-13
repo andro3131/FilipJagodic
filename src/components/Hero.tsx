@@ -4,7 +4,7 @@ import { useRef, useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 
 const VIDEO_URL =
-  "https://res.cloudinary.com/dewf3zos0/video/upload/v1770980095/Filip5_xs4cua.mp4";
+  "https://res.cloudinary.com/dewf3zos0/video/upload/v1770980459/Filip6_q0fsne.mp4";
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -164,19 +164,19 @@ export default function Hero() {
                 ease: [0.25, 0.4, 0.25, 1],
               }}
             >
-              <div className="relative w-[55vw] max-w-[750px] h-[80vh] max-h-[850px]">
+              <div className="relative w-[50vw] max-w-[680px] h-[85vh] max-h-[900px]">
                 <video
                   ref={videoRef}
                   muted
                   playsInline
                   preload="auto"
                   onLoadedMetadata={handleLoadedMetadata}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-top"
                   style={{
                     maskImage:
-                      "linear-gradient(to top, transparent 0%, black 7%, black 100%), radial-gradient(ellipse 80% 85% at 50% 43%, black 40%, transparent 80%)",
+                      "linear-gradient(to bottom, black 0%, black 92%, transparent 100%), linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
                     WebkitMaskImage:
-                      "linear-gradient(to top, transparent 0%, black 7%, black 100%), radial-gradient(ellipse 80% 85% at 50% 43%, black 40%, transparent 80%)",
+                      "linear-gradient(to bottom, black 0%, black 92%, transparent 100%), linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
                     maskComposite: "intersect",
                     WebkitMaskComposite: "source-in",
                     filter: "brightness(0.95) contrast(1.05)",
@@ -191,7 +191,7 @@ export default function Hero() {
 
           {/* RIGHT: Title stacked vertically */}
           <motion.div
-            className="hidden lg:flex flex-col items-start justify-center flex-1 pl-2"
+            className="hidden lg:flex flex-col items-start justify-center flex-1 -ml-8"
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{
