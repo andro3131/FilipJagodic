@@ -63,8 +63,8 @@ export default function Hero() {
       />
 
       {/* Main hero area — Filip image left, title right */}
-      <div className="relative flex-1 flex items-center justify-center px-6 lg:px-12">
-        <div className="relative flex items-center justify-between w-full max-w-7xl mx-auto gap-8">
+      <div className="relative flex-1 flex items-end justify-center px-6 lg:px-12 pb-32">
+        <div className="relative flex items-end justify-between w-full max-w-7xl mx-auto gap-12">
           {/* LEFT: Filip's image with glow */}
           <motion.div
             className="relative flex-shrink-0"
@@ -77,7 +77,7 @@ export default function Hero() {
             }}
             style={{
               zIndex: 2,
-              transform: `translate(${mouse.x * 20}px, ${mouse.y * 12}px)`,
+              transform: `translate(${mouse.x * 25}px, ${mouse.y * 15}px)`,
               transition:
                 "transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
             }}
@@ -100,15 +100,14 @@ export default function Hero() {
               priority
               className="max-h-[75vh] w-auto object-contain"
               style={{
-                filter:
-                  "drop-shadow(0 0 2px rgba(20,22,24,1)) drop-shadow(0 0 8px rgba(20,22,24,0.9)) drop-shadow(0 25px 80px rgba(0,0,0,0.6))",
+                filter: "drop-shadow(0 25px 80px rgba(0,0,0,0.6))",
               }}
             />
           </motion.div>
 
           {/* RIGHT: Title stacked vertically */}
           <motion.div
-            className="hidden lg:flex flex-col items-start justify-center flex-1"
+            className="hidden lg:flex flex-col items-start justify-center flex-1 pl-16"
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{
@@ -123,33 +122,30 @@ export default function Hero() {
             }}
           >
             <h2
-              className="font-heading text-[7rem] xl:text-[9rem] 2xl:text-[11rem] font-bold leading-[0.85] tracking-tight mb-2"
+              className="font-heading text-[7rem] xl:text-[9rem] 2xl:text-[11rem] font-bold leading-[0.85] tracking-tight mb-2 animate-gradient"
               style={{
                 background:
-                  "linear-gradient(160deg, #FF6B6B 0%, #D44040 20%, #FF8A8A 40%, #D44040 60%, #AA3333 80%, #D44040 100%)",
-                backgroundSize: "300% 300%",
+                  "linear-gradient(110deg, #D44040 0%, #FF6B6B 25%, #FF8A8A 35%, #D44040 50%, #AA3333 65%, #D44040 80%, #FF6B6B 100%)",
+                backgroundSize: "200% 100%",
                 backgroundClip: "text",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
-                filter:
-                  "drop-shadow(0 0 60px rgba(212, 64, 64, 0.6)) drop-shadow(0 0 120px rgba(212, 64, 64, 0.3)) drop-shadow(0 8px 32px rgba(0, 0, 0, 0.7))",
-                textShadow: "0 0 80px rgba(255, 107, 107, 0.3)",
+                animation: "shimmer 8s ease-in-out infinite",
               }}
             >
               FILIP
             </h2>
             <h2
-              className="font-heading text-[7rem] xl:text-[9rem] 2xl:text-[11rem] font-bold leading-[0.85] tracking-tight"
+              className="font-heading text-[7rem] xl:text-[9rem] 2xl:text-[11rem] font-bold leading-[0.85] tracking-tight animate-gradient"
               style={{
                 background:
-                  "linear-gradient(160deg, #FF6B6B 0%, #D44040 20%, #FF8A8A 40%, #D44040 60%, #AA3333 80%, #D44040 100%)",
-                backgroundSize: "300% 300%",
+                  "linear-gradient(110deg, #D44040 0%, #FF6B6B 25%, #FF8A8A 35%, #D44040 50%, #AA3333 65%, #D44040 80%, #FF6B6B 100%)",
+                backgroundSize: "200% 100%",
                 backgroundClip: "text",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
-                filter:
-                  "drop-shadow(0 0 60px rgba(212, 64, 64, 0.6)) drop-shadow(0 0 120px rgba(212, 64, 64, 0.3)) drop-shadow(0 8px 32px rgba(0, 0, 0, 0.7))",
-                textShadow: "0 0 80px rgba(255, 107, 107, 0.3)",
+                animation: "shimmer 8s ease-in-out infinite",
+                animationDelay: "0.5s",
               }}
             >
               JAGODIČ
