@@ -103,8 +103,7 @@ export default function Hero() {
                 priority
                 className="max-h-[80vh] w-auto object-contain"
                 style={{
-                  filter: "drop-shadow(0 30px 100px rgba(0,0,0,0.8)) brightness(0.98) contrast(1.02)",
-                  mixBlendMode: "normal",
+                  filter: "drop-shadow(0 0 0.5px rgba(0,0,0,1)) drop-shadow(0 0 1.5px rgba(0,0,0,0.9)) drop-shadow(0 30px 100px rgba(0,0,0,0.8)) brightness(0.97) contrast(1.03)",
                 }}
               />
             </motion.div>
@@ -130,12 +129,12 @@ export default function Hero() {
               className="font-heading text-[7rem] xl:text-[9rem] 2xl:text-[11rem] font-black leading-[0.85] tracking-[-0.03em] mb-2"
               style={{
                 background:
-                  "linear-gradient(110deg, #AA3333 0%, #D44040 15%, #FF6B6B 30%, #FFDADA 48%, #FFFFFF 50%, #FFDADA 52%, #D44040 70%, #AA3333 85%, #C43838 100%)",
-                backgroundSize: "200% 100%",
+                  "linear-gradient(110deg, #D44040 0%, #C43838 30%, #D44040 44%, #FFE8E8 50%, #D44040 56%, #C43838 70%, #D44040 100%)",
+                backgroundSize: "300% 100%",
                 backgroundClip: "text",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
-                animation: "shimmer 6s ease-in-out infinite",
+                animation: "shimmer 10s ease-in-out infinite",
                 filter: "drop-shadow(0 0 80px rgba(212, 64, 64, 0.25))",
               }}
             >
@@ -145,13 +144,13 @@ export default function Hero() {
               className="font-heading text-[7rem] xl:text-[9rem] 2xl:text-[11rem] font-black leading-[0.85] tracking-[-0.03em] pb-[0.2em]"
               style={{
                 background:
-                  "linear-gradient(110deg, #AA3333 0%, #D44040 15%, #FF6B6B 30%, #FFDADA 48%, #FFFFFF 50%, #FFDADA 52%, #D44040 70%, #AA3333 85%, #C43838 100%)",
-                backgroundSize: "200% 100%",
+                  "linear-gradient(110deg, #D44040 0%, #C43838 30%, #D44040 44%, #FFE8E8 50%, #D44040 56%, #C43838 70%, #D44040 100%)",
+                backgroundSize: "300% 100%",
                 backgroundClip: "text",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
-                animation: "shimmer 6s ease-in-out infinite",
-                animationDelay: "0.5s",
+                animation: "shimmer 10s ease-in-out infinite",
+                animationDelay: "1s",
                 paddingLeft: "4rem",
                 filter: "drop-shadow(0 0 80px rgba(212, 64, 64, 0.25))",
               }}
@@ -177,12 +176,12 @@ export default function Hero() {
             className="font-heading text-[3.5rem] sm:text-[5rem] md:text-[6rem] font-black leading-none tracking-[-0.03em] block"
             style={{
               background:
-                "linear-gradient(135deg, #AA3333 0%, #D44040 15%, #FF6B6B 30%, #FFDADA 48%, #FFFFFF 50%, #FFDADA 52%, #D44040 70%, #AA3333 85%, #C43838 100%)",
-              backgroundSize: "200% 200%",
+                "linear-gradient(135deg, #D44040 0%, #C43838 30%, #D44040 44%, #FFE8E8 50%, #D44040 56%, #C43838 70%, #D44040 100%)",
+              backgroundSize: "300% 300%",
               backgroundClip: "text",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
-              animation: "shimmer 6s ease-in-out infinite",
+              animation: "shimmer 10s ease-in-out infinite",
               filter:
                 "drop-shadow(0 0 30px rgba(212, 64, 64, 0.4)) drop-shadow(0 0 60px rgba(212, 64, 64, 0.2))",
             }}
@@ -193,13 +192,13 @@ export default function Hero() {
             className="font-heading text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] font-black leading-none tracking-[-0.03em] block pb-[0.2em]"
             style={{
               background:
-                "linear-gradient(135deg, #AA3333 0%, #D44040 15%, #FF6B6B 30%, #FFDADA 48%, #FFFFFF 50%, #FFDADA 52%, #D44040 70%, #AA3333 85%, #C43838 100%)",
-              backgroundSize: "200% 200%",
+                "linear-gradient(135deg, #D44040 0%, #C43838 30%, #D44040 44%, #FFE8E8 50%, #D44040 56%, #C43838 70%, #D44040 100%)",
+              backgroundSize: "300% 300%",
               backgroundClip: "text",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
-              animation: "shimmer 6s ease-in-out infinite",
-              animationDelay: "0.5s",
+              animation: "shimmer 10s ease-in-out infinite",
+              animationDelay: "1s",
               filter:
                 "drop-shadow(0 0 30px rgba(212, 64, 64, 0.4)) drop-shadow(0 0 60px rgba(212, 64, 64, 0.2))",
             }}
