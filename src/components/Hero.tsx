@@ -3,29 +3,15 @@
 import { useRef, useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 
-const FRAME_URLS = [
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1770971627/ezgif-frame-001_ydayyv.png",
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1770971624/ezgif-frame-002_fglnth.png",
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1770971625/ezgif-frame-003_pvlsvm.png",
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1770971646/ezgif-frame-004_iubyst.png",
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1770971647/ezgif-frame-005_dw7usu.png",
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1770971644/ezgif-frame-006_hewqdf.png",
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1770971647/ezgif-frame-007_trepm4.png",
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1770971643/ezgif-frame-008_i32dqx.png",
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1770971642/ezgif-frame-009_svg6ry.png",
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1770971646/ezgif-frame-010_iu6k9a.png",
-];
-
-const INTRO_END_FRAME = 4;
-const TOTAL_FRAMES = FRAME_URLS.length;
+const VIDEO_URL =
+  "https://res.cloudinary.com/dewf3zos0/video/upload/v1770979432/Filip3_qcl9ul.mp4";
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const imagesRef = useRef<HTMLImageElement[]>([]);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoDurationRef = useRef(0);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
-  const [currentFrame, setCurrentFrame] = useState(0);
-  const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [videoReady, setVideoReady] = useState(false);
   const [introComplete, setIntroComplete] = useState(false);
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
@@ -42,48 +28,25 @@ export default function Hero() {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [handleMouseMove]);
 
-  // Preload all frame images
-  useEffect(() => {
-    const images: HTMLImageElement[] = [];
-    let loaded = 0;
-    FRAME_URLS.forEach((src, i) => {
-      const img = new window.Image();
-      img.crossOrigin = "anonymous";
-      img.src = src;
-      img.onload = () => {
-        loaded++;
-        if (loaded === TOTAL_FRAMES) {
-          imagesRef.current = images;
-          setImagesLoaded(true);
-        }
-      };
-      images[i] = img;
-    });
+  // Video metadata loaded — store duration and enable scrubbing
+  const handleLoadedMetadata = useCallback(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    videoDurationRef.current = video.duration;
+    video.currentTime = 0;
+    setVideoReady(true);
   }, []);
 
-  // Draw current frame to canvas
+  // Intro: scrub first half with easeOutCubic (slows to stop)
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas || !imagesLoaded) return;
-    const ctx = canvas.getContext("2d");
-    const img = imagesRef.current[currentFrame];
-    if (!ctx || !img) return;
+    if (!videoReady) return;
+    const video = videoRef.current;
+    if (!video) return;
 
-    if (canvas.width !== img.naturalWidth) {
-      canvas.width = img.naturalWidth;
-      canvas.height = img.naturalHeight;
-    }
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(img, 0, 0);
-  }, [currentFrame, imagesLoaded]);
-
-  // Intro animation: frames 0 → 4 with easeOut
-  useEffect(() => {
-    if (!imagesLoaded) return;
-
+    const introEnd = videoDurationRef.current / 2;
     const startTime = performance.now();
-    const delay = 300;
-    const duration = 1200;
+    const animDuration = 2500;
+    const delay = 500;
 
     let rafId: number;
     const animate = (time: number) => {
@@ -93,13 +56,9 @@ export default function Hero() {
         return;
       }
 
-      const progress = Math.min(elapsed / duration, 1);
+      const progress = Math.min(elapsed / animDuration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
-      const frame = Math.min(
-        Math.floor(eased * (INTRO_END_FRAME + 1)),
-        INTRO_END_FRAME
-      );
-      setCurrentFrame(frame);
+      video.currentTime = eased * introEnd;
 
       if (progress < 1) {
         rafId = requestAnimationFrame(animate);
@@ -110,20 +69,23 @@ export default function Hero() {
 
     rafId = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(rafId);
-  }, [imagesLoaded]);
+  }, [videoReady]);
 
-  // Scroll-based frames: 4 → 9
+  // Scroll: scrub second half based on scroll position
   useEffect(() => {
     if (!introComplete) return;
+    const video = videoRef.current;
+    if (!video) return;
+
+    const dur = videoDurationRef.current;
+    const midpoint = dur / 2;
+    const scrollHalf = dur - midpoint;
 
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      const scrollRange = window.innerHeight * 0.5;
+      const scrollRange = window.innerHeight * 0.6;
       const progress = Math.min(Math.max(scrollY / scrollRange, 0), 1);
-      const frame =
-        INTRO_END_FRAME +
-        Math.round(progress * (TOTAL_FRAMES - 1 - INTRO_END_FRAME));
-      setCurrentFrame(frame);
+      video.currentTime = midpoint + progress * scrollHalf;
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -171,22 +133,25 @@ export default function Hero() {
         aria-hidden="true"
       />
 
-      {/* Main hero area — Filip image left, title right */}
+      {/* Main hero area — Filip video left, title right */}
       <div className="relative flex-1 flex items-center justify-center px-6 lg:px-12">
-        <div className="relative flex items-center justify-between w-full max-w-7xl mx-auto gap-12" style={{ marginTop: "10vh" }}>
-          {/* LEFT: Filip's image sequence with glow */}
+        <div
+          className="relative flex items-center justify-between w-full max-w-7xl mx-auto gap-8"
+          style={{ marginTop: "10vh" }}
+        >
+          {/* LEFT: Filip's video with glow */}
           <div
             className="relative flex-shrink-0"
             style={{
               zIndex: 2,
-              transform: `translate(${mouse.x * 25}px, ${mouse.y * 15}px)`,
+              transform: `translate(${mouse.x * 15}px, ${mouse.y * 10}px)`,
               transition:
                 "transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
             }}
           >
-            {/* Large red glow behind Filip */}
+            {/* Red glow behind video */}
             <div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[180%] h-[180%] rounded-full pointer-events-none"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[160%] rounded-full pointer-events-none"
               style={{
                 background:
                   "radial-gradient(circle, rgba(212, 64, 64, 0.35) 0%, rgba(212, 64, 64, 0.15) 40%, rgba(212, 64, 64, 0.05) 60%, transparent 80%)",
@@ -196,7 +161,7 @@ export default function Hero() {
             />
 
             <motion.div
-              initial={{ opacity: 0, x: -100, scale: 0.95 }}
+              initial={{ opacity: 0, x: -80, scale: 0.95 }}
               animate={{ opacity: 1, x: 0, scale: 1 }}
               transition={{
                 duration: 1.2,
@@ -204,24 +169,32 @@ export default function Hero() {
                 ease: [0.25, 0.4, 0.25, 1],
               }}
             >
-              <canvas
-                ref={canvasRef}
-                width={600}
-                height={800}
-                className="max-h-[80vh] w-auto"
-                style={{
-                  filter:
-                    "drop-shadow(0 0 0.5px rgba(0,0,0,1)) drop-shadow(0 0 1.5px rgba(0,0,0,0.9)) drop-shadow(0 30px 100px rgba(0,0,0,0.8)) brightness(0.97) contrast(1.03)",
-                }}
-                role="img"
-                aria-label="Filip Jagodič"
-              />
+              <div className="relative w-[45vw] max-w-[650px] h-[70vh] max-h-[780px]">
+                <video
+                  ref={videoRef}
+                  muted
+                  playsInline
+                  preload="auto"
+                  onLoadedMetadata={handleLoadedMetadata}
+                  className="w-full h-full object-cover"
+                  style={{
+                    maskImage:
+                      "radial-gradient(ellipse 70% 75% at 50% 45%, rgba(0,0,0,1) 35%, rgba(0,0,0,0) 80%)",
+                    WebkitMaskImage:
+                      "radial-gradient(ellipse 70% 75% at 50% 45%, rgba(0,0,0,1) 35%, rgba(0,0,0,0) 80%)",
+                    filter: "brightness(0.95) contrast(1.05)",
+                  }}
+                  aria-label="Filip Jagodič"
+                >
+                  <source src={VIDEO_URL} type="video/mp4" />
+                </video>
+              </div>
             </motion.div>
           </div>
 
           {/* RIGHT: Title stacked vertically */}
           <motion.div
-            className="hidden lg:flex flex-col items-start justify-center flex-1 pl-20"
+            className="hidden lg:flex flex-col items-start justify-center flex-1 pl-12"
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{
@@ -244,7 +217,8 @@ export default function Hero() {
                 backgroundClip: "text",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
-                animation: "shimmer-flash 3s ease-out forwards, shimmer-red 8s ease-in-out 3s infinite, float-text 7s ease-in-out 2s infinite",
+                animation:
+                  "shimmer-flash 3s ease-out forwards, shimmer-red 8s ease-in-out 3s infinite, float-text 7s ease-in-out 2s infinite",
                 filter: "drop-shadow(0 0 80px rgba(212, 64, 64, 0.25))",
               }}
             >
@@ -259,7 +233,8 @@ export default function Hero() {
                 backgroundClip: "text",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
-                animation: "shimmer-flash 3s ease-out 1s forwards, shimmer-red 8s ease-in-out 4s infinite, float-text 8s ease-in-out 2.5s infinite",
+                animation:
+                  "shimmer-flash 3s ease-out 1s forwards, shimmer-red 8s ease-in-out 4s infinite, float-text 8s ease-in-out 2.5s infinite",
                 paddingLeft: "4rem",
                 filter: "drop-shadow(0 0 80px rgba(212, 64, 64, 0.25))",
               }}
@@ -290,7 +265,8 @@ export default function Hero() {
               backgroundClip: "text",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
-              animation: "shimmer-flash 3s ease-out forwards, shimmer-red 8s ease-in-out 3s infinite, float-text 7s ease-in-out 2s infinite",
+              animation:
+                "shimmer-flash 3s ease-out forwards, shimmer-red 8s ease-in-out 3s infinite, float-text 7s ease-in-out 2s infinite",
               filter:
                 "drop-shadow(0 0 30px rgba(212, 64, 64, 0.4)) drop-shadow(0 0 60px rgba(212, 64, 64, 0.2))",
             }}
@@ -306,7 +282,8 @@ export default function Hero() {
               backgroundClip: "text",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
-              animation: "shimmer-flash 3s ease-out 1s forwards, shimmer-red 8s ease-in-out 4s infinite, float-text 8s ease-in-out 2.5s infinite",
+              animation:
+                "shimmer-flash 3s ease-out 1s forwards, shimmer-red 8s ease-in-out 4s infinite, float-text 8s ease-in-out 2.5s infinite",
               filter:
                 "drop-shadow(0 0 30px rgba(212, 64, 64, 0.4)) drop-shadow(0 0 60px rgba(212, 64, 64, 0.2))",
             }}
@@ -317,7 +294,10 @@ export default function Hero() {
       </div>
 
       {/* Bottom content — below image, always visible */}
-      <div className="relative pb-20 md:pb-24 text-center px-6" style={{ zIndex: 3 }}>
+      <div
+        className="relative pb-20 md:pb-24 text-center px-6"
+        style={{ zIndex: 3 }}
+      >
         <motion.p
           className="text-accent/80 text-sm md:text-base font-medium tracking-[0.3em] uppercase mb-3"
           initial={{ opacity: 0, y: 20 }}
