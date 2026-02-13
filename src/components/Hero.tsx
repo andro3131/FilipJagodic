@@ -137,7 +137,7 @@ export default function Hero() {
       <div className="relative flex-1 flex items-center justify-center px-6 lg:px-12">
         <div
           className="relative flex items-center justify-between w-full max-w-7xl mx-auto gap-2"
-          style={{ marginTop: "10vh" }}
+          style={{ marginTop: "4vh" }}
         >
           {/* LEFT: Filip's video with glow (no mouse parallax) */}
           <div
@@ -164,7 +164,7 @@ export default function Hero() {
                 ease: [0.25, 0.4, 0.25, 1],
               }}
             >
-              <div className="relative w-[50vw] max-w-[680px] h-[85vh] max-h-[900px]">
+              <div className="relative w-[50vw] max-w-[680px] h-[70vh] max-h-[750px]">
                 <video
                   ref={videoRef}
                   muted
@@ -174,13 +174,11 @@ export default function Hero() {
                   className="w-full h-full object-cover object-top"
                   style={{
                     maskImage:
-                      "linear-gradient(to bottom, black 0%, black 92%, transparent 100%), linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
+                      "radial-gradient(ellipse 85% 80% at 45% 40%, black 30%, transparent 70%)",
                     WebkitMaskImage:
-                      "linear-gradient(to bottom, black 0%, black 92%, transparent 100%), linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
-                    maskComposite: "intersect",
-                    WebkitMaskComposite: "source-in",
+                      "radial-gradient(ellipse 85% 80% at 45% 40%, black 30%, transparent 70%)",
                     filter: "brightness(0.95) contrast(1.05)",
-                  } as React.CSSProperties}
+                  }}
                   aria-label="Filip Jagodič"
                 >
                   <source src={VIDEO_URL} type="video/mp4" />
@@ -191,7 +189,7 @@ export default function Hero() {
 
           {/* RIGHT: Title stacked vertically */}
           <motion.div
-            className="hidden lg:flex flex-col items-start justify-center flex-1 -ml-8"
+            className="hidden lg:flex flex-col items-start justify-center flex-1 -ml-24"
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{
@@ -290,10 +288,21 @@ export default function Hero() {
         </motion.div>
       </div>
 
+      {/* Bottom blur overlay to hide wheelchair/floor */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-[200px] pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(to top, #0F1012 0%, #0F1012 20%, transparent 100%)",
+          zIndex: 3,
+        }}
+        aria-hidden="true"
+      />
+
       {/* Bottom content — below image, always visible */}
       <div
-        className="relative pb-20 md:pb-24 text-center px-6"
-        style={{ zIndex: 3 }}
+        className="relative pb-12 md:pb-16 text-center px-6"
+        style={{ zIndex: 4 }}
       >
         <motion.p
           className="text-accent/80 text-sm md:text-base font-medium tracking-[0.3em] uppercase mb-3"
