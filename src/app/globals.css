@@ -69,8 +69,8 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* Gentle floating motion for headings */
+/* Floating motion for headings */
 @keyframes float-text {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
+  50% { transform: translateY(-14px); }
 }

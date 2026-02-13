@@ -33,7 +33,8 @@ export default function Hero() {
     const video = videoRef.current;
     if (!video) return;
 
-    const onCanPlay = () => {
+    const initVideo = () => {
+      if (videoReady) return;
       video.pause();
       videoDurationRef.current = video.duration;
       video.currentTime = 0.01;
@@ -41,9 +42,20 @@ export default function Hero() {
       setVideoReady(true);
     };
 
-    video.addEventListener("canplay", onCanPlay);
-    return () => video.removeEventListener("canplay", onCanPlay);
-  }, []);
+    // If already loaded (cached/fast load), init immediately
+    if (video.readyState >= 2) {
+      initVideo();
+      return;
+    }
+
+    // Otherwise wait for loadeddata + canplay as fallbacks
+    video.addEventListener("loadeddata", initVideo);
+    video.addEventListener("canplay", initVideo);
+    return () => {
+      video.removeEventListener("loadeddata", initVideo);
+      video.removeEventListener("canplay", initVideo);
+    };
+  }, [videoReady]);
 
   // Intro: scrub first half with easeOutCubic (slows to stop)
   useEffect(() => {
@@ -150,7 +162,7 @@ export default function Hero() {
           {/* LEFT: Filip's video with glow (no mouse parallax) */}
           <div
             className="relative flex-shrink-0 -ml-20"
-            style={{ zIndex: 2, marginTop: "6vh" }}
+            style={{ zIndex: 2, marginTop: "10vh" }}
           >
             {/* Red glow behind video */}
             <div
@@ -181,9 +193,9 @@ export default function Hero() {
                   className="w-full h-full object-cover object-top"
                   style={{
                     maskImage:
-                      "radial-gradient(ellipse 75% 72% at 50% 42%, black 40%, transparent 65%)",
+                      "radial-gradient(ellipse 80% 78% at 50% 42%, black 50%, transparent 72%)",
                     WebkitMaskImage:
-                      "radial-gradient(ellipse 75% 72% at 50% 42%, black 40%, transparent 65%)",
+                      "radial-gradient(ellipse 80% 78% at 50% 42%, black 50%, transparent 72%)",
                     filter: "brightness(0.95) contrast(1.05)",
                   }}
                   aria-label="Filip Jagodič"
