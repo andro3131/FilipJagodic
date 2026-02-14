@@ -12,6 +12,7 @@ const albums = [
       "https://res.cloudinary.com/dewf3zos0/image/upload/v1771103655/listek_zunaj-FINAL_paujro.jpg",
     images: [
       "https://res.cloudinary.com/dewf3zos0/image/upload/v1771104017/Screenshot_2026-02-14_at_22.20.11_tv9fum.png",
+      "https://res.cloudinary.com/dewf3zos0/image/upload/v1771103663/Inlay_zunaj_FINAL_FINAL_d6vjvw.jpg",
     ],
   },
   {
