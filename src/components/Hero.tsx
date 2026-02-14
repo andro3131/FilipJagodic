@@ -210,12 +210,12 @@ export default function Hero() {
                   muted
                   playsInline
                   preload="auto"
-                  className="w-full h-full object-cover object-top"
+                  className="w-full h-full object-cover object-center"
                   style={{
-                    /* maskImage:
+                    maskImage:
                       "radial-gradient(ellipse 68% 86% at 50% 56%, black 30%, transparent 65%)",
                     WebkitMaskImage:
-                      "radial-gradient(ellipse 68% 86% at 50% 56%, black 30%, transparent 65%)", */
+                      "radial-gradient(ellipse 68% 86% at 50% 56%, black 30%, transparent 65%)",
                     filter: "brightness(0.95) contrast(1.05)",
                   }}
                   aria-label="Filip Jagodič"
