@@ -242,12 +242,14 @@ export default function About() {
               Danes Filip pozna na tisoče pesmi — od jazzovskih standardov iz leta
               1920, šansonov in popevk iz 50-ih in 60-ih let, do sodobnih
               uspešnic. Vsako slišano pesem lahko takoj reproducira na klaviaturah
-              in jo zapoje z vsemi glasovi. V snemalnem studiu posname tudi 30
-              pesmi na eno sejo.
+              in jo zapoje z vsemi glasovi. Ima tudi izjemno sposobnost, da pesem
+              zapoje od konca proti začetku — besedilo in melodijo obrne v celoti.
+              V snemalnem studiu posname tudi 30 pesmi na eno sejo.
             </p>
 
             <p>
-              Filip je izredno neposreden in iskren. Na odru nima treme — kot sam
+              Filip je posnel tri zgoščenke in leta 2018 imel samostojni koncert
+              v Trebnjem, ki je bil razprodan. Na odru nima treme — kot sam
               pravi: {`\u201ENimam treme, ni me strah. Ljudi ne vidim.\u201D`} Ta
               neposrednost je del njegovega čara, ki očara vse, ki ga srečajo — od
               navadnih poslušalcev do največjih zvezdnikov, kot je Andrea Bocelli.
@@ -269,8 +271,8 @@ export default function About() {
             {/* Photo */}
             <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden mt-8">
               <Image
-                src="https://res.cloudinary.com/dewf3zos0/image/upload/v1771098609/20250520_175129_uvgigs.jpg"
-                alt="Filip v snemalnem studiu"
+                src="https://res.cloudinary.com/dewf3zos0/image/upload/v1771102674/Screenshot_2026-02-14_at_21.57.37_brrt7t.png"
+                alt="Filip Jagodič"
                 fill
                 className="object-cover object-top"
               />
