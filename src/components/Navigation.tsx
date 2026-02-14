@@ -9,7 +9,6 @@ const navLinks = [
   { href: "#galerija", label: "Galerija" },
   { href: "#glasba", label: "Glasba" },
   { href: "#zbirke", label: "Zbirke" },
-  { href: "#povezave", label: "Povezave" },
   { href: "#kontakt", label: "Kontakt" },
 ];
 
