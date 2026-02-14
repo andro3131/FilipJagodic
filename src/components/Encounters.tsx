@@ -10,8 +10,8 @@ const encounters = [
     name: "Andrea Bocelli",
     role: "Legendarni tenor",
     event: "Srečanje v Ljubljani",
-    // TODO: zamenjaj s Cloudinary URL
-    image: "",
+    image:
+      "https://res.cloudinary.com/dewf3zos0/image/upload/v1771096727/andrea_bocelli_jboluq.jpg",
     description:
       "Filip je zaigral in zapel za Andreo Bocellija, ki je njegovo izvedbo pohvalil z navdušenim \"bravisimo\" in obdržal ključek s skladbo.",
     fullStory:
@@ -22,7 +22,8 @@ const encounters = [
     name: "Klapa Šufit",
     role: "Hrvaška klapa",
     event: "Skupni nastop",
-    image: "",
+    image:
+      "https://res.cloudinary.com/dewf3zos0/image/upload/v1771096728/klas%CC%8Ca_sufit_a92qqs.jpg",
     description:
       "Filip je nastopil skupaj s hrvaško klapo Šufit in občinstvo očaral z neposrednostjo in glasbenim talentom.",
     fullStory:
@@ -32,21 +33,45 @@ const encounters = [
     name: "Jan Plestenjak",
     role: "Slovenski glasbenik",
     event: "Srečanje",
-    image: "",
+    image:
+      "https://res.cloudinary.com/dewf3zos0/image/upload/v1771096729/plestenjak_vnjqg3.jpg",
     description:
       "Srečanje z enim najpopularnejših slovenskih glasbenikov, ki ga je Filipova iskrenost in talent globoko navdušil.",
     fullStory:
       "Ko je Filip srečal Jana Plestenjaka, enega najpopularnejših slovenskih glasbenikov, je bil zvest svojemu značaju — neposreden in iskren. Plestenjaka je Filipov talent globoko navdušil, predvsem sposobnost, da vsako slišano pesem takoj reproducira na klaviaturah.",
   },
   {
-    name: "Zdenka Cotič",
-    role: "Slovenska glasbenica",
+    name: "Borut Pahor",
+    role: "Bivši predsednik Republike Slovenije",
     event: "Srečanje",
-    image: "",
+    image:
+      "https://res.cloudinary.com/dewf3zos0/image/upload/v1771096727/borut_pahor_s8jwkb.jpg",
     description:
-      "Filip je svojo neposrednost pokazal tudi ob srečanju z Zdenko Cotič — njegove iskrene pripombe presenetijo tudi slavne glasbenike.",
+      "Filip je s svojim talentom navdušil tudi bivšega predsednika Republike Slovenije Boruta Pahorja.",
     fullStory:
-      "Filipova neposrednost in iskrenost sta se pokazali tudi ob srečanju z Zdenko Cotič. Njegove komentarje in pripombe, ki bi marsikomu vzele sapo, slavni glasbeniki sprejemajo z nasmehom — saj vedo, da prihajajo iz čistega srca.",
+      "Filip je s svojim talentom navdušil tudi bivšega predsednika Republike Slovenije Boruta Pahorja. Besedilo bo dopolnjeno.",
+  },
+  {
+    name: "Dejan Zavec",
+    role: "Slovenski boksar, svetovni prvak",
+    event: "Srečanje",
+    image:
+      "https://res.cloudinary.com/dewf3zos0/image/upload/v1771096726/dejan_zavec1_pol9nb.jpg",
+    description:
+      "Srečanje dveh borcev — Filip s svojimi izzivi, Dejan v ringu. Oba zmagovalca.",
+    fullStory:
+      "Srečanje dveh borcev — Filip s svojimi izzivi, Dejan v ringu. Oba zmagovalca. Besedilo bo dopolnjeno.",
+  },
+  {
+    name: "Darja Švajger",
+    role: "Operna pevka",
+    event: "Srečanje",
+    image:
+      "https://res.cloudinary.com/dewf3zos0/image/upload/v1771096726/darja_svajger_ascluf.jpg",
+    description:
+      "Filip je srečal tudi operno pevko Darjo Švajger, ki jo je navdušil s svojim izjemnim posluhom.",
+    fullStory:
+      "Filip je srečal tudi operno pevko Darjo Švajger, ki jo je navdušil s svojim izjemnim posluhom. Besedilo bo dopolnjeno.",
   },
 ];
 
