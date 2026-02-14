@@ -76,7 +76,7 @@ const stats = [
 
 const abilities = [
   {
-    title: "100% absolutni posluh",
+    title: "Absolutni posluh",
     description:
       "Filip prepozna in reproducira vsak ton brez reference. Slišano pesem lahko takoj zaigra in zapoje — vse se nauči sam.",
   },
@@ -93,7 +93,7 @@ const abilities = [
   {
     title: "Glasbeni enciklopedist",
     description:
-      "Pozna glasbeno zgodovino, avtorje, izvajalce in letnice pesmi od 1920 do danes. Najraje poje pesmi iz 50-ih in 60-ih let.",
+      "Pozna avtorje, izvajalce in zgodbe za pesmimi vseh žanrov in obdobij. Prepeva vse, najraje pa starejše pesmi.",
   },
 ];
 

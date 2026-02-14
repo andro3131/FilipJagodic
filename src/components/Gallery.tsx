@@ -25,6 +25,7 @@ const photos = [
     src: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771098609/20250520_175129_uvgigs.jpg",
     alt: "Filip v studiu",
     caption: "V snemalnem studiu",
+    position: "top" as const,
   },
   {
     src: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771098651/21761758_833699250140200_3605137899429653888_n_jqsvoi.jpg",
@@ -91,6 +92,7 @@ export default function Gallery() {
                       alt={photo.alt}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      style={photo.position ? { objectPosition: photo.position } : undefined}
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">

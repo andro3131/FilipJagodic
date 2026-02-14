@@ -326,7 +326,7 @@ export default function Hero() {
               </motion.p>
 
               <motion.p
-                className="text-xl md:text-2xl text-white/60 font-light italic mb-1"
+                className="text-xl md:text-2xl text-white/60 font-light italic mb-6"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 1 }}
@@ -346,14 +346,14 @@ export default function Hero() {
                     {word}
                   </motion.span>
                 ))}
-              </motion.p>
-              <motion.p
-                className="text-sm text-white/40 not-italic mb-6"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 1.8 }}
-              >
-                — Helen Keller
+                <motion.span
+                  className="inline-block text-sm text-white/40 not-italic ml-1"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 1.8 }}
+                >
+                  — Helen Keller
+                </motion.span>
               </motion.p>
 
               <motion.div
