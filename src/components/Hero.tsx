@@ -213,9 +213,9 @@ export default function Hero() {
                   className="w-full h-full object-cover object-top"
                   style={{
                     maskImage:
-                      "radial-gradient(ellipse 68% 84% at 50% 55%, black 35%, transparent 65%)",
+                      "radial-gradient(ellipse 68% 86% at 50% 54%, black 30%, transparent 65%)",
                     WebkitMaskImage:
-                      "radial-gradient(ellipse 68% 84% at 50% 55%, black 35%, transparent 65%)",
+                      "radial-gradient(ellipse 68% 86% at 50% 54%, black 30%, transparent 65%)",
                     filter: "brightness(0.95) contrast(1.05)",
                   }}
                   aria-label="Filip Jagodič"
