@@ -1,84 +1,38 @@
 "use client";
 
+import Image from "next/image";
 import ScrollReveal from "./ScrollReveal";
 
-type CollectionItem = {
-  name: string;
-  description: string;
-  category: "klaviatura" | "diktafon";
-  image?: string;
-};
-
-const items: CollectionItem[] = [
+const items = [
   {
     name: "Yamaha PSR-S975",
     description: "Profesionalna izvajalska klaviatura z bogato zvočno banko.",
-    category: "klaviatura",
+    category: "klaviatura" as const,
+    image:
+      "https://res.cloudinary.com/dewf3zos0/image/upload/v1771104657/yamahapsr-s975-sounds_KEY0004768-000_emppra.jpg",
   },
   {
     name: "Sony ICD-UX570",
     description: "Kompakten digitalni diktafon z odličnim mikrofonom.",
-    category: "diktafon",
+    category: "diktafon" as const,
+    image:
+      "https://res.cloudinary.com/dewf3zos0/image/upload/v1771104655/96f58b90-30f7-4f43-ba2b-e3427723e87c.__CR0_0_600_450_PT0_SX600_V1____jpf5kj.jpg",
   },
   {
     name: "Korg PA1000",
     description: "Napredna aranžerska klaviatura z realističnimi zvoki.",
-    category: "klaviatura",
+    category: "klaviatura" as const,
+    image:
+      "https://res.cloudinary.com/dewf3zos0/image/upload/v1771104659/ea2ab88f9f04a3c588eacd63941f8cc3_rrb00y.jpg",
   },
   {
     name: "Olympus WS-853",
     description: "Zanesljiv diktafon za snemanje v studijski kvaliteti.",
-    category: "diktafon",
-  },
-  {
-    name: "Roland E-A7",
-    description: "Vsestranska klaviatura z zvoki z vsega sveta.",
-    category: "klaviatura",
-  },
-  {
-    name: "Zoom H1n",
-    description: "Prenosni snemalnik z X/Y stereo mikrofonoma.",
-    category: "diktafon",
+    category: "diktafon" as const,
+    image:
+      "https://res.cloudinary.com/dewf3zos0/image/upload/v1771104653/a0f484d4-3b9f-4174-bbac-92184b1846ce.jpg._CB313504000__j4gk3c.jpg",
   },
 ];
-
-function KeyboardIcon() {
-  return (
-    <svg
-      className="w-14 h-14 text-accent/20"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={1}
-        d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"
-      />
-    </svg>
-  );
-}
-
-function RecorderIcon() {
-  return (
-    <svg
-      className="w-14 h-14 text-accent/20"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={1}
-        d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
-      />
-    </svg>
-  );
-}
 
 export default function Collections() {
   return (
@@ -107,46 +61,37 @@ export default function Collections() {
           </p>
         </ScrollReveal>
 
-        {/* Unified grid — alternating keyboards & dictaphones */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Single row — 4 items */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
           {items.map((item, index) => (
             <ScrollReveal key={item.name} delay={0.1 * index}>
-              <div className="group p-6 rounded-2xl bg-surface border border-border hover:border-accent/30 transition-all duration-500">
-                {/* Placeholder visual */}
-                <div
-                  className={`w-full aspect-[4/3] rounded-xl mb-4 flex items-center justify-center ${
-                    item.category === "klaviatura"
-                      ? "bg-gradient-to-br from-accent/5 to-accent/[0.02]"
-                      : "bg-gradient-to-br from-white/[0.04] to-white/[0.01]"
-                  }`}
-                >
-                  {item.category === "klaviatura" ? (
-                    <KeyboardIcon />
-                  ) : (
-                    <RecorderIcon />
-                  )}
+              <div className="group p-4 rounded-2xl bg-surface border border-border hover:border-accent/30 transition-all duration-500">
+                {/* Image */}
+                <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden mb-4 bg-[#141618]">
+                  <Image
+                    src={item.image}
+                    alt={item.name}
+                    fill
+                    className="object-contain transition-transform duration-500 group-hover:scale-105"
+                  />
                 </div>
 
                 {/* Info */}
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <h4 className="font-semibold text-white group-hover:text-accent transition-colors">
-                      {item.name}
-                    </h4>
-                    <p className="text-white/40 text-sm mt-1">
-                      {item.description}
-                    </p>
-                  </div>
-                  <span
-                    className={`flex-shrink-0 text-[10px] font-medium tracking-wider uppercase px-2.5 py-1 rounded-full ${
-                      item.category === "klaviatura"
-                        ? "bg-accent/10 text-accent/60"
-                        : "bg-white/5 text-white/40"
-                    }`}
-                  >
-                    {item.category === "klaviatura" ? "Klaviatura" : "Diktafon"}
-                  </span>
-                </div>
+                <h4 className="font-semibold text-white text-sm group-hover:text-accent transition-colors">
+                  {item.name}
+                </h4>
+                <p className="text-white/40 text-xs mt-1">
+                  {item.description}
+                </p>
+                <span
+                  className={`inline-block mt-2 text-[10px] font-medium tracking-wider uppercase px-2.5 py-1 rounded-full ${
+                    item.category === "klaviatura"
+                      ? "bg-accent/10 text-accent/60"
+                      : "bg-white/5 text-white/40"
+                  }`}
+                >
+                  {item.category === "klaviatura" ? "Klaviatura" : "Diktafon"}
+                </span>
               </div>
             </ScrollReveal>
           ))}
