@@ -130,7 +130,11 @@ export default function Studio() {
                         alt={album.title}
                         fill
                         className={`object-cover transition-transform duration-500 group-hover:scale-110 ${
-                          index <= 1 ? "scale-[1.08]" : ""
+                          index === 0
+                            ? "scale-[1.11]"
+                            : index === 1
+                              ? "scale-[1.08]"
+                              : ""
                         }`}
                       />
                     </div>
