@@ -13,6 +13,15 @@ export default function Hero() {
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
   const [videoReady, setVideoReady] = useState(false);
   const [introComplete, setIntroComplete] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 1024);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
     if (!sectionRef.current) return;
@@ -28,7 +37,7 @@ export default function Hero() {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [handleMouseMove]);
 
-  // Wait until video is seekable before starting scrub
+  // Wait until video is seekable before starting
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -42,13 +51,11 @@ export default function Hero() {
       setVideoReady(true);
     };
 
-    // If already loaded (cached/fast load), init immediately
     if (video.readyState >= 2) {
       initVideo();
       return;
     }
 
-    // Otherwise wait for loadeddata + canplay as fallbacks
     video.addEventListener("loadeddata", initVideo);
     video.addEventListener("canplay", initVideo);
     return () => {
@@ -57,61 +64,74 @@ export default function Hero() {
     };
   }, [videoReady]);
 
-  // Intro: scrub first half with easeOutCubic (slows to stop)
+  // Intro: native playback with variable playbackRate for easeOut
   useEffect(() => {
     if (!videoReady) return;
     const video = videoRef.current;
     if (!video) return;
 
-    const introEnd = videoDurationRef.current / 2;
-    const startTime = performance.now();
-    const animDuration = 4000;
-    const delay = 600;
+    const midpoint = videoDurationRef.current / 2;
 
-    let rafId: number;
-    const animate = (time: number) => {
-      const elapsed = time - startTime - delay;
-      if (elapsed < 0) {
-        rafId = requestAnimationFrame(animate);
-        return;
-      }
+    const timeout = setTimeout(() => {
+      video.currentTime = 0.01;
+      video.playbackRate = 1.5;
+      video.play();
 
-      const progress = Math.min(elapsed / animDuration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      video.currentTime = eased * introEnd;
+      let rafId: number;
+      const checkProgress = () => {
+        if (video.currentTime >= midpoint - 0.05) {
+          video.pause();
+          video.currentTime = midpoint;
+          setIntroComplete(true);
+          return;
+        }
+        // EaseOut: slow down as we approach midpoint
+        const progress = video.currentTime / midpoint;
+        video.playbackRate = Math.max(0.15, 1.5 * Math.pow(1 - progress, 2));
+        rafId = requestAnimationFrame(checkProgress);
+      };
+      rafId = requestAnimationFrame(checkProgress);
 
-      if (progress < 1) {
-        rafId = requestAnimationFrame(animate);
-      } else {
-        setIntroComplete(true);
-      }
-    };
+      // Cleanup for rAF
+      const cleanup = () => cancelAnimationFrame(rafId);
+      video.addEventListener("pause", cleanup, { once: true });
+    }, 600);
 
-    rafId = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(rafId);
+    return () => clearTimeout(timeout);
   }, [videoReady]);
 
-  // Scroll: scrub second half based on scroll position
+  // Scroll: scrub second half (desktop only, throttled + fastSeek)
   useEffect(() => {
-    if (!introComplete) return;
+    if (!introComplete || isMobile) return;
     const video = videoRef.current;
     if (!video) return;
 
     const dur = videoDurationRef.current;
     const midpoint = dur / 2;
     const scrollHalf = dur - midpoint;
+    let lastUpdate = 0;
 
     const handleScroll = () => {
+      const now = performance.now();
+      if (now - lastUpdate < 50) return; // Throttle to ~20fps
+      lastUpdate = now;
+
       const scrollY = window.scrollY;
       const scrollRange = window.innerHeight * 0.6;
       const progress = Math.min(Math.max(scrollY / scrollRange, 0), 1);
-      video.currentTime = midpoint + progress * scrollHalf;
+      const targetTime = midpoint + progress * scrollHalf;
+
+      if (video.fastSeek) {
+        video.fastSeek(targetTime);
+      } else {
+        video.currentTime = targetTime;
+      }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [introComplete]);
+  }, [introComplete, isMobile]);
 
   return (
     <section
@@ -153,16 +173,16 @@ export default function Hero() {
         aria-hidden="true"
       />
 
-      {/* Main hero area — Filip video left, title right */}
+      {/* Main hero area */}
       <div className="relative flex-1 flex items-center justify-center px-6 lg:px-12">
         <div
-          className="relative flex items-center justify-between w-full max-w-7xl mx-auto gap-2"
+          className="relative flex flex-col lg:flex-row items-center lg:justify-between w-full max-w-7xl mx-auto gap-2"
           style={{ marginTop: "4vh" }}
         >
-          {/* LEFT: Filip's video with glow (no mouse parallax) */}
+          {/* Filip's video with glow */}
           <div
-            className="relative flex-shrink-0 -ml-32"
-            style={{ zIndex: 2, marginTop: "-8vh" }}
+            className="relative flex-shrink-0 mx-auto lg:mx-0 lg:-ml-32"
+            style={{ zIndex: 2, marginTop: isMobile ? "6vh" : "-8vh" }}
           >
             {/* Red glow behind video */}
             <div
@@ -176,7 +196,7 @@ export default function Hero() {
             />
 
             <motion.div
-              initial={{ opacity: 0, x: -80, scale: 0.95 }}
+              initial={{ opacity: 0, x: isMobile ? 0 : -80, scale: 0.95 }}
               animate={{ opacity: 1, x: 0, scale: 1 }}
               transition={{
                 duration: 1.2,
@@ -184,7 +204,7 @@ export default function Hero() {
                 ease: [0.25, 0.4, 0.25, 1],
               }}
             >
-              <div className="relative w-[55vw] max-w-[760px] h-[85vh] max-h-[920px]">
+              <div className="relative w-[80vw] max-w-[400px] h-[60vh] max-h-[500px] lg:w-[55vw] lg:max-w-[760px] lg:h-[85vh] lg:max-h-[920px]">
                 <video
                   ref={videoRef}
                   muted
@@ -206,7 +226,7 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* RIGHT: Title + slogan + buttons */}
+          {/* RIGHT: Title + slogan + buttons (desktop) */}
           <motion.div
             className="hidden lg:flex flex-col items-start justify-center flex-1 -ml-4"
             initial={{ opacity: 0, x: 100 }}
@@ -335,10 +355,10 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Mobile title — stacked above image area */}
+        {/* Mobile: title + slogan + buttons below video */}
         <motion.div
-          className="lg:hidden absolute top-20 left-0 right-0 text-center"
-          initial={{ opacity: 0, y: -30 }}
+          className="lg:hidden absolute bottom-16 left-0 right-0 text-center px-6"
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
             duration: 1,
@@ -348,7 +368,7 @@ export default function Hero() {
           style={{ zIndex: 3 }}
         >
           <h2
-            className="font-heading text-[3.5rem] sm:text-[5rem] md:text-[6rem] font-black leading-none tracking-[-0.03em] block"
+            className="font-heading text-[3.5rem] sm:text-[5rem] md:text-[6rem] font-black leading-none tracking-[-0.03em]"
             style={{
               background:
                 "linear-gradient(135deg, #D44040 0%, #C43838 30%, #D44040 44%, #FFE8E8 50%, #D44040 56%, #C43838 70%, #D44040 100%)",
@@ -357,7 +377,7 @@ export default function Hero() {
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               animation:
-                "shimmer-flash 3s ease-out forwards, shimmer-red 8s ease-in-out 3s infinite, float-text 7s ease-in-out 2s infinite",
+                "shimmer-flash 3s ease-out forwards, shimmer-red 8s ease-in-out 3s infinite",
               filter:
                 "drop-shadow(0 0 30px rgba(212, 64, 64, 0.4)) drop-shadow(0 0 60px rgba(212, 64, 64, 0.2))",
             }}
@@ -365,7 +385,7 @@ export default function Hero() {
             FILIP
           </h2>
           <h2
-            className="font-heading text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] font-black leading-none tracking-[-0.03em] block pb-[0.2em]"
+            className="font-heading text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] font-black leading-none tracking-[-0.03em] pb-[0.2em] mb-4"
             style={{
               background:
                 "linear-gradient(135deg, #D44040 0%, #C43838 30%, #D44040 44%, #FFE8E8 50%, #D44040 56%, #C43838 70%, #D44040 100%)",
@@ -374,13 +394,40 @@ export default function Hero() {
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               animation:
-                "shimmer-flash 3s ease-out 1s forwards, shimmer-red 8s ease-in-out 4s infinite, float-text 8s ease-in-out 2.5s infinite",
+                "shimmer-flash 3s ease-out 1s forwards, shimmer-red 8s ease-in-out 4s infinite",
               filter:
                 "drop-shadow(0 0 30px rgba(212, 64, 64, 0.4)) drop-shadow(0 0 60px rgba(212, 64, 64, 0.2))",
             }}
           >
             JAGODIČ
           </h2>
+
+          <p className="text-white/60 text-lg font-light mb-5">
+            Glasba presega vse meje
+          </p>
+
+          <div className="flex gap-3 justify-center">
+            <a
+              href="#glasba"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-accent text-white font-semibold rounded-full text-sm"
+            >
+              <svg
+                className="w-4 h-4"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="M8 5v14l11-7z" />
+              </svg>
+              Poslušaj glasbo
+            </a>
+            <a
+              href="#o-filipu"
+              className="inline-flex items-center justify-center px-6 py-3 border-2 border-white/20 text-white font-semibold rounded-full text-sm"
+            >
+              Spoznaj Filipa
+            </a>
+          </div>
         </motion.div>
       </div>
 
