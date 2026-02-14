@@ -5,37 +5,36 @@ import Image from "next/image";
 import ScrollReveal from "./ScrollReveal";
 import Modal from "./Modal";
 
-// TODO: zamenjaj s Cloudinary URLji
 const photos = [
   {
-    src: "",
+    src: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771098561/14232370_632665486910245_786561684551610605_n_lrymzy.jpg",
     alt: "Filip za klaviaturami",
     caption: "Filip za klaviaturami",
   },
   {
-    src: "",
+    src: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771098693/11019010_402268379949958_4207790944302076286_n_eor5pu.jpg",
     alt: "Filip na nastopu",
     caption: "Nastop v živo",
   },
   {
-    src: "",
+    src: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771098529/andrea_bocelli_qwksga.jpg",
     alt: "Filip in Andrea Bocelli",
     caption: "Srečanje z Andreo Bocellijem",
   },
   {
-    src: "",
+    src: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771098609/20250520_175129_uvgigs.jpg",
     alt: "Filip v studiu",
     caption: "V snemalnem studiu",
   },
   {
-    src: "",
-    alt: "Filip z družino",
+    src: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771098651/21761758_833699250140200_3605137899429653888_n_jqsvoi.jpg",
+    alt: "Filip z mamo Andrejo",
     caption: "Filip z mamo Andrejo",
   },
   {
-    src: "",
-    alt: "Filip s klaviaturo",
-    caption: "Filip in njegova zbirka",
+    src: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771098757/21752222_833699213473537_373850975019071424_n_ijhcv2.jpg",
+    alt: "Filip z diktafonom",
+    caption: "Filip z diktafonom",
   },
 ];
 
