@@ -6,7 +6,7 @@ const featured = {
   id: "EJYPq4STQ6w",
   title: "Privid",
   description:
-    "Avtorska pesem in videospot — duet z Barbaro Leben. Edina avtorska glasba, posneta profesionalno.",
+    "Avtorska pesem in duetu s pevko Barbaro Leben, z besedilom Filipove mame Andreje Pader. Pesem je hrepenenje po ljubezni in čustveno popotovanje dveh duš — edina Filipova avtorska skladba, posneta profesionalno.",
 };
 
 const videos = [
