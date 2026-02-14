@@ -213,9 +213,9 @@ export default function Hero() {
                   className="w-full h-full object-cover object-top"
                   style={{
                     maskImage:
-                      "radial-gradient(ellipse 68% 86% at 50% 54%, black 30%, transparent 65%)",
+                      "radial-gradient(ellipse 68% 86% at 50% 56%, black 30%, transparent 65%)",
                     WebkitMaskImage:
-                      "radial-gradient(ellipse 68% 86% at 50% 54%, black 30%, transparent 65%)",
+                      "radial-gradient(ellipse 68% 86% at 50% 56%, black 30%, transparent 65%)",
                     filter: "brightness(0.95) contrast(1.05)",
                   }}
                   aria-label="Filip Jagodič"
@@ -357,7 +357,7 @@ export default function Hero() {
 
         {/* Mobile: title + slogan + buttons above video */}
         <motion.div
-          className="lg:hidden absolute top-16 left-0 right-0 text-center px-6"
+          className="lg:hidden absolute top-12 left-0 right-0 text-center px-6"
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
