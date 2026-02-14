@@ -269,12 +269,13 @@ export default function About() {
             </p>
 
             {/* Photo */}
-            <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden mt-8">
+            <div className="relative w-full rounded-xl overflow-hidden mt-8">
               <Image
                 src="https://res.cloudinary.com/dewf3zos0/image/upload/v1771102674/Screenshot_2026-02-14_at_21.57.37_brrt7t.png"
                 alt="Filip Jagodič"
-                fill
-                className="object-cover object-top"
+                width={1200}
+                height={800}
+                className="w-full h-auto"
               />
             </div>
           </div>
