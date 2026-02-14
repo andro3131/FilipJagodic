@@ -75,9 +75,9 @@ const stats = [
 
 const abilities = [
   {
-    title: "Absolutni posluh",
+    title: "100% absolutni posluh",
     description:
-      "Filip prepozna in reproducira vsak ton brez reference. Slišano pesem lahko takoj zaigra in zapoje.",
+      "Filip prepozna in reproducira vsak ton brez reference. Slišano pesem lahko takoj zaigra in zapoje — vse se nauči sam.",
   },
   {
     title: "Neverjetni spomin",
@@ -85,14 +85,14 @@ const abilities = [
       "Sposoben je memorizirati na tisoče besedil pesmi v različnih jezikih in jih reproducirati brez napake.",
   },
   {
-    title: "Petje v obratni smeri",
+    title: "Brez treme",
     description:
-      "Unikatna sposobnost — pesem lahko zapoje od zadnjega verza proti prvemu, z obratno obrnjeno melodijo.",
+      "\"Nimam treme, ni me strah. Ljudi ne vidim.\" Filipova neposrednost in iskrenost očarata vse, ki ga srečajo.",
   },
   {
     title: "Glasbeni enciklopedist",
     description:
-      "Pozna glasbeno zgodovino, avtorje, izvajalce in letnice pesmi od 1920 do danes.",
+      "Pozna glasbeno zgodovino, avtorje, izvajalce in letnice pesmi od 1920 do danes. Najraje poje pesmi iz 50-ih in 60-ih let.",
   },
 ];
 
@@ -123,13 +123,16 @@ export default function About() {
           className="max-w-3xl mx-auto mb-20 md:mb-28"
           delay={0.2}
         >
-          <p className="text-lg md:text-xl text-white/70 leading-relaxed text-center">
-            Filip Jagodič je 27-letni glasbenik z absolutnim posluhom, ki
-            presega vse ovire. Kljub cerebralni paralizi, avtizmu in slepoti je
-            razvil izjemne glasbene sposobnosti. Igra na klaviature, poje in
-            pozna na tisoče pesmi — od jazzovskih standardov iz leta 1920 do
-            sodobnih uspešnic. Ko sede za klaviature, se zgodi čarobnost.
+          <p className="text-lg md:text-xl text-white/70 leading-relaxed text-center mb-6">
+            Filip Jagodič se je rodil po hudih zapletih v petem mesecu
+            nosečnosti. Kljub slepoti, cerebralni paralizi in avtizmu je razvil
+            izjemen glasbeni talent — 100-odstotni absolutni posluh. Že pri
+            dobrem letu je pel melodije, ko pa je dobil igračo s tipkami, je
+            začel igrati vse, kar je slišal.
           </p>
+          <blockquote className="text-xl md:text-2xl text-accent/80 font-heading italic text-center">
+            {`\u201ENihče me ne uči. Vsega sem se naučil sam.\u201D`}
+          </blockquote>
         </ScrollReveal>
 
         {/* Abilities */}

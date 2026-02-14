@@ -1,6 +1,7 @@
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
+import Encounters from "@/components/Encounters";
 import Music from "@/components/Music";
 import Collections from "@/components/Collections";
 import Links from "@/components/Links";
@@ -14,6 +15,7 @@ export default function Home() {
       <main id="main-content">
         <Hero />
         <About />
+        <Encounters />
         <Music />
         <Collections />
         <Links />
