@@ -1,68 +1,39 @@
 "use client";
 
-import { useState } from "react";
 import ScrollReveal from "./ScrollReveal";
 
-const categories = [
-  { id: "vse", label: "Vse" },
-  { id: "1920-1950", label: "1920–1950" },
-  { id: "1950-1970", label: "1950–1970" },
-  { id: "sodobno", label: "Sodobno" },
-];
+const featured = {
+  id: "EJYPq4STQ6w",
+  title: "Privid",
+  description:
+    "Avtorska pesem in videospot — duet z Barbaro Leben. Edina avtorska glasba, posneta profesionalno.",
+};
 
-const tracks = [
+const videos = [
   {
-    title: "What a Wonderful World",
-    artist: "Louis Armstrong",
-    year: "1967",
-    category: "1950-1970",
-    description: "Filipova interpretacija klasike, posneta v studiu.",
+    id: "KPP-UOhs8iE",
+    title: "Prsti zapleteni",
+    description: "Duet s Klapo Rišpet.",
   },
   {
-    title: "Fly Me to the Moon",
-    artist: "Frank Sinatra",
-    year: "1964",
-    category: "1950-1970",
-    description: "Nežna izvedba z značilnim Filipovim pridihom.",
+    id: "1WPEC_KJXpk",
+    title: "Take Good Care of Her",
+    description:
+      "Adam Wade — prikaz kako Filip posname vokal in klaviature hkrati.",
   },
   {
-    title: "La Vie en Rose",
-    artist: "Edith Piaf",
-    year: "1947",
-    category: "1920-1950",
-    description: "Francoski šanson v izvedbi z absolutnim posluhom.",
+    id: "ruVUK_g5rK0",
+    title: "Let It Be Me",
+    description: "Cover pesmi Elvisa Presleyja.",
   },
   {
-    title: "Over the Rainbow",
-    artist: "Judy Garland",
-    year: "1939",
-    category: "1920-1950",
-    description: "Časless klasika, polna čustev.",
-  },
-  {
-    title: "Imagine",
-    artist: "John Lennon",
-    year: "1971",
-    category: "sodobno",
-    description: "Filipova ganljiva različica legendarnega hita.",
-  },
-  {
-    title: "Bohemian Rhapsody",
-    artist: "Queen",
-    year: "1975",
-    category: "sodobno",
-    description: "Epska izvedba z vsemi vokalnimi deli.",
+    id: "SJgYyL1qdzE",
+    title: "Nastop v živo s Klapo Šufit",
+    description: "Filip na odru skupaj s hrvaško klapo.",
   },
 ];
 
 export default function Music() {
-  const [activeCategory, setActiveCategory] = useState("vse");
-
-  const filteredTracks =
-    activeCategory === "vse"
-      ? tracks
-      : tracks.filter((t) => t.category === activeCategory);
-
   return (
     <section
       id="glasba"
@@ -73,7 +44,7 @@ export default function Music() {
         {/* Section header */}
         <ScrollReveal className="text-center mb-16">
           <p className="text-accent text-sm font-medium tracking-[0.3em] uppercase mb-4">
-            Arhiv
+            Poslušaj
           </p>
           <h2
             id="music-heading"
@@ -83,103 +54,60 @@ export default function Music() {
           </h2>
           <div className="w-20 h-0.5 bg-accent mx-auto mb-6" />
           <p className="text-white/50 max-w-2xl mx-auto">
-            Zbirka Filipovih izvedb — od jazzovskih klasik do sodobnih
-            uspešnic. Vsaka pesem je posneta v enem prehodu, brez popravkov.
+            Filipove izvedbe in nastopi — od avtorske glasbe do coverjev
+            in nastopov v živo.
           </p>
         </ScrollReveal>
 
-        {/* Filter tabs */}
-        <ScrollReveal
-          className="flex flex-wrap justify-center gap-3 mb-12"
-          delay={0.1}
-        >
-          {categories.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => setActiveCategory(cat.id)}
-              className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent ${
-                activeCategory === cat.id
-                  ? "bg-accent text-white"
-                  : "bg-surface-light text-white/60 hover:text-white border border-border hover:border-accent/30"
-              }`}
-              aria-pressed={activeCategory === cat.id}
-            >
-              {cat.label}
-            </button>
-          ))}
-        </ScrollReveal>
-
-        {/* Tracks grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredTracks.map((track, index) => (
-            <ScrollReveal key={track.title} delay={0.1 * index}>
-              <article className="group p-6 rounded-2xl bg-[#141618] border border-border hover:border-accent/30 transition-all duration-500">
-                {/* Album art placeholder */}
-                <div className="w-full aspect-square rounded-xl bg-surface-lighter mb-5 flex items-center justify-center overflow-hidden relative">
-                  <div
-                    className="absolute inset-0 opacity-20"
-                    style={{
-                      background:
-                        "linear-gradient(135deg, #D44040 0%, #141618 100%)",
-                    }}
-                  />
-                  <button
-                    className="relative z-10 w-16 h-16 bg-accent/90 rounded-full flex items-center justify-center hover:bg-accent hover:scale-110 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent"
-                    aria-label={`Predvajaj ${track.title}`}
-                  >
-                    <svg
-                      className="w-6 h-6 text-white ml-1"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  </button>
-                </div>
-
-                <div>
-                  <h3 className="font-heading text-lg font-semibold text-white group-hover:text-accent transition-colors">
-                    {track.title}
-                  </h3>
-                  <p className="text-white/40 text-sm mt-1">
-                    {track.artist} · {track.year}
-                  </p>
-                  <p className="text-white/50 text-sm mt-3 leading-relaxed">
-                    {track.description}
-                  </p>
-                </div>
-              </article>
-            </ScrollReveal>
-          ))}
-        </div>
-
-        {/* YouTube embed placeholder */}
-        <ScrollReveal className="mt-16" delay={0.2}>
-          <div className="p-8 rounded-2xl bg-[#141618] border border-border text-center">
-            <h3 className="font-heading text-2xl font-semibold mb-4">
-              Video posnetki
-            </h3>
-            <p className="text-white/50 mb-6">
-              Filipovi video posnetki bodo prikazani tukaj. Povezava do YouTube
-              kanala bo dodana kmalu.
-            </p>
-            <div className="aspect-video max-w-3xl mx-auto rounded-xl bg-surface-lighter flex items-center justify-center">
-              <div className="text-center">
-                <svg
-                  className="w-16 h-16 text-white/20 mx-auto mb-3"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0C.488 3.45.029 5.804 0 12c.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0C23.512 20.55 23.971 18.196 24 12c-.029-6.185-.484-8.549-4.385-8.816zM9 16V8l8 4-8 4z" />
-                </svg>
-                <p className="text-white/30 text-sm">
-                  YouTube video bo dodan tukaj
-                </p>
-              </div>
+        {/* Featured video */}
+        <ScrollReveal className="mb-12" delay={0.1}>
+          <div className="max-w-4xl mx-auto">
+            <div className="aspect-video rounded-2xl overflow-hidden bg-black border border-border">
+              <iframe
+                src={`https://www.youtube.com/embed/${featured.id}`}
+                title={featured.title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+                loading="lazy"
+              />
+            </div>
+            <div className="mt-4 text-center">
+              <h3 className="font-heading text-xl md:text-2xl font-semibold text-white">
+                {featured.title}
+              </h3>
+              <p className="text-white/50 mt-1">{featured.description}</p>
             </div>
           </div>
         </ScrollReveal>
+
+        {/* Video grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {videos.map((video, index) => (
+            <ScrollReveal key={video.id} delay={0.1 * index}>
+              <div className="rounded-2xl overflow-hidden bg-[#141618] border border-border hover:border-accent/30 transition-all duration-500">
+                <div className="aspect-video bg-black">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${video.id}`}
+                    title={video.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-4 md:p-5">
+                  <h3 className="font-heading text-lg font-semibold text-white">
+                    {video.title}
+                  </h3>
+                  <p className="text-white/50 text-sm mt-1">
+                    {video.description}
+                  </p>
+                </div>
+              </div>
+            </ScrollReveal>
+          ))}
+        </div>
       </div>
     </section>
   );
