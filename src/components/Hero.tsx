@@ -70,7 +70,7 @@ export default function Hero() {
     const video = videoRef.current;
     if (!video) return;
 
-    const midpoint = videoDurationRef.current / 2;
+    const introStop = videoDurationRef.current / 2 + 0.5;
 
     const timeout = setTimeout(() => {
       video.currentTime = 0.01;
@@ -79,14 +79,14 @@ export default function Hero() {
 
       let rafId: number;
       const checkProgress = () => {
-        if (video.currentTime >= midpoint - 0.05) {
+        if (video.currentTime >= introStop - 0.05) {
           video.pause();
-          video.currentTime = midpoint;
+          video.currentTime = introStop;
           setIntroComplete(true);
           return;
         }
         // EaseOut: gentle slowdown, never crawls
-        const progress = video.currentTime / midpoint;
+        const progress = video.currentTime / introStop;
         video.playbackRate = Math.max(0.5, 1.5 * (1 - progress * 0.7));
         rafId = requestAnimationFrame(checkProgress);
       };
@@ -107,8 +107,8 @@ export default function Hero() {
     if (!video) return;
 
     const dur = videoDurationRef.current;
-    const midpoint = dur / 2;
-    const scrollHalf = dur - midpoint;
+    const introStop = dur / 2 + 0.5;
+    const scrollHalf = dur - introStop;
     let lastUpdate = 0;
 
     const handleScroll = () => {
@@ -119,7 +119,7 @@ export default function Hero() {
       const scrollY = window.scrollY;
       const scrollRange = window.innerHeight * 0.6;
       const progress = Math.min(Math.max(scrollY / scrollRange, 0), 1);
-      const targetTime = midpoint + progress * scrollHalf;
+      const targetTime = introStop + progress * scrollHalf;
 
       if (video.fastSeek) {
         video.fastSeek(targetTime);
@@ -212,10 +212,10 @@ export default function Hero() {
                   preload="auto"
                   className="w-full h-full object-contain"
                   style={{
-                    /* maskImage:
+                    maskImage:
                       "radial-gradient(ellipse 68% 86% at 50% 56%, black 30%, transparent 65%)",
                     WebkitMaskImage:
-                      "radial-gradient(ellipse 68% 86% at 50% 56%, black 30%, transparent 65%)", */
+                      "radial-gradient(ellipse 68% 86% at 50% 56%, black 30%, transparent 65%)",
                     filter: "brightness(0.95) contrast(1.05)",
                   }}
                   aria-label="Filip Jagodič"
