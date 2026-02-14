@@ -293,7 +293,7 @@ export default function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 1 }}
               >
-                {"Glasba presega vse meje".split(" ").map((word, i) => (
+                {"Najlepše stvari lahko začutiš le s srcem".split(" ").map((word, i) => (
                   <motion.span
                     key={i}
                     className="inline-block mr-2"
@@ -403,7 +403,7 @@ export default function Hero() {
           </h2>
 
           <p className="text-white/60 text-lg font-light">
-            Glasba presega vse meje
+            Najlepše stvari lahko začutiš le s srcem
           </p>
         </motion.div>
 
@@ -442,7 +442,7 @@ export default function Hero() {
 
       {/* Bottom blur overlay to hide wheelchair/floor */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-[280px] pointer-events-none"
+        className="absolute bottom-0 left-0 right-0 h-[380px] lg:h-[280px] pointer-events-none"
         style={{
           background:
             "linear-gradient(to top, #0F1012 0%, #0F1012 20%, transparent 100%)",
