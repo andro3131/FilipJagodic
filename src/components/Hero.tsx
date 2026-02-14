@@ -14,6 +14,7 @@ export default function Hero() {
   const [videoReady, setVideoReady] = useState(false);
   const [introComplete, setIntroComplete] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const shimmerRef = useRef<HTMLDivElement>(null);
 
   // Detect mobile
   useEffect(() => {
@@ -21,6 +22,19 @@ export default function Hero() {
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
+  }, []);
+
+  // Mouse shimmer on title (no React re-renders, direct DOM)
+  const handleTitleMove = useCallback((e: React.MouseEvent) => {
+    const el = shimmerRef.current;
+    if (!el) return;
+    el.style.opacity = "1";
+    el.style.setProperty("--shimmer-x", `${e.clientX}px`);
+    el.style.setProperty("--shimmer-y", `${e.clientY}px`);
+  }, []);
+
+  const handleTitleLeave = useCallback(() => {
+    if (shimmerRef.current) shimmerRef.current.style.opacity = "0";
   }, []);
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
@@ -242,39 +256,63 @@ export default function Hero() {
                 "transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
             }}
           >
-            <h2
-              className="font-heading text-[7rem] xl:text-[9rem] 2xl:text-[11rem] font-black leading-[0.85] tracking-[-0.03em] mb-6"
-              style={{
-                background:
-                  "linear-gradient(110deg, #D44040 0%, #C43838 30%, #D44040 44%, #FFE8E8 50%, #D44040 56%, #C43838 70%, #D44040 100%)",
-                backgroundSize: "300% 100%",
-                backgroundClip: "text",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                animation:
-                  "shimmer-flash 3s ease-out forwards, shimmer-red 8s ease-in-out 3s infinite, float-text 7s ease-in-out 2s infinite",
-                filter: "drop-shadow(0 0 80px rgba(212, 64, 64, 0.25))",
-              }}
+            <div
+              className="relative"
+              onMouseMove={handleTitleMove}
+              onMouseLeave={handleTitleLeave}
             >
-              FILIP
-            </h2>
-            <h2
-              className="font-heading text-[7rem] xl:text-[9rem] 2xl:text-[11rem] font-black leading-[0.85] tracking-[-0.03em] pb-[0.2em]"
-              style={{
-                background:
-                  "linear-gradient(110deg, #D44040 0%, #C43838 30%, #D44040 44%, #FFE8E8 50%, #D44040 56%, #C43838 70%, #D44040 100%)",
-                backgroundSize: "300% 100%",
-                backgroundClip: "text",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                animation:
-                  "shimmer-flash 3s ease-out 1s forwards, shimmer-red 8s ease-in-out 4s infinite, float-text 8s ease-in-out 2.5s infinite",
-                paddingLeft: "4rem",
-                filter: "drop-shadow(0 0 80px rgba(212, 64, 64, 0.25))",
-              }}
-            >
-              JAGODIČ
-            </h2>
+              <h2
+                className="font-heading text-[7rem] xl:text-[9rem] 2xl:text-[11rem] font-black leading-[0.85] tracking-[-0.03em] mb-6"
+                style={{
+                  background:
+                    "linear-gradient(110deg, #D44040 0%, #C43838 30%, #D44040 44%, #FFE8E8 50%, #D44040 56%, #C43838 70%, #D44040 100%)",
+                  backgroundSize: "300% 100%",
+                  backgroundClip: "text",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  animation:
+                    "shimmer-flash 3s ease-out forwards, shimmer-red 8s ease-in-out 3s infinite, float-text 7s ease-in-out 2s infinite",
+                  filter: "drop-shadow(0 0 80px rgba(212, 64, 64, 0.25))",
+                }}
+              >
+                FILIP
+              </h2>
+              <h2
+                className="font-heading text-[7rem] xl:text-[9rem] 2xl:text-[11rem] font-black leading-[0.85] tracking-[-0.03em] pb-[0.2em]"
+                style={{
+                  background:
+                    "linear-gradient(110deg, #D44040 0%, #C43838 30%, #D44040 44%, #FFE8E8 50%, #D44040 56%, #C43838 70%, #D44040 100%)",
+                  backgroundSize: "300% 100%",
+                  backgroundClip: "text",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  animation:
+                    "shimmer-flash 3s ease-out 1s forwards, shimmer-red 8s ease-in-out 4s infinite, float-text 8s ease-in-out 2.5s infinite",
+                  paddingLeft: "4rem",
+                  filter: "drop-shadow(0 0 80px rgba(212, 64, 64, 0.25))",
+                }}
+              >
+                JAGODIČ
+              </h2>
+
+              {/* Mouse-follow shimmer overlay */}
+              <div
+                ref={shimmerRef}
+                className="absolute inset-0 pointer-events-none select-none"
+                style={{ opacity: 0, transition: "opacity 0.3s ease" }}
+                aria-hidden="true"
+              >
+                <h2 className="shimmer-overlay-text font-heading text-[7rem] xl:text-[9rem] 2xl:text-[11rem] font-black leading-[0.85] tracking-[-0.03em] mb-6">
+                  FILIP
+                </h2>
+                <h2
+                  className="shimmer-overlay-text font-heading text-[7rem] xl:text-[9rem] 2xl:text-[11rem] font-black leading-[0.85] tracking-[-0.03em] pb-[0.2em]"
+                  style={{ paddingLeft: "4rem" }}
+                >
+                  JAGODIČ
+                </h2>
+              </div>
+            </div>
 
             {/* Slogan + buttons under title, offset like JAGODIČ */}
             <div className="mt-8 pl-[8rem]">
