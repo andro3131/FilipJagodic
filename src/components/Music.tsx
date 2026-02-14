@@ -13,7 +13,8 @@ const videos = [
   {
     id: "KPP-UOhs8iE",
     title: "Prsti zapleteni",
-    description: "Duet s Klapo Rišpet.",
+    description:
+      "Jelena Rozga in Klapa Rišpet — Prsti zapleteni (cover), duet z Agnes Kumlanc.",
   },
   {
     id: "1WPEC_KJXpk",
