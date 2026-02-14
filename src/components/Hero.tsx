@@ -210,7 +210,7 @@ export default function Hero() {
                   muted
                   playsInline
                   preload="auto"
-                  className="w-full h-full object-cover object-center"
+                  className="w-full h-full object-contain"
                   style={{
                     /* maskImage:
                       "radial-gradient(ellipse 68% 86% at 50% 56%, black 30%, transparent 65%)",
