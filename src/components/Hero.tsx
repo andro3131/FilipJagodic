@@ -4,7 +4,7 @@ import { useRef, useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 
 const VIDEO_URL =
-  "https://res.cloudinary.com/dewf3zos0/video/upload/v1770984847/Filip14_ottezv.mp4";
+  "https://res.cloudinary.com/dewf3zos0/video/upload/v1771070979/Filip15_f8xeep.mp4";
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -213,9 +213,9 @@ export default function Hero() {
                   className="w-full h-full object-cover object-top"
                   style={{
                     maskImage:
-                      "radial-gradient(ellipse 68% 82% at 50% 56%, black 45%, transparent 65%)",
+                      "radial-gradient(ellipse 68% 84% at 50% 55%, black 35%, transparent 65%)",
                     WebkitMaskImage:
-                      "radial-gradient(ellipse 68% 82% at 50% 56%, black 45%, transparent 65%)",
+                      "radial-gradient(ellipse 68% 84% at 50% 55%, black 35%, transparent 65%)",
                     filter: "brightness(0.95) contrast(1.05)",
                   }}
                   aria-label="Filip Jagodič"
