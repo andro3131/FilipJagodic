@@ -2,6 +2,7 @@ import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Encounters from "@/components/Encounters";
+import Gallery from "@/components/Gallery";
 import Music from "@/components/Music";
 import Collections from "@/components/Collections";
 import Links from "@/components/Links";
@@ -16,6 +17,7 @@ export default function Home() {
         <Hero />
         <About />
         <Encounters />
+        <Gallery />
         <Music />
         <Collections />
         <Links />
