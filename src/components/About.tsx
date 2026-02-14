@@ -69,7 +69,7 @@ const stats = [
   {
     number: 30,
     suffix: "+",
-    label: "Pesmi na sejo",
+    label: "Posnetih pesmi v enem dnevu",
     description: "V snemalnem studiu",
   },
 ];
