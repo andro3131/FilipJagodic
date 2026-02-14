@@ -85,9 +85,9 @@ export default function Hero() {
           setIntroComplete(true);
           return;
         }
-        // EaseOut: slow down as we approach midpoint
+        // EaseOut: gentle slowdown, never crawls
         const progress = video.currentTime / midpoint;
-        video.playbackRate = Math.max(0.15, 1.5 * Math.pow(1 - progress, 2));
+        video.playbackRate = Math.max(0.5, 1.5 * (1 - progress * 0.7));
         rafId = requestAnimationFrame(checkProgress);
       };
       rafId = requestAnimationFrame(checkProgress);
@@ -182,7 +182,7 @@ export default function Hero() {
           {/* Filip's video with glow */}
           <div
             className="relative flex-shrink-0 mx-auto lg:mx-0 lg:-ml-32"
-            style={{ zIndex: 2, marginTop: isMobile ? "6vh" : "-8vh" }}
+            style={{ zIndex: 2, marginTop: isMobile ? "14vh" : "-8vh" }}
           >
             {/* Red glow behind video */}
             <div
@@ -355,10 +355,10 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Mobile: title + slogan + buttons below video */}
+        {/* Mobile: title + slogan + buttons above video */}
         <motion.div
-          className="lg:hidden absolute bottom-16 left-0 right-0 text-center px-6"
-          initial={{ opacity: 0, y: 30 }}
+          className="lg:hidden absolute top-16 left-0 right-0 text-center px-6"
+          initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
             duration: 1,
