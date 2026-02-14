@@ -275,21 +275,7 @@ export default function Hero() {
                   filter: "drop-shadow(0 0 80px rgba(212, 64, 64, 0.25))",
                 }}
               >
-                {"FILIP".split("").map((char, i) => (
-                  <motion.span
-                    key={i}
-                    className="inline-block"
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                      duration: 0.5,
-                      delay: 0.7 + i * 0.08,
-                      ease: [0.25, 0.4, 0.25, 1],
-                    }}
-                  >
-                    {char}
-                  </motion.span>
-                ))}
+                FILIP
               </h2>
               <h2
                 className="font-heading text-[7rem] xl:text-[9rem] 2xl:text-[11rem] font-black leading-[0.85] tracking-[-0.03em] pb-[0.2em]"
@@ -306,21 +292,7 @@ export default function Hero() {
                   filter: "drop-shadow(0 0 80px rgba(212, 64, 64, 0.25))",
                 }}
               >
-                {"JAGODIČ".split("").map((char, i) => (
-                  <motion.span
-                    key={i}
-                    className="inline-block"
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                      duration: 0.5,
-                      delay: 1.2 + i * 0.08,
-                      ease: [0.25, 0.4, 0.25, 1],
-                    }}
-                  >
-                    {char}
-                  </motion.span>
-                ))}
+                JAGODIČ
               </h2>
 
               {/* Mouse-follow shimmer overlay */}
@@ -331,17 +303,13 @@ export default function Hero() {
                 aria-hidden="true"
               >
                 <h2 className="shimmer-overlay-text font-heading text-[7rem] xl:text-[9rem] 2xl:text-[11rem] font-black leading-[0.85] tracking-[-0.03em] mb-6">
-                  {"FILIP".split("").map((char, i) => (
-                    <span key={i} className="inline-block">{char}</span>
-                  ))}
+                  FILIP
                 </h2>
                 <h2
                   className="shimmer-overlay-text font-heading text-[7rem] xl:text-[9rem] 2xl:text-[11rem] font-black leading-[0.85] tracking-[-0.03em] pb-[0.2em]"
                   style={{ paddingLeft: "4rem" }}
                 >
-                  {"JAGODIČ".split("").map((char, i) => (
-                    <span key={i} className="inline-block">{char}</span>
-                  ))}
+                  JAGODIČ
                 </h2>
               </div>
             </div>
@@ -358,12 +326,12 @@ export default function Hero() {
               </motion.p>
 
               <motion.p
-                className="text-xl md:text-2xl text-white/60 font-light mb-6"
+                className="text-xl md:text-2xl text-white/60 font-light italic mb-1"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 1 }}
               >
-                {"Najlepše stvari lahko začutiš le s srcem".split(" ").map((word, i) => (
+                {`\u201ENajlepše stvari lahko začutiš le s srcem\u201D`.split(" ").map((word, i) => (
                   <motion.span
                     key={i}
                     className="inline-block mr-2"
@@ -378,6 +346,14 @@ export default function Hero() {
                     {word}
                   </motion.span>
                 ))}
+              </motion.p>
+              <motion.p
+                className="text-sm text-white/40 not-italic mb-6"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 1.8 }}
+              >
+                — Helen Keller
               </motion.p>
 
               <motion.div
@@ -452,24 +428,10 @@ export default function Hero() {
                 "drop-shadow(0 0 30px rgba(212, 64, 64, 0.4)) drop-shadow(0 0 60px rgba(212, 64, 64, 0.2))",
             }}
           >
-            {"FILIP".split("").map((char, i) => (
-              <motion.span
-                key={i}
-                className="inline-block"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.4,
-                  delay: 0.6 + i * 0.08,
-                  ease: [0.25, 0.4, 0.25, 1],
-                }}
-              >
-                {char}
-              </motion.span>
-            ))}
+            FILIP
           </h2>
           <h2
-            className="font-heading text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] font-black leading-none tracking-[-0.03em] pb-[0.2em] mb-4"
+            className="font-heading text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] font-black leading-none tracking-[-0.03em] pb-[0.2em] mb-3"
             style={{
               background:
                 "linear-gradient(135deg, #D44040 0%, #B83333 15%, #E85555 30%, #D44040 44%, #FFE8E8 50%, #D44040 56%, #CC3838 70%, #E84848 85%, #D44040 100%)",
@@ -483,25 +445,14 @@ export default function Hero() {
                 "drop-shadow(0 0 30px rgba(212, 64, 64, 0.4)) drop-shadow(0 0 60px rgba(212, 64, 64, 0.2))",
             }}
           >
-            {"JAGODIČ".split("").map((char, i) => (
-              <motion.span
-                key={i}
-                className="inline-block"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.4,
-                  delay: 1.1 + i * 0.08,
-                  ease: [0.25, 0.4, 0.25, 1],
-                }}
-              >
-                {char}
-              </motion.span>
-            ))}
+            JAGODIČ
           </h2>
 
-          <p className="text-white/60 text-lg font-light">
-            Najlepše stvari lahko začutiš le s srcem
+          <p className="text-white/60 text-base font-light italic leading-snug">
+            {`\u201ENajlepše stvari lahko začutiš le s srcem\u201D`}
+          </p>
+          <p className="text-white/35 text-xs mt-1">
+            — Helen Keller
           </p>
         </motion.div>
 
