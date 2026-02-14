@@ -2,51 +2,83 @@
 
 import ScrollReveal from "./ScrollReveal";
 
-const keyboards = [
+type CollectionItem = {
+  name: string;
+  description: string;
+  category: "klaviatura" | "diktafon";
+  image?: string;
+};
+
+const items: CollectionItem[] = [
   {
     name: "Yamaha PSR-S975",
     description: "Profesionalna izvajalska klaviatura z bogato zvočno banko.",
+    category: "klaviatura",
+  },
+  {
+    name: "Sony ICD-UX570",
+    description: "Kompakten digitalni diktafon z odličnim mikrofonom.",
+    category: "diktafon",
   },
   {
     name: "Korg PA1000",
     description: "Napredna aranžerska klaviatura z realističnimi zvoki.",
-  },
-  {
-    name: "Roland E-A7",
-    description: "Vsestranska klaviatura z zvoki z vsega sveta.",
-  },
-  {
-    name: "Yamaha PSR-SX900",
-    description: "Vrhunska klaviatura z naprednimi funkcijami.",
-  },
-  {
-    name: "Casio CT-X5000",
-    description: "Zmogljiva klaviatura z AiX Sound Source.",
-  },
-  {
-    name: "Korg PA700",
-    description: "Profesionalna aranžerska postaja.",
-  },
-];
-
-const dictaphones = [
-  {
-    name: "Sony ICD-UX570",
-    description: "Kompakten digitalni diktafon z odličnim mikrofonom.",
+    category: "klaviatura",
   },
   {
     name: "Olympus WS-853",
     description: "Zanesljiv diktafon za snemanje v studijski kvaliteti.",
+    category: "diktafon",
+  },
+  {
+    name: "Roland E-A7",
+    description: "Vsestranska klaviatura z zvoki z vsega sveta.",
+    category: "klaviatura",
   },
   {
     name: "Zoom H1n",
     description: "Prenosni snemalnik z X/Y stereo mikrofonoma.",
-  },
-  {
-    name: "Tascam DR-05X",
-    description: "Stereo prenosni snemalnik za glasbene posnetke.",
+    category: "diktafon",
   },
 ];
+
+function KeyboardIcon() {
+  return (
+    <svg
+      className="w-14 h-14 text-accent/20"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1}
+        d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"
+      />
+    </svg>
+  );
+}
+
+function RecorderIcon() {
+  return (
+    <svg
+      className="w-14 h-14 text-accent/20"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1}
+        d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
+      />
+    </svg>
+  );
+}
 
 export default function Collections() {
   return (
@@ -67,93 +99,57 @@ export default function Collections() {
           >
             Zbirke
           </h2>
-          <div className="w-20 h-0.5 bg-accent mx-auto" />
+          <div className="w-20 h-0.5 bg-accent mx-auto mb-6" />
+          <p className="text-white/50 max-w-2xl mx-auto">
+            Filip je zbiratelj klaviatur in diktafonov — ima več kot 20
+            klaviatur in številne diktafone. Vsak ima svoj značaj, ki ga Filip
+            pozna do potankosti.
+          </p>
         </ScrollReveal>
 
-        {/* Keyboards */}
-        <div className="mb-20">
-          <ScrollReveal>
-            <h3 className="font-heading text-2xl md:text-3xl font-semibold text-accent mb-8 text-center">
-              Klaviature
-            </h3>
-            <p className="text-white/50 text-center max-w-2xl mx-auto mb-12">
-              Filip je zbiratelj klaviatur — ima jih več kot 20. Vsaka ima svoj
-              značaj in zvok, ki ga Filip pozna do potankosti.
-            </p>
-          </ScrollReveal>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {keyboards.map((kb, index) => (
-              <ScrollReveal key={kb.name} delay={0.1 * index}>
-                <div className="group p-6 rounded-2xl bg-surface border border-border hover:border-accent/30 transition-all duration-500">
-                  <div className="w-full aspect-[4/3] rounded-xl bg-surface-lighter mb-4 flex items-center justify-center">
-                    <svg
-                      className="w-12 h-12 text-white/10"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1}
-                        d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"
-                      />
-                    </svg>
-                  </div>
-                  <h4 className="font-semibold text-white group-hover:text-accent transition-colors">
-                    {kb.name}
-                  </h4>
-                  <p className="text-white/40 text-sm mt-1">
-                    {kb.description}
-                  </p>
+        {/* Unified grid — alternating keyboards & dictaphones */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {items.map((item, index) => (
+            <ScrollReveal key={item.name} delay={0.1 * index}>
+              <div className="group p-6 rounded-2xl bg-surface border border-border hover:border-accent/30 transition-all duration-500">
+                {/* Placeholder visual */}
+                <div
+                  className={`w-full aspect-[4/3] rounded-xl mb-4 flex items-center justify-center ${
+                    item.category === "klaviatura"
+                      ? "bg-gradient-to-br from-accent/5 to-accent/[0.02]"
+                      : "bg-gradient-to-br from-white/[0.04] to-white/[0.01]"
+                  }`}
+                >
+                  {item.category === "klaviatura" ? (
+                    <KeyboardIcon />
+                  ) : (
+                    <RecorderIcon />
+                  )}
                 </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
 
-        {/* Dictaphones */}
-        <div>
-          <ScrollReveal>
-            <h3 className="font-heading text-2xl md:text-3xl font-semibold text-accent mb-8 text-center">
-              Diktafoni
-            </h3>
-            <p className="text-white/50 text-center max-w-2xl mx-auto mb-12">
-              Poleg klaviatur Filip zbira tudi diktafone — orodja za zajem
-              zvoka, ki ga spremljajo povsod.
-            </p>
-          </ScrollReveal>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {dictaphones.map((d, index) => (
-              <ScrollReveal key={d.name} delay={0.1 * index}>
-                <div className="group p-6 rounded-2xl bg-surface border border-border hover:border-accent/30 transition-all duration-500">
-                  <div className="w-full aspect-square rounded-xl bg-surface-lighter mb-4 flex items-center justify-center">
-                    <svg
-                      className="w-10 h-10 text-white/10"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1}
-                        d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
-                      />
-                    </svg>
+                {/* Info */}
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <h4 className="font-semibold text-white group-hover:text-accent transition-colors">
+                      {item.name}
+                    </h4>
+                    <p className="text-white/40 text-sm mt-1">
+                      {item.description}
+                    </p>
                   </div>
-                  <h4 className="font-semibold text-white group-hover:text-accent transition-colors">
-                    {d.name}
-                  </h4>
-                  <p className="text-white/40 text-sm mt-1">{d.description}</p>
+                  <span
+                    className={`flex-shrink-0 text-[10px] font-medium tracking-wider uppercase px-2.5 py-1 rounded-full ${
+                      item.category === "klaviatura"
+                        ? "bg-accent/10 text-accent/60"
+                        : "bg-white/5 text-white/40"
+                    }`}
+                  >
+                    {item.category === "klaviatura" ? "Klaviatura" : "Diktafon"}
+                  </span>
                 </div>
-              </ScrollReveal>
-            ))}
-          </div>
+              </div>
+            </ScrollReveal>
+          ))}
         </div>
       </div>
     </section>
