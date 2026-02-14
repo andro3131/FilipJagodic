@@ -184,7 +184,12 @@ export default function About() {
                 delay={0.15 * index}
                 className="text-center"
               >
-                <div className="p-6 md:p-8 rounded-2xl bg-surface border border-border">
+                <div
+                  className="p-6 md:p-8 rounded-2xl bg-gradient-to-br from-accent/[0.08] to-transparent border border-accent/10"
+                  style={{
+                    animation: `sway 4s ease-in-out ${index * 0.5}s infinite`,
+                  }}
+                >
                   <AnimatedNumber target={stat.number} suffix={stat.suffix} />
                   <p className="text-white font-semibold mt-3 mb-1">
                     {stat.label}

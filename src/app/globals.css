@@ -75,6 +75,12 @@ body {
   50% { transform: translateY(-14px); }
 }
 
+/* Gentle left-right sway for stat cards */
+@keyframes sway {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(15px); }
+}
+
 /* Mouse-follow shimmer on title text */
 .shimmer-overlay-text {
   background: radial-gradient(
