@@ -265,7 +265,7 @@ export default function Hero() {
                 className="font-heading text-[7rem] xl:text-[9rem] 2xl:text-[11rem] font-black leading-[0.85] tracking-[-0.03em] mb-6"
                 style={{
                   background:
-                    "linear-gradient(110deg, #D44040 0%, #C43838 30%, #D44040 44%, #FFE8E8 50%, #D44040 56%, #C43838 70%, #D44040 100%)",
+                    "linear-gradient(110deg, #D44040 0%, #B83333 15%, #E85555 30%, #D44040 44%, #FFE8E8 50%, #D44040 56%, #CC3838 70%, #E84848 85%, #D44040 100%)",
                   backgroundSize: "300% 100%",
                   backgroundClip: "text",
                   WebkitBackgroundClip: "text",
@@ -275,13 +275,27 @@ export default function Hero() {
                   filter: "drop-shadow(0 0 80px rgba(212, 64, 64, 0.25))",
                 }}
               >
-                FILIP
+                {"FILIP".split("").map((char, i) => (
+                  <motion.span
+                    key={i}
+                    className="inline-block"
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 0.5,
+                      delay: 0.7 + i * 0.08,
+                      ease: [0.25, 0.4, 0.25, 1],
+                    }}
+                  >
+                    {char}
+                  </motion.span>
+                ))}
               </h2>
               <h2
                 className="font-heading text-[7rem] xl:text-[9rem] 2xl:text-[11rem] font-black leading-[0.85] tracking-[-0.03em] pb-[0.2em]"
                 style={{
                   background:
-                    "linear-gradient(110deg, #D44040 0%, #C43838 30%, #D44040 44%, #FFE8E8 50%, #D44040 56%, #C43838 70%, #D44040 100%)",
+                    "linear-gradient(110deg, #D44040 0%, #B83333 15%, #E85555 30%, #D44040 44%, #FFE8E8 50%, #D44040 56%, #CC3838 70%, #E84848 85%, #D44040 100%)",
                   backgroundSize: "300% 100%",
                   backgroundClip: "text",
                   WebkitBackgroundClip: "text",
@@ -292,7 +306,21 @@ export default function Hero() {
                   filter: "drop-shadow(0 0 80px rgba(212, 64, 64, 0.25))",
                 }}
               >
-                JAGODIČ
+                {"JAGODIČ".split("").map((char, i) => (
+                  <motion.span
+                    key={i}
+                    className="inline-block"
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 0.5,
+                      delay: 1.2 + i * 0.08,
+                      ease: [0.25, 0.4, 0.25, 1],
+                    }}
+                  >
+                    {char}
+                  </motion.span>
+                ))}
               </h2>
 
               {/* Mouse-follow shimmer overlay */}
@@ -303,13 +331,17 @@ export default function Hero() {
                 aria-hidden="true"
               >
                 <h2 className="shimmer-overlay-text font-heading text-[7rem] xl:text-[9rem] 2xl:text-[11rem] font-black leading-[0.85] tracking-[-0.03em] mb-6">
-                  FILIP
+                  {"FILIP".split("").map((char, i) => (
+                    <span key={i} className="inline-block">{char}</span>
+                  ))}
                 </h2>
                 <h2
                   className="shimmer-overlay-text font-heading text-[7rem] xl:text-[9rem] 2xl:text-[11rem] font-black leading-[0.85] tracking-[-0.03em] pb-[0.2em]"
                   style={{ paddingLeft: "4rem" }}
                 >
-                  JAGODIČ
+                  {"JAGODIČ".split("").map((char, i) => (
+                    <span key={i} className="inline-block">{char}</span>
+                  ))}
                 </h2>
               </div>
             </div>
@@ -409,7 +441,7 @@ export default function Hero() {
             className="font-heading text-[3.5rem] sm:text-[5rem] md:text-[6rem] font-black leading-none tracking-[-0.03em]"
             style={{
               background:
-                "linear-gradient(135deg, #D44040 0%, #C43838 30%, #D44040 44%, #FFE8E8 50%, #D44040 56%, #C43838 70%, #D44040 100%)",
+                "linear-gradient(135deg, #D44040 0%, #B83333 15%, #E85555 30%, #D44040 44%, #FFE8E8 50%, #D44040 56%, #CC3838 70%, #E84848 85%, #D44040 100%)",
               backgroundSize: "300% 300%",
               backgroundClip: "text",
               WebkitBackgroundClip: "text",
@@ -420,13 +452,27 @@ export default function Hero() {
                 "drop-shadow(0 0 30px rgba(212, 64, 64, 0.4)) drop-shadow(0 0 60px rgba(212, 64, 64, 0.2))",
             }}
           >
-            FILIP
+            {"FILIP".split("").map((char, i) => (
+              <motion.span
+                key={i}
+                className="inline-block"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.4,
+                  delay: 0.6 + i * 0.08,
+                  ease: [0.25, 0.4, 0.25, 1],
+                }}
+              >
+                {char}
+              </motion.span>
+            ))}
           </h2>
           <h2
             className="font-heading text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] font-black leading-none tracking-[-0.03em] pb-[0.2em] mb-4"
             style={{
               background:
-                "linear-gradient(135deg, #D44040 0%, #C43838 30%, #D44040 44%, #FFE8E8 50%, #D44040 56%, #C43838 70%, #D44040 100%)",
+                "linear-gradient(135deg, #D44040 0%, #B83333 15%, #E85555 30%, #D44040 44%, #FFE8E8 50%, #D44040 56%, #CC3838 70%, #E84848 85%, #D44040 100%)",
               backgroundSize: "300% 300%",
               backgroundClip: "text",
               WebkitBackgroundClip: "text",
@@ -437,7 +483,21 @@ export default function Hero() {
                 "drop-shadow(0 0 30px rgba(212, 64, 64, 0.4)) drop-shadow(0 0 60px rgba(212, 64, 64, 0.2))",
             }}
           >
-            JAGODIČ
+            {"JAGODIČ".split("").map((char, i) => (
+              <motion.span
+                key={i}
+                className="inline-block"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.4,
+                  delay: 1.1 + i * 0.08,
+                  ease: [0.25, 0.4, 0.25, 1],
+                }}
+              >
+                {char}
+              </motion.span>
+            ))}
           </h2>
 
           <p className="text-white/60 text-lg font-light">
