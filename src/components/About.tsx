@@ -2,6 +2,7 @@
 
 import { useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
+import Image from "next/image";
 import ScrollReveal from "./ScrollReveal";
 import Modal from "./Modal";
 
@@ -264,6 +265,16 @@ export default function About() {
               podporo in skrb. Skupaj sta neustavljiva ekipa — Filip s talentom,
               Andreja z neskončno ljubeznijo in voljo.
             </p>
+
+            {/* Photo */}
+            <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden mt-8">
+              <Image
+                src="https://res.cloudinary.com/dewf3zos0/image/upload/v1771098609/20250520_175129_uvgigs.jpg"
+                alt="Filip v snemalnem studiu"
+                fill
+                className="object-cover object-top"
+              />
+            </div>
           </div>
         </div>
       </Modal>

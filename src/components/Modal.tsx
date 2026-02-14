@@ -25,13 +25,24 @@ export default function Modal({
 
   useEffect(() => {
     if (isOpen) {
+      const scrollY = window.scrollY;
       document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.left = "0";
+      document.body.style.right = "0";
       window.addEventListener("keydown", handleEscape);
+
+      return () => {
+        document.body.style.overflow = "";
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.left = "";
+        document.body.style.right = "";
+        window.scrollTo(0, scrollY);
+        window.removeEventListener("keydown", handleEscape);
+      };
     }
-    return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", handleEscape);
-    };
   }, [isOpen, handleEscape]);
 
   return (
@@ -53,7 +64,9 @@ export default function Modal({
 
           {/* Content */}
           <motion.div
-            className={`relative ${maxWidth} w-full max-h-[90vh] overflow-y-auto rounded-2xl bg-surface border border-border shadow-2xl`}
+            className={`relative ${maxWidth} w-full max-h-[90vh] overflow-y-auto overscroll-contain rounded-2xl bg-surface border border-border shadow-2xl`}
+            onWheel={(e) => e.stopPropagation()}
+            onTouchMove={(e) => e.stopPropagation()}
             initial={{ scale: 0.95, y: 20 }}
             animate={{ scale: 1, y: 0 }}
             exit={{ scale: 0.95, y: 20 }}
