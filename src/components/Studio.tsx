@@ -10,19 +10,27 @@ const albums = [
     title: "Zgoščenka 1",
     cover:
       "https://res.cloudinary.com/dewf3zos0/image/upload/v1771103655/listek_zunaj-FINAL_paujro.jpg",
-    images: [] as string[],
+    images: [
+      "https://res.cloudinary.com/dewf3zos0/image/upload/v1771104017/Screenshot_2026-02-14_at_22.20.11_tv9fum.png",
+    ],
   },
   {
     title: "Zgoščenka 2",
     cover:
       "https://res.cloudinary.com/dewf3zos0/image/upload/v1771103718/ovitek_noter_ZUNAJ_FINAL_eco11d.jpg",
-    images: [] as string[],
+    images: [
+      "https://res.cloudinary.com/dewf3zos0/image/upload/v1771103978/ovitek_noter_NOTER_FINAL2_es9fg6.jpg",
+      "https://res.cloudinary.com/dewf3zos0/image/upload/v1771103709/Inlay_zunaj_FINAL-FINAL_h3qt7b.jpg",
+    ],
   },
   {
     title: "Zgoščenka 3",
     cover:
       "https://res.cloudinary.com/dewf3zos0/image/upload/v1771103695/Screenshot_2026-02-14_at_22.14.48_zvzcdg.png",
-    images: [] as string[],
+    images: [
+      "https://res.cloudinary.com/dewf3zos0/image/upload/v1771104182/Screenshot_2026-02-14_at_22.19.49_q2ffjk.png",
+      "https://res.cloudinary.com/dewf3zos0/image/upload/v1771103675/Inlay_zunaj_Filip6-final_u4mt6k.jpg",
+    ],
   },
 ];
 
