@@ -4,6 +4,7 @@ import About from "@/components/About";
 import Encounters from "@/components/Encounters";
 import Gallery from "@/components/Gallery";
 import Music from "@/components/Music";
+import Studio from "@/components/Studio";
 import Collections from "@/components/Collections";
 
 import Contact from "@/components/Contact";
@@ -19,6 +20,7 @@ export default function Home() {
         <Encounters />
         <Gallery />
         <Music />
+        <Studio />
         <Collections />
         <Contact />
       </main>

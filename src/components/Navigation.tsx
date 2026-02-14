@@ -8,6 +8,7 @@ const navLinks = [
   { href: "#srecanja", label: "Srečanja" },
   { href: "#galerija", label: "Galerija" },
   { href: "#glasba", label: "Glasba" },
+  { href: "#studio", label: "V studiu" },
   { href: "#zbirke", label: "Zbirke" },
   { href: "#kontakt", label: "Kontakt" },
 ];
