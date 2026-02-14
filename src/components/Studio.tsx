@@ -34,48 +34,6 @@ const albums = [
   },
 ];
 
-const duets = [
-  {
-    name: "Barbara Leben",
-    song: "Privid",
-    description:
-      "Avtorska pesem — duet z izjemno vokalistko, z besedilom Andreje Pader in glasbo Andreja Mežana.",
-  },
-  {
-    name: "Agnes Kumlanc",
-    song: "Prsti zapleteni",
-    description:
-      "Cover pesmi Jelene Rozge in Klape Rišpet, poln energije in čustev.",
-  },
-  {
-    name: "Mija Koritnik",
-    song: "Duet",
-    description:
-      "Poseben duet s slepo deklico Mijo — dva glasova, ista občutljivost za glasbo.",
-  },
-  {
-    name: "Jernej Golob",
-    song: "Duet",
-    description:
-      "Duet z enim od Filipovih pomočnikov — prijateljstvo, ki se sliši tudi v glasbi.",
-  },
-];
-
-const highlights = [
-  {
-    number: "30+",
-    label: "Pesmi na snemalno popoldne",
-  },
-  {
-    number: "99%",
-    label: "Odpetih iz prve",
-  },
-  {
-    number: "3",
-    label: "Zgoščenke",
-  },
-];
-
 export default function Studio() {
   const [selectedAlbum, setSelectedAlbum] = useState<
     (typeof albums)[0] | null
@@ -135,20 +93,13 @@ export default function Studio() {
                 angleščini (čisto za foro) in vzdušje je vedno sproščeno. A ko
                 pritisne tipko in odpre usta, je vsak posnetek čista magija.
               </p>
-            </div>
-          </ScrollReveal>
-
-          {/* Stat highlights */}
-          <ScrollReveal className="mb-20 md:mb-28" delay={0.15}>
-            <div className="flex flex-wrap justify-center gap-6 md:gap-10">
-              {highlights.map((h) => (
-                <div key={h.label} className="text-center">
-                  <p className="font-heading text-3xl md:text-4xl font-bold text-accent">
-                    {h.number}
-                  </p>
-                  <p className="text-white/40 text-sm mt-1">{h.label}</p>
-                </div>
-              ))}
+              <p>
+                Filip je posnel tudi več duetov. Z Barbaro Leben je posnel
+                avtorsko pesem Privid, z Agnes Kumlanc energični cover Prsti
+                zapleteni. Poseben je bil duet s slepo deklico Mijo Koritnik —
+                dva glasova, ista občutljivost za glasbo. Zapel pa je tudi z
+                Jernejem Golobom, enim od svojih pomočnikov.
+              </p>
             </div>
           </ScrollReveal>
 
@@ -217,36 +168,6 @@ export default function Studio() {
             </ScrollReveal>
           </div>
 
-          {/* Duets */}
-          <div>
-            <ScrollReveal>
-              <h3 className="font-heading text-2xl md:text-3xl font-semibold text-white mb-3 text-center">
-                Dueti
-              </h3>
-              <p className="text-white/40 text-center mb-10 max-w-xl mx-auto">
-                Filip je posnel duete z različnimi glasbeniki — vsako sodelovanje
-                je zgodba zase.
-              </p>
-            </ScrollReveal>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-              {duets.map((duet, index) => (
-                <ScrollReveal key={duet.name} delay={0.1 * index}>
-                  <div className="p-6 rounded-2xl bg-[#141618] border border-border hover:border-accent/30 transition-all duration-500">
-                    <p className="text-accent text-xs font-medium tracking-[0.2em] uppercase mb-2">
-                      {duet.song}
-                    </p>
-                    <h4 className="font-heading text-lg md:text-xl font-semibold text-white mb-2">
-                      {duet.name}
-                    </h4>
-                    <p className="text-white/50 text-sm leading-relaxed">
-                      {duet.description}
-                    </p>
-                  </div>
-                </ScrollReveal>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
 
