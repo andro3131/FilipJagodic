@@ -6,7 +6,6 @@ import Gallery from "@/components/Gallery";
 import Music from "@/components/Music";
 import Studio from "@/components/Studio";
 import Collections from "@/components/Collections";
-
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 

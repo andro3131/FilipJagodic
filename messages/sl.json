@@ -1,0 +1,234 @@
+{
+  "metadata": {
+    "title": "Filip Jagodič — Glasba presega vse meje",
+    "description": "Filip Jagodič je izjemen glasbenik z absolutnim posluhom, ki presega vse ovire. Spoznajte njegovo neverjetno zgodbo in glasbo.",
+    "ogDescription": "Spoznajte izjemnega glasbenika z absolutnim posluhom."
+  },
+  "nav": {
+    "about": "O Filipu",
+    "encounters": "Srečanja",
+    "gallery": "Galerija",
+    "music": "Glasba",
+    "studio": "V studiu",
+    "collections": "Zbirke",
+    "contact": "Kontakt",
+    "mainNav": "Glavna navigacija",
+    "openMenu": "Odpri meni",
+    "closeMenu": "Zapri meni"
+  },
+  "hero": {
+    "srOnly": "Filip Jagodič — Glasba presega vse meje",
+    "ariaLabel": "Uvod",
+    "roles": "Glasbenik · Izvajalec · Zbiratelj",
+    "quote": "\u201ENajlepše stvari lahko začutiš le s srcem\u201D",
+    "quoteAuthor": "— Helen Keller",
+    "listenMusic": "Poslušaj glasbo",
+    "meetFilip": "Spoznaj Filipa",
+    "videoAlt": "Filip Jagodič"
+  },
+  "about": {
+    "supra": "Spoznaj",
+    "heading": "O Filipu",
+    "story": "Filip Jagodič se je rodil po hudih zapletih v petem mesecu nosečnosti. Kljub slepoti, cerebralni paralizi in avtizmu je razvil izjemen glasbeni talent — 100-odstotni absolutni posluh. Že pri dobrem letu je pel melodije, ko pa je dobil igračo s tipkami, je začel igrati vse, kar je slišal.",
+    "blockquote": "\u201ENihče me ne uči. Vsega sem se naučil sam.\u201D",
+    "readFullStory": "Preberi celotno zgodbo",
+    "abilities": {
+      "absolutePitch": {
+        "title": "Absolutni posluh",
+        "description": "Filip prepozna in reproducira vsak ton brez reference. Slišano pesem lahko takoj zaigra in zapoje — vse se nauči sam."
+      },
+      "memory": {
+        "title": "Neverjetni spomin",
+        "description": "Sposoben je memorizirati na tisoče besedil pesmi v različnih jezikih in jih reproducirati brez napake."
+      },
+      "noStageFright": {
+        "title": "Brez treme",
+        "description": "\"Nimam treme, ni me strah. Ljudi ne vidim.\" Filipova neposrednost in iskrenost očarata vse, ki ga srečajo."
+      },
+      "encyclopedia": {
+        "title": "Glasbeni enciklopedist",
+        "description": "Pozna avtorje, izvajalce in zgodbe za pesmimi vseh žanrov in obdobij. Prepeva vse, najraje pa starejše pesmi."
+      }
+    },
+    "stats": {
+      "songs": { "label": "Pesmi v repertoarju", "description": "Memoriziranih besedil in melodij" },
+      "keyboards": { "label": "Klaviatur", "description": "V osebni zbirki" },
+      "years": { "label": "Let", "description": "Življenja s glasbo" },
+      "recorded": { "label": "Posnetih pesmi v enem dnevu", "description": "V snemalnem studiu" }
+    },
+    "bio": {
+      "supra": "Življenjska zgodba",
+      "heading": "Filip Jagodič",
+      "p1": "Filip Jagodič se je rodil po hudih zapletih v petem mesecu nosečnosti. Njegova pot je bila od samega začetka izjemno zahtevna. Diagnoze — slepota, cerebralna paraliza in ena od oblik avtizma — bi marsikoga ustavile, a Filip je od vsega začetka kazal izjemno voljo in talent.",
+      "p2": "Že pri dobrem letu starosti je začel peti pesmice — brez besedila, a z brezhibno melodijo. Ko je dobil igračo s tipkami, se je začela prava glasbena pot. Filip je začel igrati vse, kar je slišal. Nihče ga ni učil — vsega se je naučil sam, z 100-odstotnim absolutnim posluhom.",
+      "blockquote": "\u201ENihče me ne uči. Vsega sem se naučil sam.\u201D",
+      "p3": "Danes Filip pozna na tisoče pesmi — od jazzovskih standardov iz leta 1920, šansonov in popevk iz 50-ih in 60-ih let, do sodobnih uspešnic. Vsako slišano pesem lahko takoj reproducira na klaviaturah in jo zapoje z vsemi glasovi. Ima tudi izjemno sposobnost, da pesem zapoje od konca proti začetku — besedilo in melodijo obrne v celoti. V snemalnem studiu posname tudi 30 pesmi na eno sejo.",
+      "p4": "Filip je posnel tri zgoščenke in leta 2018 imel samostojni koncert v Trebnjem, ki je bil razprodan. Na odru nima treme — kot sam pravi: \u201ENimam treme, ni me strah. Ljudi ne vidim.\u201D Ta neposrednost je del njegovega čara, ki očara vse, ki ga srečajo — od navadnih poslušalcev do največjih zvezdnikov, kot je Andrea Bocelli.",
+      "p5": "Poleg glasbe ima Filip še eno veliko strast — zbira sintetizatorje in diktafone. V svoji zbirki ima več kot 20 klaviatur, vsako pozna do potankosti. Njegova velika želja ostaja Yamaha Tyros 5 — profesionalna klaviatura, ki bi mu odprla nove glasbene svetove.",
+      "p6": "Za Filipom stoji predana mama Andreja Pader, ki mu nudi vsakodnevno podporo in skrb. Skupaj sta neustavljiva ekipa — Filip s talentom, Andreja z neskončno ljubeznijo in voljo.",
+      "photoAlt": "Filip Jagodič"
+    }
+  },
+  "encounters": {
+    "supra": "Posebni trenutki",
+    "heading": "Srečanja",
+    "subtitle": "Filip je s svojim talentom in neposrednostjo navdušil mnoge znane glasbenike — vsako srečanje je zgodba zase.",
+    "readStory": "Preberi zgodbo",
+    "imageWillBeAdded": "Slika bo dodana",
+    "items": {
+      "bocelli": {
+        "name": "Andrea Bocelli",
+        "role": "Legendarni tenor",
+        "event": "Srečanje v Ljubljani",
+        "description": "Filip je zaigral in zapel za Andreo Bocellija, ki je njegovo izvedbo pohvalil z navdušenim \"bravisimo\" in obdržal ključek s skladbo.",
+        "fullStory": "Eno največjih srečanj v Filipovem življenju se je zgodilo v Ljubljani, ko je imel priložnost zaigrati in zapeti pred legendarnim tenorom Andreo Bocellijem. Filip je bil povsem sproščen — kot vedno, brez treme in strahu. Bocelli je njegovo izvedbo pozorno poslušal in jo na koncu pohvalil z navdušenim \"bravisimo\". Tako navdušen je bil, da je Filipov ključek s skladbo obdržal kot spomin. Trenutek, ki ga Filip in njegova družina ne bodo nikoli pozabili."
+      },
+      "sufit": {
+        "name": "Klapa Šufit",
+        "role": "Hrvaška klapa",
+        "event": "Skupni nastop",
+        "description": "Filip je nastopil skupaj s hrvaško klapo Šufit in občinstvo očaral z neposrednostjo in glasbenim talentom.",
+        "fullStory": "Filip je stopil na oder skupaj s člani hrvaške klape Šufit in dokazal, da glasba res ne pozna meja. Kljub temu, da je bil najmlajši na odru, je z neposrednostjo in talentom očaral celotno občinstvo. Člani klape so bili nad njegovim posluhom in sposobnostjo takojšnjega prilagajanja navdušeni."
+      },
+      "plestenjak": {
+        "name": "Jan Plestenjak",
+        "role": "Slovenski glasbenik",
+        "event": "Srečanje",
+        "description": "Srečanje z enim najpopularnejših slovenskih glasbenikov, ki ga je Filipova iskrenost in talent globoko navdušil.",
+        "fullStory": "Ko je Filip srečal Jana Plestenjaka, enega najpopularnejših slovenskih glasbenikov, je bil zvest svojemu značaju — neposreden in iskren. Plestenjaka je Filipov talent globoko navdušil, predvsem sposobnost, da vsako slišano pesem takoj reproducira na klaviaturah."
+      },
+      "pahor": {
+        "name": "Borut Pahor",
+        "role": "Bivši predsednik Republike Slovenije",
+        "event": "Srečanje",
+        "description": "Filip je s svojim talentom navdušil tudi bivšega predsednika Republike Slovenije Boruta Pahorja.",
+        "fullStory": "Filip je s svojim talentom navdušil tudi bivšega predsednika Republike Slovenije Boruta Pahorja. Besedilo bo dopolnjeno."
+      },
+      "zavec": {
+        "name": "Dejan Zavec",
+        "role": "Slovenski boksar, svetovni prvak",
+        "event": "Srečanje",
+        "description": "Srečanje dveh borcev — Filip s svojimi izzivi, Dejan v ringu. Oba zmagovalca.",
+        "fullStory": "Srečanje dveh borcev — Filip s svojimi izzivi, Dejan v ringu. Oba zmagovalca. Besedilo bo dopolnjeno."
+      },
+      "svajger": {
+        "name": "Darja Švajger",
+        "role": "Operna pevka",
+        "event": "Srečanje",
+        "description": "Filip je srečal tudi operno pevko Darjo Švajger, ki jo je navdušil s svojim izjemnim posluhom.",
+        "fullStory": "Filip je srečal tudi operno pevko Darjo Švajger, ki jo je navdušil s svojim izjemnim posluhom. Besedilo bo dopolnjeno."
+      }
+    }
+  },
+  "gallery": {
+    "supra": "Utrinki",
+    "heading": "Galerija",
+    "openPhoto": "Odpri: {alt}",
+    "prevPhoto": "Prejšnja slika",
+    "nextPhoto": "Naslednja slika",
+    "imageWillBeAdded": "Slika bo dodana",
+    "photos": {
+      "keyboards": { "alt": "Filip za klaviaturami", "caption": "Filip za klaviaturami" },
+      "performance": { "alt": "Filip na nastopu", "caption": "Nastop v živo" },
+      "bocelli": { "alt": "Filip in Andrea Bocelli", "caption": "Srečanje z Andreo Bocellijem" },
+      "studio": { "alt": "Filip v studiu", "caption": "V snemalnem studiu" },
+      "mom": { "alt": "Filip z mamo Andrejo", "caption": "Filip z mamo Andrejo" },
+      "dictaphone": { "alt": "Filip z diktafonom", "caption": "Filip z diktafonom" }
+    }
+  },
+  "music": {
+    "supra": "Poslušaj",
+    "heading": "Glasba",
+    "subtitle": "Filipove izvedbe in nastopi — od avtorske glasbe do coverjev in nastopov v živo.",
+    "featured": {
+      "title": "Privid",
+      "description": "Avtorska pesem v duetu s pevko Barbaro Leben, z besedilom Filipove mame Andreje Pader in glasbo Andreja Mežana. Hrepenenje po ljubezni in čustveno popotovanje dveh duš."
+    },
+    "videos": {
+      "prstiZapleteni": {
+        "title": "Prsti zapleteni",
+        "description": "Jelena Rozga in Klapa Rišpet — Prsti zapleteni (cover), duet z Agnes Kumlanc."
+      },
+      "takeGoodCare": {
+        "title": "Take Good Care of Her",
+        "description": "Adam Wade — prikaz kako Filip posname vokal in klaviature hkrati."
+      },
+      "letItBeMe": {
+        "title": "Let It Be Me",
+        "description": "Cover pesmi Elvisa Presleyja."
+      },
+      "klapaSufit": {
+        "title": "Nastop v živo s Klapo Šufit",
+        "description": "Filip na odru skupaj s hrvaško klapo."
+      }
+    }
+  },
+  "studio": {
+    "supra": "Drugi dom",
+    "heading": "V studiu",
+    "subtitle": "Studio v Trebnjem je Filipov drugi dom. Poleg petja doma je najraje prav tukaj, kjer nastajajo posnetki, zgoščenke in nepozabni trenutki.",
+    "storyP1": "Ko Filip stopi v studio, se začne pravi šov. Vse dela izključno na dotik — klaviature odigra in zapoje hkrati, brez not, brez priprav. 99% pesmi odpoje iz prve. Na snemalno popoldne posname tudi 30 in več pesmi.",
+    "storyP2": "V studiu se veliko šalimo — Filip se najraje pogovarja v angleščini (čisto za foro) in vzdušje je vedno sproščeno. A ko pritisne tipko in odpre usta, je vsak posnetek čista magija.",
+    "storyP3": "Filip je posnel tudi več duetov. Z Barbaro Leben je posnel avtorsko pesem Privid, z Agnes Kumlanc energični cover Prsti zapleteni. Poseben je bil duet s slepo deklico Mijo Koritnik — dva glasova, ista občutljivost za glasbo. Zapel pa je tudi z Jernejem Golobom, enim od svojih pomočnikov.",
+    "albumsHeading": "Zgoščenke",
+    "albumsSubtitle": "Filip je posnel tri zgoščenke. Na voljo so v fizični obliki ali na USB ključku.",
+    "openGallery": "Odpri galerijo",
+    "orderCd": "Naroči CD ali USB ključek",
+    "album1": "Zgoščenka 1",
+    "album2": "Zgoščenka 2",
+    "album3": "Zgoščenka 3",
+    "prevImage": "Prejšnja slika",
+    "nextImage": "Naslednja slika"
+  },
+  "collections": {
+    "supra": "Strast",
+    "heading": "Zbirke",
+    "subtitle": "Filip je zbiratelj klaviatur in diktafonov — ima več kot 20 klaviatur in številne diktafone. Vsak ima svoj značaj, ki ga Filip pozna do potankosti.",
+    "keyboard": "Klaviatura",
+    "dictaphone": "Diktafon",
+    "items": {
+      "yamaha": {
+        "name": "Yamaha PSR-S975",
+        "description": "Profesionalna izvajalska klaviatura z bogato zvočno banko."
+      },
+      "sony": {
+        "name": "Sony ICD-UX570",
+        "description": "Kompakten digitalni diktafon z odličnim mikrofonom."
+      },
+      "korg": {
+        "name": "Korg PA1000",
+        "description": "Napredna aranžerska klaviatura z realističnimi zvoki."
+      },
+      "olympus": {
+        "name": "Olympus WS-853",
+        "description": "Zanesljiv diktafon za snemanje v studijski kvaliteti."
+      }
+    }
+  },
+  "contact": {
+    "supra": "Povežimo se",
+    "heading": "Kontakt",
+    "subtitle": "Za nastope, sodelovanja, medijske poizvedbe ali preprosto sporočilo — z veseljem se povežemo.",
+    "emailCta": "Pišite nam",
+    "performances": "Nastopi",
+    "performancesDesc": "Koncerti, dogodki, festivali",
+    "media": "Mediji",
+    "mediaDesc": "Intervjuji, reportaže, dokumentarci",
+    "collaborations": "Sodelovanja",
+    "collaborationsDesc": "Glasba, projekti, dobrodelnost",
+    "youtubeChannel": "YouTube kanal",
+    "facebookProfile": "Facebook profil"
+  },
+  "footer": {
+    "tagline": "Glasba presega vse meje",
+    "footerNav": "Noga — navigacija",
+    "about": "O Filipu",
+    "music": "Glasba",
+    "collections": "Zbirke",
+    "contact": "Kontakt"
+  },
+  "common": {
+    "close": "Zapri",
+    "skipToContent": "Preskoči na vsebino"
+  }
+}

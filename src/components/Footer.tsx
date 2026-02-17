@@ -1,4 +1,10 @@
+"use client";
+
+import { useTranslations } from "next-intl";
+
 export default function Footer() {
+  const t = useTranslations("footer");
+
   return (
     <footer className="py-12 px-6 border-t border-border" role="contentinfo">
       <div className="mx-auto max-w-7xl">
@@ -8,43 +14,37 @@ export default function Footer() {
               FILIP JAGODIČ
             </p>
             <p className="text-white/30 text-sm mt-1">
-              Glasba presega vse meje
+              {t("tagline")}
             </p>
           </div>
 
           <nav
-            aria-label="Noga — navigacija"
+            aria-label={t("footerNav")}
             className="flex flex-wrap gap-6 justify-center"
           >
             <a
               href="#o-filipu"
               className="text-white/40 hover:text-accent text-sm transition-colors"
             >
-              O Filipu
+              {t("about")}
             </a>
             <a
               href="#glasba"
               className="text-white/40 hover:text-accent text-sm transition-colors"
             >
-              Glasba
+              {t("music")}
             </a>
             <a
               href="#zbirke"
               className="text-white/40 hover:text-accent text-sm transition-colors"
             >
-              Zbirke
-            </a>
-            <a
-              href="#povezave"
-              className="text-white/40 hover:text-accent text-sm transition-colors"
-            >
-              Povezave
+              {t("collections")}
             </a>
             <a
               href="#kontakt"
               className="text-white/40 hover:text-accent text-sm transition-colors"
             >
-              Kontakt
+              {t("contact")}
             </a>
           </nav>
 

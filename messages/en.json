@@ -1,0 +1,234 @@
+{
+  "metadata": {
+    "title": "Filip Jagodič — Music Beyond All Boundaries",
+    "description": "Filip Jagodič is an extraordinary musician with perfect pitch who transcends all obstacles. Discover his incredible story and music.",
+    "ogDescription": "Discover an extraordinary musician with perfect pitch."
+  },
+  "nav": {
+    "about": "About Filip",
+    "encounters": "Encounters",
+    "gallery": "Gallery",
+    "music": "Music",
+    "studio": "In the Studio",
+    "collections": "Collections",
+    "contact": "Contact",
+    "mainNav": "Main navigation",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "hero": {
+    "srOnly": "Filip Jagodič — Music Beyond All Boundaries",
+    "ariaLabel": "Introduction",
+    "roles": "Musician · Performer · Collector",
+    "quote": "\u201CThe best and most beautiful things in the world cannot be seen or even touched — they must be felt with the heart\u201D",
+    "quoteAuthor": "— Helen Keller",
+    "listenMusic": "Listen to Music",
+    "meetFilip": "Meet Filip",
+    "videoAlt": "Filip Jagodič"
+  },
+  "about": {
+    "supra": "Get to Know",
+    "heading": "About Filip",
+    "story": "Filip Jagodič was born after severe complications in the fifth month of pregnancy. Despite blindness, cerebral palsy, and autism, he developed an extraordinary musical talent — 100% perfect pitch. By the age of one, he was already singing melodies, and when he got a toy with keys, he began playing everything he heard.",
+    "blockquote": "\u201CNo one teaches me. I learned everything by myself.\u201D",
+    "readFullStory": "Read Full Story",
+    "abilities": {
+      "absolutePitch": {
+        "title": "Perfect Pitch",
+        "description": "Filip can identify and reproduce any tone without reference. He can instantly play and sing any song he hears — he learns everything on his own."
+      },
+      "memory": {
+        "title": "Incredible Memory",
+        "description": "He can memorize thousands of song lyrics in different languages and reproduce them without a single mistake."
+      },
+      "noStageFright": {
+        "title": "No Stage Fright",
+        "description": "\"I have no stage fright, I'm not afraid. I can't see the people.\" Filip's directness and honesty captivate everyone who meets him."
+      },
+      "encyclopedia": {
+        "title": "Musical Encyclopedia",
+        "description": "He knows the authors, performers, and stories behind songs of all genres and eras. He covers everything, but prefers older songs the most."
+      }
+    },
+    "stats": {
+      "songs": { "label": "Songs in Repertoire", "description": "Memorized lyrics and melodies" },
+      "keyboards": { "label": "Keyboards", "description": "In personal collection" },
+      "years": { "label": "Years", "description": "A life with music" },
+      "recorded": { "label": "Songs Recorded in One Day", "description": "In the recording studio" }
+    },
+    "bio": {
+      "supra": "Life Story",
+      "heading": "Filip Jagodič",
+      "p1": "Filip Jagodič was born after severe complications in the fifth month of pregnancy. His path has been extraordinarily challenging from the very beginning. The diagnoses — blindness, cerebral palsy, and a form of autism — would have stopped many, but Filip showed exceptional will and talent from the start.",
+      "p2": "By the age of one, he began singing songs — without words, but with flawless melody. When he got a toy with keys, his true musical journey began. Filip started playing everything he heard. No one taught him — he learned everything himself, with 100% perfect pitch.",
+      "blockquote": "\u201CNo one teaches me. I learned everything by myself.\u201D",
+      "p3": "Today, Filip knows thousands of songs — from jazz standards of the 1920s, chansons and pop songs from the 50s and 60s, to modern hits. He can instantly reproduce any song he hears on keyboards and sing it with all the voices. He also has the extraordinary ability to sing a song backwards — reversing both the lyrics and melody entirely. In the recording studio, he can record over 30 songs in a single session.",
+      "p4": "Filip has recorded three CDs and in 2018 had a sold-out solo concert in Trebnje. He has no stage fright on stage — as he says: \u201CI have no stage fright, I'm not afraid. I can't see the people.\u201D This directness is part of his charm that captivates everyone he meets — from ordinary listeners to the biggest stars, like Andrea Bocelli.",
+      "p5": "Besides music, Filip has another great passion — he collects synthesizers and dictaphones. His collection includes more than 20 keyboards, and he knows each one inside out. His biggest wish remains the Yamaha Tyros 5 — a professional keyboard that would open new musical worlds for him.",
+      "p6": "Behind Filip stands his devoted mother Andreja Pader, who provides him with daily support and care. Together they are an unstoppable team — Filip with his talent, Andreja with boundless love and determination.",
+      "photoAlt": "Filip Jagodič"
+    }
+  },
+  "encounters": {
+    "supra": "Special Moments",
+    "heading": "Encounters",
+    "subtitle": "Filip has impressed many famous musicians with his talent and directness — each encounter is a story of its own.",
+    "readStory": "Read story",
+    "imageWillBeAdded": "Image coming soon",
+    "items": {
+      "bocelli": {
+        "name": "Andrea Bocelli",
+        "role": "Legendary tenor",
+        "event": "Meeting in Ljubljana",
+        "description": "Filip played and sang for Andrea Bocelli, who praised his performance with an enthusiastic \"bravisimo\" and kept the USB stick with the recording.",
+        "fullStory": "One of the greatest encounters in Filip's life took place in Ljubljana, when he had the opportunity to play and sing before the legendary tenor Andrea Bocelli. Filip was completely relaxed — as always, without any stage fright or fear. Bocelli listened attentively to his performance and praised it with an enthusiastic \"bravisimo\". He was so impressed that he kept Filip's USB stick with the recording as a memento. A moment that Filip and his family will never forget."
+      },
+      "sufit": {
+        "name": "Klapa Šufit",
+        "role": "Croatian klapa ensemble",
+        "event": "Joint performance",
+        "description": "Filip performed together with the Croatian klapa Šufit and captivated the audience with his directness and musical talent.",
+        "fullStory": "Filip stepped on stage together with members of the Croatian klapa Šufit and proved that music truly knows no boundaries. Despite being the youngest on stage, he captivated the entire audience with his directness and talent. The klapa members were amazed by his ear and ability to instantly adapt."
+      },
+      "plestenjak": {
+        "name": "Jan Plestenjak",
+        "role": "Slovenian musician",
+        "event": "Meeting",
+        "description": "A meeting with one of the most popular Slovenian musicians, who was deeply impressed by Filip's sincerity and talent.",
+        "fullStory": "When Filip met Jan Plestenjak, one of the most popular Slovenian musicians, he stayed true to his character — direct and sincere. Plestenjak was deeply impressed by Filip's talent, especially his ability to instantly reproduce any song he hears on keyboards."
+      },
+      "pahor": {
+        "name": "Borut Pahor",
+        "role": "Former President of Slovenia",
+        "event": "Meeting",
+        "description": "Filip impressed the former President of Slovenia Borut Pahor with his talent.",
+        "fullStory": "Filip impressed the former President of Slovenia Borut Pahor with his talent. Full story coming soon."
+      },
+      "zavec": {
+        "name": "Dejan Zavec",
+        "role": "Slovenian boxer, world champion",
+        "event": "Meeting",
+        "description": "A meeting of two fighters — Filip with his challenges, Dejan in the ring. Both champions.",
+        "fullStory": "A meeting of two fighters — Filip with his challenges, Dejan in the ring. Both champions. Full story coming soon."
+      },
+      "svajger": {
+        "name": "Darja Švajger",
+        "role": "Opera singer",
+        "event": "Meeting",
+        "description": "Filip also met opera singer Darja Švajger, who was impressed by his extraordinary ear for music.",
+        "fullStory": "Filip also met opera singer Darja Švajger, who was impressed by his extraordinary ear for music. Full story coming soon."
+      }
+    }
+  },
+  "gallery": {
+    "supra": "Snapshots",
+    "heading": "Gallery",
+    "openPhoto": "Open: {alt}",
+    "prevPhoto": "Previous photo",
+    "nextPhoto": "Next photo",
+    "imageWillBeAdded": "Image coming soon",
+    "photos": {
+      "keyboards": { "alt": "Filip at the keyboards", "caption": "Filip at the keyboards" },
+      "performance": { "alt": "Filip performing", "caption": "Live performance" },
+      "bocelli": { "alt": "Filip and Andrea Bocelli", "caption": "Meeting Andrea Bocelli" },
+      "studio": { "alt": "Filip in the studio", "caption": "In the recording studio" },
+      "mom": { "alt": "Filip with his mother Andreja", "caption": "Filip with his mother Andreja" },
+      "dictaphone": { "alt": "Filip with a dictaphone", "caption": "Filip with a dictaphone" }
+    }
+  },
+  "music": {
+    "supra": "Listen",
+    "heading": "Music",
+    "subtitle": "Filip's performances and shows — from original music to covers and live performances.",
+    "featured": {
+      "title": "Privid",
+      "description": "An original song as a duet with singer Barbara Leben, with lyrics by Filip's mother Andreja Pader and music by Andrej Mežan. A longing for love and an emotional journey of two souls."
+    },
+    "videos": {
+      "prstiZapleteni": {
+        "title": "Prsti zapleteni",
+        "description": "Jelena Rozga & Klapa Rišpet — Prsti zapleteni (cover), duet with Agnes Kumlanc."
+      },
+      "takeGoodCare": {
+        "title": "Take Good Care of Her",
+        "description": "Adam Wade — showing how Filip records vocals and keyboards simultaneously."
+      },
+      "letItBeMe": {
+        "title": "Let It Be Me",
+        "description": "Elvis Presley cover."
+      },
+      "klapaSufit": {
+        "title": "Live Performance with Klapa Šufit",
+        "description": "Filip on stage together with the Croatian klapa."
+      }
+    }
+  },
+  "studio": {
+    "supra": "Second Home",
+    "heading": "In the Studio",
+    "subtitle": "The studio in Trebnje is Filip's second home. Besides singing at home, he loves being here the most, where recordings, CDs, and unforgettable moments are made.",
+    "storyP1": "When Filip steps into the studio, the real show begins. He does everything exclusively by touch — he plays keyboards and sings simultaneously, without sheet music, without preparation. He nails 99% of songs on the first take. In a single recording session, he can record over 30 songs.",
+    "storyP2": "There's a lot of joking in the studio — Filip loves speaking in English (just for fun) and the atmosphere is always relaxed. But when he presses a key and opens his mouth, every recording is pure magic.",
+    "storyP3": "Filip has also recorded several duets. With Barbara Leben, he recorded the original song Privid, and with Agnes Kumlanc an energetic cover of Prsti zapleteni. A special duet was with blind girl Mija Koritnik — two voices, the same sensitivity for music. He also sang with Jernej Golob, one of his assistants.",
+    "albumsHeading": "CDs",
+    "albumsSubtitle": "Filip has recorded three CDs. They are available in physical format or on a USB drive.",
+    "openGallery": "Open gallery",
+    "orderCd": "Order CD or USB drive",
+    "album1": "CD 1",
+    "album2": "CD 2",
+    "album3": "CD 3",
+    "prevImage": "Previous image",
+    "nextImage": "Next image"
+  },
+  "collections": {
+    "supra": "Passion",
+    "heading": "Collections",
+    "subtitle": "Filip is a collector of keyboards and dictaphones — he has more than 20 keyboards and numerous dictaphones. Each one has its own character, which Filip knows inside out.",
+    "keyboard": "Keyboard",
+    "dictaphone": "Dictaphone",
+    "items": {
+      "yamaha": {
+        "name": "Yamaha PSR-S975",
+        "description": "Professional performance keyboard with a rich sound bank."
+      },
+      "sony": {
+        "name": "Sony ICD-UX570",
+        "description": "Compact digital dictaphone with an excellent microphone."
+      },
+      "korg": {
+        "name": "Korg PA1000",
+        "description": "Advanced arranger keyboard with realistic sounds."
+      },
+      "olympus": {
+        "name": "Olympus WS-853",
+        "description": "Reliable dictaphone for studio-quality recording."
+      }
+    }
+  },
+  "contact": {
+    "supra": "Get in Touch",
+    "heading": "Contact",
+    "subtitle": "For performances, collaborations, media inquiries, or just a simple message — we'd love to connect.",
+    "emailCta": "Write to Us",
+    "performances": "Performances",
+    "performancesDesc": "Concerts, events, festivals",
+    "media": "Media",
+    "mediaDesc": "Interviews, reports, documentaries",
+    "collaborations": "Collaborations",
+    "collaborationsDesc": "Music, projects, charity",
+    "youtubeChannel": "YouTube Channel",
+    "facebookProfile": "Facebook Profile"
+  },
+  "footer": {
+    "tagline": "Music Beyond All Boundaries",
+    "footerNav": "Footer navigation",
+    "about": "About Filip",
+    "music": "Music",
+    "collections": "Collections",
+    "contact": "Contact"
+  },
+  "common": {
+    "close": "Close",
+    "skipToContent": "Skip to content"
+  }
+}

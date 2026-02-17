@@ -1,40 +1,21 @@
 "use client";
 
 import ScrollReveal from "./ScrollReveal";
+import { useTranslations } from "next-intl";
 
-const featured = {
-  id: "EJYPq4STQ6w",
-  title: "Privid",
-  description:
-    "Avtorska pesem v duetu s pevko Barbaro Leben, z besedilom Filipove mame Andreje Pader in glasbo Andreja Mežana. Hrepenenje po ljubezni in čustveno popotovanje dveh duš.",
+const featuredId = "EJYPq4STQ6w";
+
+const videoKeys = ["prstiZapleteni", "takeGoodCare", "letItBeMe", "klapaSufit"] as const;
+const videoIds: Record<string, string> = {
+  prstiZapleteni: "KPP-UOhs8iE",
+  takeGoodCare: "1WPEC_KJXpk",
+  letItBeMe: "ruVUK_g5rK0",
+  klapaSufit: "SJgYyL1qdzE",
 };
 
-const videos = [
-  {
-    id: "KPP-UOhs8iE",
-    title: "Prsti zapleteni",
-    description:
-      "Jelena Rozga in Klapa Rišpet — Prsti zapleteni (cover), duet z Agnes Kumlanc.",
-  },
-  {
-    id: "1WPEC_KJXpk",
-    title: "Take Good Care of Her",
-    description:
-      "Adam Wade — prikaz kako Filip posname vokal in klaviature hkrati.",
-  },
-  {
-    id: "ruVUK_g5rK0",
-    title: "Let It Be Me",
-    description: "Cover pesmi Elvisa Presleyja.",
-  },
-  {
-    id: "SJgYyL1qdzE",
-    title: "Nastop v živo s Klapo Šufit",
-    description: "Filip na odru skupaj s hrvaško klapo.",
-  },
-];
-
 export default function Music() {
+  const t = useTranslations("music");
+
   return (
     <section
       id="glasba"
@@ -45,18 +26,17 @@ export default function Music() {
         {/* Section header */}
         <ScrollReveal className="text-center mb-16">
           <p className="text-accent text-sm font-medium tracking-[0.3em] uppercase mb-4">
-            Poslušaj
+            {t("supra")}
           </p>
           <h2
             id="music-heading"
             className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
           >
-            Glasba
+            {t("heading")}
           </h2>
           <div className="w-20 h-0.5 bg-accent mx-auto mb-6" />
           <p className="text-white/50 max-w-2xl mx-auto">
-            Filipove izvedbe in nastopi — od avtorske glasbe do coverjev
-            in nastopov v živo.
+            {t("subtitle")}
           </p>
         </ScrollReveal>
 
@@ -65,8 +45,8 @@ export default function Music() {
           <div className="max-w-4xl mx-auto">
             <div className="aspect-video rounded-2xl overflow-hidden bg-black border border-border">
               <iframe
-                src={`https://www.youtube.com/embed/${featured.id}`}
-                title={featured.title}
+                src={`https://www.youtube.com/embed/${featuredId}`}
+                title={t("featured.title")}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 className="w-full h-full"
@@ -75,22 +55,22 @@ export default function Music() {
             </div>
             <div className="mt-4 text-center">
               <h3 className="font-heading text-xl md:text-2xl font-semibold text-white">
-                {featured.title}
+                {t("featured.title")}
               </h3>
-              <p className="text-white/50 mt-1">{featured.description}</p>
+              <p className="text-white/50 mt-1">{t("featured.description")}</p>
             </div>
           </div>
         </ScrollReveal>
 
         {/* Video grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {videos.map((video, index) => (
-            <ScrollReveal key={video.id} delay={0.1 * index}>
+          {videoKeys.map((key, index) => (
+            <ScrollReveal key={key} delay={0.1 * index}>
               <div className="rounded-2xl overflow-hidden bg-[#141618] border border-border hover:border-accent/30 transition-all duration-500">
                 <div className="aspect-video bg-black">
                   <iframe
-                    src={`https://www.youtube.com/embed/${video.id}`}
-                    title={video.title}
+                    src={`https://www.youtube.com/embed/${videoIds[key]}`}
+                    title={t(`videos.${key}.title`)}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                     className="w-full h-full"
@@ -99,10 +79,10 @@ export default function Music() {
                 </div>
                 <div className="p-4 md:p-5">
                   <h3 className="font-heading text-lg font-semibold text-white">
-                    {video.title}
+                    {t(`videos.${key}.title`)}
                   </h3>
                   <p className="text-white/50 text-sm mt-1">
-                    {video.description}
+                    {t(`videos.${key}.description`)}
                   </p>
                 </div>
               </div>

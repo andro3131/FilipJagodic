@@ -2,11 +2,13 @@
 
 import { useRef, useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 const VIDEO_URL =
   "https://res.cloudinary.com/dewf3zos0/video/upload/v1771070979/Filip15_f8xeep.mp4";
 
 export default function Hero() {
+  const t = useTranslations("hero");
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const videoDurationRef = useRef(0);
@@ -147,14 +149,16 @@ export default function Hero() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [introComplete, isMobile]);
 
+  const quoteWords = t("quote").split(" ");
+
   return (
     <section
       ref={sectionRef}
-      aria-label="Uvod"
+      aria-label={t("ariaLabel")}
       className="relative min-h-screen flex flex-col overflow-x-clip"
     >
       {/* Accessible heading */}
-      <h1 className="sr-only">Filip Jagodič — Glasba presega vse meje</h1>
+      <h1 className="sr-only">{t("srOnly")}</h1>
 
       {/* Background gradient with red glows */}
       <div
@@ -232,7 +236,7 @@ export default function Hero() {
                       "radial-gradient(ellipse 68% 83% at 50% 51%, black 30%, transparent 60%)",
                     filter: "brightness(0.95) contrast(1.05)",
                   }}
-                  aria-label="Filip Jagodič"
+                  aria-label={t("videoAlt")}
                 >
                   <source src={VIDEO_URL} type="video/mp4" />
                 </video>
@@ -322,7 +326,7 @@ export default function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.8 }}
               >
-                Glasbenik · Izvajalec · Zbiratelj
+                {t("roles")}
               </motion.p>
 
               <motion.p
@@ -331,7 +335,7 @@ export default function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 1 }}
               >
-                {`\u201ENajlepše stvari lahko začutiš le s srcem\u201D`.split(" ").map((word, i) => (
+                {quoteWords.map((word, i) => (
                   <motion.span
                     key={i}
                     className="inline-block mr-2"
@@ -352,7 +356,7 @@ export default function Hero() {
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.6, delay: 1.8 }}
                 >
-                  — Helen Keller
+                  {t("quoteAuthor")}
                 </motion.span>
               </motion.p>
 
@@ -375,7 +379,7 @@ export default function Hero() {
                     >
                       <path d="M8 5v14l11-7z" />
                     </svg>
-                    Poslušaj glasbo
+                    {t("listenMusic")}
                   </span>
                   <span
                     className="absolute inset-0 bg-gradient-to-r from-accent-light to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -386,7 +390,7 @@ export default function Hero() {
                   href="#o-filipu"
                   className="group relative inline-flex items-center justify-center px-8 py-4 border-2 border-white/20 text-white font-semibold rounded-full overflow-hidden transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-base"
                 >
-                  <span className="relative z-10">Spoznaj Filipa</span>
+                  <span className="relative z-10">{t("meetFilip")}</span>
                   <span
                     className="absolute inset-0 border-2 border-accent scale-0 group-hover:scale-100 transition-transform duration-500 ease-out rounded-full"
                     aria-hidden="true"
@@ -449,10 +453,10 @@ export default function Hero() {
           </h2>
 
           <p className="text-white/60 text-base font-light italic leading-snug">
-            {`\u201ENajlepše stvari lahko začutiš le s srcem\u201D`}
+            {t("quote")}
           </p>
           <p className="text-white/35 text-xs mt-1">
-            — Helen Keller
+            {t("quoteAuthor")}
           </p>
         </motion.div>
 
@@ -477,13 +481,13 @@ export default function Hero() {
               >
                 <path d="M8 5v14l11-7z" />
               </svg>
-              Poslušaj glasbo
+              {t("listenMusic")}
             </a>
             <a
               href="#o-filipu"
               className="inline-flex items-center justify-center px-6 py-3 border-2 border-white/20 text-white font-semibold rounded-full text-sm"
             >
-              Spoznaj Filipa
+              {t("meetFilip")}
             </a>
           </div>
         </motion.div>

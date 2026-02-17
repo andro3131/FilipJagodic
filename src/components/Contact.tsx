@@ -1,8 +1,11 @@
 "use client";
 
 import ScrollReveal from "./ScrollReveal";
+import { useTranslations } from "next-intl";
 
 export default function Contact() {
+  const t = useTranslations("contact");
+
   return (
     <section
       id="kontakt"
@@ -12,21 +15,20 @@ export default function Contact() {
       <div className="mx-auto max-w-3xl text-center">
         <ScrollReveal>
           <p className="text-accent text-sm font-medium tracking-[0.3em] uppercase mb-4">
-            Povežimo se
+            {t("supra")}
           </p>
           <h2
             id="contact-heading"
             className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
           >
-            Kontakt
+            {t("heading")}
           </h2>
           <div className="w-20 h-0.5 bg-accent mx-auto mb-8" />
         </ScrollReveal>
 
         <ScrollReveal delay={0.2}>
           <p className="text-white/60 text-lg mb-12 max-w-xl mx-auto">
-            Za nastope, sodelovanja, medijske poizvedbe ali preprosto sporočilo
-            — z veseljem se povežemo.
+            {t("subtitle")}
           </p>
         </ScrollReveal>
 
@@ -49,25 +51,25 @@ export default function Contact() {
                 d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
               />
             </svg>
-            Pišite nam
+            {t("emailCta")}
           </a>
         </ScrollReveal>
 
         <ScrollReveal delay={0.4} className="mt-12">
           <div className="flex flex-col sm:flex-row gap-8 justify-center text-white/40">
             <div>
-              <p className="font-semibold text-white/60 mb-1">Nastopi</p>
-              <p className="text-sm">Koncerti, dogodki, festivali</p>
+              <p className="font-semibold text-white/60 mb-1">{t("performances")}</p>
+              <p className="text-sm">{t("performancesDesc")}</p>
             </div>
             <div className="hidden sm:block w-px bg-border" aria-hidden="true" />
             <div>
-              <p className="font-semibold text-white/60 mb-1">Mediji</p>
-              <p className="text-sm">Intervjuji, reportaže, dokumentarci</p>
+              <p className="font-semibold text-white/60 mb-1">{t("media")}</p>
+              <p className="text-sm">{t("mediaDesc")}</p>
             </div>
             <div className="hidden sm:block w-px bg-border" aria-hidden="true" />
             <div>
-              <p className="font-semibold text-white/60 mb-1">Sodelovanja</p>
-              <p className="text-sm">Glasba, projekti, dobrodelnost</p>
+              <p className="font-semibold text-white/60 mb-1">{t("collaborations")}</p>
+              <p className="text-sm">{t("collaborationsDesc")}</p>
             </div>
           </div>
         </ScrollReveal>
@@ -85,7 +87,7 @@ export default function Contact() {
                 <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
               </svg>
               <span className="text-white/70 group-hover:text-white text-sm font-medium transition-colors">
-                YouTube kanal
+                {t("youtubeChannel")}
               </span>
             </a>
             <a
@@ -98,7 +100,7 @@ export default function Contact() {
                 <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
               </svg>
               <span className="text-white/70 group-hover:text-white text-sm font-medium transition-colors">
-                Facebook profil
+                {t("facebookProfile")}
               </span>
             </a>
           </div>
