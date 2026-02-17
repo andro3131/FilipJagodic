@@ -38,6 +38,9 @@ export async function generateMetadata({
       "glasba",
       "klaviature",
     ],
+    icons: {
+      icon: "/favicon.svg",
+    },
     openGraph: {
       title: t("title"),
       description: t("ogDescription"),
