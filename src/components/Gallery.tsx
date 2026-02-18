@@ -7,7 +7,7 @@ import Modal from "./Modal";
 import { useTranslations, useLocale } from "next-intl";
 import Link from "next/link";
 
-const photoKeys = ["keyboards", "performance", "bocelli", "studio"] as const;
+const photoKeys = ["keyboards", "performance", "bocelli", "studio", "mom", "dictaphone"] as const;
 
 const photoSrcs: Record<string, string> = {
   keyboards: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771098561/14232370_632665486910245_786561684551610605_n_lrymzy.jpg",

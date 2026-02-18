@@ -7,7 +7,15 @@ import ScrollReveal from "./ScrollReveal";
 import Modal from "./Modal";
 import { useTranslations, useLocale } from "next-intl";
 
-const photoKeys = ["keyboards", "performance", "bocelli", "studio", "mom", "dictaphone"] as const;
+const photoKeys = [
+  "keyboards", "performance", "bocelli", "studio", "mom", "dictaphone",
+  "klapaSufit2018", "ministrica2018", "odmevi2019", "split2018",
+  "koncert2017", "rtv2014", "zdravilisce2025", "leto2019", "krst",
+  "koncert2018a", "koncert2018b", "koncert2018c", "koncert2018d",
+  "koncert2018e", "koncert2018f", "koncert2018g", "koncert2018h",
+  "koncert2018i", "koncert2018j", "koncert2018k", "koncert2018l",
+  "nastop2017a", "nastop2017b", "nastop2015",
+] as const;
 
 const photoSrcs: Record<string, string> = {
   keyboards: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771098561/14232370_632665486910245_786561684551610605_n_lrymzy.jpg",
@@ -16,6 +24,30 @@ const photoSrcs: Record<string, string> = {
   studio: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771098609/20250520_175129_uvgigs.jpg",
   mom: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771098651/21761758_833699250140200_3605137899429653888_n_jqsvoi.jpg",
   dictaphone: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771098757/21752222_833699213473537_373850975019071424_n_ijhcv2.jpg",
+  klapaSufit2018: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444852/klapa_s%CC%8Cufit_2018_mhtgp0.jpg",
+  ministrica2018: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444860/Ministrica_2018_-Filipa_na_obisku_xm7wzr.jpg",
+  odmevi2019: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444846/Filip_na_Odmevih_2019_ghqnp5.jpg",
+  split2018: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444864/Split2018_i3adqy.jpg",
+  koncert2017: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444840/filip_koncer_2017_Dom_starejs%CC%8Cih_S%CC%8Cmarje_onmdip.jpg",
+  rtv2014: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444837/Filip_2014_RTV_SLO_f2r3xh.jpg",
+  zdravilisce2025: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444825/2025_koncert_Zdravilis%CC%8Cc%CC%8Ce_aahfjf.jpg",
+  leto2019: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444821/2019_o3wgy8.jpg",
+  krst: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444793/krst1_pydhei.jpg",
+  koncert2018a: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444776/45935589_1068219333303432_6249811765169750016_n_gwdubj.jpg",
+  koncert2018b: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444772/45788021_1068219459970086_1003587690748182528_n_bpe8be.jpg",
+  koncert2018c: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444766/44519342_1045761838882515_3992878284449775616_n_jjm4nv.jpg",
+  koncert2018d: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444763/44443880_1045231838935515_918131203201040384_n_ikooyu.jpg",
+  koncert2018e: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444759/33720422_964264490417008_9021151803894398976_n_igtckq.jpg",
+  koncert2018f: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444755/33656414_964264650416992_5472617731943563264_n_njw4lk.jpg",
+  koncert2018g: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444746/33573390_964264710416986_3024183878676905984_n_qcolgm.jpg",
+  koncert2018h: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444742/33553620_964308807079243_150270275642982400_n_oetm3x.jpg",
+  koncert2018i: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444733/33239218_961836457326478_5792941426580914176_n_nug4ki.jpg",
+  koncert2018j: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444721/32778994_959714747538649_1413907704904155136_n_lghgvl.jpg",
+  koncert2018k: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444708/32191095_954898238020300_8172849811079299072_n_drx7kn.jpg",
+  koncert2018l: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444700/32130431_954898188020305_5629947937388756992_n_oyvy8t.jpg",
+  nastop2017a: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444694/26239806_894780974032027_3156786193237124355_n_r5tsdp.jpg",
+  nastop2017b: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444682/24910061_873918102784981_1230610379598755610_n_ocb0xy.jpg",
+  nastop2015: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444645/11036498_414954345348028_3331372259413785606_n_tel5gj.jpg",
 };
 
 const photoPositions: Record<string, string> = {
