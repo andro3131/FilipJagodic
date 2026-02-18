@@ -135,6 +135,13 @@
         "event": "Meeting",
         "description": "Filip met Slovenian singer-songwriter Adi Smolar, who was impressed by his talent.",
         "fullStory": "Filip met Slovenian singer-songwriter Adi Smolar, who was impressed by his talent. Full story coming soon."
+      },
+      "kesovija": {
+        "name": "Tereza Kesovija",
+        "role": "Croatian singer",
+        "event": "Meeting",
+        "description": "Filip met legendary Croatian singer Tereza Kesovija and sang a song with her.",
+        "fullStory": "Filip met legendary Croatian singer Tereza Kesovija and sang a song with her. Full story coming soon."
       }
     }
   },

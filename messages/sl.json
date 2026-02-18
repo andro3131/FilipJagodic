@@ -135,6 +135,13 @@
         "event": "Srečanje",
         "description": "Filip je srečal slovenskega kantavtorja Adija Smolarja, ki ga je navdušil s svojim talentom.",
         "fullStory": "Filip je srečal slovenskega kantavtorja Adija Smolarja, ki ga je navdušil s svojim talentom. Besedilo bo dopolnjeno."
+      },
+      "kesovija": {
+        "name": "Tereza Kesovija",
+        "role": "Hrvaška pevka",
+        "event": "Srečanje",
+        "description": "Filip je srečal legendarno hrvaško pevko Terezo Kesovijo in z njo zapel pesem.",
+        "fullStory": "Filip je srečal legendarno hrvaško pevko Terezo Kesovijo in z njo zapel pesem. Besedilo bo dopolnjeno."
       }
     }
   },

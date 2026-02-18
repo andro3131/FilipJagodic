@@ -7,7 +7,7 @@ import ScrollReveal from "./ScrollReveal";
 import Modal from "./Modal";
 import { useTranslations, useLocale } from "next-intl";
 
-const encounterKeys = ["bocelli", "sufit", "plestenjak", "pahor", "zavec", "svajger", "slabinac", "smolar"] as const;
+const encounterKeys = ["bocelli", "sufit", "plestenjak", "pahor", "zavec", "svajger", "slabinac", "smolar", "kesovija"] as const;
 
 const encounterImages: Record<string, string> = {
   bocelli: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771096727/andrea_bocelli_jboluq.jpg",
@@ -23,6 +23,8 @@ const encounterImages: Record<string, string> = {
 const encounterVideos: Record<string, string> = {
   plestenjak: "https://res.cloudinary.com/dewf3zos0/video/upload/v1771445309/19874134_107584786563726_526080777331408896_n_dahm5v.mp4",
   svajger: "https://res.cloudinary.com/dewf3zos0/video/upload/v1771447966/Darja_S%CC%8Cvajger_-_My_Way_Frank_Sinatra_Filip_don_Filipo_hkmreh.mp4",
+  kesovija: "https://res.cloudinary.com/dewf3zos0/video/upload/v1771448018/Tereza_Kesovija_-_Prona%C4%91i_put_ABBA_Filip_don_Filipo_izlvid.mp4",
+  bocelli: "https://res.cloudinary.com/dewf3zos0/video/upload/v1771448046/filip_THE_KING_bocelli_2018_04_03_12_05_01_UTC_oka615.mp4",
 };
 
 const highlightKeys = new Set(["bocelli"]);
@@ -40,7 +42,9 @@ export default function EncountersAll() {
 
   const mediaItems = selectedKey
     ? [
-        { type: "image" as const, src: encounterImages[selectedKey] },
+        ...(encounterImages[selectedKey]
+          ? [{ type: "image" as const, src: encounterImages[selectedKey] }]
+          : []),
         ...(encounterVideos[selectedKey]
           ? [{ type: "video" as const, src: encounterVideos[selectedKey] }]
           : []),
@@ -125,12 +129,20 @@ export default function EncountersAll() {
                                 isHighlight ? "ring-2 ring-accent/30" : ""
                               }`}
                             >
-                              <Image
-                                src={image}
-                                alt={t(`items.${key}.name`)}
-                                fill
-                                className="object-cover"
-                              />
+                              {image ? (
+                                <Image
+                                  src={image}
+                                  alt={t(`items.${key}.name`)}
+                                  fill
+                                  className="object-cover"
+                                />
+                              ) : (
+                                <div className="w-full h-full flex items-center justify-center">
+                                  <svg className="w-8 h-8 text-accent/60" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z" />
+                                  </svg>
+                                </div>
+                              )}
                             </div>
 
                             <div className="flex-1 min-w-0">

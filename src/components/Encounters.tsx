@@ -18,6 +18,7 @@ const encounterImages: Record<string, string> = {
 
 const encounterVideos: Record<string, string> = {
   plestenjak: "https://res.cloudinary.com/dewf3zos0/video/upload/v1771445309/19874134_107584786563726_526080777331408896_n_dahm5v.mp4",
+  bocelli: "https://res.cloudinary.com/dewf3zos0/video/upload/v1771448046/filip_THE_KING_bocelli_2018_04_03_12_05_01_UTC_oka615.mp4",
 };
 
 const highlightKeys = new Set(["bocelli"]);
