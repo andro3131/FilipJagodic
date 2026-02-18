@@ -52,21 +52,13 @@ export default function Navigation() {
         <div className="flex h-20 items-center justify-between gap-4">
 
           {/* Logo */}
-          <a href="#" className="relative flex-shrink-0" aria-label="Filip Jagodič">
-            <div
-              className="absolute inset-0 rounded-full pointer-events-none"
-              style={{
-                background: "radial-gradient(circle, rgba(212, 64, 64, 0.4) 0%, transparent 70%)",
-                filter: "blur(8px)",
-              }}
-              aria-hidden="true"
-            />
+          <a href="#" className="flex-shrink-0" aria-label="Filip Jagodič">
             <Image
               src="https://res.cloudinary.com/dewf3zos0/image/upload/v1771415815/filip-fav5_ngucbj.png"
               alt="FJ"
-              width={40}
-              height={40}
-              className="relative w-10 h-10"
+              width={60}
+              height={60}
+              className="w-[60px] h-[60px]"
             />
           </a>
 
