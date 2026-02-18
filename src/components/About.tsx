@@ -2,10 +2,9 @@
 
 import { useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-import Image from "next/image";
 import ScrollReveal from "./ScrollReveal";
-import Modal from "./Modal";
-import { useTranslations } from "next-intl";
+import Link from "next/link";
+import { useTranslations, useLocale } from "next-intl";
 
 function AnimatedNumber({
   target,
@@ -60,7 +59,7 @@ const statsData = [
 
 export default function About() {
   const t = useTranslations("about");
-  const [bioOpen, setBioOpen] = useState(false);
+  const locale = useLocale();
 
   return (
     <>
@@ -96,8 +95,8 @@ export default function About() {
               {t("blockquote")}
             </blockquote>
             <div className="text-center">
-              <button
-                onClick={() => setBioOpen(true)}
+              <Link
+                href={`/${locale}/o-filipu`}
                 className="inline-flex items-center gap-2 px-6 py-3 border border-accent/30 text-accent rounded-full text-sm font-medium hover:bg-accent/10 hover:border-accent/50 transition-all duration-300"
               >
                 {t("readFullStory")}
@@ -114,7 +113,7 @@ export default function About() {
                     d="M9 5l7 7-7 7"
                   />
                 </svg>
-              </button>
+              </Link>
             </div>
           </ScrollReveal>
 
@@ -160,46 +159,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* Full biography modal */}
-      <Modal
-        isOpen={bioOpen}
-        onClose={() => setBioOpen(false)}
-        maxWidth="max-w-4xl"
-      >
-        <div className="p-6 md:p-10">
-          <p className="text-accent text-sm font-medium tracking-[0.3em] uppercase mb-4">
-            {t("bio.supra")}
-          </p>
-          <h3 className="font-heading text-3xl md:text-4xl font-bold text-white mb-8">
-            {t("bio.heading")}
-          </h3>
-
-          <div className="space-y-6 text-white/70 leading-relaxed text-base md:text-lg">
-            <p>{t("bio.p1")}</p>
-            <p>{t("bio.p2")}</p>
-
-            <blockquote className="border-l-2 border-accent/50 pl-6 my-8 text-accent/80 font-heading italic text-xl md:text-2xl">
-              {t("bio.blockquote")}
-            </blockquote>
-
-            <p>{t("bio.p3")}</p>
-            <p>{t("bio.p4")}</p>
-            <p>{t("bio.p5")}</p>
-            <p>{t("bio.p6")}</p>
-
-            {/* Photo */}
-            <div className="relative w-full rounded-xl overflow-hidden mt-8">
-              <Image
-                src="https://res.cloudinary.com/dewf3zos0/image/upload/v1771102674/Screenshot_2026-02-14_at_21.57.37_brrt7t.png"
-                alt={t("bio.photoAlt")}
-                width={1200}
-                height={800}
-                className="w-full h-auto"
-              />
-            </div>
-          </div>
-        </div>
-      </Modal>
     </>
   );
 }
