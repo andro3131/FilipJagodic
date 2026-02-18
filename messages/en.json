@@ -128,6 +128,13 @@
         "event": "Meeting",
         "description": "Filip met legendary Croatian singer Kičo Slabinac, who was impressed by his talent.",
         "fullStory": "Filip met legendary Croatian singer Kičo Slabinac, who was impressed by his talent. Full story coming soon."
+      },
+      "smolar": {
+        "name": "Adi Smolar",
+        "role": "Slovenian singer-songwriter",
+        "event": "Meeting",
+        "description": "Filip met Slovenian singer-songwriter Adi Smolar, who was impressed by his talent.",
+        "fullStory": "Filip met Slovenian singer-songwriter Adi Smolar, who was impressed by his talent. Full story coming soon."
       }
     }
   },

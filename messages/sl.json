@@ -128,6 +128,13 @@
         "event": "Srečanje",
         "description": "Filip je srečal legendarnega hrvaškega pevca Kiča Slabinaca, ki ga je navdušil s svojim talentom.",
         "fullStory": "Filip je srečal legendarnega hrvaškega pevca Kiča Slabinaca, ki ga je navdušil s svojim talentom. Besedilo bo dopolnjeno."
+      },
+      "smolar": {
+        "name": "Adi Smolar",
+        "role": "Slovenski kantavtor",
+        "event": "Srečanje",
+        "description": "Filip je srečal slovenskega kantavtorja Adija Smolarja, ki ga je navdušil s svojim talentom.",
+        "fullStory": "Filip je srečal slovenskega kantavtorja Adija Smolarja, ki ga je navdušil s svojim talentom. Besedilo bo dopolnjeno."
       }
     }
   },
