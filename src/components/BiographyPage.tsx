@@ -181,7 +181,7 @@ function PhotoGrid({
 }) {
   return (
     <div
-      className={`grid gap-3 my-10 ${
+      className={`grid gap-3 my-6 ${
         photos.length === 1
           ? "grid-cols-1 max-w-2xl mx-auto"
           : photos.length === 2
@@ -218,7 +218,7 @@ function SinglePhoto({
   onPhotoClick: (src: string) => void;
 }) {
   return (
-    <div className="my-10 max-w-2xl mx-auto">
+    <div className="my-6 max-w-2xl mx-auto">
       <button
         onClick={() => onPhotoClick(src)}
         className="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-surface-lighter cursor-pointer group"
@@ -245,7 +245,7 @@ function Chapter({
   delay?: number;
 }) {
   return (
-    <ScrollReveal delay={delay} className="mb-16 md:mb-20">
+    <ScrollReveal delay={delay} className="mb-10 md:mb-14">
       <h2 className="font-heading text-2xl md:text-3xl font-bold text-white mb-6">
         {title}
       </h2>
@@ -264,7 +264,7 @@ function Paragraph({ children }: { children: React.ReactNode }) {
 
 function Quote({ children }: { children: React.ReactNode }) {
   return (
-    <blockquote className="border-l-2 border-accent/50 pl-6 my-8 text-accent/80 font-heading italic text-lg md:text-xl">
+    <blockquote className="border-l-2 border-accent/50 pl-6 my-5 text-accent/80 font-heading italic text-lg md:text-xl">
       {children}
     </blockquote>
   );
