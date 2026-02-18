@@ -30,6 +30,21 @@ export default function EncountersAll() {
   const t = useTranslations("encounters");
   const locale = useLocale();
   const [selectedKey, setSelectedKey] = useState<string | null>(null);
+  const [activeMedia, setActiveMedia] = useState(0);
+
+  const openEncounter = (key: string) => {
+    setSelectedKey(key);
+    setActiveMedia(0);
+  };
+
+  const mediaItems = selectedKey
+    ? [
+        { type: "image" as const, src: encounterImages[selectedKey] },
+        ...(encounterVideos[selectedKey]
+          ? [{ type: "video" as const, src: encounterVideos[selectedKey] }]
+          : []),
+      ]
+    : [];
 
   return (
     <>
@@ -96,7 +111,7 @@ export default function EncountersAll() {
                         }`}
                       >
                         <button
-                          onClick={() => setSelectedKey(key)}
+                          onClick={() => openEncounter(key)}
                           className={`w-full text-left p-5 md:p-6 rounded-2xl border transition-all duration-500 cursor-pointer group ${
                             isHighlight
                               ? "bg-[#1A1618] border-accent/30 hover:border-accent/50"
@@ -153,23 +168,71 @@ export default function EncountersAll() {
       <Modal isOpen={!!selectedKey} onClose={() => setSelectedKey(null)}>
         {selectedKey && (
           <div>
-            <div className="relative w-full aspect-[16/10] bg-surface-lighter">
-              <Image
-                src={encounterImages[selectedKey]}
-                alt={t(`items.${selectedKey}.name`)}
-                fill
-                className="object-cover"
-              />
-            </div>
-
-            {encounterVideos[selectedKey] && (
-              <div className="px-6 pt-6">
+            {/* Main viewer */}
+            <div className="relative w-full aspect-[16/10] bg-black">
+              {mediaItems[activeMedia]?.type === "video" ? (
                 <video
-                  src={encounterVideos[selectedKey]}
+                  key={mediaItems[activeMedia].src}
+                  src={mediaItems[activeMedia].src}
                   controls
-                  className="w-full rounded-xl"
+                  className="w-full h-full object-contain"
                   preload="metadata"
                 />
+              ) : (
+                <Image
+                  src={mediaItems[activeMedia]?.src || encounterImages[selectedKey]}
+                  alt={t(`items.${selectedKey}.name`)}
+                  fill
+                  className="object-cover"
+                />
+              )}
+
+              {mediaItems.length > 1 && (
+                <>
+                  <button
+                    onClick={() => setActiveMedia((activeMedia - 1 + mediaItems.length) % mediaItems.length)}
+                    className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 text-white/70 hover:text-white hover:bg-black/70 flex items-center justify-center transition-colors"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={() => setActiveMedia((activeMedia + 1) % mediaItems.length)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 text-white/70 hover:text-white hover:bg-black/70 flex items-center justify-center transition-colors"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                </>
+              )}
+            </div>
+
+            {/* Thumbnail strip */}
+            {mediaItems.length > 1 && (
+              <div className="flex gap-2 p-4">
+                {mediaItems.map((item, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActiveMedia(i)}
+                    className={`relative flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-colors ${
+                      i === activeMedia
+                        ? "border-accent"
+                        : "border-transparent opacity-60 hover:opacity-100"
+                    }`}
+                  >
+                    {item.type === "image" ? (
+                      <Image src={item.src} alt={`Thumbnail ${i + 1}`} fill className="object-cover" />
+                    ) : (
+                      <div className="w-full h-full bg-surface-lighter flex items-center justify-center">
+                        <svg className="w-6 h-6 text-accent" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </div>
+                    )}
+                  </button>
+                ))}
               </div>
             )}
 
