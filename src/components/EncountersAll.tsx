@@ -25,6 +25,7 @@ const encounterVideos: Record<string, string> = {
   svajger: "https://res.cloudinary.com/dewf3zos0/video/upload/v1771447966/Darja_S%CC%8Cvajger_-_My_Way_Frank_Sinatra_Filip_don_Filipo_hkmreh.mp4",
   kesovija: "https://res.cloudinary.com/dewf3zos0/video/upload/v1771448018/Tereza_Kesovija_-_Prona%C4%91i_put_ABBA_Filip_don_Filipo_izlvid.mp4",
   bocelli: "https://res.cloudinary.com/dewf3zos0/video/upload/v1771448046/filip_THE_KING_bocelli_2018_04_03_12_05_01_UTC_oka615.mp4",
+  sufit: "https://res.cloudinary.com/dewf3zos0/video/upload/v1771448081/Klapa_S%CC%8Cufit_-_Zavezan_Filip_don_Filipo_mhjj6i.mp4",
 };
 
 const highlightKeys = new Set(["bocelli"]);
