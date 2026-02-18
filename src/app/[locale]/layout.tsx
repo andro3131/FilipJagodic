@@ -39,7 +39,11 @@ export async function generateMetadata({
       "klaviature",
     ],
     icons: {
-      icon: "/favicon.svg",
+      icon: [
+        { url: "/favicon.svg", type: "image/svg+xml" },
+        { url: "/favicon-192.png", sizes: "192x192", type: "image/png" },
+      ],
+      apple: "/favicon-180.png",
     },
     openGraph: {
       title: t("title"),

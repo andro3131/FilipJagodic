@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations, useLocale } from "next-intl";
 import { useRouter, usePathname } from "next/navigation";
+import Image from "next/image";
 
 export default function Navigation() {
   const t = useTranslations("nav");
@@ -48,7 +49,21 @@ export default function Navigation() {
       }`}
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="flex h-20 items-center justify-end gap-4">
+        <div className="flex h-20 items-center justify-between gap-4">
+
+          {/* Logo */}
+          <a href="#" className="flex-shrink-0" aria-label="Filip Jagodič">
+            <Image
+              src="https://res.cloudinary.com/dewf3zos0/image/upload/v1771410536/filip-fav2_copy_pdav4v.png"
+              alt="FJ"
+              width={40}
+              height={40}
+              className="w-10 h-10"
+            />
+          </a>
+
+          {/* Right side */}
+          <div className="flex items-center gap-4">
 
           {/* Desktop links */}
           <div className="hidden md:flex items-center gap-8">
@@ -100,6 +115,7 @@ export default function Navigation() {
               }
             />
           </button>
+          </div>
         </div>
       </div>
 
