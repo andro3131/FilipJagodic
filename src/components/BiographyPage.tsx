@@ -39,6 +39,14 @@ const eightYearsPhoto =
 const teenPhoto =
   "https://res.cloudinary.com/dewf3zos0/image/upload/v1771449086/14232370_632665486910245_786561684551610605_n_mcxyjo.jpg";
 
+const motherPhotos = [
+  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771450879/21761758_833699250140200_3605137899429653888_n_rpombz.jpg",
+  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771450860/10959463_399208300255966_485022783268918936_n_kfqz7s.jpg",
+];
+
+const endPhoto =
+  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444763/44443880_1045231838935515_918131203201040384_n_ikooyu.jpg";
+
 function PhotoGrid({ photos, alt }: { photos: string[]; alt: string }) {
   return (
     <div
@@ -194,12 +202,14 @@ export default function BiographyPage() {
           <Paragraph>{t("ch8p1")}</Paragraph>
           <Quote>{t("ch8q")}</Quote>
           <Paragraph>{t("ch8p2")}</Paragraph>
+          <PhotoGrid photos={motherPhotos} alt={t("photoAlt")} />
         </Chapter>
 
         {/* Chapter 9: Today */}
         <Chapter title={t("ch9title")} delay={0.1}>
           <Paragraph>{t("ch9p1")}</Paragraph>
           <Paragraph>{t("ch9p2")}</Paragraph>
+          <SinglePhoto src={endPhoto} alt={t("photoAlt")} />
         </Chapter>
       </div>
     </section>
