@@ -204,6 +204,14 @@
     "subtitle": "Filip je zbiratelj klaviatur in diktafonov — ima več kot 20 klaviatur in številne diktafone. Vsak ima svoj značaj, ki ga Filip pozna do potankosti.",
     "keyboard": "Klaviatura",
     "dictaphone": "Diktafon",
+    "keyboardsTitle": "Klaviature",
+    "dictaphonesTitle": "Diktafoni",
+    "keyboardsDesc": "Več kot 20 klaviatur v osebni zbirki",
+    "dictaphonesDesc": "Številni diktafoni za snemanje",
+    "openCollection": "Odpri zbirko",
+    "deviceList": "Seznam naprav",
+    "prevImage": "Prejšnja slika",
+    "nextImage": "Naslednja slika",
     "items": {
       "yamaha": {
         "name": "Yamaha PSR-S975",

@@ -204,6 +204,14 @@
     "subtitle": "Filip is a collector of keyboards and dictaphones — he has more than 20 keyboards and numerous dictaphones. Each one has its own character, which Filip knows inside out.",
     "keyboard": "Keyboard",
     "dictaphone": "Dictaphone",
+    "keyboardsTitle": "Keyboards",
+    "dictaphonesTitle": "Dictaphones",
+    "keyboardsDesc": "Over 20 keyboards in personal collection",
+    "dictaphonesDesc": "Numerous dictaphones for recording",
+    "openCollection": "Open collection",
+    "deviceList": "Device list",
+    "prevImage": "Previous image",
+    "nextImage": "Next image",
     "items": {
       "yamaha": {
         "name": "Yamaha PSR-S975",
