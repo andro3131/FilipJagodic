@@ -210,6 +210,78 @@
       "klapaSufit": {
         "title": "Nastop v živo s Klapo Šufit",
         "description": "Filip na odru skupaj s hrvaško klapo."
+      },
+      "blueChristmas": {
+        "title": "Blue Christmas",
+        "description": "Elvis Presley — Blue Christmas (cover), duet."
+      },
+      "shame": {
+        "title": "Shame",
+        "description": "Robbie Williams & Gary Barlow — Shame (cover)."
+      },
+      "letHerGo": {
+        "title": "Let Her Go",
+        "description": "Passenger — Let Her Go (cover)."
+      },
+      "blueEyes": {
+        "title": "Blue Eyes",
+        "description": "Limp Bizkit — Blue Eyes (cover)."
+      },
+      "yourCheatingHeart": {
+        "title": "Your Cheating Heart",
+        "description": "Hank Williams — Your Cheating Heart (cover)."
+      },
+      "poJezeru": {
+        "title": "Po jezeru",
+        "description": "Tradicionalna ljudska pesem — Po jezeru (cover)."
+      },
+      "thisCouldBeHeaven": {
+        "title": "This Could Be Heaven",
+        "description": "Queen — This Could Be Heaven (cover)."
+      },
+      "darkMoon": {
+        "title": "Dark Moon",
+        "description": "Ned Miller — Dark Moon (cover)."
+      },
+      "loveIsAll": {
+        "title": "Love Is All",
+        "description": "Malcolm Roberts — Love Is All (cover)."
+      },
+      "hamburgSong": {
+        "title": "Hamburg Song",
+        "description": "Keane — Hamburg Song (cover)."
+      },
+      "smile": {
+        "title": "Smile",
+        "description": "Nat King Cole — Smile (cover)."
+      },
+      "whoAmI": {
+        "title": "Who Am I",
+        "description": "Elvis Presley — Who Am I (cover)."
+      },
+      "overTheRainbow": {
+        "title": "Over the Rainbow",
+        "description": "Israel Kamakawiwo\u02BBole — Over the Rainbow (cover)."
+      },
+      "weCallOnHim": {
+        "title": "We Call on Him",
+        "description": "Elvis Presley — We Call on Him (cover)."
+      },
+      "forTheGoodTimes": {
+        "title": "For the Good Times",
+        "description": "Bill Nash — For the Good Times (cover)."
+      },
+      "stillWaiting": {
+        "title": "I'm Still Waiting at the Door",
+        "description": "I'm Still Waiting at the Door (cover)."
+      },
+      "upWhereWeBelong": {
+        "title": "Up Where We Belong",
+        "description": "Joe Cocker & Jennifer Warnes — Up Where We Belong (cover), duet z Barbaro Leben."
+      },
+      "whatAWonderfulWorld": {
+        "title": "What a Wonderful World",
+        "description": "Louis Armstrong — What a Wonderful World (cover)."
       }
     }
   },

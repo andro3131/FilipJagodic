@@ -6,12 +6,38 @@ import { useTranslations, useLocale } from "next-intl";
 
 const featuredId = "EJYPq4STQ6w";
 
-const videoKeys = ["prstiZapleteni", "takeGoodCare", "letItBeMe", "klapaSufit"] as const;
+const videoKeys = [
+  "prstiZapleteni", "takeGoodCare", "letItBeMe", "klapaSufit",
+  "blueChristmas", "shame", "letHerGo", "blueEyes",
+  "yourCheatingHeart", "poJezeru", "thisCouldBeHeaven",
+  "darkMoon", "loveIsAll", "hamburgSong", "smile",
+  "whoAmI", "overTheRainbow", "weCallOnHim",
+  "forTheGoodTimes", "stillWaiting", "upWhereWeBelong",
+  "whatAWonderfulWorld",
+] as const;
 const videoIds: Record<string, string> = {
   prstiZapleteni: "KPP-UOhs8iE",
   takeGoodCare: "1WPEC_KJXpk",
   letItBeMe: "ruVUK_g5rK0",
   klapaSufit: "SJgYyL1qdzE",
+  blueChristmas: "Qz2Qaa1msLE",
+  shame: "7Qf24gXHNDw",
+  letHerGo: "3W1fW61wqrk",
+  blueEyes: "G19dpj2Mw1c",
+  yourCheatingHeart: "GGUwSNEsP04",
+  poJezeru: "U_LeonbTwJY",
+  thisCouldBeHeaven: "khuVaQuCZl0",
+  darkMoon: "Z_AAYxf_Zdw",
+  loveIsAll: "QJihFOWj10c",
+  hamburgSong: "-z57R6--Fi0",
+  smile: "MCWNcfkBVAQ",
+  whoAmI: "oOsBwLI9f88",
+  overTheRainbow: "ulIzJOADq6U",
+  weCallOnHim: "Cl6Z34kqDMs",
+  forTheGoodTimes: "cfFoncG4mSY",
+  stillWaiting: "Z3Drko8tcJU",
+  upWhereWeBelong: "SZwYAaYL_Iw",
+  whatAWonderfulWorld: "SDJ0yhM6418",
 };
 
 export default function MusicAll() {
