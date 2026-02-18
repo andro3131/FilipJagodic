@@ -121,6 +121,13 @@
         "event": "Meeting",
         "description": "Filip also met opera singer Darja Švajger, who was impressed by his extraordinary ear for music.",
         "fullStory": "Filip also met opera singer Darja Švajger, who was impressed by his extraordinary ear for music. Full story coming soon."
+      },
+      "slabinac": {
+        "name": "Kičo Slabinac",
+        "role": "Legendary Croatian singer",
+        "event": "Meeting",
+        "description": "Filip met legendary Croatian singer Kičo Slabinac, who was impressed by his talent.",
+        "fullStory": "Filip met legendary Croatian singer Kičo Slabinac, who was impressed by his talent. Full story coming soon."
       }
     }
   },

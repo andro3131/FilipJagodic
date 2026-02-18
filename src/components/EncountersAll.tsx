@@ -7,7 +7,7 @@ import ScrollReveal from "./ScrollReveal";
 import Modal from "./Modal";
 import { useTranslations, useLocale } from "next-intl";
 
-const encounterKeys = ["bocelli", "sufit", "plestenjak", "pahor", "zavec", "svajger"] as const;
+const encounterKeys = ["bocelli", "sufit", "plestenjak", "pahor", "zavec", "svajger", "slabinac"] as const;
 
 const encounterImages: Record<string, string> = {
   bocelli: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771096727/andrea_bocelli_jboluq.jpg",
@@ -16,6 +16,7 @@ const encounterImages: Record<string, string> = {
   pahor: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771096727/borut_pahor_s8jwkb.jpg",
   zavec: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771096726/dejan_zavec1_pol9nb.jpg",
   svajger: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771096726/darja_svajger_ascluf.jpg",
+  slabinac: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771443715/125402116_1704431406400309_7387810105924028628_n_nmadpp.jpg",
 };
 
 const highlightKeys = new Set(["bocelli"]);

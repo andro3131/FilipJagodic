@@ -121,6 +121,13 @@
         "event": "Srečanje",
         "description": "Filip je srečal tudi operno pevko Darjo Švajger, ki jo je navdušil s svojim izjemnim posluhom.",
         "fullStory": "Filip je srečal tudi operno pevko Darjo Švajger, ki jo je navdušil s svojim izjemnim posluhom. Besedilo bo dopolnjeno."
+      },
+      "slabinac": {
+        "name": "Kičo Slabinac",
+        "role": "Legendarni hrvaški pevec",
+        "event": "Srečanje",
+        "description": "Filip je srečal legendarnega hrvaškega pevca Kiča Slabinaca, ki ga je navdušil s svojim talentom.",
+        "fullStory": "Filip je srečal legendarnega hrvaškega pevca Kiča Slabinaca, ki ga je navdušil s svojim talentom. Besedilo bo dopolnjeno."
       }
     }
   },
