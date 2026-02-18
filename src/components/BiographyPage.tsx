@@ -39,6 +39,20 @@ const eightYearsPhoto =
 const teenPhoto =
   "https://res.cloudinary.com/dewf3zos0/image/upload/v1771449086/14232370_632665486910245_786561684551610605_n_mcxyjo.jpg";
 
+const autisticPhotos = [
+  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444128/zbrika2_2021_lnshyb.jpg",
+  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444110/klaviature_do_2020_llmar5.jpg",
+];
+
+const careerPhotos = [
+  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771103695/Screenshot_2026-02-14_at_22.14.48_zvzcdg.png",
+  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771103621/FILIP_JUMBO_25.MAJ_majhna_FINAL_vhfuxe.jpg",
+  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444746/33573390_964264710416986_3024183878676905984_n_qcolgm.jpg",
+  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771098529/andrea_bocelli_qwksga.jpg",
+  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771098693/11019010_402268379949958_4207790944302076286_n_eor5pu.jpg",
+  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771096727/borut_pahor_s8jwkb.jpg",
+];
+
 const motherPhotos = [
   "https://res.cloudinary.com/dewf3zos0/image/upload/v1771450879/21761758_833699250140200_3605137899429653888_n_rpombz.jpg",
   "https://res.cloudinary.com/dewf3zos0/image/upload/v1771450860/10959463_399208300255966_485022783268918936_n_kfqz7s.jpg",
@@ -182,19 +196,21 @@ export default function BiographyPage() {
           <Quote>{t("ch5q")}</Quote>
           <Paragraph>{t("ch5p2")}</Paragraph>
           <SinglePhoto src={youngKeyboardPhoto} alt={t("photoAlt")} />
+          <SinglePhoto src={eightYearsPhoto} alt={t("photoAlt")} />
+          <SinglePhoto src={teenPhoto} alt={t("photoAlt")} />
         </Chapter>
 
         {/* Chapter 6: Autistic traits */}
         <Chapter title={t("ch6title")} delay={0.1}>
           <Paragraph>{t("ch6p1")}</Paragraph>
           <Quote>{t("ch6q")}</Quote>
-          <SinglePhoto src={eightYearsPhoto} alt={t("photoAlt")} />
+          <PhotoGrid photos={autisticPhotos} alt={t("photoAlt")} />
         </Chapter>
 
         {/* Chapter 7: Career */}
         <Chapter title={t("ch7title")} delay={0.1}>
           <Paragraph>{t("ch7p1")}</Paragraph>
-          <SinglePhoto src={teenPhoto} alt={t("photoAlt")} />
+          <PhotoGrid photos={careerPhotos} alt={t("photoAlt")} />
         </Chapter>
 
         {/* Chapter 8: Mother */}
