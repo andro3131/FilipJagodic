@@ -2,46 +2,52 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import ScrollReveal from "./ScrollReveal";
 import Modal from "./Modal";
 import { useTranslations, useLocale } from "next-intl";
-import Link from "next/link";
 
-const encounterKeys = ["bocelli", "sufit", "plestenjak", "pahor"] as const;
+const encounterKeys = ["bocelli", "sufit", "plestenjak", "pahor", "zavec", "svajger"] as const;
 
 const encounterImages: Record<string, string> = {
   bocelli: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771096727/andrea_bocelli_jboluq.jpg",
   sufit: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771096728/klas%CC%8Ca_sufit_a92qqs.jpg",
   plestenjak: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771096729/plestenjak_vnjqg3.jpg",
   pahor: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771096727/borut_pahor_s8jwkb.jpg",
+  zavec: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771096726/dejan_zavec1_pol9nb.jpg",
+  svajger: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771096726/darja_svajger_ascluf.jpg",
 };
 
 const highlightKeys = new Set(["bocelli"]);
 
-export default function Encounters() {
+export default function EncountersAll() {
   const t = useTranslations("encounters");
   const locale = useLocale();
   const [selectedKey, setSelectedKey] = useState<string | null>(null);
 
   return (
     <>
-      <section
-        id="srecanja"
-        aria-labelledby="encounters-heading"
-        className="relative py-24 md:py-32 px-6 bg-surface"
-      >
+      <section className="relative pt-32 pb-24 md:pt-40 md:pb-32 px-6">
         <div className="mx-auto max-w-5xl">
+          {/* Back link */}
+          <ScrollReveal>
+            <Link
+              href={`/${locale}/#srecanja`}
+              className="inline-flex items-center gap-2 text-white/40 hover:text-accent text-sm transition-colors mb-12"
+            >
+              <span>&larr;</span>
+              <span>{t("backToHome")}</span>
+            </Link>
+          </ScrollReveal>
+
           {/* Section header */}
           <ScrollReveal className="text-center mb-16 md:mb-24">
             <p className="text-accent text-sm font-medium tracking-[0.3em] uppercase mb-4">
               {t("supra")}
             </p>
-            <h2
-              id="encounters-heading"
-              className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
-            >
+            <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               {t("heading")}
-            </h2>
+            </h1>
             <div className="w-20 h-0.5 bg-accent mx-auto mb-6" />
             <p className="text-white/50 max-w-2xl mx-auto">
               {t("subtitle")}
@@ -134,19 +140,6 @@ export default function Encounters() {
               })}
             </div>
           </div>
-
-          {/* View all link */}
-          <ScrollReveal delay={0.3} className="text-center mt-16">
-            <Link
-              href={`/${locale}/srecanja`}
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-border hover:border-accent/40 bg-surface hover:bg-accent/5 transition-all duration-300 group"
-            >
-              <span className="text-white/70 group-hover:text-white font-medium transition-colors">
-                {t("viewAll")}
-              </span>
-              <span className="text-accent group-hover:translate-x-1 transition-transform duration-300">&rarr;</span>
-            </Link>
-          </ScrollReveal>
         </div>
       </section>
 
