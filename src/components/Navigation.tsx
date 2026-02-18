@@ -56,9 +56,9 @@ export default function Navigation() {
             <Image
               src="https://res.cloudinary.com/dewf3zos0/image/upload/v1771415815/filip-fav5_ngucbj.png"
               alt="FJ"
-              width={60}
-              height={60}
-              className="w-[60px] h-[60px]"
+              width={90}
+              height={72}
+              className="w-[90px] h-[72px]"
             />
           </a>
 
