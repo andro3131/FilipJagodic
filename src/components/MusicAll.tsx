@@ -16,6 +16,7 @@ const videoKeys = [
   "whatAWonderfulWorld",
   "moja", "glazekVincka", "notteStellata", "cigo", "shallow",
   "yourMan", "somethingStupid", "zbogJedneDivne", "loveMeTender",
+  "onaSanjaOLjubljani", "bocelliFilip",
 ] as const;
 const videoIds: Record<string, string> = {
   prstiZapleteni: "KPP-UOhs8iE",
@@ -49,6 +50,8 @@ const videoIds: Record<string, string> = {
   somethingStupid: "r8Zn4mi2FG0",
   zbogJedneDivne: "qhn172yv0M4",
   loveMeTender: "Jk3xxYBbhq0",
+  onaSanjaOLjubljani: "s4Dd6xmF57s",
+  bocelliFilip: "LpJKWz-m1Us",
 };
 
 export default function MusicAll() {
