@@ -245,7 +245,7 @@ function Chapter({
   delay?: number;
 }) {
   return (
-    <ScrollReveal delay={delay} className="mb-10 md:mb-14">
+    <ScrollReveal delay={delay} className="mb-8 md:mb-10">
       <h2 className="font-heading text-2xl md:text-3xl font-bold text-white mb-6">
         {title}
       </h2>

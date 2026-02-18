@@ -46,7 +46,7 @@ export default function Collections() {
       <section
         id="zbirke"
         aria-labelledby="collections-heading"
-        className="relative py-24 md:py-32 px-6"
+        className="relative py-24 md:py-32 px-6 bg-surface"
       >
         <div className="mx-auto max-w-5xl">
           {/* Section header */}

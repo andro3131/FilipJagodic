@@ -57,7 +57,7 @@ export default function Studio() {
       <section
         id="studio"
         aria-labelledby="studio-heading"
-        className="relative py-24 md:py-32 px-6 bg-surface"
+        className="relative py-24 md:py-32 px-6"
       >
         <div className="mx-auto max-w-7xl">
           {/* Section header */}
