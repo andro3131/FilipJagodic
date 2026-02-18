@@ -2,12 +2,12 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import ScrollReveal from "./ScrollReveal";
 import Modal from "./Modal";
 import { useTranslations, useLocale } from "next-intl";
-import Link from "next/link";
 
-const photoKeys = ["keyboards", "performance", "bocelli", "studio"] as const;
+const photoKeys = ["keyboards", "performance", "bocelli", "studio", "mom", "dictaphone"] as const;
 
 const photoSrcs: Record<string, string> = {
   keyboards: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771098561/14232370_632665486910245_786561684551610605_n_lrymzy.jpg",
@@ -22,7 +22,7 @@ const photoPositions: Record<string, string> = {
   studio: "top",
 };
 
-export default function Gallery() {
+export default function GalleryAll() {
   const t = useTranslations("gallery");
   const locale = useLocale();
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -37,23 +37,27 @@ export default function Gallery() {
 
   return (
     <>
-      <section
-        id="galerija"
-        aria-labelledby="gallery-heading"
-        className="relative py-24 md:py-32 px-6"
-      >
+      <section className="relative pt-32 pb-24 md:pt-40 md:pb-32 px-6">
         <div className="mx-auto max-w-7xl">
+          {/* Back link */}
+          <ScrollReveal>
+            <Link
+              href={`/${locale}/#galerija`}
+              className="inline-flex items-center gap-2 text-white/40 hover:text-accent text-sm transition-colors mb-12"
+            >
+              <span>&larr;</span>
+              <span>{t("backToHome")}</span>
+            </Link>
+          </ScrollReveal>
+
           {/* Section header */}
           <ScrollReveal className="text-center mb-16 md:mb-24">
             <p className="text-accent text-sm font-medium tracking-[0.3em] uppercase mb-4">
               {t("supra")}
             </p>
-            <h2
-              id="gallery-heading"
-              className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
-            >
+            <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               {t("heading")}
-            </h2>
+            </h1>
             <div className="w-20 h-0.5 bg-accent mx-auto" />
           </ScrollReveal>
 
@@ -84,19 +88,6 @@ export default function Gallery() {
               </ScrollReveal>
             ))}
           </div>
-
-          {/* View all link */}
-          <ScrollReveal delay={0.3} className="text-center mt-12">
-            <Link
-              href={`/${locale}/galerija`}
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-border hover:border-accent/40 bg-surface hover:bg-accent/5 transition-all duration-300 group"
-            >
-              <span className="text-white/70 group-hover:text-white font-medium transition-colors">
-                {t("viewAll")}
-              </span>
-              <span className="text-accent group-hover:translate-x-1 transition-transform duration-300">&rarr;</span>
-            </Link>
-          </ScrollReveal>
         </div>
       </section>
 

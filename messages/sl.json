@@ -144,6 +144,10 @@
     "openPhoto": "Odpri: {alt}",
     "prevPhoto": "Prejšnja slika",
     "nextPhoto": "Naslednja slika",
+    "viewAll": "Vsa galerija",
+    "backToHome": "Nazaj na glavno stran",
+    "pageTitle": "Galerija — Filip Jagodič",
+    "pageDescription": "Fotografije iz Filipovega življenja — nastopi, srečanja, studijske seje in več.",
     "imageWillBeAdded": "Slika bo dodana",
     "photos": {
       "keyboards": { "alt": "Filip za klaviaturami", "caption": "Filip za klaviaturami" },

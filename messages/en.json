@@ -144,6 +144,10 @@
     "openPhoto": "Open: {alt}",
     "prevPhoto": "Previous photo",
     "nextPhoto": "Next photo",
+    "viewAll": "Full gallery",
+    "backToHome": "Back to home",
+    "pageTitle": "Gallery — Filip Jagodič",
+    "pageDescription": "Photos from Filip's life — performances, encounters, studio sessions and more.",
     "imageWillBeAdded": "Image coming soon",
     "photos": {
       "keyboards": { "alt": "Filip at the keyboards", "caption": "Filip at the keyboards" },
