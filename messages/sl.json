@@ -302,6 +302,22 @@
       "shallow": {
         "title": "Shallow",
         "description": "Lady Gaga & Bradley Cooper — Shallow (cover), duet z Mijo Koritnik."
+      },
+      "yourMan": {
+        "title": "Your Man",
+        "description": "Josh Turner — Your Man (cover), duet z Jernejem Golobom."
+      },
+      "somethingStupid": {
+        "title": "Something Stupid",
+        "description": "Robin Williams & Nicole Kidman — Something Stupid (cover), duet z Mijo Koritnik."
+      },
+      "zbogJedneDivne": {
+        "title": "Zbog jedne divne crne žene",
+        "description": "Krunoslav Kičo Slabinac — Zbog jedne divne crne žene, duet s Kičom Slabincem."
+      },
+      "loveMeTender": {
+        "title": "Love Me Tender",
+        "description": "Elvis Presley — Love Me Tender (cover)."
       }
     }
   },
