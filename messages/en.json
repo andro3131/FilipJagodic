@@ -282,6 +282,26 @@
       "whatAWonderfulWorld": {
         "title": "What a Wonderful World",
         "description": "Louis Armstrong — What a Wonderful World (cover)."
+      },
+      "moja": {
+        "title": "Moja",
+        "description": "Modrijani — Moja (cover), duet with Agnes Kumlanc."
+      },
+      "glazekVincka": {
+        "title": "Glažek vinčka",
+        "description": "Fran Milčinski Ježek — Glažek vinčka (cover)."
+      },
+      "notteStellata": {
+        "title": "Notte Stellata",
+        "description": "Il Volo — Notte Stellata (cover)."
+      },
+      "cigo": {
+        "title": "Cigo",
+        "description": "MPZ Svoboda — Cigo, lyrics and music by Jože Percl (cover)."
+      },
+      "shallow": {
+        "title": "Shallow",
+        "description": "Lady Gaga & Bradley Cooper — Shallow (cover), duet with Mija Koritnik."
       }
     }
   },

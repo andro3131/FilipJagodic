@@ -14,6 +14,7 @@ const videoKeys = [
   "whoAmI", "overTheRainbow", "weCallOnHim",
   "forTheGoodTimes", "stillWaiting", "upWhereWeBelong",
   "whatAWonderfulWorld",
+  "moja", "glazekVincka", "notteStellata", "cigo", "shallow",
 ] as const;
 const videoIds: Record<string, string> = {
   prstiZapleteni: "KPP-UOhs8iE",
@@ -38,6 +39,11 @@ const videoIds: Record<string, string> = {
   stillWaiting: "Z3Drko8tcJU",
   upWhereWeBelong: "SZwYAaYL_Iw",
   whatAWonderfulWorld: "SDJ0yhM6418",
+  moja: "ZKqP1HdgHj8",
+  glazekVincka: "1svESZ1LtCw",
+  notteStellata: "fq5V-xHL4n4",
+  cigo: "DAlKoGOPouY",
+  shallow: "YI6aJS-atv0",
 };
 
 export default function MusicAll() {
