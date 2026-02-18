@@ -20,6 +20,10 @@ const encounterImages: Record<string, string> = {
   smolar: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771443993/adi_u7h56z.jpg",
 };
 
+const encounterVideos: Record<string, string> = {
+  plestenjak: "https://res.cloudinary.com/dewf3zos0/video/upload/v1771445309/19874134_107584786563726_526080777331408896_n_dahm5v.mp4",
+};
+
 const highlightKeys = new Set(["bocelli"]);
 
 export default function EncountersAll() {
@@ -157,6 +161,17 @@ export default function EncountersAll() {
                 className="object-cover"
               />
             </div>
+
+            {encounterVideos[selectedKey] && (
+              <div className="px-6 pt-6">
+                <video
+                  src={encounterVideos[selectedKey]}
+                  controls
+                  className="w-full rounded-xl"
+                  preload="metadata"
+                />
+              </div>
+            )}
 
             <div className="p-6 md:p-8">
               <p className="text-accent text-xs font-medium tracking-[0.2em] uppercase mb-2">
