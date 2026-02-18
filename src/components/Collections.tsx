@@ -11,14 +11,10 @@ type Category = "keyboards" | "dictaphones";
 const categoryImages: Record<Category, string[]> = {
   keyboards: [
     "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444110/klaviature_do_2020_llmar5.jpg",
-    "https://res.cloudinary.com/dewf3zos0/image/upload/v1771104657/yamahapsr-s975-sounds_KEY0004768-000_emppra.jpg",
-    "https://res.cloudinary.com/dewf3zos0/image/upload/v1771104659/ea2ab88f9f04a3c588eacd63941f8cc3_rrb00y.jpg",
   ],
   dictaphones: [
     "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444128/zbrika2_2021_lnshyb.jpg",
     "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444073/delc%CC%8Cek_zbirke_h2cwuw.jpg",
-    "https://res.cloudinary.com/dewf3zos0/image/upload/v1771104655/96f58b90-30f7-4f43-ba2b-e3427723e87c.__CR0_0_600_450_PT0_SX600_V1____jpf5kj.jpg",
-    "https://res.cloudinary.com/dewf3zos0/image/upload/v1771104653/a0f484d4-3b9f-4174-bbac-92184b1846ce.jpg._CB313504000__j4gk3c.jpg",
   ],
 };
 
