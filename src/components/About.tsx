@@ -97,7 +97,7 @@ export default function About() {
             <div className="text-center">
               <Link
                 href={`/${locale}/o-filipu`}
-                className="inline-flex items-center gap-3 px-8 py-4 bg-accent/10 border border-accent/40 text-accent rounded-full text-base font-semibold hover:bg-accent/20 hover:border-accent/60 transition-all duration-300"
+                className="inline-flex items-center gap-3 px-8 py-4 bg-accent/10 border border-accent/40 text-white rounded-full text-base font-semibold hover:bg-accent/20 hover:border-accent/60 transition-all duration-300"
               >
                 {t("readFullStory")}
                 <svg
