@@ -62,7 +62,7 @@ export default function Navigation() {
               aria-hidden="true"
             />
             <Image
-              src="https://res.cloudinary.com/dewf3zos0/image/upload/v1771410536/filip-fav2_copy_pdav4v.png"
+              src="https://res.cloudinary.com/dewf3zos0/image/upload/v1771413521/filip-fav4_o3zwlh.png"
               alt="FJ"
               width={40}
               height={40}
