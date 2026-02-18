@@ -189,22 +189,17 @@ export default function BiographyPage() {
           <SinglePhoto src={teenPhoto} alt={t("photoAlt")} />
         </Chapter>
 
-        {/* Chapter 8: Belgium */}
+        {/* Chapter 8: Mother */}
         <Chapter title={t("ch8title")} delay={0.1}>
           <Paragraph>{t("ch8p1")}</Paragraph>
+          <Quote>{t("ch8q")}</Quote>
+          <Paragraph>{t("ch8p2")}</Paragraph>
         </Chapter>
 
-        {/* Chapter 9: Mother */}
+        {/* Chapter 9: Today */}
         <Chapter title={t("ch9title")} delay={0.1}>
           <Paragraph>{t("ch9p1")}</Paragraph>
-          <Quote>{t("ch9q")}</Quote>
           <Paragraph>{t("ch9p2")}</Paragraph>
-        </Chapter>
-
-        {/* Chapter 10: Today */}
-        <Chapter title={t("ch10title")} delay={0.1}>
-          <Paragraph>{t("ch10p1")}</Paragraph>
-          <Paragraph>{t("ch10p2")}</Paragraph>
         </Chapter>
       </div>
     </section>
