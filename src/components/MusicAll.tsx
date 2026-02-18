@@ -1,12 +1,12 @@
 "use client";
 
+import Link from "next/link";
 import ScrollReveal from "./ScrollReveal";
 import { useTranslations, useLocale } from "next-intl";
-import Link from "next/link";
 
 const featuredId = "EJYPq4STQ6w";
 
-const videoKeys = ["prstiZapleteni", "takeGoodCare"] as const;
+const videoKeys = ["prstiZapleteni", "takeGoodCare", "letItBeMe", "klapaSufit"] as const;
 const videoIds: Record<string, string> = {
   prstiZapleteni: "KPP-UOhs8iE",
   takeGoodCare: "1WPEC_KJXpk",
@@ -14,28 +14,32 @@ const videoIds: Record<string, string> = {
   klapaSufit: "SJgYyL1qdzE",
 };
 
-export default function Music() {
+export default function MusicAll() {
   const t = useTranslations("music");
   const locale = useLocale();
 
   return (
-    <section
-      id="glasba"
-      aria-labelledby="music-heading"
-      className="relative py-24 md:py-32 px-6 bg-surface"
-    >
+    <section className="relative pt-32 pb-24 md:pt-40 md:pb-32 px-6">
       <div className="mx-auto max-w-7xl">
+        {/* Back link */}
+        <ScrollReveal>
+          <Link
+            href={`/${locale}/#glasba`}
+            className="inline-flex items-center gap-2 text-white/40 hover:text-accent text-sm transition-colors mb-12"
+          >
+            <span>&larr;</span>
+            <span>{t("backToHome")}</span>
+          </Link>
+        </ScrollReveal>
+
         {/* Section header */}
         <ScrollReveal className="text-center mb-16">
           <p className="text-accent text-sm font-medium tracking-[0.3em] uppercase mb-4">
             {t("supra")}
           </p>
-          <h2
-            id="music-heading"
-            className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
-          >
+          <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             {t("heading")}
-          </h2>
+          </h1>
           <div className="w-20 h-0.5 bg-accent mx-auto mb-6" />
           <p className="text-white/50 max-w-2xl mx-auto">
             {t("subtitle")}
@@ -64,7 +68,7 @@ export default function Music() {
           </div>
         </ScrollReveal>
 
-        {/* Video grid */}
+        {/* All videos grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {videoKeys.map((key, index) => (
             <ScrollReveal key={key} delay={0.1 * index}>
@@ -91,19 +95,6 @@ export default function Music() {
             </ScrollReveal>
           ))}
         </div>
-
-        {/* View all link */}
-        <ScrollReveal delay={0.3} className="text-center mt-12">
-          <Link
-            href={`/${locale}/glasba`}
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-border hover:border-accent/40 bg-surface hover:bg-accent/5 transition-all duration-300 group"
-          >
-            <span className="text-white/70 group-hover:text-white font-medium transition-colors">
-              {t("viewAll")}
-            </span>
-            <span className="text-accent group-hover:translate-x-1 transition-transform duration-300">&rarr;</span>
-          </Link>
-        </ScrollReveal>
       </div>
     </section>
   );
