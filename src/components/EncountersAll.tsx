@@ -22,6 +22,7 @@ const encounterImages: Record<string, string> = {
 
 const encounterVideos: Record<string, string> = {
   plestenjak: "https://res.cloudinary.com/dewf3zos0/video/upload/v1771445309/19874134_107584786563726_526080777331408896_n_dahm5v.mp4",
+  svajger: "https://res.cloudinary.com/dewf3zos0/video/upload/v1771447966/Darja_S%CC%8Cvajger_-_My_Way_Frank_Sinatra_Filip_don_Filipo_hkmreh.mp4",
 };
 
 const highlightKeys = new Set(["bocelli"]);
