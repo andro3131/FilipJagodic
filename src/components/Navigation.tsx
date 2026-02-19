@@ -90,7 +90,7 @@ export default function Navigation() {
           </div>
 
           {/* Language switcher */}
-          <div className="flex items-center gap-0 text-xs font-bold tracking-wider uppercase">
+          <div className="flex items-center gap-0 text-xs font-bold tracking-wider uppercase ml-4">
             <button
               onClick={() => goToLocale("sl")}
               className={`px-1.5 py-1 rounded-full transition-all duration-300 ${
