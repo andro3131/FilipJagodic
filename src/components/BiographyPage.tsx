@@ -353,6 +353,7 @@ export default function BiographyPage() {
           <Chapter title={t("ch6title")} delay={0.1}>
             <Paragraph>{t("ch6p1")}</Paragraph>
             <Quote>{t("ch6q")}</Quote>
+            <Paragraph>{t("ch6p2")}</Paragraph>
             <PhotoGrid photos={autisticPhotos} alt={t("photoAlt")} onPhotoClick={openLightbox} />
           </Chapter>
 
@@ -367,6 +368,7 @@ export default function BiographyPage() {
             <Paragraph>{t("ch8p1")}</Paragraph>
             <Quote>{t("ch8q")}</Quote>
             <Paragraph>{t("ch8p2")}</Paragraph>
+            <Paragraph>{t("ch8p3")}</Paragraph>
             <PhotoGrid photos={motherPhotos} alt={t("photoAlt")} onPhotoClick={openLightbox} />
           </Chapter>
 
@@ -374,6 +376,7 @@ export default function BiographyPage() {
           <Chapter title={t("ch9title")} delay={0.1}>
             <Paragraph>{t("ch9p1")}</Paragraph>
             <Paragraph>{t("ch9p2")}</Paragraph>
+            <Paragraph>{t("ch9p3")}</Paragraph>
             <SinglePhoto src={endPhoto} alt={t("photoAlt")} onPhotoClick={openLightbox} />
           </Chapter>
         </div>
