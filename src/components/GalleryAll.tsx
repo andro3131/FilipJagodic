@@ -15,6 +15,8 @@ const photoKeys = [
   "koncert2018e", "koncert2018f", "koncert2018g", "koncert2018h",
   "koncert2018i", "koncert2018j", "koncert2018k", "koncert2018l",
   "nastop2017a", "nastop2017b", "nastop2015",
+  "gal01", "gal02", "gal03", "gal04", "gal05", "gal06", "gal07", "gal08",
+  "gal09", "gal10", "gal11", "gal12", "gal13", "gal14", "gal15", "gal16",
 ] as const;
 
 const photoSrcs: Record<string, string> = {
@@ -48,6 +50,22 @@ const photoSrcs: Record<string, string> = {
   nastop2017a: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444694/26239806_894780974032027_3156786193237124355_n_r5tsdp.jpg",
   nastop2017b: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444682/24910061_873918102784981_1230610379598755610_n_ocb0xy.jpg",
   nastop2015: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444645/11036498_414954345348028_3331372259413785606_n_tel5gj.jpg",
+  gal01: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771491155/505919391_3027880854055351_8683892512718212164_n_cp59cj.jpg",
+  gal02: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771491152/603848112_3226558620854239_8148089245787051675_n_y7l3ix.jpg",
+  gal03: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771491002/594961964_3210340135809421_4751235298297858240_n_wcjbkz.jpg",
+  gal04: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771490971/598560808_3218023608374407_5662259276898222474_n_nk5pby.jpg",
+  gal05: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771490966/577057315_3185957031581065_7963548043233581554_n_digm5z.jpg",
+  gal06: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771490962/568265414_3164906537019448_8619112095800451186_n_fi0amz.jpg",
+  gal07: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771490953/533257491_3091034517339984_2564655278229010325_n_scubpq.jpg",
+  gal08: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771490957/533238210_3091034691073300_7966591796341300162_n_ykxd4v.jpg",
+  gal09: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771490949/564592390_3158575137652588_1842571403597055778_n_vr7sep.jpg",
+  gal10: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771490944/490952655_2973004419542995_2072209197962270408_n_sakul2.jpg",
+  gal11: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771490940/488258690_2952286501614787_7804477986907336990_n_mhuwfp.jpg",
+  gal12: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771490936/566209337_3158575104319258_6157201650400503308_n_t65nyw.jpg",
+  gal13: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771490931/486726034_2941857505991020_7153766809362837456_n_aiyn1t.jpg",
+  gal14: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771490927/525765796_3075939422582827_4934286303607049133_n_tvyswk.jpg",
+  gal15: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771490923/508250868_3034853496691420_8335069599681755769_n_jdhquh.jpg",
+  gal16: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771490919/506707164_3029098073933629_6681610252135709041_n_yiglxj.jpg",
 };
 
 const photoPositions: Record<string, string> = {
