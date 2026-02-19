@@ -65,6 +65,18 @@ export default function Navigation() {
 
           {/* Desktop links */}
           <div className="hidden md:flex items-center gap-8">
+            <a
+              href={`/${locale}/`}
+              onClick={(e) => {
+                if (isMainPage) {
+                  e.preventDefault();
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }
+              }}
+              className="text-sm font-medium text-white/60 transition-colors duration-300 hover:text-accent focus:text-accent focus:outline-none focus:underline"
+            >
+              {t("home")}
+            </a>
             {navLinks.map((link) => (
               <a
                 key={link.hash}
@@ -147,6 +159,19 @@ export default function Navigation() {
             transition={{ duration: 0.3 }}
           >
             <div className="px-6 py-4 flex flex-col gap-4">
+              <a
+                href={`/${locale}/`}
+                className="text-lg text-white/70 hover:text-accent transition-colors"
+                onClick={(e) => {
+                  setIsMobileMenuOpen(false);
+                  if (isMainPage) {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }
+                }}
+              >
+                {t("home")}
+              </a>
               {navLinks.map((link) => (
                 <a
                   key={link.hash}
