@@ -298,7 +298,7 @@ export default function BiographyPage() {
   return (
     <>
       <section className="relative pt-32 pb-24 md:pt-40 md:pb-32 px-6">
-        <div className="mx-auto max-w-4xl">
+        <div className="mx-auto max-w-[996px]">
           {/* Back link */}
           <ScrollReveal>
             <Link
