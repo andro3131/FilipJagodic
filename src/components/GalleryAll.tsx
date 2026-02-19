@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import ScrollReveal from "./ScrollReveal";
@@ -123,10 +123,49 @@ function fullUrl(src: string) {
   return src.replace("/upload/", "/upload/q_auto,f_auto/");
 }
 
+// Preload a full-size image into the browser cache
+const preloaded = new Set<string>();
+function preloadImage(key: string) {
+  const url = fullUrl(photoSrcs[key]);
+  if (preloaded.has(url)) return;
+  preloaded.add(url);
+  const img = new window.Image();
+  img.src = url;
+}
+
 export default function GalleryAll() {
   const t = useTranslations("gallery");
   const locale = useLocale();
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const preloadStarted = useRef(false);
+
+  // Background preload: after mount, gradually preload all full-size images
+  useEffect(() => {
+    if (preloadStarted.current) return;
+    preloadStarted.current = true;
+    let i = 0;
+    const batchSize = 3;
+    const interval = setInterval(() => {
+      for (let j = 0; j < batchSize && i < photoKeys.length; j++, i++) {
+        preloadImage(photoKeys[i]);
+      }
+      if (i >= photoKeys.length) clearInterval(interval);
+    }, 500);
+    return () => clearInterval(interval);
+  }, []);
+
+  // When lightbox is open, preload adjacent images
+  useEffect(() => {
+    if (selectedIndex === null) return;
+    const prev = (selectedIndex - 1 + photoKeys.length) % photoKeys.length;
+    const next = (selectedIndex + 1) % photoKeys.length;
+    preloadImage(photoKeys[prev]);
+    preloadImage(photoKeys[next]);
+  }, [selectedIndex]);
+
+  const handleHover = useCallback((index: number) => {
+    preloadImage(photoKeys[index]);
+  }, []);
 
   const navigate = (dir: -1 | 1) => {
     if (selectedIndex === null) return;
@@ -168,6 +207,7 @@ export default function GalleryAll() {
               <ScrollReveal key={key} delay={0.05 * (index % 6)}>
                 <button
                   onClick={() => setSelectedIndex(index)}
+                  onMouseEnter={() => handleHover(index)}
                   className="group relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-surface-lighter cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent"
                   aria-label={t("openPhoto", { alt: t(`photos.${key}.alt`) })}
                 >
