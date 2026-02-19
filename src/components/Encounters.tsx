@@ -76,7 +76,7 @@ export default function Encounters() {
               aria-hidden="true"
             />
 
-            <div className="space-y-4 md:space-y-6">
+            <div className="space-y-2 md:-space-y-2">
               {encounterKeys.map((key, index) => {
                 const isLeft = index % 2 === 0;
                 const isHighlight = highlightKeys.has(key);
