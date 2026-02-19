@@ -96,11 +96,22 @@ label{display:block;margin-bottom:4px;font-size:.875rem;color:var(--muted)}
 .img-preview-sm{width:80px;height:60px}
 .img-row{display:flex;align-items:center;gap:12px;margin-bottom:8px;flex-wrap:wrap}
 
-/* Sticky save */
+/* Sticky save — fixed at top right */
 .save-bar{
-  position:sticky;bottom:0;background:var(--surface);border-top:1px solid var(--border);
-  padding:16px 0;margin-top:32px;z-index:50;display:flex;gap:12px;
+  position:sticky;top:0;background:var(--surface);border-bottom:1px solid var(--border);
+  padding:12px 0;margin-bottom:24px;z-index:50;display:flex;gap:12px;align-items:center;
 }
+
+/* Move buttons */
+.btn-move{
+  background:none;border:1px solid var(--border);color:var(--muted);cursor:pointer;
+  padding:4px 8px;border-radius:4px;font-size:.75rem;line-height:1;
+}
+.btn-move:hover{border-color:var(--accent);color:var(--accent)}
+
+/* Highlight new item */
+@keyframes highlightNew{from{border-color:var(--accent);box-shadow:0 0 12px rgba(212,64,64,.3)}to{border-color:var(--border);box-shadow:none}}
+.card-new{animation:highlightNew 1.5s ease}
 
 /* Toast */
 .toast-container{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:8px}
@@ -273,6 +284,19 @@ let translationsEnSha = null;
 function val(id) { return document.getElementById(id)?.value || ''; }
 function esc(s) { return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function getToken() { return sessionStorage.getItem('admin_token') || ''; }
+
+function scrollToNew(containerId) {
+  setTimeout(() => {
+    const el = document.querySelector('#' + containerId + ' .card-new');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 50);
+}
+
+function moveItem(arr, from, to) {
+  if (to < 0 || to >= arr.length) return;
+  const item = arr.splice(from, 1)[0];
+  arr.splice(to, 0, item);
+}
 
 function showToast(msg, type='success') {
   const c = document.getElementById('toast-container');
@@ -460,15 +484,15 @@ function renderHero() {
   const d = sectionData.hero.data;
   document.getElementById('section-hero').innerHTML = `
     <h1>Junak (Hero)</h1>
+    <div class="save-bar">
+      <button class="btn btn-accent" onclick="saveSection('hero', collectHeroData)">Shrani</button>
+      <button class="btn btn-history btn-sm" onclick="showHistory('hero')">&#x1F552; Zgodovina</button>
+    </div>
     <div class="card">
       <div class="field">
         <label for="hero-videoUrl">Video URL</label>
         <input type="text" id="hero-videoUrl" value="${esc(d.videoUrl || '')}" placeholder="https://res.cloudinary.com/...">
       </div>
-    </div>
-    <div class="save-bar">
-      <button class="btn btn-accent" onclick="saveSection('hero', collectHeroData)">Shrani</button>
-      <button class="btn btn-history btn-sm" onclick="showHistory('hero')">&#x1F552; Zgodovina</button>
     </div>
   `;
 }
@@ -523,6 +547,10 @@ function renderAbout() {
 
   document.getElementById('section-about').innerHTML = `
     <h1>O Filipu (About)</h1>
+    <div class="save-bar">
+      <button class="btn btn-accent" onclick="saveSection('about', collectAboutData)">Shrani</button>
+      <button class="btn btn-history btn-sm" onclick="showHistory('about')">&#x1F552; Zgodovina</button>
+    </div>
 
     <div class="card">
       <div class="card-header">
@@ -538,11 +566,6 @@ function renderAbout() {
         <button class="btn btn-outline btn-sm" onclick="addStatItem()">+ Dodaj</button>
       </div>
       <div id="stats-list">${statsHtml}</div>
-    </div>
-
-    <div class="save-bar">
-      <button class="btn btn-accent" onclick="saveSection('about', collectAboutData)">Shrani</button>
-      <button class="btn btn-history btn-sm" onclick="showHistory('about')">&#x1F552; Zgodovina</button>
     </div>
   `;
 }
@@ -604,10 +627,14 @@ function renderEncounters() {
     const isFeatured = featured.includes(key);
     const isHighlight = highlightKeys.includes(key);
     allHtml += `
-      <div class="card" data-enc-idx="${i}">
+      <div class="card${i===0 && key==='new_encounter' ? ' card-new' : ''}" data-enc-idx="${i}">
         <div class="card-header">
           <h3>#${i+1}: <span class="enc-key-display">${esc(key)}</span></h3>
-          <button class="btn btn-danger btn-sm" onclick="removeEncounter(${i})">&#x2715; Odstrani</button>
+          <div style="display:flex;gap:4px;align-items:center">
+            <button class="btn-move" onclick="moveEncounter(${i},${i-1})" ${i===0?'disabled':''} title="Gor">&#x25B2;</button>
+            <button class="btn-move" onclick="moveEncounter(${i},${i+1})" ${i===all.length-1?'disabled':''} title="Dol">&#x25BC;</button>
+            <button class="btn btn-danger btn-sm" onclick="removeEncounter(${i})">&#x2715; Odstrani</button>
+          </div>
         </div>
         <div class="field">
           <label>Kljuc</label>
@@ -641,18 +668,13 @@ function renderEncounters() {
   });
 
   document.getElementById('section-encounters').innerHTML = `
-    <h1>Srecanja (Encounters)</h1>
-    <div class="card">
-      <div class="card-header">
-        <h3>Vsa srecanja</h3>
-        <button class="btn btn-outline btn-sm" onclick="addEncounter()">+ Dodaj</button>
-      </div>
-    </div>
-    <div id="encounters-list">${allHtml}</div>
+    <h1>Srecanja (Encounters) — ${all.length}</h1>
     <div class="save-bar">
       <button class="btn btn-accent" onclick="saveSection('encounters', collectEncountersData)">Shrani</button>
+      <button class="btn btn-outline btn-sm" onclick="addEncounter()">+ Dodaj srecanje</button>
       <button class="btn btn-history btn-sm" onclick="showHistory('encounters')">&#x1F552; Zgodovina</button>
     </div>
+    <div id="encounters-list">${allHtml}</div>
   `;
 }
 
@@ -680,10 +702,11 @@ function collectEncountersData() {
 function addEncounter() {
   const d = sectionData.encounters.data;
   d.all = d.all || [];
-  d.all.push('new_encounter');
+  d.all.unshift('new_encounter');
   d.images = d.images || {};
   d.videos = d.videos || {};
   renderEncounters();
+  scrollToNew('encounters-list');
 }
 
 function removeEncounter(i) {
@@ -694,6 +717,12 @@ function removeEncounter(i) {
   if (d.highlightKeys) d.highlightKeys = d.highlightKeys.filter(k => k !== key);
   if (d.images) delete d.images[key];
   if (d.videos) delete d.videos[key];
+  renderEncounters();
+}
+
+function moveEncounter(from, to) {
+  const d = sectionData.encounters.data;
+  moveItem(d.all, from, to);
   renderEncounters();
 }
 
@@ -711,10 +740,14 @@ function renderGallery() {
     const pos = positions[key] || '';
     const isFeatured = featured.includes(key);
     allHtml += `
-      <div class="card" data-gal-idx="${i}">
+      <div class="card${i===0 && key==='new_photo' ? ' card-new' : ''}" data-gal-idx="${i}">
         <div class="card-header">
           <h3>#${i+1}: ${esc(key)}</h3>
-          <button class="btn btn-danger btn-sm" onclick="removeGalleryItem(${i})">&#x2715;</button>
+          <div style="display:flex;gap:4px;align-items:center">
+            <button class="btn-move" onclick="moveGalleryItem(${i},${i-1})" ${i===0?'disabled':''} title="Gor">&#x25B2;</button>
+            <button class="btn-move" onclick="moveGalleryItem(${i},${i+1})" ${i===all.length-1?'disabled':''} title="Dol">&#x25BC;</button>
+            <button class="btn btn-danger btn-sm" onclick="removeGalleryItem(${i})">&#x2715;</button>
+          </div>
         </div>
         <div class="field">
           <label>Kljuc</label>
@@ -740,18 +773,13 @@ function renderGallery() {
   });
 
   document.getElementById('section-gallery').innerHTML = `
-    <h1>Galerija (Gallery)</h1>
-    <div class="card">
-      <div class="card-header">
-        <h3>Vse fotografije (${all.length})</h3>
-        <button class="btn btn-outline btn-sm" onclick="addGalleryItem()">+ Dodaj</button>
-      </div>
-    </div>
-    <div id="gallery-list">${allHtml}</div>
+    <h1>Galerija (Gallery) — ${all.length} fotografij</h1>
     <div class="save-bar">
       <button class="btn btn-accent" onclick="saveSection('gallery', collectGalleryData)">Shrani</button>
+      <button class="btn btn-outline btn-sm" onclick="addGalleryItem()">+ Dodaj fotografijo</button>
       <button class="btn btn-history btn-sm" onclick="showHistory('gallery')">&#x1F552; Zgodovina</button>
     </div>
+    <div id="gallery-list">${allHtml}</div>
   `;
 }
 
@@ -777,8 +805,9 @@ function collectGalleryData() {
 function addGalleryItem() {
   const d = sectionData.gallery.data;
   d.all = d.all || [];
-  d.all.push('new_photo');
+  d.all.unshift('new_photo');
   renderGallery();
+  scrollToNew('gallery-list');
 }
 
 function removeGalleryItem(i) {
@@ -788,6 +817,12 @@ function removeGalleryItem(i) {
   if (d.featured) d.featured = d.featured.filter(k => k !== key);
   if (d.images) delete d.images[key];
   if (d.positions) delete d.positions[key];
+  renderGallery();
+}
+
+function moveGalleryItem(from, to) {
+  const d = sectionData.gallery.data;
+  moveItem(d.all, from, to);
   renderGallery();
 }
 
@@ -804,10 +839,14 @@ function renderMusic() {
     const vid = videoIds[key] || '';
     const isFeatured = featured.includes(key);
     allHtml += `
-      <div class="card" data-mus-idx="${i}">
+      <div class="card${i===0 && key==='new_video' ? ' card-new' : ''}" data-mus-idx="${i}">
         <div class="card-header">
           <h3>#${i+1}: ${esc(key)}</h3>
-          <button class="btn btn-danger btn-sm" onclick="removeMusicItem(${i})">&#x2715;</button>
+          <div style="display:flex;gap:4px;align-items:center">
+            <button class="btn-move" onclick="moveMusicItem(${i},${i-1})" ${i===0?'disabled':''} title="Gor">&#x25B2;</button>
+            <button class="btn-move" onclick="moveMusicItem(${i},${i+1})" ${i===all.length-1?'disabled':''} title="Dol">&#x25BC;</button>
+            <button class="btn btn-danger btn-sm" onclick="removeMusicItem(${i})">&#x2715;</button>
+          </div>
         </div>
         <div class="field">
           <label>Kljuc</label>
@@ -825,24 +864,19 @@ function renderMusic() {
   });
 
   document.getElementById('section-music').innerHTML = `
-    <h1>Glasba (Music)</h1>
+    <h1>Glasba (Music) — ${all.length} videov</h1>
+    <div class="save-bar">
+      <button class="btn btn-accent" onclick="saveSection('music', collectMusicData)">Shrani</button>
+      <button class="btn btn-outline btn-sm" onclick="addMusicItem()">+ Dodaj video</button>
+      <button class="btn btn-history btn-sm" onclick="showHistory('music')">&#x1F552; Zgodovina</button>
+    </div>
     <div class="card">
       <div class="field">
         <label for="music-featuredId">Featured Video ID (YouTube)</label>
         <input type="text" id="music-featuredId" value="${esc(featuredId)}" placeholder="dQw4w9WgXcQ">
       </div>
     </div>
-    <div class="card">
-      <div class="card-header">
-        <h3>Vsi videi (${all.length})</h3>
-        <button class="btn btn-outline btn-sm" onclick="addMusicItem()">+ Dodaj</button>
-      </div>
-    </div>
     <div id="music-list">${allHtml}</div>
-    <div class="save-bar">
-      <button class="btn btn-accent" onclick="saveSection('music', collectMusicData)">Shrani</button>
-      <button class="btn btn-history btn-sm" onclick="showHistory('music')">&#x1F552; Zgodovina</button>
-    </div>
   `;
 }
 
@@ -865,8 +899,9 @@ function collectMusicData() {
 function addMusicItem() {
   const d = sectionData.music.data;
   d.all = d.all || [];
-  d.all.push('new_video');
+  d.all.unshift('new_video');
   renderMusic();
+  scrollToNew('music-list');
 }
 
 function removeMusicItem(i) {
@@ -875,6 +910,12 @@ function removeMusicItem(i) {
   d.all.splice(i, 1);
   if (d.featured) d.featured = d.featured.filter(k => k !== key);
   if (d.videoIds) delete d.videoIds[key];
+  renderMusic();
+}
+
+function moveMusicItem(from, to) {
+  const d = sectionData.music.data;
+  moveItem(d.all, from, to);
   renderMusic();
 }
 
@@ -925,18 +966,13 @@ function renderStudio() {
   });
 
   document.getElementById('section-studio').innerHTML = `
-    <h1>V studiu (Studio)</h1>
-    <div class="card">
-      <div class="card-header">
-        <h3>Albumi (${albums.length})</h3>
-        <button class="btn btn-outline btn-sm" onclick="addStudioAlbum()">+ Dodaj album</button>
-      </div>
-    </div>
-    <div id="studio-albums-list">${albumsHtml}</div>
+    <h1>V studiu (Studio) — ${albums.length} albumi</h1>
     <div class="save-bar">
       <button class="btn btn-accent" onclick="saveSection('studio', collectStudioData)">Shrani</button>
+      <button class="btn btn-outline btn-sm" onclick="addStudioAlbum()">+ Dodaj album</button>
       <button class="btn btn-history btn-sm" onclick="showHistory('studio')">&#x1F552; Zgodovina</button>
     </div>
+    <div id="studio-albums-list">${albumsHtml}</div>
   `;
 }
 
@@ -1031,12 +1067,12 @@ function renderCollections() {
 
   document.getElementById('section-collections').innerHTML = `
     <h1>Zbirke (Collections)</h1>
-    ${renderCategory('Klaviature (Keyboards)', 'keyboards', kb)}
-    ${renderCategory('Diktafoni (Dictaphones)', 'dictaphones', dc)}
     <div class="save-bar">
       <button class="btn btn-accent" onclick="saveSection('collections', collectCollectionsData)">Shrani</button>
       <button class="btn btn-history btn-sm" onclick="showHistory('collections')">&#x1F552; Zgodovina</button>
     </div>
+    ${renderCategory('Klaviature (Keyboards)', 'keyboards', kb)}
+    ${renderCategory('Diktafoni (Dictaphones)', 'dictaphones', dc)}
   `;
 }
 
@@ -1106,6 +1142,12 @@ function renderBiography() {
   ];
 
   let html = '<h1>Zivljenjepis (Biography)</h1>';
+  html += `
+    <div class="save-bar">
+      <button class="btn btn-accent" onclick="saveSection('biography', collectBiographyData)">Shrani</button>
+      <button class="btn btn-history btn-sm" onclick="showHistory('biography')">&#x1F552; Zgodovina</button>
+    </div>
+  `;
 
   chapters.forEach(ch => {
     const photos = d[ch.key] || [];
@@ -1131,13 +1173,6 @@ function renderBiography() {
       </div>
     `;
   });
-
-  html += `
-    <div class="save-bar">
-      <button class="btn btn-accent" onclick="saveSection('biography', collectBiographyData)">Shrani</button>
-      <button class="btn btn-history btn-sm" onclick="showHistory('biography')">&#x1F552; Zgodovina</button>
-    </div>
-  `;
 
   document.getElementById('section-biography').innerHTML = html;
 }
@@ -1177,6 +1212,10 @@ function renderContact() {
 
   document.getElementById('section-contact').innerHTML = `
     <h1>Kontakt (Contact)</h1>
+    <div class="save-bar">
+      <button class="btn btn-accent" onclick="saveSection('contact', collectContactData)">Shrani</button>
+      <button class="btn btn-history btn-sm" onclick="showHistory('contact')">&#x1F552; Zgodovina</button>
+    </div>
     <div class="card">
       <h3 style="margin-bottom:16px">EmailJS</h3>
       <div class="field">
@@ -1202,10 +1241,6 @@ function renderContact() {
         <label for="contact-facebook">Facebook URL</label>
         <input type="url" id="contact-facebook" value="${esc(social.facebook || '')}" placeholder="https://facebook.com/...">
       </div>
-    </div>
-    <div class="save-bar">
-      <button class="btn btn-accent" onclick="saveSection('contact', collectContactData)">Shrani</button>
-      <button class="btn btn-history btn-sm" onclick="showHistory('contact')">&#x1F552; Zgodovina</button>
     </div>
   `;
 }
@@ -1262,6 +1297,13 @@ function renderTranslations() {
   allKeys.forEach(k => { if (!sections.includes(k)) sections.push(k); });
 
   let html = '<h1>Prevodi (Translations)</h1>';
+  html += `
+    <div class="save-bar">
+      <button class="btn btn-accent" onclick="saveTranslations()">Shrani prevode</button>
+      <button class="btn btn-history btn-sm" onclick="showHistory('messages-sl')">&#x1F552; SL zgodovina</button>
+      <button class="btn btn-history btn-sm" onclick="showHistory('messages-en')">&#x1F552; EN zgodovina</button>
+    </div>
+  `;
 
   sections.forEach((sectionKey, si) => {
     const slSection = translationsSl[sectionKey];
@@ -1300,14 +1342,6 @@ function renderTranslations() {
       </div>
     `;
   });
-
-  html += `
-    <div class="save-bar">
-      <button class="btn btn-accent" onclick="saveTranslations()">Shrani prevode</button>
-      <button class="btn btn-history btn-sm" onclick="showHistory('messages-sl')">&#x1F552; SL zgodovina</button>
-      <button class="btn btn-history btn-sm" onclick="showHistory('messages-en')">&#x1F552; EN zgodovina</button>
-    </div>
-  `;
 
   document.getElementById('section-translations').innerHTML = html;
 }
