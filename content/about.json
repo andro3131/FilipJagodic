@@ -1,9 +1,30 @@
 {
-  "abilityKeys": ["absolutePitch", "memory", "noStageFright", "encyclopedia"],
+  "abilityKeys": [
+    "absolutePitch",
+    "memory",
+    "noStageFright",
+    "encyclopedia"
+  ],
   "stats": [
-    { "number": 1000, "suffix": "+", "key": "songs" },
-    { "number": 20, "suffix": "+", "key": "keyboards" },
-    { "number": 27, "suffix": "", "key": "years" },
-    { "number": 30, "suffix": "+", "key": "recorded" }
+    {
+      "number": 1000,
+      "suffix": "+",
+      "key": "songs"
+    },
+    {
+      "number": 20,
+      "suffix": "+",
+      "key": "keyboards"
+    },
+    {
+      "number": 28,
+      "suffix": "",
+      "key": "years"
+    },
+    {
+      "number": 30,
+      "suffix": "+",
+      "key": "recorded"
+    }
   ]
 }
