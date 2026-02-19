@@ -33,8 +33,8 @@ export default function Navigation() {
     // On subpages, let the default <a> navigation happen
   };
 
-  const switchLocale = () => {
-    const newLocale = locale === "sl" ? "en" : "sl";
+  const goToLocale = (newLocale: string) => {
+    if (newLocale === locale) return;
     const pathWithoutLocale = pathname.replace(/^\/(sl|en)/, "") || "/";
     router.push(`/${newLocale}${pathWithoutLocale}`);
   };
@@ -78,13 +78,31 @@ export default function Navigation() {
           </div>
 
           {/* Language switcher */}
-          <button
-            onClick={switchLocale}
-            className="text-xs font-bold tracking-wider uppercase px-3 py-1.5 rounded-full border border-white/20 text-white/60 hover:text-white hover:border-accent/50 transition-all duration-300"
-            aria-label={locale === "sl" ? "Switch to English" : "Preklopi na slovenščino"}
-          >
-            {locale === "sl" ? "EN" : "SI"}
-          </button>
+          <div className="flex items-center gap-1 text-xs font-bold tracking-wider uppercase">
+            <button
+              onClick={() => goToLocale("sl")}
+              className={`px-2 py-1 rounded-full transition-all duration-300 ${
+                locale === "sl"
+                  ? "text-accent"
+                  : "text-white/40 hover:text-white"
+              }`}
+              aria-label="Slovenščina"
+            >
+              SL
+            </button>
+            <span className="text-white/20">|</span>
+            <button
+              onClick={() => goToLocale("en")}
+              className={`px-2 py-1 rounded-full transition-all duration-300 ${
+                locale === "en"
+                  ? "text-accent"
+                  : "text-white/40 hover:text-white"
+              }`}
+              aria-label="English"
+            >
+              EN
+            </button>
+          </div>
 
           {/* Mobile menu toggle */}
           <button
