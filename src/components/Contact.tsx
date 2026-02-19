@@ -1,10 +1,23 @@
 "use client";
 
+import { useState } from "react";
 import ScrollReveal from "./ScrollReveal";
 import { useTranslations } from "next-intl";
 
 export default function Contact() {
   const t = useTranslations("contact");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const subject = encodeURIComponent(`Sporočilo od ${name}`);
+    const body = encodeURIComponent(
+      `Ime: ${name}\nE-pošta: ${email}\n\n${message}`
+    );
+    window.location.href = `mailto:kontakt@filipjagodic.si?subject=${subject}&body=${body}`;
+  };
 
   return (
     <section
@@ -32,30 +45,91 @@ export default function Contact() {
           </p>
         </ScrollReveal>
 
+        {/* Contact form */}
         <ScrollReveal delay={0.3}>
-          <a
-            href="mailto:kontakt@filipjagodic.si"
-            className="inline-flex items-center gap-3 px-10 py-5 bg-accent text-white font-semibold text-lg rounded-full hover:bg-accent-light transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-[#141618]"
+          <form
+            onSubmit={handleSubmit}
+            className="max-w-xl mx-auto text-left space-y-5 mb-12"
           >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label
+                  htmlFor="contact-name"
+                  className="block text-white/60 text-sm font-medium mb-2"
+                >
+                  {t("formName")}
+                </label>
+                <input
+                  id="contact-name"
+                  type="text"
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder={t("formNamePlaceholder")}
+                  className="w-full px-4 py-3 bg-surface border border-border rounded-lg text-white placeholder-white/30 focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/30 transition-colors"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="contact-email"
+                  className="block text-white/60 text-sm font-medium mb-2"
+                >
+                  {t("formEmail")}
+                </label>
+                <input
+                  id="contact-email"
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder={t("formEmailPlaceholder")}
+                  className="w-full px-4 py-3 bg-surface border border-border rounded-lg text-white placeholder-white/30 focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/30 transition-colors"
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                htmlFor="contact-message"
+                className="block text-white/60 text-sm font-medium mb-2"
+              >
+                {t("formMessage")}
+              </label>
+              <textarea
+                id="contact-message"
+                required
+                rows={5}
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                placeholder={t("formMessagePlaceholder")}
+                className="w-full px-4 py-3 bg-surface border border-border rounded-lg text-white placeholder-white/30 focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/30 transition-colors resize-none"
               />
-            </svg>
-            {t("emailCta")}
-          </a>
+            </div>
+            <div className="text-center pt-2">
+              <button
+                type="submit"
+                className="inline-flex items-center gap-3 px-10 py-4 bg-accent text-white font-semibold text-lg rounded-full hover:bg-accent-light transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-[#141618]"
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  />
+                </svg>
+                {t("formSend")}
+              </button>
+            </div>
+          </form>
         </ScrollReveal>
 
-        <ScrollReveal delay={0.4} className="mt-12">
+        <ScrollReveal delay={0.4}>
           <div className="flex flex-col sm:flex-row gap-8 justify-center text-white/40">
             <div>
               <p className="font-semibold text-white/60 mb-1">{t("performances")}</p>
