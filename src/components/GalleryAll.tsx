@@ -114,6 +114,15 @@ const photoPositions: Record<string, string> = {
   studio: "top",
 };
 
+// Cloudinary: insert transformation params for optimized thumbnails
+function thumbUrl(src: string) {
+  return src.replace("/upload/", "/upload/c_fill,w_600,h_450,q_auto,f_auto/");
+}
+
+function fullUrl(src: string) {
+  return src.replace("/upload/", "/upload/q_auto,f_auto/");
+}
+
 export default function GalleryAll() {
   const t = useTranslations("gallery");
   const locale = useLocale();
@@ -156,16 +165,17 @@ export default function GalleryAll() {
           {/* Photo grid */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
             {photoKeys.map((key, index) => (
-              <ScrollReveal key={key} delay={0.08 * index}>
+              <ScrollReveal key={key} delay={0.05 * (index % 6)}>
                 <button
                   onClick={() => setSelectedIndex(index)}
                   className="group relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-surface-lighter cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent"
                   aria-label={t("openPhoto", { alt: t(`photos.${key}.alt`) })}
                 >
                   <Image
-                    src={photoSrcs[key]}
+                    src={thumbUrl(photoSrcs[key])}
                     alt={t(`photos.${key}.alt`)}
                     fill
+                    sizes="(max-width: 768px) 50vw, 33vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                     style={photoPositions[key] ? { objectPosition: photoPositions[key] } : undefined}
                   />
@@ -193,9 +203,10 @@ export default function GalleryAll() {
           <div className="relative">
             <div className="relative w-full aspect-[16/10] bg-black">
               <Image
-                src={photoSrcs[selectedKey]}
+                src={fullUrl(photoSrcs[selectedKey])}
                 alt={t(`photos.${selectedKey}.alt`)}
                 fill
+                sizes="90vw"
                 className="object-contain"
               />
 
