@@ -15,6 +15,9 @@ const categoryImages: Record<Category, string[]> = {
   dictaphones: [
     "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444128/zbrika2_2021_lnshyb.jpg",
     "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444073/delc%CC%8Cek_zbirke_h2cwuw.jpg",
+    "https://res.cloudinary.com/dewf3zos0/image/upload/v1771490962/568265414_3164906537019448_8619112095800451186_n_fi0amz.jpg",
+    "https://res.cloudinary.com/dewf3zos0/image/upload/v1771490872/474636910_2883279178515520_2740116039688518909_n_yzescg.jpg",
+    "https://res.cloudinary.com/dewf3zos0/image/upload/v1771490850/126998423_1712118665631583_3046801342967229634_n_sqxgej.jpg",
   ],
 };
 
