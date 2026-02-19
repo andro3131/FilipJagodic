@@ -201,6 +201,19 @@ label{display:block;margin-bottom:4px;font-size:.875rem;color:var(--muted)}
 /* History button */
 .btn-history{background:transparent;border:1px solid var(--border);color:var(--muted)}
 .btn-history:hover{border-color:var(--accent);color:var(--accent)}
+
+/* Inline translation pair divider */
+.trans-pair-group{margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
+.trans-pair-group h4{font-size:.9rem;color:var(--accent);margin-bottom:12px}
+
+/* Translate button */
+.btn-translate{
+  background:none;border:1px solid var(--border);color:var(--accent);cursor:pointer;
+  padding:2px 8px;border-radius:4px;font-size:.7rem;font-weight:600;
+  white-space:nowrap;transition:all .15s;line-height:1.4;
+}
+.btn-translate:hover{background:var(--accent);color:#fff}
+.btn-translate:disabled{opacity:.4;cursor:wait}
 </style>
 </head>
 <body>
@@ -208,7 +221,7 @@ label{display:block;margin-bottom:4px;font-size:.875rem;color:var(--muted)}
 <!-- Login Screen -->
 <div id="login-screen">
   <div class="login-box">
-    <h1>Filip Jagodic</h1>
+    <h1>Filip Jagodič</h1>
     <p>Admin Panel</p>
     <div class="field">
       <label for="login-pw">Geslo</label>
@@ -224,7 +237,7 @@ label{display:block;margin-bottom:4px;font-size:.875rem;color:var(--muted)}
   <!-- Sidebar -->
   <div class="sidebar">
     <div class="sidebar-header">
-      <h2>Filip Jagodic</h2>
+      <h2>Filip Jagodič</h2>
       <small>Administracija</small>
     </div>
     <div class="sidebar-nav" id="sidebar-nav"></div>
@@ -253,7 +266,7 @@ label{display:block;margin-bottom:4px;font-size:.875rem;color:var(--muted)}
 
 <script>
 /* =========================================================
-   ADMIN PANEL — Filip Jagodic
+   ADMIN PANEL — Filip Jagodič
    ========================================================= */
 
 // ---- Config ----
@@ -263,12 +276,12 @@ const CLOUDINARY_PRESET = 'Filip_galerija';
 const SECTIONS = [
   { key: 'hero',         file: 'hero',         label: 'Junak' },
   { key: 'about',        file: 'about',        label: 'O Filipu' },
-  { key: 'encounters',   file: 'encounters',   label: 'Srecanja' },
+  { key: 'encounters',   file: 'encounters',   label: 'Srečanja' },
   { key: 'gallery',      file: 'gallery',      label: 'Galerija' },
   { key: 'music',        file: 'music',        label: 'Glasba' },
   { key: 'studio',       file: 'studio',       label: 'V studiu' },
   { key: 'collections',  file: 'collections',  label: 'Zbirke' },
-  { key: 'biography',    file: 'biography',    label: 'Zivljenjepis' },
+  { key: 'biography',    file: 'biography',    label: 'Življenjepis' },
   { key: 'contact',      file: 'contact',      label: 'Kontakt' },
   { key: 'translations', file: null,           label: 'Prevodi' },
 ];
@@ -307,6 +320,152 @@ function showToast(msg, type='success') {
   setTimeout(() => { t.style.opacity='0'; t.style.transition='opacity .3s'; setTimeout(()=>t.remove(),300); }, 3000);
 }
 
+// ---- Translation helpers ----
+function getTransVal(lang, path) {
+  const obj = lang === 'sl' ? translationsSl : translationsEn;
+  if (!obj) return '';
+  const keys = path.split('.');
+  let val = obj;
+  for (const k of keys) {
+    if (val === undefined || val === null) return '';
+    val = val[k];
+  }
+  return val || '';
+}
+
+function renderTransPair(label, path, opts) {
+  opts = opts || {};
+  const slVal = getTransVal('sl', path);
+  const enVal = getTransVal('en', path);
+  const isLong = opts.textarea || String(slVal).length > 80 || String(enVal).length > 80;
+  const tBtn = '<button class="btn-translate" onclick="event.stopPropagation();translateField(this)" title="Prevedi SL \u2192 EN">\u2192 EN</button>';
+
+  if (isLong) {
+    return '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">' +
+      '<div class="field"><label>SL: ' + esc(label) + '</label>' +
+        '<textarea data-trans-path="' + esc(path) + '" data-trans-lang="sl" rows="3">' + esc(slVal) + '</textarea></div>' +
+      '<div class="field"><label style="display:flex;justify-content:space-between;align-items:center"><span>EN: ' + esc(label) + '</span> ' + tBtn + '</label>' +
+        '<textarea data-trans-path="' + esc(path) + '" data-trans-lang="en" rows="3">' + esc(enVal) + '</textarea></div>' +
+    '</div>';
+  }
+  return '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">' +
+    '<div class="field"><label>SL: ' + esc(label) + '</label>' +
+      '<input type="text" data-trans-path="' + esc(path) + '" data-trans-lang="sl" value="' + esc(slVal) + '"></div>' +
+    '<div class="field"><label style="display:flex;justify-content:space-between;align-items:center"><span>EN: ' + esc(label) + '</span> ' + tBtn + '</label>' +
+      '<input type="text" data-trans-path="' + esc(path) + '" data-trans-lang="en" value="' + esc(enVal) + '"></div>' +
+  '</div>';
+}
+
+function setNestedValue(obj, path, value) {
+  const keys = path.split('.');
+  let current = obj;
+  for (let i = 0; i < keys.length - 1; i++) {
+    if (current[keys[i]] === undefined || typeof current[keys[i]] !== 'object') {
+      current[keys[i]] = {};
+    }
+    current = current[keys[i]];
+  }
+  current[keys[keys.length - 1]] = value;
+}
+
+async function saveInlineTranslations() {
+  const inputs = document.querySelectorAll('[data-trans-path]');
+  if (inputs.length === 0) return;
+
+  const sl = JSON.parse(JSON.stringify(translationsSl));
+  const en = JSON.parse(JSON.stringify(translationsEn));
+
+  inputs.forEach(input => {
+    const path = input.getAttribute('data-trans-path');
+    const lang = input.getAttribute('data-trans-lang');
+    const value = input.value;
+    setNestedValue(lang === 'sl' ? sl : en, path, value);
+  });
+
+  const slChanged = JSON.stringify(sl) !== JSON.stringify(translationsSl);
+  const enChanged = JSON.stringify(en) !== JSON.stringify(translationsEn);
+
+  const promises = [];
+  if (slChanged) promises.push(apiPut('messages-sl', sl, translationsSlSha).then(r => { translationsSl = sl; translationsSlSha = r.sha; }));
+  if (enChanged) promises.push(apiPut('messages-en', en, translationsEnSha).then(r => { translationsEn = en; translationsEnSha = r.sha; }));
+
+  if (promises.length > 0) await Promise.all(promises);
+}
+
+// ---- Translation API (MyMemory SL→EN) ----
+async function translateText(text) {
+  if (!text || !text.trim()) return '';
+  const MAX_CHUNK = 480;
+  async function fetchTranslation(chunk) {
+    const res = await fetch('https://api.mymemory.translated.net/get?q=' + encodeURIComponent(chunk.trim()) + '&langpair=sl|en');
+    const data = await res.json();
+    if (data.responseData && data.responseData.translatedText) {
+      return data.responseData.translatedText;
+    }
+    throw new Error('Prevod ni uspel');
+  }
+  if (text.length <= MAX_CHUNK) return fetchTranslation(text);
+  // Split long text into sentences and batch
+  const sentences = text.match(/[^.!?]+[.!?]+[\s]*/g) || [text];
+  let chunks = [], current = '';
+  for (const s of sentences) {
+    if ((current + s).length > MAX_CHUNK && current) { chunks.push(current); current = s; }
+    else { current += s; }
+  }
+  if (current) chunks.push(current);
+  let result = '';
+  for (const chunk of chunks) {
+    try { result += await fetchTranslation(chunk) + ' '; } catch { result += chunk + ' '; }
+    await new Promise(r => setTimeout(r, 200));
+  }
+  return result.trim();
+}
+
+async function translateField(btn) {
+  const grid = btn.closest('[style*="grid"]') || btn.closest('.trans-row');
+  if (!grid) return;
+  const slInput = grid.querySelector('[data-trans-lang="sl"]');
+  const enInput = grid.querySelector('[data-trans-lang="en"]');
+  if (!slInput || !enInput) return;
+  const text = slInput.value.trim();
+  if (!text) { showToast('SL polje je prazno', 'error'); return; }
+  btn.disabled = true;
+  const orig = btn.textContent;
+  btn.textContent = '...';
+  try {
+    enInput.value = await translateText(text);
+    showToast('Prevedeno!');
+  } catch (e) {
+    showToast('Napaka pri prevajanju', 'error');
+  }
+  btn.disabled = false;
+  btn.textContent = orig;
+}
+
+async function translateAllToEN() {
+  const section = document.querySelector('.section-content.active');
+  if (!section) return;
+  const slInputs = section.querySelectorAll('[data-trans-lang="sl"]');
+  if (slInputs.length === 0) { showToast('Ni besedil za prevajanje', 'error'); return; }
+  const toTranslate = [];
+  slInputs.forEach(sl => {
+    const text = sl.value.trim();
+    if (!text) return;
+    const path = sl.getAttribute('data-trans-path');
+    const en = section.querySelector('[data-trans-path="' + path + '"][data-trans-lang="en"]');
+    if (en) toTranslate.push({ text, en });
+  });
+  if (toTranslate.length === 0) { showToast('Ni besedil za prevajanje', 'error'); return; }
+  showToast('Prevajam ' + toTranslate.length + ' besedil...');
+  let count = 0, errors = 0;
+  for (const item of toTranslate) {
+    try { item.en.value = await translateText(item.text); count++; }
+    catch { errors++; }
+    await new Promise(r => setTimeout(r, 300));
+  }
+  showToast('Prevedeno ' + count + '/' + toTranslate.length + (errors ? ' (' + errors + ' napak)' : ''));
+}
+
 // ---- Auth ----
 async function doLogin() {
   const pw = val('login-pw');
@@ -320,7 +479,7 @@ async function doLogin() {
       body: JSON.stringify({ password: pw })
     });
     const d = await r.json();
-    if (!r.ok || !d.token) { errEl.textContent = d.error || 'Napacno geslo.'; return; }
+    if (!r.ok || !d.token) { errEl.textContent = d.error || 'Napačno geslo.'; return; }
     sessionStorage.setItem('admin_token', d.token);
     showApp();
   } catch (e) {
@@ -333,10 +492,12 @@ function doLogout() {
   location.reload();
 }
 
-function showApp() {
+async function showApp() {
   document.getElementById('login-screen').style.display = 'none';
   document.getElementById('app').style.display = 'block';
   buildSidebar();
+  // Auto-load translations on login
+  await loadTranslationsData();
   switchSection('hero');
 }
 
@@ -424,7 +585,7 @@ async function loadSection(key) {
   if (!sec) return;
 
   if (key === 'translations') {
-    await loadTranslations();
+    renderTranslations();
     return;
   }
 
@@ -469,9 +630,27 @@ async function saveSection(fileKey, collectFn) {
     const res = await apiPut(fileKey, data, sha);
     sectionData[sKey].sha = res.sha;
     sectionData[sKey].data = data;
+    await saveInlineTranslations();
     showToast('Shranjeno!');
   } catch (e) {
     showToast('Napaka: ' + e.message, 'error');
+  }
+}
+
+// ---- Load translations data (called on login) ----
+async function loadTranslationsData() {
+  if (translationsSl && translationsEn) return;
+  try {
+    const [slRes, enRes] = await Promise.all([
+      apiGet('messages-sl'),
+      apiGet('messages-en')
+    ]);
+    translationsSl = slRes.data || {};
+    translationsEn = enRes.data || {};
+    translationsSlSha = slRes.sha;
+    translationsEnSha = enRes.sha;
+  } catch (e) {
+    console.error('Napaka pri nalaganju prevodov:', e);
   }
 }
 
@@ -483,16 +662,25 @@ async function saveSection(fileKey, collectFn) {
 function renderHero() {
   const d = sectionData.hero.data;
   document.getElementById('section-hero').innerHTML = `
-    <h1>Junak (Hero)</h1>
+    <h1>Junak</h1>
     <div class="save-bar">
       <button class="btn btn-accent" onclick="saveSection('hero', collectHeroData)">Shrani</button>
+      <button class="btn btn-outline btn-sm" onclick="translateAllToEN()">Prevedi vse v EN</button>
       <button class="btn btn-history btn-sm" onclick="showHistory('hero')">&#x1F552; Zgodovina</button>
     </div>
     <div class="card">
       <div class="field">
-        <label for="hero-videoUrl">Video URL</label>
+        <label for="hero-videoUrl">Povezava videa</label>
         <input type="text" id="hero-videoUrl" value="${esc(d.videoUrl || '')}" placeholder="https://res.cloudinary.com/...">
       </div>
+    </div>
+    <div class="card">
+      <h3 style="margin-bottom:16px">Besedila</h3>
+      ${renderTransPair('Vloge', 'hero.roles')}
+      ${renderTransPair('Citat', 'hero.quote')}
+      ${renderTransPair('Avtor citata', 'hero.quoteAuthor')}
+      ${renderTransPair('Poslušaj glasbo (gumb)', 'hero.listenMusic')}
+      ${renderTransPair('Spoznaj Filipa (gumb)', 'hero.meetFilip')}
     </div>
   `;
 }
@@ -513,7 +701,7 @@ function renderAbout() {
       <div class="list-item" data-stat-idx="${i}">
         <div class="list-fields">
           <div class="field">
-            <label>Stevilka</label>
+            <label>Številka</label>
             <input type="number" class="stat-number" value="${esc(s.number || '')}" placeholder="3000">
           </div>
           <div class="field">
@@ -521,9 +709,11 @@ function renderAbout() {
             <input type="text" class="stat-suffix" value="${esc(s.suffix || '')}" placeholder="+">
           </div>
           <div class="field">
-            <label>Kljuc</label>
+            <label>Ključ</label>
             <input type="text" class="stat-key" value="${esc(s.key || '')}" placeholder="songs">
           </div>
+          ${s.key ? renderTransPair('Oznaka statistike', 'about.stats.' + s.key + '.label') : ''}
+          ${s.key ? renderTransPair('Opis statistike', 'about.stats.' + s.key + '.description') : ''}
         </div>
         <button class="btn btn-danger btn-sm" onclick="removeStatItem(${i})">&#x2715;</button>
       </div>
@@ -536,9 +726,11 @@ function renderAbout() {
       <div class="list-item" data-ability-idx="${i}">
         <div class="list-fields">
           <div class="field">
-            <label>Kljuc sposobnosti</label>
+            <label>Ključ sposobnosti</label>
             <input type="text" class="ability-key" value="${esc(k)}" placeholder="absolutePitch">
           </div>
+          ${k ? renderTransPair('Naslov sposobnosti', 'about.abilities.' + k + '.title') : ''}
+          ${k ? renderTransPair('Opis sposobnosti', 'about.abilities.' + k + '.description') : ''}
         </div>
         <button class="btn btn-danger btn-sm" onclick="removeAbilityKey(${i})">&#x2715;</button>
       </div>
@@ -546,15 +738,25 @@ function renderAbout() {
   });
 
   document.getElementById('section-about').innerHTML = `
-    <h1>O Filipu (About)</h1>
+    <h1>O Filipu</h1>
     <div class="save-bar">
       <button class="btn btn-accent" onclick="saveSection('about', collectAboutData)">Shrani</button>
+      <button class="btn btn-outline btn-sm" onclick="translateAllToEN()">Prevedi vse v EN</button>
       <button class="btn btn-history btn-sm" onclick="showHistory('about')">&#x1F552; Zgodovina</button>
     </div>
 
     <div class="card">
+      <h3 style="margin-bottom:16px">Besedila</h3>
+      ${renderTransPair('Nadnaslov', 'about.supra')}
+      ${renderTransPair('Naslov', 'about.heading')}
+      ${renderTransPair('Zgodba', 'about.story', {textarea:true})}
+      ${renderTransPair('Citat', 'about.blockquote')}
+      ${renderTransPair('Gumb za celotno zgodbo', 'about.readFullStory')}
+    </div>
+
+    <div class="card">
       <div class="card-header">
-        <h3>Kljuci sposobnosti</h3>
+        <h3>Ključi sposobnosti</h3>
         <button class="btn btn-outline btn-sm" onclick="addAbilityKey()">+ Dodaj</button>
       </div>
       <div id="ability-keys-list">${abilityKeysHtml}</div>
@@ -620,6 +822,15 @@ function renderEncounters() {
   const videos = d.videos || {};
   const highlightKeys = d.highlightKeys || [];
 
+  let sectionTextsHtml = `
+    <div class="card">
+      <h3 style="margin-bottom:16px">Besedila sekcije</h3>
+      ${renderTransPair('Nadnaslov', 'encounters.supra')}
+      ${renderTransPair('Naslov', 'encounters.heading')}
+      ${renderTransPair('Podnaslov', 'encounters.subtitle')}
+    </div>
+  `;
+
   let allHtml = '';
   all.forEach((key, i) => {
     const img = images[key] || '';
@@ -637,7 +848,7 @@ function renderEncounters() {
           </div>
         </div>
         <div class="field">
-          <label>Kljuc</label>
+          <label>Ključ</label>
           <input type="text" class="enc-key" value="${esc(key)}" placeholder="plestenjak">
         </div>
         <div class="check-list">
@@ -645,35 +856,45 @@ function renderEncounters() {
             <input type="checkbox" class="enc-featured" ${isFeatured ? 'checked' : ''}> Na glavni strani
           </label>
           <label class="check-item">
-            <input type="checkbox" class="enc-highlight" ${isHighlight ? 'checked' : ''}> Rdec poudarek
+            <input type="checkbox" class="enc-highlight" ${isHighlight ? 'checked' : ''}> Rdeč poudarek
           </label>
         </div>
         <div class="field">
-          <label>Slika URL</label>
+          <label>Povezava slike</label>
           <div class="img-row">
             ${img ? '<img src="'+esc(img)+'" class="img-preview" onerror="this.style.display=\'none\'">' : ''}
             <input type="text" class="enc-image" value="${esc(img)}" placeholder="https://...">
-            <button class="btn btn-outline btn-sm" onclick="uploadForInput(this, 'enc-image')">Nalozi</button>
+            <button class="btn btn-outline btn-sm" onclick="uploadForInput(this, 'enc-image')">Naloži</button>
           </div>
         </div>
         <div class="field">
-          <label>Video URL (opcijsko)</label>
+          <label>Povezava videa (neobvezno)</label>
           <div class="img-row">
             <input type="text" class="enc-video" value="${esc(vid)}" placeholder="https://...">
-            <button class="btn btn-outline btn-sm" onclick="uploadForInput(this, 'enc-video')">Nalozi</button>
+            <button class="btn btn-outline btn-sm" onclick="uploadForInput(this, 'enc-video')">Naloži</button>
           </div>
+        </div>
+        <div class="trans-pair-group">
+          <h4>Besedila (SL / EN)</h4>
+          ${renderTransPair('Ime', 'encounters.items.' + key + '.name')}
+          ${renderTransPair('Vloga', 'encounters.items.' + key + '.role')}
+          ${renderTransPair('Dogodek', 'encounters.items.' + key + '.event')}
+          ${renderTransPair('Opis', 'encounters.items.' + key + '.description')}
+          ${renderTransPair('Celotna zgodba', 'encounters.items.' + key + '.fullStory', {textarea:true})}
         </div>
       </div>
     `;
   });
 
   document.getElementById('section-encounters').innerHTML = `
-    <h1>Srecanja (Encounters) — ${all.length}</h1>
+    <h1>Srečanja — ${all.length}</h1>
     <div class="save-bar">
       <button class="btn btn-accent" onclick="saveSection('encounters', collectEncountersData)">Shrani</button>
-      <button class="btn btn-outline btn-sm" onclick="addEncounter()">+ Dodaj srecanje</button>
+      <button class="btn btn-outline btn-sm" onclick="addEncounter()">+ Dodaj srečanje</button>
+      <button class="btn btn-outline btn-sm" onclick="translateAllToEN()">Prevedi vse v EN</button>
       <button class="btn btn-history btn-sm" onclick="showHistory('encounters')">&#x1F552; Zgodovina</button>
     </div>
+    ${sectionTextsHtml}
     <div id="encounters-list">${allHtml}</div>
   `;
 }
@@ -734,6 +955,14 @@ function renderGallery() {
   const images = d.images || {};
   const positions = d.positions || {};
 
+  let sectionTextsHtml = `
+    <div class="card">
+      <h3 style="margin-bottom:16px">Besedila sekcije</h3>
+      ${renderTransPair('Nadnaslov', 'gallery.supra')}
+      ${renderTransPair('Naslov', 'gallery.heading')}
+    </div>
+  `;
+
   let allHtml = '';
   all.forEach((key, i) => {
     const img = images[key] || '';
@@ -750,35 +979,42 @@ function renderGallery() {
           </div>
         </div>
         <div class="field">
-          <label>Kljuc</label>
+          <label>Ključ</label>
           <input type="text" class="gal-key" value="${esc(key)}">
         </div>
         <label class="check-item" style="margin-bottom:12px">
           <input type="checkbox" class="gal-featured" ${isFeatured ? 'checked' : ''}> Na glavni strani
         </label>
         <div class="field">
-          <label>Slika URL</label>
+          <label>Povezava slike</label>
           <div class="img-row">
             ${img ? '<img src="'+esc(img)+'" class="img-preview" onerror="this.style.display=\'none\'">' : ''}
             <input type="text" class="gal-image" value="${esc(img)}">
-            <button class="btn btn-outline btn-sm" onclick="uploadForInput(this, 'gal-image')">Nalozi</button>
+            <button class="btn btn-outline btn-sm" onclick="uploadForInput(this, 'gal-image')">Naloži</button>
           </div>
         </div>
         <div class="field">
-          <label>Pozicija (object-position, opcijsko)</label>
+          <label>Pozicija slike (neobvezno)</label>
           <input type="text" class="gal-position" value="${esc(pos)}" placeholder="center top">
+        </div>
+        <div class="trans-pair-group">
+          <h4>Besedila (SL / EN)</h4>
+          ${renderTransPair('Alt besedilo', 'gallery.photos.' + key + '.alt')}
+          ${renderTransPair('Podnapis', 'gallery.photos.' + key + '.caption')}
         </div>
       </div>
     `;
   });
 
   document.getElementById('section-gallery').innerHTML = `
-    <h1>Galerija (Gallery) — ${all.length} fotografij</h1>
+    <h1>Galerija — ${all.length} fotografij</h1>
     <div class="save-bar">
       <button class="btn btn-accent" onclick="saveSection('gallery', collectGalleryData)">Shrani</button>
       <button class="btn btn-outline btn-sm" onclick="addGalleryItem()">+ Dodaj fotografijo</button>
+      <button class="btn btn-outline btn-sm" onclick="translateAllToEN()">Prevedi vse v EN</button>
       <button class="btn btn-history btn-sm" onclick="showHistory('gallery')">&#x1F552; Zgodovina</button>
     </div>
+    ${sectionTextsHtml}
     <div id="gallery-list">${allHtml}</div>
   `;
 }
@@ -834,6 +1070,15 @@ function renderMusic() {
   const all = d.all || [];
   const videoIds = d.videoIds || {};
 
+  let sectionTextsHtml = `
+    <div class="card">
+      <h3 style="margin-bottom:16px">Besedila sekcije</h3>
+      ${renderTransPair('Nadnaslov', 'music.supra')}
+      ${renderTransPair('Naslov', 'music.heading')}
+      ${renderTransPair('Podnaslov', 'music.subtitle')}
+    </div>
+  `;
+
   let allHtml = '';
   all.forEach((key, i) => {
     const vid = videoIds[key] || '';
@@ -849,7 +1094,7 @@ function renderMusic() {
           </div>
         </div>
         <div class="field">
-          <label>Kljuc</label>
+          <label>Ključ</label>
           <input type="text" class="mus-key" value="${esc(key)}">
         </div>
         <label class="check-item" style="margin-bottom:12px">
@@ -859,20 +1104,27 @@ function renderMusic() {
           <label>YouTube ID</label>
           <input type="text" class="mus-videoid" value="${esc(vid)}" placeholder="dQw4w9WgXcQ">
         </div>
+        <div class="trans-pair-group">
+          <h4>Besedila (SL / EN)</h4>
+          ${renderTransPair('Naslov', 'music.videos.' + key + '.title')}
+          ${renderTransPair('Opis', 'music.videos.' + key + '.description')}
+        </div>
       </div>
     `;
   });
 
   document.getElementById('section-music').innerHTML = `
-    <h1>Glasba (Music) — ${all.length} videov</h1>
+    <h1>Glasba — ${all.length} videov</h1>
     <div class="save-bar">
       <button class="btn btn-accent" onclick="saveSection('music', collectMusicData)">Shrani</button>
       <button class="btn btn-outline btn-sm" onclick="addMusicItem()">+ Dodaj video</button>
+      <button class="btn btn-outline btn-sm" onclick="translateAllToEN()">Prevedi vse v EN</button>
       <button class="btn btn-history btn-sm" onclick="showHistory('music')">&#x1F552; Zgodovina</button>
     </div>
+    ${sectionTextsHtml}
     <div class="card">
       <div class="field">
-        <label for="music-featuredId">Featured Video ID (YouTube)</label>
+        <label for="music-featuredId">ID izpostavljenega videa (YouTube)</label>
         <input type="text" id="music-featuredId" value="${esc(featuredId)}" placeholder="dQw4w9WgXcQ">
       </div>
     </div>
@@ -924,6 +1176,20 @@ function renderStudio() {
   const d = sectionData.studio.data;
   const albums = d.albums || [];
 
+  let sectionTextsHtml = `
+    <div class="card">
+      <h3 style="margin-bottom:16px">Besedila sekcije</h3>
+      ${renderTransPair('Nadnaslov', 'studio.supra')}
+      ${renderTransPair('Naslov', 'studio.heading')}
+      ${renderTransPair('Podnaslov', 'studio.subtitle', {textarea:true})}
+      ${renderTransPair('Zgodba 1', 'studio.storyP1', {textarea:true})}
+      ${renderTransPair('Zgodba 2', 'studio.storyP2', {textarea:true})}
+      ${renderTransPair('Zgodba 3', 'studio.storyP3', {textarea:true})}
+      ${renderTransPair('Naslov albumov', 'studio.albumsHeading')}
+      ${renderTransPair('Podnaslov albumov', 'studio.albumsSubtitle')}
+    </div>
+  `;
+
   let albumsHtml = '';
   albums.forEach((album, ai) => {
     let imagesHtml = '';
@@ -932,7 +1198,7 @@ function renderStudio() {
         <div class="img-row" data-album-img="${ai}-${ii}">
           <img src="${esc(img)}" class="img-preview img-preview-sm" onerror="this.style.display='none'">
           <input type="text" class="studio-album-img" value="${esc(img)}" style="flex:1">
-          <button class="btn btn-outline btn-sm" onclick="uploadForInput(this, 'studio-album-img')">Nalozi</button>
+          <button class="btn btn-outline btn-sm" onclick="uploadForInput(this, 'studio-album-img')">Naloži</button>
           <button class="btn btn-danger btn-sm" onclick="removeStudioAlbumImage(${ai}, ${ii})">&#x2715;</button>
         </div>
       `;
@@ -945,15 +1211,15 @@ function renderStudio() {
           <button class="btn btn-danger btn-sm" onclick="removeStudioAlbum(${ai})">&#x2715; Odstrani album</button>
         </div>
         <div class="field">
-          <label>Kljuc</label>
+          <label>Ključ</label>
           <input type="text" class="album-key" value="${esc(album.key || '')}">
         </div>
         <div class="field">
-          <label>Naslovnica URL</label>
+          <label>Povezava naslovnice</label>
           <div class="img-row">
             ${album.cover ? '<img src="'+esc(album.cover)+'" class="img-preview" onerror="this.style.display=\'none\'">' : ''}
             <input type="text" class="album-cover" value="${esc(album.cover || '')}">
-            <button class="btn btn-outline btn-sm" onclick="uploadForInput(this, 'album-cover')">Nalozi</button>
+            <button class="btn btn-outline btn-sm" onclick="uploadForInput(this, 'album-cover')">Naloži</button>
           </div>
         </div>
         <div class="field">
@@ -961,17 +1227,23 @@ function renderStudio() {
           <div class="album-images" id="album-images-${ai}">${imagesHtml}</div>
           <button class="btn btn-outline btn-sm" style="margin-top:8px" onclick="addStudioAlbumImage(${ai})">+ Dodaj sliko</button>
         </div>
+        <div class="trans-pair-group">
+          <h4>Besedila (SL / EN)</h4>
+          ${renderTransPair('Ime albuma', 'studio.album' + (ai+1))}
+        </div>
       </div>
     `;
   });
 
   document.getElementById('section-studio').innerHTML = `
-    <h1>V studiu (Studio) — ${albums.length} albumi</h1>
+    <h1>V studiu — ${albums.length} albumi</h1>
     <div class="save-bar">
       <button class="btn btn-accent" onclick="saveSection('studio', collectStudioData)">Shrani</button>
       <button class="btn btn-outline btn-sm" onclick="addStudioAlbum()">+ Dodaj album</button>
+      <button class="btn btn-outline btn-sm" onclick="translateAllToEN()">Prevedi vse v EN</button>
       <button class="btn btn-history btn-sm" onclick="showHistory('studio')">&#x1F552; Zgodovina</button>
     </div>
+    ${sectionTextsHtml}
     <div id="studio-albums-list">${albumsHtml}</div>
   `;
 }
@@ -1021,6 +1293,15 @@ function renderCollections() {
   const kb = d.keyboards || { images: [], items: [] };
   const dc = d.dictaphones || { images: [], items: [] };
 
+  let sectionTextsHtml = `
+    <div class="card">
+      <h3 style="margin-bottom:16px">Besedila sekcije</h3>
+      ${renderTransPair('Nadnaslov', 'collections.supra')}
+      ${renderTransPair('Naslov', 'collections.heading')}
+      ${renderTransPair('Podnaslov', 'collections.subtitle', {textarea:true})}
+    </div>
+  `;
+
   function renderCategory(cat, prefix, data) {
     let imagesHtml = '';
     (data.images || []).forEach((img, i) => {
@@ -1028,7 +1309,7 @@ function renderCollections() {
         <div class="img-row" data-col-img="${prefix}-${i}">
           <img src="${esc(img)}" class="img-preview img-preview-sm" onerror="this.style.display='none'">
           <input type="text" class="col-${prefix}-img" value="${esc(img)}" style="flex:1">
-          <button class="btn btn-outline btn-sm" onclick="uploadForInput(this, 'col-${prefix}-img')">Nalozi</button>
+          <button class="btn btn-outline btn-sm" onclick="uploadForInput(this, 'col-${prefix}-img')">Naloži</button>
           <button class="btn btn-danger btn-sm" onclick="removeCollectionImage('${prefix}', ${i})">&#x2715;</button>
         </div>
       `;
@@ -1040,6 +1321,8 @@ function renderCollections() {
         <div class="list-item" data-col-item="${prefix}-${i}">
           <div class="list-fields">
             <input type="text" class="col-${prefix}-item" value="${esc(item)}" placeholder="yamaha">
+            ${item ? renderTransPair('Ime naprave', 'collections.items.' + item + '.name') : ''}
+            ${item ? renderTransPair('Opis naprave', 'collections.items.' + item + '.description') : ''}
           </div>
           <button class="btn btn-danger btn-sm" onclick="removeCollectionItem('${prefix}', ${i})">&#x2715;</button>
         </div>
@@ -1057,7 +1340,7 @@ function renderCollections() {
           <button class="btn btn-outline btn-sm" style="margin-top:8px" onclick="addCollectionImage('${prefix}')">+ Dodaj sliko</button>
         </div>
         <div class="field" style="margin-top:16px">
-          <label>Predmeti (kljuci)</label>
+          <label>Predmeti (ključi)</label>
           <div id="col-${prefix}-items">${itemsHtml}</div>
           <button class="btn btn-outline btn-sm" style="margin-top:8px" onclick="addCollectionItem('${prefix}')">+ Dodaj predmet</button>
         </div>
@@ -1066,13 +1349,15 @@ function renderCollections() {
   }
 
   document.getElementById('section-collections').innerHTML = `
-    <h1>Zbirke (Collections)</h1>
+    <h1>Zbirke</h1>
     <div class="save-bar">
       <button class="btn btn-accent" onclick="saveSection('collections', collectCollectionsData)">Shrani</button>
+      <button class="btn btn-outline btn-sm" onclick="translateAllToEN()">Prevedi vse v EN</button>
       <button class="btn btn-history btn-sm" onclick="showHistory('collections')">&#x1F552; Zgodovina</button>
     </div>
-    ${renderCategory('Klaviature (Keyboards)', 'keyboards', kb)}
-    ${renderCategory('Diktafoni (Dictaphones)', 'dictaphones', dc)}
+    ${sectionTextsHtml}
+    ${renderCategory('Klaviature', 'keyboards', kb)}
+    ${renderCategory('Diktafoni', 'dictaphones', dc)}
   `;
 }
 
@@ -1130,21 +1415,34 @@ function removeCollectionItem(prefix, i) {
 function renderBiography() {
   const d = sectionData.biography.data;
   const chapters = [
-    { key: 'birthPhotos',          label: 'Rojstvo (birthPhotos)' },
-    { key: 'firstMonthsPhotos',    label: 'Prvi meseci (firstMonthsPhotos)' },
-    { key: 'singingWithMomPhotos', label: 'Petje z mamo (singingWithMomPhotos)' },
-    { key: 'fatherPhotos',         label: 'Oce (fatherPhotos)' },
-    { key: 'musicalTalentPhotos',  label: 'Glasbeni talent (musicalTalentPhotos)' },
-    { key: 'autisticPhotos',       label: 'Avtisticne lastnosti (autisticPhotos)' },
-    { key: 'careerPhotos',         label: 'Kariera (careerPhotos)' },
-    { key: 'motherPhotos',         label: 'Mama (motherPhotos)' },
-    { key: 'endPhoto',             label: 'Zakljucek (endPhoto)' },
+    { key: 'birthPhotos',          label: 'Rojstvo' },
+    { key: 'firstMonthsPhotos',    label: 'Prvi meseci' },
+    { key: 'singingWithMomPhotos', label: 'Petje z mamo' },
+    { key: 'fatherPhotos',         label: 'Oče' },
+    { key: 'musicalTalentPhotos',  label: 'Glasbeni talent' },
+    { key: 'autisticPhotos',       label: 'Avtistične lastnosti' },
+    { key: 'careerPhotos',         label: 'Kariera' },
+    { key: 'motherPhotos',         label: 'Mama' },
+    { key: 'endPhoto',             label: 'Zaključek' },
   ];
 
-  let html = '<h1>Zivljenjepis (Biography)</h1>';
+  const chapterTexts = {
+    birthPhotos: ['ch1title', 'ch1p1', 'ch1p2', 'ch1q'],
+    firstMonthsPhotos: ['ch2title', 'ch2p1'],
+    singingWithMomPhotos: ['ch3title', 'ch3p1', 'ch3q'],
+    fatherPhotos: ['ch4title', 'ch4p1'],
+    musicalTalentPhotos: ['ch5title', 'ch5p1', 'ch5q', 'ch5p2'],
+    autisticPhotos: ['ch6title', 'ch6p1', 'ch6q', 'ch6p2'],
+    careerPhotos: ['ch7title', 'ch7p1'],
+    motherPhotos: ['ch8title', 'ch8p1', 'ch8q', 'ch8p2', 'ch8p3'],
+    endPhoto: ['ch9title', 'ch9p1', 'ch9p2', 'ch9p3'],
+  };
+
+  let html = '<h1>Življenjepis</h1>';
   html += `
     <div class="save-bar">
       <button class="btn btn-accent" onclick="saveSection('biography', collectBiographyData)">Shrani</button>
+      <button class="btn btn-outline btn-sm" onclick="translateAllToEN()">Prevedi vse v EN</button>
       <button class="btn btn-history btn-sm" onclick="showHistory('biography')">&#x1F552; Zgodovina</button>
     </div>
   `;
@@ -1157,11 +1455,32 @@ function renderBiography() {
         <div class="img-row" data-bio-img="${ch.key}-${i}">
           <img src="${esc(img)}" class="img-preview img-preview-sm" onerror="this.style.display='none'">
           <input type="text" class="bio-${ch.key}-img" value="${esc(img)}" style="flex:1">
-          <button class="btn btn-outline btn-sm" onclick="uploadForInput(this, 'bio-${ch.key}-img')">Nalozi</button>
+          <button class="btn btn-outline btn-sm" onclick="uploadForInput(this, 'bio-${ch.key}-img')">Naloži</button>
           <button class="btn btn-danger btn-sm" onclick="removeBioPhoto('${ch.key}', ${i})">&#x2715;</button>
         </div>
       `;
     });
+
+    // Build chapter texts
+    let textsHtml = '';
+    const textKeys = chapterTexts[ch.key] || [];
+    if (textKeys.length > 0) {
+      textsHtml = '<div class="trans-pair-group"><h4>Besedila poglavja (SL / EN)</h4>';
+      textKeys.forEach(tk => {
+        let label = tk;
+        let opts = {};
+        if (tk.endsWith('title') || tk.includes('title')) {
+          label = 'Naslov';
+        } else if (tk.endsWith('q') || tk.match(/q$/)) {
+          label = 'Citat';
+        } else {
+          label = 'Odstavek (' + tk + ')';
+          opts = { textarea: true };
+        }
+        textsHtml += renderTransPair(label, 'about.bio.' + tk, opts);
+      });
+      textsHtml += '</div>';
+    }
 
     html += `
       <div class="card">
@@ -1170,6 +1489,7 @@ function renderBiography() {
           <button class="btn btn-outline btn-sm" onclick="addBioPhoto('${ch.key}')">+ Dodaj</button>
         </div>
         <div id="bio-${ch.key}-list">${photosHtml}</div>
+        ${textsHtml}
       </div>
     `;
   });
@@ -1211,10 +1531,21 @@ function renderContact() {
   const social = d.social || {};
 
   document.getElementById('section-contact').innerHTML = `
-    <h1>Kontakt (Contact)</h1>
+    <h1>Kontakt</h1>
     <div class="save-bar">
       <button class="btn btn-accent" onclick="saveSection('contact', collectContactData)">Shrani</button>
+      <button class="btn btn-outline btn-sm" onclick="translateAllToEN()">Prevedi vse v EN</button>
       <button class="btn btn-history btn-sm" onclick="showHistory('contact')">&#x1F552; Zgodovina</button>
+    </div>
+    <div class="card">
+      <h3 style="margin-bottom:16px">Besedila sekcije</h3>
+      ${renderTransPair('Nadnaslov', 'contact.supra')}
+      ${renderTransPair('Naslov', 'contact.heading')}
+      ${renderTransPair('Podnaslov', 'contact.subtitle', {textarea:true})}
+      ${renderTransPair('Ime (oznaka)', 'contact.formName')}
+      ${renderTransPair('E-pošta (oznaka)', 'contact.formEmail')}
+      ${renderTransPair('Sporočilo (oznaka)', 'contact.formMessage')}
+      ${renderTransPair('Gumb pošlji', 'contact.formSend')}
     </div>
     <div class="card">
       <h3 style="margin-bottom:16px">EmailJS</h3>
@@ -1232,7 +1563,7 @@ function renderContact() {
       </div>
     </div>
     <div class="card">
-      <h3 style="margin-bottom:16px">Socialna omrezja</h3>
+      <h3 style="margin-bottom:16px">Socialna omrežja</h3>
       <div class="field">
         <label for="contact-youtube">YouTube URL</label>
         <input type="url" id="contact-youtube" value="${esc(social.youtube || '')}" placeholder="https://youtube.com/...">
@@ -1259,47 +1590,24 @@ function collectContactData() {
   };
 }
 
-// ---- 10. TRANSLATIONS ----
-async function loadTranslations() {
-  const el = document.getElementById('section-translations');
-  if (translationsSl && translationsEn) {
-    renderTranslations();
+// ---- 10. TRANSLATIONS (slimmed down — only non-inline sections) ----
+function renderTranslations() {
+  if (!translationsSl || !translationsEn) {
+    document.getElementById('section-translations').innerHTML = '<p style="color:var(--muted)">Prevodi še niso naloženi.</p>';
     return;
   }
-  el.innerHTML = '<p style="color:var(--muted)">Nalagam prevode...</p>';
-  try {
-    const [slRes, enRes] = await Promise.all([
-      apiGet('messages-sl'),
-      apiGet('messages-en')
-    ]);
-    translationsSl = slRes.data || {};
-    translationsEn = enRes.data || {};
-    translationsSlSha = slRes.sha;
-    translationsEnSha = enRes.sha;
-    renderTranslations();
-  } catch (e) {
-    el.innerHTML = '<p style="color:var(--danger)">Napaka: ' + esc(e.message) + '</p>';
-  }
-}
 
-function renderTranslations() {
-  const topSections = [
-    'metadata', 'nav', 'hero', 'about', 'encounters', 'gallery',
-    'music', 'studio', 'collections', 'contact', 'footer', 'common', 'bio'
-  ];
-
-  // Collect all top-level keys from both languages
+  const inlineSections = ['hero', 'about', 'encounters', 'gallery', 'music', 'studio', 'collections', 'contact'];
   const allKeys = new Set([...Object.keys(translationsSl || {}), ...Object.keys(translationsEn || {})]);
   const sections = [];
-  // First add known sections in order
-  topSections.forEach(k => { if (allKeys.has(k)) sections.push(k); });
-  // Then add any remaining sections
-  allKeys.forEach(k => { if (!sections.includes(k)) sections.push(k); });
+  // Only show sections NOT handled inline
+  allKeys.forEach(k => { if (!inlineSections.includes(k)) sections.push(k); });
 
-  let html = '<h1>Prevodi (Translations)</h1>';
+  let html = '<h1>Prevodi</h1>';
   html += `
     <div class="save-bar">
       <button class="btn btn-accent" onclick="saveTranslations()">Shrani prevode</button>
+      <button class="btn btn-outline btn-sm" onclick="translateAllToEN()">Prevedi vse v EN</button>
       <button class="btn btn-history btn-sm" onclick="showHistory('messages-sl')">&#x1F552; SL zgodovina</button>
       <button class="btn btn-history btn-sm" onclick="showHistory('messages-en')">&#x1F552; EN zgodovina</button>
     </div>
@@ -1368,8 +1676,8 @@ function renderTransKeys(prefix, slObj, enObj) {
 
     // Leaf value
     const isLong = (String(slVal || '').length > 80 || String(enVal || '').length > 80);
-    const inputTag = isLong ? 'textarea' : 'input type="text"';
-    const closeTag = isLong ? '</textarea>' : '';
+
+    const tBtnHtml = '<button class="btn-translate" onclick="event.stopPropagation();translateField(this)" title="Prevedi SL \u2192 EN" style="margin-left:6px">\u2192 EN</button>';
 
     if (isLong) {
       html += `
@@ -1380,7 +1688,7 @@ function renderTransKeys(prefix, slObj, enObj) {
             <textarea data-trans-path="${esc(path)}" data-trans-lang="sl" rows="3">${esc(slVal || '')}</textarea>
           </div>
           <div class="field" style="margin-bottom:0">
-            <label>EN</label>
+            <label style="display:flex;justify-content:space-between;align-items:center"><span>EN</span> ${tBtnHtml}</label>
             <textarea data-trans-path="${esc(path)}" data-trans-lang="en" rows="3">${esc(enVal || '')}</textarea>
           </div>
         </div>
@@ -1394,7 +1702,7 @@ function renderTransKeys(prefix, slObj, enObj) {
             <input type="text" data-trans-path="${esc(path)}" data-trans-lang="sl" value="${esc(slVal || '')}">
           </div>
           <div class="field" style="margin-bottom:0">
-            <label>EN</label>
+            <label style="display:flex;justify-content:space-between;align-items:center"><span>EN</span> ${tBtnHtml}</label>
             <input type="text" data-trans-path="${esc(path)}" data-trans-lang="en" value="${esc(enVal || '')}">
           </div>
         </div>
@@ -1424,18 +1732,6 @@ function collectTranslationsData() {
   });
 
   return { sl, en };
-}
-
-function setNestedValue(obj, path, value) {
-  const keys = path.split('.');
-  let current = obj;
-  for (let i = 0; i < keys.length - 1; i++) {
-    if (current[keys[i]] === undefined || typeof current[keys[i]] !== 'object') {
-      current[keys[i]] = {};
-    }
-    current = current[keys[i]];
-  }
-  current[keys[keys.length - 1]] = value;
 }
 
 async function saveTranslations() {
