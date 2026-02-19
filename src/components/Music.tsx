@@ -4,15 +4,11 @@ import ScrollReveal from "./ScrollReveal";
 import { useTranslations, useLocale } from "next-intl";
 import Link from "next/link";
 
-const featuredId = "EJYPq4STQ6w";
+import musicData from '../../content/music.json';
 
-const videoKeys = ["prstiZapleteni", "takeGoodCare"] as const;
-const videoIds: Record<string, string> = {
-  prstiZapleteni: "KPP-UOhs8iE",
-  takeGoodCare: "1WPEC_KJXpk",
-  letItBeMe: "ruVUK_g5rK0",
-  klapaSufit: "SJgYyL1qdzE",
-};
+const featuredId = musicData.featuredId;
+const videoKeys = musicData.featured;
+const videoIds: Record<string, string> = musicData.videoIds;
 
 export default function Music() {
   const t = useTranslations("music");

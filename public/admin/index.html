@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Filip Jagodič</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0a0c;--surface:#141618;--accent:#D44040;--text:#f0f0f0;
+  --muted:#a0a0a0;--border:rgba(255,255,255,0.1);--radius:8px;
+  --sidebar-w:240px;--danger:#e74c3c;--success:#27ae60;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;min-height:100vh}
+a{color:var(--accent);text-decoration:none}
+input,textarea,select,button{font-family:inherit;font-size:inherit}
+input[type=text],input[type=number],input[type=password],input[type=url],textarea{
+  width:100%;padding:10px 14px;background:var(--bg);border:1px solid var(--border);
+  border-radius:var(--radius);color:var(--text);outline:none;transition:border .2s;
+}
+input:focus,textarea:focus{border-color:var(--accent)}
+textarea{resize:vertical;min-height:80px}
+label{display:block;margin-bottom:4px;font-size:.875rem;color:var(--muted)}
+.field{margin-bottom:16px}
+
+/* Buttons */
+.btn{
+  display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border:none;
+  border-radius:var(--radius);cursor:pointer;font-weight:600;font-size:.875rem;
+  transition:opacity .2s,transform .1s;
+}
+.btn:active{transform:scale(.97)}
+.btn-accent{background:var(--accent);color:#fff}
+.btn-accent:hover{opacity:.9}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--text)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+.btn-danger{background:var(--danger);color:#fff}
+.btn-danger:hover{opacity:.9}
+.btn-sm{padding:6px 12px;font-size:.8rem}
+
+/* Login */
+#login-screen{
+  display:flex;align-items:center;justify-content:center;min-height:100vh;
+}
+.login-box{
+  background:var(--surface);padding:40px;border-radius:12px;width:360px;
+  border:1px solid var(--border);text-align:center;
+}
+.login-box h1{font-size:1.5rem;margin-bottom:8px}
+.login-box p{color:var(--muted);margin-bottom:24px;font-size:.9rem}
+.login-box .field{text-align:left}
+.login-error{color:var(--danger);font-size:.85rem;margin-top:8px;min-height:20px}
+
+/* Layout */
+#app{display:none}
+.sidebar{
+  position:fixed;top:0;left:0;width:var(--sidebar-w);height:100vh;
+  background:var(--surface);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;z-index:100;
+}
+.sidebar-header{padding:20px;border-bottom:1px solid var(--border)}
+.sidebar-header h2{font-size:1.1rem;color:var(--accent)}
+.sidebar-header small{color:var(--muted);font-size:.75rem}
+.sidebar-nav{flex:1;overflow-y:auto;padding:8px 0}
+.sidebar-nav button{
+  display:block;width:100%;text-align:left;padding:10px 20px;background:none;
+  border:none;color:var(--muted);cursor:pointer;font-size:.9rem;transition:all .15s;
+}
+.sidebar-nav button:hover{color:var(--text);background:rgba(255,255,255,.04)}
+.sidebar-nav button.active{color:var(--accent);background:rgba(212,64,64,.08);border-right:3px solid var(--accent)}
+.sidebar-footer{padding:16px 20px;border-top:1px solid var(--border)}
+.sidebar-footer button{
+  background:none;border:none;color:var(--muted);cursor:pointer;font-size:.85rem;
+}
+.sidebar-footer button:hover{color:var(--danger)}
+
+.main{margin-left:var(--sidebar-w);padding:32px 40px;max-width:960px}
+.main h1{font-size:1.75rem;margin-bottom:24px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.section-content{display:none}
+.section-content.active{display:block}
+
+/* Cards */
+.card{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:20px;margin-bottom:16px;
+}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.card-header h3{font-size:1rem}
+
+/* Image preview */
+.img-preview{
+  width:120px;height:90px;object-fit:cover;border-radius:6px;border:1px solid var(--border);
+  background:var(--bg);cursor:pointer;
+}
+.img-preview-sm{width:80px;height:60px}
+.img-row{display:flex;align-items:center;gap:12px;margin-bottom:8px;flex-wrap:wrap}
+
+/* Sticky save */
+.save-bar{
+  position:sticky;bottom:0;background:var(--surface);border-top:1px solid var(--border);
+  padding:16px 0;margin-top:32px;z-index:50;display:flex;gap:12px;
+}
+
+/* Toast */
+.toast-container{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:8px}
+.toast{
+  padding:12px 20px;border-radius:var(--radius);color:#fff;font-size:.9rem;
+  animation:toastIn .3s ease;min-width:260px;box-shadow:0 4px 20px rgba(0,0,0,.4);
+}
+.toast-success{background:var(--success)}
+.toast-error{background:var(--danger)}
+@keyframes toastIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* Dynamic list */
+.list-item{
+  display:flex;align-items:flex-start;gap:12px;padding:12px;background:var(--bg);
+  border:1px solid var(--border);border-radius:var(--radius);margin-bottom:8px;
+}
+.list-item .list-fields{flex:1}
+.list-item .list-fields .field{margin-bottom:8px}
+
+/* Translations */
+.trans-section{margin-bottom:16px}
+.trans-section-header{
+  display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--surface);
+  border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;
+  font-weight:600;font-size:.95rem;user-select:none;
+}
+.trans-section-header:hover{border-color:var(--accent)}
+.trans-section-header .arrow{transition:transform .2s;font-size:.7rem}
+.trans-section-header.open .arrow{transform:rotate(90deg)}
+.trans-body{display:none;padding:12px;border:1px solid var(--border);border-top:none;border-radius:0 0 var(--radius) var(--radius)}
+.trans-body.open{display:block}
+.trans-row{display:grid;grid-template-columns:200px 1fr 1fr;gap:12px;align-items:start;padding:8px 0;border-bottom:1px solid var(--border)}
+.trans-row:last-child{border-bottom:none}
+.trans-key{font-size:.8rem;color:var(--accent);word-break:break-all;padding-top:8px}
+
+/* Checkbox list */
+.check-list{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.check-item{
+  display:flex;align-items:center;gap:6px;padding:6px 12px;background:var(--bg);
+  border:1px solid var(--border);border-radius:var(--radius);font-size:.85rem;
+}
+.check-item input[type=checkbox]{accent-color:var(--accent)}
+
+/* Albums */
+.album-images{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+</style>
+</head>
+<body>
+
+<!-- Login Screen -->
+<div id="login-screen">
+  <div class="login-box">
+    <h1>Filip Jagodic</h1>
+    <p>Admin Panel</p>
+    <div class="field">
+      <label for="login-pw">Geslo</label>
+      <input type="password" id="login-pw" placeholder="Vnesite geslo..." onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <button class="btn btn-accent" style="width:100%;margin-top:8px" onclick="doLogin()">Prijava</button>
+    <div class="login-error" id="login-error"></div>
+  </div>
+</div>
+
+<!-- App -->
+<div id="app">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <h2>Filip Jagodic</h2>
+      <small>Administracija</small>
+    </div>
+    <div class="sidebar-nav" id="sidebar-nav"></div>
+    <div class="sidebar-footer">
+      <button onclick="doLogout()">&#x2190; Odjava</button>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+    <div id="section-hero" class="section-content"></div>
+    <div id="section-about" class="section-content"></div>
+    <div id="section-encounters" class="section-content"></div>
+    <div id="section-gallery" class="section-content"></div>
+    <div id="section-music" class="section-content"></div>
+    <div id="section-studio" class="section-content"></div>
+    <div id="section-collections" class="section-content"></div>
+    <div id="section-biography" class="section-content"></div>
+    <div id="section-contact" class="section-content"></div>
+    <div id="section-translations" class="section-content"></div>
+  </div>
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toast-container"></div>
+
+<script>
+/* =========================================================
+   ADMIN PANEL — Filip Jagodic
+   ========================================================= */
+
+// ---- Config ----
+const CLOUDINARY_CLOUD = 'dewf3zos0';
+const CLOUDINARY_PRESET = 'Filip_galerija';
+
+const SECTIONS = [
+  { key: 'hero',         file: 'hero',         label: 'Junak' },
+  { key: 'about',        file: 'about',        label: 'O Filipu' },
+  { key: 'encounters',   file: 'encounters',   label: 'Srecanja' },
+  { key: 'gallery',      file: 'gallery',      label: 'Galerija' },
+  { key: 'music',        file: 'music',        label: 'Glasba' },
+  { key: 'studio',       file: 'studio',       label: 'V studiu' },
+  { key: 'collections',  file: 'collections',  label: 'Zbirke' },
+  { key: 'biography',    file: 'biography',    label: 'Zivljenjepis' },
+  { key: 'contact',      file: 'contact',      label: 'Kontakt' },
+  { key: 'translations', file: null,           label: 'Prevodi' },
+];
+
+let sectionData = {};
+let currentSection = 'hero';
+let translationsSl = null;
+let translationsEn = null;
+let translationsSlSha = null;
+let translationsEnSha = null;
+
+// ---- Helpers ----
+function val(id) { return document.getElementById(id)?.value || ''; }
+function esc(s) { return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function getToken() { return sessionStorage.getItem('admin_token') || ''; }
+
+function showToast(msg, type='success') {
+  const c = document.getElementById('toast-container');
+  const t = document.createElement('div');
+  t.className = 'toast toast-' + type;
+  t.textContent = msg;
+  c.appendChild(t);
+  setTimeout(() => { t.style.opacity='0'; t.style.transition='opacity .3s'; setTimeout(()=>t.remove(),300); }, 3000);
+}
+
+// ---- Auth ----
+async function doLogin() {
+  const pw = val('login-pw');
+  const errEl = document.getElementById('login-error');
+  errEl.textContent = '';
+  if (!pw) { errEl.textContent = 'Vnesite geslo.'; return; }
+  try {
+    const r = await fetch('/api/auth', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: pw })
+    });
+    const d = await r.json();
+    if (!r.ok || !d.token) { errEl.textContent = d.error || 'Napacno geslo.'; return; }
+    sessionStorage.setItem('admin_token', d.token);
+    showApp();
+  } catch (e) {
+    errEl.textContent = 'Napaka pri povezavi.';
+  }
+}
+
+function doLogout() {
+  sessionStorage.removeItem('admin_token');
+  location.reload();
+}
+
+function showApp() {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  buildSidebar();
+  switchSection('hero');
+}
+
+// ---- API ----
+async function apiGet(fileKey) {
+  const r = await fetch('/api/content?file=' + encodeURIComponent(fileKey), {
+    headers: { 'Authorization': 'Bearer ' + getToken() }
+  });
+  if (r.status === 401) { doLogout(); throw new Error('Unauthorized'); }
+  if (!r.ok) throw new Error('API error ' + r.status);
+  return r.json();
+}
+
+async function apiPut(fileKey, data, sha) {
+  const r = await fetch('/api/content?file=' + encodeURIComponent(fileKey), {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + getToken() },
+    body: JSON.stringify({ data, sha })
+  });
+  if (r.status === 401) { doLogout(); throw new Error('Unauthorized'); }
+  const d = await r.json();
+  if (!r.ok || !d.success) throw new Error(d.error || 'Save failed');
+  return d;
+}
+
+// ---- Cloudinary Upload ----
+function uploadImage() {
+  return new Promise((resolve, reject) => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*,video/*';
+    input.onchange = async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      if (file.size > 10 * 1024 * 1024) {
+        showToast('Datoteka je prevelika (max 10 MB)', 'error');
+        return;
+      }
+      showToast('Nalagam...');
+      const fd = new FormData();
+      fd.append('file', file);
+      fd.append('upload_preset', CLOUDINARY_PRESET);
+      try {
+        const res = await fetch('https://api.cloudinary.com/v1_1/' + CLOUDINARY_CLOUD + '/auto/upload', {
+          method: 'POST', body: fd
+        });
+        const data = await res.json();
+        if (data.secure_url) {
+          showToast('Naloženo!');
+          resolve(data.secure_url);
+        } else {
+          showToast('Napaka pri nalaganju', 'error');
+          reject(new Error('Upload failed'));
+        }
+      } catch (err) {
+        showToast('Napaka pri nalaganju', 'error');
+        reject(err);
+      }
+    };
+    input.click();
+  });
+}
+
+// ---- Sidebar ----
+function buildSidebar() {
+  const nav = document.getElementById('sidebar-nav');
+  nav.innerHTML = SECTIONS.map(s =>
+    '<button data-key="' + s.key + '" onclick="switchSection(\'' + s.key + '\')">' + esc(s.label) + '</button>'
+  ).join('');
+}
+
+function switchSection(key) {
+  currentSection = key;
+  document.querySelectorAll('.sidebar-nav button').forEach(b => {
+    b.classList.toggle('active', b.dataset.key === key);
+  });
+  document.querySelectorAll('.section-content').forEach(el => {
+    el.classList.toggle('active', el.id === 'section-' + key);
+  });
+  loadSection(key);
+}
+
+async function loadSection(key) {
+  const sec = SECTIONS.find(s => s.key === key);
+  if (!sec) return;
+
+  if (key === 'translations') {
+    await loadTranslations();
+    return;
+  }
+
+  if (sectionData[key]) {
+    renderSection(key);
+    return;
+  }
+
+  const el = document.getElementById('section-' + key);
+  el.innerHTML = '<p style="color:var(--muted)">Nalagam...</p>';
+
+  try {
+    const res = await apiGet(sec.file);
+    sectionData[key] = { data: res.data || {}, sha: res.sha };
+    renderSection(key);
+  } catch (e) {
+    el.innerHTML = '<p style="color:var(--danger)">Napaka: ' + esc(e.message) + '</p>';
+  }
+}
+
+function renderSection(key) {
+  const renderers = {
+    hero: renderHero,
+    about: renderAbout,
+    encounters: renderEncounters,
+    gallery: renderGallery,
+    music: renderMusic,
+    studio: renderStudio,
+    collections: renderCollections,
+    biography: renderBiography,
+    contact: renderContact,
+  };
+  if (renderers[key]) renderers[key]();
+}
+
+async function saveSection(fileKey, collectFn) {
+  const sec = SECTIONS.find(s => s.file === fileKey);
+  const sKey = sec ? sec.key : fileKey;
+  try {
+    const data = collectFn();
+    const sha = sectionData[sKey]?.sha || '';
+    const res = await apiPut(fileKey, data, sha);
+    sectionData[sKey].sha = res.sha;
+    sectionData[sKey].data = data;
+    showToast('Shranjeno!');
+  } catch (e) {
+    showToast('Napaka: ' + e.message, 'error');
+  }
+}
+
+/* =========================================================
+   SECTION RENDERERS
+   ========================================================= */
+
+// ---- 1. HERO ----
+function renderHero() {
+  const d = sectionData.hero.data;
+  document.getElementById('section-hero').innerHTML = `
+    <h1>Junak (Hero)</h1>
+    <div class="card">
+      <div class="field">
+        <label for="hero-videoUrl">Video URL</label>
+        <input type="text" id="hero-videoUrl" value="${esc(d.videoUrl || '')}" placeholder="https://res.cloudinary.com/...">
+      </div>
+    </div>
+    <div class="save-bar">
+      <button class="btn btn-accent" onclick="saveSection('hero', collectHeroData)">Shrani</button>
+    </div>
+  `;
+}
+
+function collectHeroData() {
+  return { videoUrl: val('hero-videoUrl') };
+}
+
+// ---- 2. ABOUT ----
+function renderAbout() {
+  const d = sectionData.about.data;
+  const stats = d.stats || [];
+  const abilityKeys = d.abilityKeys || [];
+
+  let statsHtml = '';
+  stats.forEach((s, i) => {
+    statsHtml += `
+      <div class="list-item" data-stat-idx="${i}">
+        <div class="list-fields">
+          <div class="field">
+            <label>Stevilka</label>
+            <input type="number" class="stat-number" value="${esc(s.number || '')}" placeholder="3000">
+          </div>
+          <div class="field">
+            <label>Pripona</label>
+            <input type="text" class="stat-suffix" value="${esc(s.suffix || '')}" placeholder="+">
+          </div>
+          <div class="field">
+            <label>Kljuc</label>
+            <input type="text" class="stat-key" value="${esc(s.key || '')}" placeholder="songs">
+          </div>
+        </div>
+        <button class="btn btn-danger btn-sm" onclick="removeStatItem(${i})">&#x2715;</button>
+      </div>
+    `;
+  });
+
+  let abilityKeysHtml = '';
+  (abilityKeys).forEach((k, i) => {
+    abilityKeysHtml += `
+      <div class="list-item" data-ability-idx="${i}">
+        <div class="list-fields">
+          <div class="field">
+            <label>Kljuc sposobnosti</label>
+            <input type="text" class="ability-key" value="${esc(k)}" placeholder="absolutePitch">
+          </div>
+        </div>
+        <button class="btn btn-danger btn-sm" onclick="removeAbilityKey(${i})">&#x2715;</button>
+      </div>
+    `;
+  });
+
+  document.getElementById('section-about').innerHTML = `
+    <h1>O Filipu (About)</h1>
+
+    <div class="card">
+      <div class="card-header">
+        <h3>Kljuci sposobnosti</h3>
+        <button class="btn btn-outline btn-sm" onclick="addAbilityKey()">+ Dodaj</button>
+      </div>
+      <div id="ability-keys-list">${abilityKeysHtml}</div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h3>Statistika</h3>
+        <button class="btn btn-outline btn-sm" onclick="addStatItem()">+ Dodaj</button>
+      </div>
+      <div id="stats-list">${statsHtml}</div>
+    </div>
+
+    <div class="save-bar">
+      <button class="btn btn-accent" onclick="saveSection('about', collectAboutData)">Shrani</button>
+    </div>
+  `;
+}
+
+function collectAboutData() {
+  const stats = [];
+  document.querySelectorAll('#stats-list .list-item').forEach(el => {
+    stats.push({
+      number: parseInt(el.querySelector('.stat-number').value) || 0,
+      suffix: el.querySelector('.stat-suffix').value,
+      key: el.querySelector('.stat-key').value,
+    });
+  });
+  const abilityKeys = [];
+  document.querySelectorAll('#ability-keys-list .list-item').forEach(el => {
+    const v = el.querySelector('.ability-key').value.trim();
+    if (v) abilityKeys.push(v);
+  });
+  return { abilityKeys, stats };
+}
+
+function addStatItem() {
+  const d = sectionData.about.data;
+  d.stats = d.stats || [];
+  d.stats.push({ number: 0, suffix: '', key: '' });
+  renderAbout();
+}
+
+function removeStatItem(i) {
+  sectionData.about.data.stats.splice(i, 1);
+  renderAbout();
+}
+
+function addAbilityKey() {
+  const d = sectionData.about.data;
+  d.abilityKeys = d.abilityKeys || [];
+  d.abilityKeys.push('');
+  renderAbout();
+}
+
+function removeAbilityKey(i) {
+  sectionData.about.data.abilityKeys.splice(i, 1);
+  renderAbout();
+}
+
+// ---- 3. ENCOUNTERS ----
+function renderEncounters() {
+  const d = sectionData.encounters.data;
+  const featured = d.featured || [];
+  const all = d.all || [];
+  const images = d.images || {};
+  const videos = d.videos || {};
+  const highlightKeys = d.highlightKeys || [];
+
+  let allHtml = '';
+  all.forEach((key, i) => {
+    const img = images[key] || '';
+    const vid = videos[key] || '';
+    const isFeatured = featured.includes(key);
+    const isHighlight = highlightKeys.includes(key);
+    allHtml += `
+      <div class="card" data-enc-idx="${i}">
+        <div class="card-header">
+          <h3>#${i+1}: <span class="enc-key-display">${esc(key)}</span></h3>
+          <button class="btn btn-danger btn-sm" onclick="removeEncounter(${i})">&#x2715; Odstrani</button>
+        </div>
+        <div class="field">
+          <label>Kljuc</label>
+          <input type="text" class="enc-key" value="${esc(key)}" placeholder="plestenjak">
+        </div>
+        <div class="check-list">
+          <label class="check-item">
+            <input type="checkbox" class="enc-featured" ${isFeatured ? 'checked' : ''}> Na glavni strani
+          </label>
+          <label class="check-item">
+            <input type="checkbox" class="enc-highlight" ${isHighlight ? 'checked' : ''}> Rdec poudarek
+          </label>
+        </div>
+        <div class="field">
+          <label>Slika URL</label>
+          <div class="img-row">
+            ${img ? '<img src="'+esc(img)+'" class="img-preview" onerror="this.style.display=\'none\'">' : ''}
+            <input type="text" class="enc-image" value="${esc(img)}" placeholder="https://...">
+            <button class="btn btn-outline btn-sm" onclick="uploadForInput(this, 'enc-image')">Nalozi</button>
+          </div>
+        </div>
+        <div class="field">
+          <label>Video URL (opcijsko)</label>
+          <div class="img-row">
+            <input type="text" class="enc-video" value="${esc(vid)}" placeholder="https://...">
+            <button class="btn btn-outline btn-sm" onclick="uploadForInput(this, 'enc-video')">Nalozi</button>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
+  document.getElementById('section-encounters').innerHTML = `
+    <h1>Srecanja (Encounters)</h1>
+    <div class="card">
+      <div class="card-header">
+        <h3>Vsa srecanja</h3>
+        <button class="btn btn-outline btn-sm" onclick="addEncounter()">+ Dodaj</button>
+      </div>
+    </div>
+    <div id="encounters-list">${allHtml}</div>
+    <div class="save-bar">
+      <button class="btn btn-accent" onclick="saveSection('encounters', collectEncountersData)">Shrani</button>
+    </div>
+  `;
+}
+
+function collectEncountersData() {
+  const all = [];
+  const featured = [];
+  const images = {};
+  const videos = {};
+  const highlightKeys = [];
+
+  document.querySelectorAll('#encounters-list .card').forEach(el => {
+    const key = el.querySelector('.enc-key').value.trim();
+    if (!key) return;
+    all.push(key);
+    if (el.querySelector('.enc-featured').checked) featured.push(key);
+    if (el.querySelector('.enc-highlight').checked) highlightKeys.push(key);
+    const img = el.querySelector('.enc-image').value.trim();
+    const vid = el.querySelector('.enc-video').value.trim();
+    if (img) images[key] = img;
+    if (vid) videos[key] = vid;
+  });
+  return { featured, all, images, videos, highlightKeys };
+}
+
+function addEncounter() {
+  const d = sectionData.encounters.data;
+  d.all = d.all || [];
+  d.all.push('new_encounter');
+  d.images = d.images || {};
+  d.videos = d.videos || {};
+  renderEncounters();
+}
+
+function removeEncounter(i) {
+  const d = sectionData.encounters.data;
+  const key = d.all[i];
+  d.all.splice(i, 1);
+  if (d.featured) d.featured = d.featured.filter(k => k !== key);
+  if (d.highlightKeys) d.highlightKeys = d.highlightKeys.filter(k => k !== key);
+  if (d.images) delete d.images[key];
+  if (d.videos) delete d.videos[key];
+  renderEncounters();
+}
+
+// ---- 4. GALLERY ----
+function renderGallery() {
+  const d = sectionData.gallery.data;
+  const featured = d.featured || [];
+  const all = d.all || [];
+  const images = d.images || {};
+  const positions = d.positions || {};
+
+  let allHtml = '';
+  all.forEach((key, i) => {
+    const img = images[key] || '';
+    const pos = positions[key] || '';
+    const isFeatured = featured.includes(key);
+    allHtml += `
+      <div class="card" data-gal-idx="${i}">
+        <div class="card-header">
+          <h3>#${i+1}: ${esc(key)}</h3>
+          <button class="btn btn-danger btn-sm" onclick="removeGalleryItem(${i})">&#x2715;</button>
+        </div>
+        <div class="field">
+          <label>Kljuc</label>
+          <input type="text" class="gal-key" value="${esc(key)}">
+        </div>
+        <label class="check-item" style="margin-bottom:12px">
+          <input type="checkbox" class="gal-featured" ${isFeatured ? 'checked' : ''}> Na glavni strani
+        </label>
+        <div class="field">
+          <label>Slika URL</label>
+          <div class="img-row">
+            ${img ? '<img src="'+esc(img)+'" class="img-preview" onerror="this.style.display=\'none\'">' : ''}
+            <input type="text" class="gal-image" value="${esc(img)}">
+            <button class="btn btn-outline btn-sm" onclick="uploadForInput(this, 'gal-image')">Nalozi</button>
+          </div>
+        </div>
+        <div class="field">
+          <label>Pozicija (object-position, opcijsko)</label>
+          <input type="text" class="gal-position" value="${esc(pos)}" placeholder="center top">
+        </div>
+      </div>
+    `;
+  });
+
+  document.getElementById('section-gallery').innerHTML = `
+    <h1>Galerija (Gallery)</h1>
+    <div class="card">
+      <div class="card-header">
+        <h3>Vse fotografije (${all.length})</h3>
+        <button class="btn btn-outline btn-sm" onclick="addGalleryItem()">+ Dodaj</button>
+      </div>
+    </div>
+    <div id="gallery-list">${allHtml}</div>
+    <div class="save-bar">
+      <button class="btn btn-accent" onclick="saveSection('gallery', collectGalleryData)">Shrani</button>
+    </div>
+  `;
+}
+
+function collectGalleryData() {
+  const all = [];
+  const featured = [];
+  const images = {};
+  const positions = {};
+
+  document.querySelectorAll('#gallery-list .card').forEach(el => {
+    const key = el.querySelector('.gal-key').value.trim();
+    if (!key) return;
+    all.push(key);
+    if (el.querySelector('.gal-featured').checked) featured.push(key);
+    const img = el.querySelector('.gal-image').value.trim();
+    const pos = el.querySelector('.gal-position').value.trim();
+    if (img) images[key] = img;
+    if (pos) positions[key] = pos;
+  });
+  return { featured, all, images, positions };
+}
+
+function addGalleryItem() {
+  const d = sectionData.gallery.data;
+  d.all = d.all || [];
+  d.all.push('new_photo');
+  renderGallery();
+}
+
+function removeGalleryItem(i) {
+  const d = sectionData.gallery.data;
+  const key = d.all[i];
+  d.all.splice(i, 1);
+  if (d.featured) d.featured = d.featured.filter(k => k !== key);
+  if (d.images) delete d.images[key];
+  if (d.positions) delete d.positions[key];
+  renderGallery();
+}
+
+// ---- 5. MUSIC ----
+function renderMusic() {
+  const d = sectionData.music.data;
+  const featuredId = d.featuredId || '';
+  const featured = d.featured || [];
+  const all = d.all || [];
+  const videoIds = d.videoIds || {};
+
+  let allHtml = '';
+  all.forEach((key, i) => {
+    const vid = videoIds[key] || '';
+    const isFeatured = featured.includes(key);
+    allHtml += `
+      <div class="card" data-mus-idx="${i}">
+        <div class="card-header">
+          <h3>#${i+1}: ${esc(key)}</h3>
+          <button class="btn btn-danger btn-sm" onclick="removeMusicItem(${i})">&#x2715;</button>
+        </div>
+        <div class="field">
+          <label>Kljuc</label>
+          <input type="text" class="mus-key" value="${esc(key)}">
+        </div>
+        <label class="check-item" style="margin-bottom:12px">
+          <input type="checkbox" class="mus-featured" ${isFeatured ? 'checked' : ''}> Na glavni strani
+        </label>
+        <div class="field">
+          <label>YouTube ID</label>
+          <input type="text" class="mus-videoid" value="${esc(vid)}" placeholder="dQw4w9WgXcQ">
+        </div>
+      </div>
+    `;
+  });
+
+  document.getElementById('section-music').innerHTML = `
+    <h1>Glasba (Music)</h1>
+    <div class="card">
+      <div class="field">
+        <label for="music-featuredId">Featured Video ID (YouTube)</label>
+        <input type="text" id="music-featuredId" value="${esc(featuredId)}" placeholder="dQw4w9WgXcQ">
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h3>Vsi videi (${all.length})</h3>
+        <button class="btn btn-outline btn-sm" onclick="addMusicItem()">+ Dodaj</button>
+      </div>
+    </div>
+    <div id="music-list">${allHtml}</div>
+    <div class="save-bar">
+      <button class="btn btn-accent" onclick="saveSection('music', collectMusicData)">Shrani</button>
+    </div>
+  `;
+}
+
+function collectMusicData() {
+  const all = [];
+  const featured = [];
+  const videoIds = {};
+
+  document.querySelectorAll('#music-list .card').forEach(el => {
+    const key = el.querySelector('.mus-key').value.trim();
+    if (!key) return;
+    all.push(key);
+    if (el.querySelector('.mus-featured').checked) featured.push(key);
+    const vid = el.querySelector('.mus-videoid').value.trim();
+    if (vid) videoIds[key] = vid;
+  });
+  return { featuredId: val('music-featuredId'), featured, all, videoIds };
+}
+
+function addMusicItem() {
+  const d = sectionData.music.data;
+  d.all = d.all || [];
+  d.all.push('new_video');
+  renderMusic();
+}
+
+function removeMusicItem(i) {
+  const d = sectionData.music.data;
+  const key = d.all[i];
+  d.all.splice(i, 1);
+  if (d.featured) d.featured = d.featured.filter(k => k !== key);
+  if (d.videoIds) delete d.videoIds[key];
+  renderMusic();
+}
+
+// ---- 6. STUDIO ----
+function renderStudio() {
+  const d = sectionData.studio.data;
+  const albums = d.albums || [];
+
+  let albumsHtml = '';
+  albums.forEach((album, ai) => {
+    let imagesHtml = '';
+    (album.images || []).forEach((img, ii) => {
+      imagesHtml += `
+        <div class="img-row" data-album-img="${ai}-${ii}">
+          <img src="${esc(img)}" class="img-preview img-preview-sm" onerror="this.style.display='none'">
+          <input type="text" class="studio-album-img" value="${esc(img)}" style="flex:1">
+          <button class="btn btn-outline btn-sm" onclick="uploadForInput(this, 'studio-album-img')">Nalozi</button>
+          <button class="btn btn-danger btn-sm" onclick="removeStudioAlbumImage(${ai}, ${ii})">&#x2715;</button>
+        </div>
+      `;
+    });
+
+    albumsHtml += `
+      <div class="card" data-album-idx="${ai}">
+        <div class="card-header">
+          <h3>Album #${ai+1}</h3>
+          <button class="btn btn-danger btn-sm" onclick="removeStudioAlbum(${ai})">&#x2715; Odstrani album</button>
+        </div>
+        <div class="field">
+          <label>Kljuc</label>
+          <input type="text" class="album-key" value="${esc(album.key || '')}">
+        </div>
+        <div class="field">
+          <label>Naslovnica URL</label>
+          <div class="img-row">
+            ${album.cover ? '<img src="'+esc(album.cover)+'" class="img-preview" onerror="this.style.display=\'none\'">' : ''}
+            <input type="text" class="album-cover" value="${esc(album.cover || '')}">
+            <button class="btn btn-outline btn-sm" onclick="uploadForInput(this, 'album-cover')">Nalozi</button>
+          </div>
+        </div>
+        <div class="field">
+          <label>Slike albuma</label>
+          <div class="album-images" id="album-images-${ai}">${imagesHtml}</div>
+          <button class="btn btn-outline btn-sm" style="margin-top:8px" onclick="addStudioAlbumImage(${ai})">+ Dodaj sliko</button>
+        </div>
+      </div>
+    `;
+  });
+
+  document.getElementById('section-studio').innerHTML = `
+    <h1>V studiu (Studio)</h1>
+    <div class="card">
+      <div class="card-header">
+        <h3>Albumi (${albums.length})</h3>
+        <button class="btn btn-outline btn-sm" onclick="addStudioAlbum()">+ Dodaj album</button>
+      </div>
+    </div>
+    <div id="studio-albums-list">${albumsHtml}</div>
+    <div class="save-bar">
+      <button class="btn btn-accent" onclick="saveSection('studio', collectStudioData)">Shrani</button>
+    </div>
+  `;
+}
+
+function collectStudioData() {
+  const albums = [];
+  document.querySelectorAll('#studio-albums-list .card').forEach(el => {
+    const key = el.querySelector('.album-key').value.trim();
+    const cover = el.querySelector('.album-cover').value.trim();
+    const images = [];
+    el.querySelectorAll('.studio-album-img').forEach(inp => {
+      const v = inp.value.trim();
+      if (v) images.push(v);
+    });
+    albums.push({ key, cover, images });
+  });
+  return { albums };
+}
+
+function addStudioAlbum() {
+  const d = sectionData.studio.data;
+  d.albums = d.albums || [];
+  d.albums.push({ key: '', cover: '', images: [] });
+  renderStudio();
+}
+
+function removeStudioAlbum(i) {
+  sectionData.studio.data.albums.splice(i, 1);
+  renderStudio();
+}
+
+function addStudioAlbumImage(ai) {
+  const d = sectionData.studio.data;
+  d.albums[ai].images = d.albums[ai].images || [];
+  d.albums[ai].images.push('');
+  renderStudio();
+}
+
+function removeStudioAlbumImage(ai, ii) {
+  sectionData.studio.data.albums[ai].images.splice(ii, 1);
+  renderStudio();
+}
+
+// ---- 7. COLLECTIONS ----
+function renderCollections() {
+  const d = sectionData.collections.data;
+  const kb = d.keyboards || { images: [], items: [] };
+  const dc = d.dictaphones || { images: [], items: [] };
+
+  function renderCategory(cat, prefix, data) {
+    let imagesHtml = '';
+    (data.images || []).forEach((img, i) => {
+      imagesHtml += `
+        <div class="img-row" data-col-img="${prefix}-${i}">
+          <img src="${esc(img)}" class="img-preview img-preview-sm" onerror="this.style.display='none'">
+          <input type="text" class="col-${prefix}-img" value="${esc(img)}" style="flex:1">
+          <button class="btn btn-outline btn-sm" onclick="uploadForInput(this, 'col-${prefix}-img')">Nalozi</button>
+          <button class="btn btn-danger btn-sm" onclick="removeCollectionImage('${prefix}', ${i})">&#x2715;</button>
+        </div>
+      `;
+    });
+
+    let itemsHtml = '';
+    (data.items || []).forEach((item, i) => {
+      itemsHtml += `
+        <div class="list-item" data-col-item="${prefix}-${i}">
+          <div class="list-fields">
+            <input type="text" class="col-${prefix}-item" value="${esc(item)}" placeholder="yamaha">
+          </div>
+          <button class="btn btn-danger btn-sm" onclick="removeCollectionItem('${prefix}', ${i})">&#x2715;</button>
+        </div>
+      `;
+    });
+
+    return `
+      <div class="card">
+        <div class="card-header">
+          <h3>${esc(cat)}</h3>
+        </div>
+        <div class="field">
+          <label>Slike</label>
+          <div id="col-${prefix}-images">${imagesHtml}</div>
+          <button class="btn btn-outline btn-sm" style="margin-top:8px" onclick="addCollectionImage('${prefix}')">+ Dodaj sliko</button>
+        </div>
+        <div class="field" style="margin-top:16px">
+          <label>Predmeti (kljuci)</label>
+          <div id="col-${prefix}-items">${itemsHtml}</div>
+          <button class="btn btn-outline btn-sm" style="margin-top:8px" onclick="addCollectionItem('${prefix}')">+ Dodaj predmet</button>
+        </div>
+      </div>
+    `;
+  }
+
+  document.getElementById('section-collections').innerHTML = `
+    <h1>Zbirke (Collections)</h1>
+    ${renderCategory('Klaviature (Keyboards)', 'keyboards', kb)}
+    ${renderCategory('Diktafoni (Dictaphones)', 'dictaphones', dc)}
+    <div class="save-bar">
+      <button class="btn btn-accent" onclick="saveSection('collections', collectCollectionsData)">Shrani</button>
+    </div>
+  `;
+}
+
+function collectCollectionsData() {
+  function collectCat(prefix) {
+    const images = [];
+    document.querySelectorAll('.col-' + prefix + '-img').forEach(inp => {
+      const v = inp.value.trim();
+      if (v) images.push(v);
+    });
+    const items = [];
+    document.querySelectorAll('.col-' + prefix + '-item').forEach(inp => {
+      const v = inp.value.trim();
+      if (v) items.push(v);
+    });
+    return { images, items };
+  }
+  return {
+    keyboards: collectCat('keyboards'),
+    dictaphones: collectCat('dictaphones'),
+  };
+}
+
+function addCollectionImage(prefix) {
+  const d = sectionData.collections.data;
+  const cat = prefix === 'keyboards' ? 'keyboards' : 'dictaphones';
+  d[cat] = d[cat] || { images: [], items: [] };
+  d[cat].images = d[cat].images || [];
+  d[cat].images.push('');
+  renderCollections();
+}
+
+function removeCollectionImage(prefix, i) {
+  const cat = prefix === 'keyboards' ? 'keyboards' : 'dictaphones';
+  sectionData.collections.data[cat].images.splice(i, 1);
+  renderCollections();
+}
+
+function addCollectionItem(prefix) {
+  const d = sectionData.collections.data;
+  const cat = prefix === 'keyboards' ? 'keyboards' : 'dictaphones';
+  d[cat] = d[cat] || { images: [], items: [] };
+  d[cat].items = d[cat].items || [];
+  d[cat].items.push('');
+  renderCollections();
+}
+
+function removeCollectionItem(prefix, i) {
+  const cat = prefix === 'keyboards' ? 'keyboards' : 'dictaphones';
+  sectionData.collections.data[cat].items.splice(i, 1);
+  renderCollections();
+}
+
+// ---- 8. BIOGRAPHY ----
+function renderBiography() {
+  const d = sectionData.biography.data;
+  const chapters = [
+    { key: 'birthPhotos',          label: 'Rojstvo (birthPhotos)' },
+    { key: 'firstMonthsPhotos',    label: 'Prvi meseci (firstMonthsPhotos)' },
+    { key: 'singingWithMomPhotos', label: 'Petje z mamo (singingWithMomPhotos)' },
+    { key: 'fatherPhotos',         label: 'Oce (fatherPhotos)' },
+    { key: 'musicalTalentPhotos',  label: 'Glasbeni talent (musicalTalentPhotos)' },
+    { key: 'autisticPhotos',       label: 'Avtisticne lastnosti (autisticPhotos)' },
+    { key: 'careerPhotos',         label: 'Kariera (careerPhotos)' },
+    { key: 'motherPhotos',         label: 'Mama (motherPhotos)' },
+    { key: 'endPhoto',             label: 'Zakljucek (endPhoto)' },
+  ];
+
+  let html = '<h1>Zivljenjepis (Biography)</h1>';
+
+  chapters.forEach(ch => {
+    const photos = d[ch.key] || [];
+    let photosHtml = '';
+    photos.forEach((img, i) => {
+      photosHtml += `
+        <div class="img-row" data-bio-img="${ch.key}-${i}">
+          <img src="${esc(img)}" class="img-preview img-preview-sm" onerror="this.style.display='none'">
+          <input type="text" class="bio-${ch.key}-img" value="${esc(img)}" style="flex:1">
+          <button class="btn btn-outline btn-sm" onclick="uploadForInput(this, 'bio-${ch.key}-img')">Nalozi</button>
+          <button class="btn btn-danger btn-sm" onclick="removeBioPhoto('${ch.key}', ${i})">&#x2715;</button>
+        </div>
+      `;
+    });
+
+    html += `
+      <div class="card">
+        <div class="card-header">
+          <h3>${esc(ch.label)} (${photos.length})</h3>
+          <button class="btn btn-outline btn-sm" onclick="addBioPhoto('${ch.key}')">+ Dodaj</button>
+        </div>
+        <div id="bio-${ch.key}-list">${photosHtml}</div>
+      </div>
+    `;
+  });
+
+  html += `
+    <div class="save-bar">
+      <button class="btn btn-accent" onclick="saveSection('biography', collectBiographyData)">Shrani</button>
+    </div>
+  `;
+
+  document.getElementById('section-biography').innerHTML = html;
+}
+
+function collectBiographyData() {
+  const chapters = ['birthPhotos','firstMonthsPhotos','singingWithMomPhotos','fatherPhotos',
+    'musicalTalentPhotos','autisticPhotos','careerPhotos','motherPhotos','endPhoto'];
+  const result = {};
+  chapters.forEach(ch => {
+    const imgs = [];
+    document.querySelectorAll('.bio-' + ch + '-img').forEach(inp => {
+      const v = inp.value.trim();
+      if (v) imgs.push(v);
+    });
+    result[ch] = imgs;
+  });
+  return result;
+}
+
+function addBioPhoto(chKey) {
+  const d = sectionData.biography.data;
+  d[chKey] = d[chKey] || [];
+  d[chKey].push('');
+  renderBiography();
+}
+
+function removeBioPhoto(chKey, i) {
+  sectionData.biography.data[chKey].splice(i, 1);
+  renderBiography();
+}
+
+// ---- 9. CONTACT ----
+function renderContact() {
+  const d = sectionData.contact.data;
+  const emailjs = d.emailjs || {};
+  const social = d.social || {};
+
+  document.getElementById('section-contact').innerHTML = `
+    <h1>Kontakt (Contact)</h1>
+    <div class="card">
+      <h3 style="margin-bottom:16px">EmailJS</h3>
+      <div class="field">
+        <label for="contact-serviceId">Service ID</label>
+        <input type="text" id="contact-serviceId" value="${esc(emailjs.serviceId || '')}" placeholder="service_xxx">
+      </div>
+      <div class="field">
+        <label for="contact-templateId">Template ID</label>
+        <input type="text" id="contact-templateId" value="${esc(emailjs.templateId || '')}" placeholder="template_xxx">
+      </div>
+      <div class="field">
+        <label for="contact-publicKey">Public Key</label>
+        <input type="text" id="contact-publicKey" value="${esc(emailjs.publicKey || '')}" placeholder="xxx">
+      </div>
+    </div>
+    <div class="card">
+      <h3 style="margin-bottom:16px">Socialna omrezja</h3>
+      <div class="field">
+        <label for="contact-youtube">YouTube URL</label>
+        <input type="url" id="contact-youtube" value="${esc(social.youtube || '')}" placeholder="https://youtube.com/...">
+      </div>
+      <div class="field">
+        <label for="contact-facebook">Facebook URL</label>
+        <input type="url" id="contact-facebook" value="${esc(social.facebook || '')}" placeholder="https://facebook.com/...">
+      </div>
+    </div>
+    <div class="save-bar">
+      <button class="btn btn-accent" onclick="saveSection('contact', collectContactData)">Shrani</button>
+    </div>
+  `;
+}
+
+function collectContactData() {
+  return {
+    emailjs: {
+      serviceId: val('contact-serviceId'),
+      templateId: val('contact-templateId'),
+      publicKey: val('contact-publicKey'),
+    },
+    social: {
+      youtube: val('contact-youtube'),
+      facebook: val('contact-facebook'),
+    }
+  };
+}
+
+// ---- 10. TRANSLATIONS ----
+async function loadTranslations() {
+  const el = document.getElementById('section-translations');
+  if (translationsSl && translationsEn) {
+    renderTranslations();
+    return;
+  }
+  el.innerHTML = '<p style="color:var(--muted)">Nalagam prevode...</p>';
+  try {
+    const [slRes, enRes] = await Promise.all([
+      apiGet('messages-sl'),
+      apiGet('messages-en')
+    ]);
+    translationsSl = slRes.data || {};
+    translationsEn = enRes.data || {};
+    translationsSlSha = slRes.sha;
+    translationsEnSha = enRes.sha;
+    renderTranslations();
+  } catch (e) {
+    el.innerHTML = '<p style="color:var(--danger)">Napaka: ' + esc(e.message) + '</p>';
+  }
+}
+
+function renderTranslations() {
+  const topSections = [
+    'metadata', 'nav', 'hero', 'about', 'encounters', 'gallery',
+    'music', 'studio', 'collections', 'contact', 'footer', 'common', 'bio'
+  ];
+
+  // Collect all top-level keys from both languages
+  const allKeys = new Set([...Object.keys(translationsSl || {}), ...Object.keys(translationsEn || {})]);
+  const sections = [];
+  // First add known sections in order
+  topSections.forEach(k => { if (allKeys.has(k)) sections.push(k); });
+  // Then add any remaining sections
+  allKeys.forEach(k => { if (!sections.includes(k)) sections.push(k); });
+
+  let html = '<h1>Prevodi (Translations)</h1>';
+
+  sections.forEach((sectionKey, si) => {
+    const slSection = translationsSl[sectionKey];
+    const enSection = translationsEn[sectionKey];
+
+    if (slSection === undefined && enSection === undefined) return;
+
+    // If it's a simple string, not an object
+    if (typeof slSection !== 'object' && typeof enSection !== 'object') {
+      html += `
+        <div class="card">
+          <div class="trans-row" style="border-bottom:none">
+            <div class="trans-key">${esc(sectionKey)}</div>
+            <div class="field" style="margin-bottom:0">
+              <label>SL</label>
+              <input type="text" data-trans-path="${esc(sectionKey)}" data-trans-lang="sl" value="${esc(slSection || '')}">
+            </div>
+            <div class="field" style="margin-bottom:0">
+              <label>EN</label>
+              <input type="text" data-trans-path="${esc(sectionKey)}" data-trans-lang="en" value="${esc(enSection || '')}">
+            </div>
+          </div>
+        </div>
+      `;
+      return;
+    }
+
+    html += `
+      <div class="trans-section">
+        <div class="trans-section-header" onclick="toggleTransSection(this)" id="trans-header-${si}">
+          <span class="arrow">&#x25B6;</span> ${esc(sectionKey)}
+        </div>
+        <div class="trans-body" id="trans-body-${si}">
+          ${renderTransKeys(sectionKey, slSection || {}, enSection || {})}
+        </div>
+      </div>
+    `;
+  });
+
+  html += `
+    <div class="save-bar">
+      <button class="btn btn-accent" onclick="saveTranslations()">Shrani prevode</button>
+    </div>
+  `;
+
+  document.getElementById('section-translations').innerHTML = html;
+}
+
+function renderTransKeys(prefix, slObj, enObj) {
+  let html = '';
+  const allKeys = new Set([...Object.keys(slObj || {}), ...Object.keys(enObj || {})]);
+
+  allKeys.forEach(key => {
+    const slVal = slObj ? slObj[key] : undefined;
+    const enVal = enObj ? enObj[key] : undefined;
+    const path = prefix + '.' + key;
+
+    // If both are objects, recurse
+    if ((typeof slVal === 'object' && slVal !== null) || (typeof enVal === 'object' && enVal !== null)) {
+      html += `
+        <div style="margin-left:12px;margin-top:8px;margin-bottom:8px">
+          <div style="font-weight:600;color:var(--accent);font-size:.85rem;margin-bottom:6px">${esc(key)}</div>
+          ${renderTransKeys(path, slVal || {}, enVal || {})}
+        </div>
+      `;
+      return;
+    }
+
+    // Leaf value
+    const isLong = (String(slVal || '').length > 80 || String(enVal || '').length > 80);
+    const inputTag = isLong ? 'textarea' : 'input type="text"';
+    const closeTag = isLong ? '</textarea>' : '';
+
+    if (isLong) {
+      html += `
+        <div class="trans-row">
+          <div class="trans-key">${esc(path)}</div>
+          <div class="field" style="margin-bottom:0">
+            <label>SL</label>
+            <textarea data-trans-path="${esc(path)}" data-trans-lang="sl" rows="3">${esc(slVal || '')}</textarea>
+          </div>
+          <div class="field" style="margin-bottom:0">
+            <label>EN</label>
+            <textarea data-trans-path="${esc(path)}" data-trans-lang="en" rows="3">${esc(enVal || '')}</textarea>
+          </div>
+        </div>
+      `;
+    } else {
+      html += `
+        <div class="trans-row">
+          <div class="trans-key">${esc(path)}</div>
+          <div class="field" style="margin-bottom:0">
+            <label>SL</label>
+            <input type="text" data-trans-path="${esc(path)}" data-trans-lang="sl" value="${esc(slVal || '')}">
+          </div>
+          <div class="field" style="margin-bottom:0">
+            <label>EN</label>
+            <input type="text" data-trans-path="${esc(path)}" data-trans-lang="en" value="${esc(enVal || '')}">
+          </div>
+        </div>
+      `;
+    }
+  });
+
+  return html;
+}
+
+function toggleTransSection(header) {
+  header.classList.toggle('open');
+  const body = header.nextElementSibling;
+  body.classList.toggle('open');
+}
+
+function collectTranslationsData() {
+  const sl = JSON.parse(JSON.stringify(translationsSl));
+  const en = JSON.parse(JSON.stringify(translationsEn));
+
+  document.querySelectorAll('[data-trans-path]').forEach(input => {
+    const path = input.getAttribute('data-trans-path');
+    const lang = input.getAttribute('data-trans-lang');
+    const value = input.tagName === 'TEXTAREA' ? input.value : input.value;
+    const target = lang === 'sl' ? sl : en;
+    setNestedValue(target, path, value);
+  });
+
+  return { sl, en };
+}
+
+function setNestedValue(obj, path, value) {
+  const keys = path.split('.');
+  let current = obj;
+  for (let i = 0; i < keys.length - 1; i++) {
+    if (current[keys[i]] === undefined || typeof current[keys[i]] !== 'object') {
+      current[keys[i]] = {};
+    }
+    current = current[keys[i]];
+  }
+  current[keys[keys.length - 1]] = value;
+}
+
+async function saveTranslations() {
+  try {
+    const { sl, en } = collectTranslationsData();
+
+    const [slRes, enRes] = await Promise.all([
+      apiPut('messages-sl', sl, translationsSlSha),
+      apiPut('messages-en', en, translationsEnSha),
+    ]);
+
+    translationsSl = sl;
+    translationsEn = en;
+    translationsSlSha = slRes.sha;
+    translationsEnSha = enRes.sha;
+    showToast('Prevodi shranjeni!');
+  } catch (e) {
+    showToast('Napaka: ' + e.message, 'error');
+  }
+}
+
+// ---- Upload helper for inputs near the button ----
+async function uploadForInput(btn, inputClass) {
+  try {
+    const url = await uploadImage();
+    // Find the input in the same parent row
+    const container = btn.closest('.img-row') || btn.closest('.field');
+    const input = container.querySelector('.' + inputClass) || container.querySelector('input[type=text]');
+    if (input) {
+      input.value = url;
+      // Update preview if exists
+      const preview = container.querySelector('.img-preview');
+      if (preview) {
+        preview.src = url;
+        preview.style.display = '';
+      }
+    }
+  } catch (e) {
+    // Upload cancelled or failed - toast already shown
+  }
+}
+
+// ---- Init ----
+(function init() {
+  if (getToken()) {
+    showApp();
+  }
+})();
+</script>
+</body>
+</html>

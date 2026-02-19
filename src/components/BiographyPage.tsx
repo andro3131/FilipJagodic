@@ -6,65 +6,17 @@ import { useState, useCallback, useEffect } from "react";
 import ScrollReveal from "./ScrollReveal";
 import { useTranslations, useLocale } from "next-intl";
 
-const birthPhotos = [
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771448586/7_1_smae7f.jpg",
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771448587/2_cicbzf.jpg",
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771448589/6_1_eyvnbp.jpg",
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771448604/26_2_ymx1ws.jpg",
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771448626/41_xhhvp3.jpg",
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771448630/42_sxrvyz.jpg",
-];
+import biographyData from '../../content/biography.json';
 
-const firstMonthsPhotos = [
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771448635/49_ge749n.jpg",
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771448664/68_tsukco.jpg",
-];
-
-const singingWithMomPhotos = [
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771448639/50_iqxa9i.jpg",
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771448643/52_ypcfmu.jpg",
-];
-
-const fatherPhotos = [
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771448678/86_e8daqv.jpg",
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771448656/65_or4onk.jpg",
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771448650/54_2_buai9t.jpg",
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771448635/49_ge749n.jpg",
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771448589/6_1_eyvnbp.jpg",
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771490902/55704623_1192077094302412_8834702750974476288_n_iksgej.jpg",
-];
-
-const musicalTalentPhotos = [
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771448997/85_ursdd5.jpg",
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771449080/94_q3lmf1.jpg",
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771449086/14232370_632665486910245_786561684551610605_n_mcxyjo.jpg",
-];
-
-const autisticPhotos = [
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444128/zbrika2_2021_lnshyb.jpg",
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444110/klaviature_do_2020_llmar5.jpg",
-];
-
-const careerPhotos = [
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771103695/Screenshot_2026-02-14_at_22.14.48_zvzcdg.png",
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771103621/FILIP_JUMBO_25.MAJ_majhna_FINAL_vhfuxe.jpg",
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444746/33573390_964264710416986_3024183878676905984_n_qcolgm.jpg",
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771098529/andrea_bocelli_qwksga.jpg",
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771098693/11019010_402268379949958_4207790944302076286_n_eor5pu.jpg",
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771096727/borut_pahor_s8jwkb.jpg",
-];
-
-const motherPhotos = [
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771450879/21761758_833699250140200_3605137899429653888_n_rpombz.jpg",
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771450860/10959463_399208300255966_485022783268918936_n_kfqz7s.jpg",
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771490829/469235815_2846551268854978_2775173921985612069_n_l38a3y.jpg",
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771489763/48426432_1130207687156020_6968695209261531136_n_wyzb3z.jpg",
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444837/Filip_2014_RTV_SLO_f2r3xh.jpg",
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444759/33720422_964264490417008_9021151803894398976_n_igtckq.jpg",
-];
-
-const endPhoto =
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444763/44443880_1045231838935515_918131203201040384_n_ikooyu.jpg";
+const birthPhotos = biographyData.birthPhotos;
+const firstMonthsPhotos = biographyData.firstMonthsPhotos;
+const singingWithMomPhotos = biographyData.singingWithMomPhotos;
+const fatherPhotos = biographyData.fatherPhotos;
+const musicalTalentPhotos = biographyData.musicalTalentPhotos;
+const autisticPhotos = biographyData.autisticPhotos;
+const careerPhotos = biographyData.careerPhotos;
+const motherPhotos = biographyData.motherPhotos;
+const endPhoto = biographyData.endPhoto[0];
 
 // Collect all photos in page order for lightbox navigation
 const allPhotos = [

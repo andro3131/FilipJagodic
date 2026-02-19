@@ -48,14 +48,10 @@ function AnimatedNumber({
   );
 }
 
-const abilityKeys = ["absolutePitch", "memory", "noStageFright", "encyclopedia"] as const;
+import aboutData from '../../content/about.json';
 
-const statsData = [
-  { number: 1000, suffix: "+", key: "songs" },
-  { number: 20, suffix: "+", key: "keyboards" },
-  { number: 27, suffix: "", key: "years" },
-  { number: 30, suffix: "+", key: "recorded" },
-];
+const abilityKeys = aboutData.abilityKeys;
+const statsData = aboutData.stats;
 
 export default function About() {
   const t = useTranslations("about");

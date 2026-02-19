@@ -7,22 +7,12 @@ import Modal from "./Modal";
 import { useTranslations, useLocale } from "next-intl";
 import Link from "next/link";
 
-const encounterKeys = ["bocelli", "sufit", "plestenjak", "pahor"] as const;
+import encountersData from '../../content/encounters.json';
 
-const encounterImages: Record<string, string> = {
-  bocelli: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771096727/andrea_bocelli_jboluq.jpg",
-  sufit: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771096728/klas%CC%8Ca_sufit_a92qqs.jpg",
-  plestenjak: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771096729/plestenjak_vnjqg3.jpg",
-  pahor: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771096727/borut_pahor_s8jwkb.jpg",
-};
-
-const encounterVideos: Record<string, string> = {
-  plestenjak: "https://res.cloudinary.com/dewf3zos0/video/upload/v1771445309/19874134_107584786563726_526080777331408896_n_dahm5v.mp4",
-  bocelli: "https://res.cloudinary.com/dewf3zos0/video/upload/v1771448046/filip_THE_KING_bocelli_2018_04_03_12_05_01_UTC_oka615.mp4",
-  sufit: "https://res.cloudinary.com/dewf3zos0/video/upload/v1771448081/Klapa_S%CC%8Cufit_-_Zavezan_Filip_don_Filipo_mhjj6i.mp4",
-};
-
-const highlightKeys = new Set(["bocelli"]);
+const encounterKeys = encountersData.featured;
+const encounterImages: Record<string, string> = encountersData.images;
+const encounterVideos: Record<string, string> = encountersData.videos;
+const highlightKeys = new Set(encountersData.highlightKeys);
 
 export default function Encounters() {
   const t = useTranslations("encounters");

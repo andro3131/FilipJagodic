@@ -7,28 +7,12 @@ import ScrollReveal from "./ScrollReveal";
 import Modal from "./Modal";
 import { useTranslations, useLocale } from "next-intl";
 
-const encounterKeys = ["bocelli", "sufit", "plestenjak", "pahor", "zavec", "svajger", "slabinac", "smolar", "kesovija"] as const;
+import encountersData from '../../content/encounters.json';
 
-const encounterImages: Record<string, string> = {
-  bocelli: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771096727/andrea_bocelli_jboluq.jpg",
-  sufit: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771096728/klas%CC%8Ca_sufit_a92qqs.jpg",
-  plestenjak: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771096729/plestenjak_vnjqg3.jpg",
-  pahor: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771096727/borut_pahor_s8jwkb.jpg",
-  zavec: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771096726/dejan_zavec1_pol9nb.jpg",
-  svajger: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771096726/darja_svajger_ascluf.jpg",
-  slabinac: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771443715/125402116_1704431406400309_7387810105924028628_n_nmadpp.jpg",
-  smolar: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771443993/adi_u7h56z.jpg",
-};
-
-const encounterVideos: Record<string, string> = {
-  plestenjak: "https://res.cloudinary.com/dewf3zos0/video/upload/v1771445309/19874134_107584786563726_526080777331408896_n_dahm5v.mp4",
-  svajger: "https://res.cloudinary.com/dewf3zos0/video/upload/v1771447966/Darja_S%CC%8Cvajger_-_My_Way_Frank_Sinatra_Filip_don_Filipo_hkmreh.mp4",
-  kesovija: "https://res.cloudinary.com/dewf3zos0/video/upload/v1771448018/Tereza_Kesovija_-_Prona%C4%91i_put_ABBA_Filip_don_Filipo_izlvid.mp4",
-  bocelli: "https://res.cloudinary.com/dewf3zos0/video/upload/v1771448046/filip_THE_KING_bocelli_2018_04_03_12_05_01_UTC_oka615.mp4",
-  sufit: "https://res.cloudinary.com/dewf3zos0/video/upload/v1771448081/Klapa_S%CC%8Cufit_-_Zavezan_Filip_don_Filipo_mhjj6i.mp4",
-};
-
-const highlightKeys = new Set(["bocelli"]);
+const encounterKeys = encountersData.all;
+const encounterImages: Record<string, string> = encountersData.images;
+const encounterVideos: Record<string, string> = encountersData.videos;
+const highlightKeys = new Set(encountersData.highlightKeys);
 
 export default function EncountersAll() {
   const t = useTranslations("encounters");

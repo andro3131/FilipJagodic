@@ -8,27 +8,16 @@ import { useTranslations } from "next-intl";
 
 type Category = "keyboards" | "dictaphones";
 
+import collectionsData from '../../content/collections.json';
+
 const categoryImages: Record<Category, string[]> = {
-  keyboards: [
-    "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444110/klaviature_do_2020_llmar5.jpg",
-    "https://res.cloudinary.com/dewf3zos0/image/upload/v1771490931/486726034_2941857505991020_7153766809362837456_n_aiyn1t.jpg",
-    "https://res.cloudinary.com/dewf3zos0/image/upload/v1771490889/481995213_2922533924590045_2334424202026040271_n_ewugdl.jpg",
-    "https://res.cloudinary.com/dewf3zos0/image/upload/v1771490863/473174263_2877244735785631_5482564637911699048_n_kilfrd.jpg",
-    "https://res.cloudinary.com/dewf3zos0/image/upload/v1771490859/506849365_3029098067266963_4591129993282806358_n_rjfu46.jpg",
-    "https://res.cloudinary.com/dewf3zos0/image/upload/v1771490833/50919634_1153311291512326_5890110255584509952_n_cc3cyx.jpg",
-  ],
-  dictaphones: [
-    "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444128/zbrika2_2021_lnshyb.jpg",
-    "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444073/delc%CC%8Cek_zbirke_h2cwuw.jpg",
-    "https://res.cloudinary.com/dewf3zos0/image/upload/v1771490962/568265414_3164906537019448_8619112095800451186_n_fi0amz.jpg",
-    "https://res.cloudinary.com/dewf3zos0/image/upload/v1771490872/474636910_2883279178515520_2740116039688518909_n_yzescg.jpg",
-    "https://res.cloudinary.com/dewf3zos0/image/upload/v1771490850/126998423_1712118665631583_3046801342967229634_n_sqxgej.jpg",
-  ],
+  keyboards: collectionsData.keyboards.images,
+  dictaphones: collectionsData.dictaphones.images,
 };
 
 const categoryItems: Record<Category, string[]> = {
-  keyboards: ["yamaha", "korg"],
-  dictaphones: ["sony", "olympus"],
+  keyboards: collectionsData.keyboards.items,
+  dictaphones: collectionsData.dictaphones.items,
 };
 
 const categoryCovers: Record<Category, string> = {

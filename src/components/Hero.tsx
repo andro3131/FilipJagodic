@@ -3,9 +3,9 @@
 import { useRef, useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
+import heroData from '../../content/hero.json';
 
-const VIDEO_URL =
-  "https://res.cloudinary.com/dewf3zos0/video/upload/v1771070979/Filip15_f8xeep.mp4";
+const VIDEO_URL = heroData.videoUrl;
 
 export default function Hero() {
   const t = useTranslations("hero");

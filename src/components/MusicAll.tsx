@@ -4,55 +4,11 @@ import Link from "next/link";
 import ScrollReveal from "./ScrollReveal";
 import { useTranslations, useLocale } from "next-intl";
 
-const featuredId = "EJYPq4STQ6w";
+import musicData from '../../content/music.json';
 
-const videoKeys = [
-  "prstiZapleteni", "takeGoodCare", "letItBeMe", "klapaSufit",
-  "blueChristmas", "shame", "letHerGo", "blueEyes",
-  "yourCheatingHeart", "poJezeru", "thisCouldBeHeaven",
-  "darkMoon", "loveIsAll", "hamburgSong", "smile",
-  "whoAmI", "overTheRainbow", "weCallOnHim",
-  "forTheGoodTimes", "stillWaiting", "upWhereWeBelong",
-  "whatAWonderfulWorld",
-  "moja", "glazekVincka", "notteStellata", "cigo", "shallow",
-  "yourMan", "somethingStupid", "zbogJedneDivne", "loveMeTender",
-  "onaSanjaOLjubljani", "bocelliFilip",
-] as const;
-const videoIds: Record<string, string> = {
-  prstiZapleteni: "KPP-UOhs8iE",
-  takeGoodCare: "1WPEC_KJXpk",
-  letItBeMe: "ruVUK_g5rK0",
-  klapaSufit: "SJgYyL1qdzE",
-  blueChristmas: "Qz2Qaa1msLE",
-  shame: "7Qf24gXHNDw",
-  letHerGo: "3W1fW61wqrk",
-  blueEyes: "G19dpj2Mw1c",
-  yourCheatingHeart: "GGUwSNEsP04",
-  poJezeru: "U_LeonbTwJY",
-  thisCouldBeHeaven: "khuVaQuCZl0",
-  darkMoon: "Z_AAYxf_Zdw",
-  loveIsAll: "QJihFOWj10c",
-  hamburgSong: "-z57R6--Fi0",
-  smile: "MCWNcfkBVAQ",
-  whoAmI: "oOsBwLI9f88",
-  overTheRainbow: "ulIzJOADq6U",
-  weCallOnHim: "Cl6Z34kqDMs",
-  forTheGoodTimes: "cfFoncG4mSY",
-  stillWaiting: "Z3Drko8tcJU",
-  upWhereWeBelong: "SZwYAaYL_Iw",
-  whatAWonderfulWorld: "SDJ0yhM6418",
-  moja: "ZKqP1HdgHj8",
-  glazekVincka: "1svESZ1LtCw",
-  notteStellata: "fq5V-xHL4n4",
-  cigo: "DAlKoGOPouY",
-  shallow: "YI6aJS-atv0",
-  yourMan: "IxLbGtoR5d8",
-  somethingStupid: "r8Zn4mi2FG0",
-  zbogJedneDivne: "qhn172yv0M4",
-  loveMeTender: "Jk3xxYBbhq0",
-  onaSanjaOLjubljani: "s4Dd6xmF57s",
-  bocelliFilip: "LpJKWz-m1Us",
-};
+const featuredId = musicData.featuredId;
+const videoKeys = musicData.all;
+const videoIds: Record<string, string> = musicData.videoIds;
 
 export default function MusicAll() {
   const t = useTranslations("music");

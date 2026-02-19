@@ -6,35 +6,9 @@ import ScrollReveal from "./ScrollReveal";
 import Modal from "./Modal";
 import { useTranslations } from "next-intl";
 
-const albums = [
-  {
-    key: "album1",
-    cover:
-      "https://res.cloudinary.com/dewf3zos0/image/upload/v1771446527/zephyr-keep-the-photo-as-it-is-just-remove-horizontal-white-shadow-0_glsgmu.jpg",
-    images: [
-      "https://res.cloudinary.com/dewf3zos0/image/upload/v1771104017/Screenshot_2026-02-14_at_22.20.11_tv9fum.png",
-      "https://res.cloudinary.com/dewf3zos0/image/upload/v1771103663/Inlay_zunaj_FINAL_FINAL_d6vjvw.jpg",
-    ],
-  },
-  {
-    key: "album2",
-    cover:
-      "https://res.cloudinary.com/dewf3zos0/image/upload/v1771103718/ovitek_noter_ZUNAJ_FINAL_eco11d.jpg",
-    images: [
-      "https://res.cloudinary.com/dewf3zos0/image/upload/v1771103978/ovitek_noter_NOTER_FINAL2_es9fg6.jpg",
-      "https://res.cloudinary.com/dewf3zos0/image/upload/v1771103709/Inlay_zunaj_FINAL-FINAL_h3qt7b.jpg",
-    ],
-  },
-  {
-    key: "album3",
-    cover:
-      "https://res.cloudinary.com/dewf3zos0/image/upload/v1771103695/Screenshot_2026-02-14_at_22.14.48_zvzcdg.png",
-    images: [
-      "https://res.cloudinary.com/dewf3zos0/image/upload/v1771104182/Screenshot_2026-02-14_at_22.19.49_q2ffjk.png",
-      "https://res.cloudinary.com/dewf3zos0/image/upload/v1771103675/Inlay_zunaj_Filip6-final_u4mt6k.jpg",
-    ],
-  },
-];
+import studioData from '../../content/studio.json';
+
+const albums = studioData.albums;
 
 export default function Studio() {
   const t = useTranslations("studio");

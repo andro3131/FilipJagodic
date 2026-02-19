@@ -7,20 +7,11 @@ import Modal from "./Modal";
 import { useTranslations, useLocale } from "next-intl";
 import Link from "next/link";
 
-const photoKeys = ["keyboards", "performance", "bocelli", "studio", "mom", "dictaphone"] as const;
+import galleryData from '../../content/gallery.json';
 
-const photoSrcs: Record<string, string> = {
-  keyboards: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771098561/14232370_632665486910245_786561684551610605_n_lrymzy.jpg",
-  performance: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771098693/11019010_402268379949958_4207790944302076286_n_eor5pu.jpg",
-  bocelli: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771098529/andrea_bocelli_qwksga.jpg",
-  studio: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771098609/20250520_175129_uvgigs.jpg",
-  mom: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771098651/21761758_833699250140200_3605137899429653888_n_jqsvoi.jpg",
-  dictaphone: "https://res.cloudinary.com/dewf3zos0/image/upload/v1771098757/21752222_833699213473537_373850975019071424_n_ijhcv2.jpg",
-};
-
-const photoPositions: Record<string, string> = {
-  studio: "top",
-};
+const photoKeys = galleryData.featured;
+const photoSrcs: Record<string, string> = galleryData.images;
+const photoPositions: Record<string, string> = galleryData.positions;
 
 export default function Gallery() {
   const t = useTranslations("gallery");

@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import ScrollReveal from "./ScrollReveal";
 import { useTranslations } from "next-intl";
+import contactData from '../../content/contact.json';
 
 export default function Contact() {
   const t = useTranslations("contact");
@@ -19,10 +20,10 @@ export default function Contact() {
     setStatus("sending");
     try {
       await emailjs.sendForm(
-        "service_b0p5bmu",
-        "template_q63h79k",
+        contactData.emailjs.serviceId,
+        contactData.emailjs.templateId,
         formRef.current,
-        "KQ0fK1l8uFe_uh_35"
+        contactData.emailjs.publicKey
       );
       setStatus("success");
       setName("");
@@ -178,7 +179,7 @@ export default function Contact() {
         <ScrollReveal delay={0.5} className="mt-12">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
-              href="https://www.youtube.com/@rokvolfand6462"
+              href={contactData.social.youtube}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-border hover:border-accent/30 bg-surface hover:bg-accent/5 transition-all duration-300 group"
@@ -191,7 +192,7 @@ export default function Contact() {
               </span>
             </a>
             <a
-              href="https://www.facebook.com/profile.php?id=100008212027574"
+              href={contactData.social.facebook}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-border hover:border-accent/30 bg-surface hover:bg-accent/5 transition-all duration-300 group"
