@@ -93,7 +93,7 @@ export default function Navigation() {
           <div className="flex items-center gap-0 text-xs font-bold tracking-wider uppercase ml-4">
             <button
               onClick={() => goToLocale("sl")}
-              className={`px-1.5 py-1 rounded-full transition-all duration-300 ${
+              className={`px-1 py-1 rounded-full transition-all duration-300 ${
                 locale === "sl"
                   ? "text-accent"
                   : "text-white/40 hover:text-white"
@@ -105,7 +105,7 @@ export default function Navigation() {
             <span className="text-white/20">|</span>
             <button
               onClick={() => goToLocale("en")}
-              className={`px-1.5 py-1 rounded-full transition-all duration-300 ${
+              className={`px-1 py-1 rounded-full transition-all duration-300 ${
                 locale === "en"
                   ? "text-accent"
                   : "text-white/40 hover:text-white"
