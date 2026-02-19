@@ -104,7 +104,7 @@ export default function Encounters() {
                         >
                           <div className="flex gap-4 items-start">
                             <div
-                              className={`relative flex-shrink-0 w-20 h-20 md:w-28 md:h-28 rounded-xl overflow-hidden bg-surface-lighter ${
+                              className={`relative flex-shrink-0 w-20 h-20 md:w-[140px] md:h-[140px] rounded-xl overflow-hidden bg-surface-lighter ${
                                 isHighlight ? "ring-2 ring-accent/30" : ""
                               }`}
                             >
