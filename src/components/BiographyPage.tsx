@@ -25,10 +25,13 @@ const singingWithMomPhotos = [
   "https://res.cloudinary.com/dewf3zos0/image/upload/v1771448643/52_ypcfmu.jpg",
 ];
 
-const toddlerPhotos = [
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771448668/73_z6aqph.jpg",
-  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771448674/77_vyhui9.jpg",
+const fatherPhotos = [
   "https://res.cloudinary.com/dewf3zos0/image/upload/v1771448678/86_e8daqv.jpg",
+  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771448656/65_or4onk.jpg",
+  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771448650/54_2_buai9t.jpg",
+  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771448635/49_ge749n.jpg",
+  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771448589/6_1_eyvnbp.jpg",
+  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771490902/55704623_1192077094302412_8834702750974476288_n_iksgej.jpg",
 ];
 
 const musicalTalentPhotos = [
@@ -64,7 +67,7 @@ const allPhotos = [
   ...birthPhotos,
   ...firstMonthsPhotos,
   ...singingWithMomPhotos,
-  ...toddlerPhotos,
+  ...fatherPhotos,
   ...musicalTalentPhotos,
   ...autisticPhotos,
   ...careerPhotos,
@@ -338,7 +341,7 @@ export default function BiographyPage() {
           {/* Chapter 4: Father */}
           <Chapter title={t("ch4title")} delay={0.1}>
             <Paragraph>{t("ch4p1")}</Paragraph>
-            <PhotoGrid photos={toddlerPhotos} alt={t("photoAlt")} onPhotoClick={openLightbox} />
+            <PhotoGrid photos={fatherPhotos} alt={t("photoAlt")} onPhotoClick={openLightbox} />
           </Chapter>
 
           {/* Chapter 5: Musical talent */}
