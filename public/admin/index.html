@@ -94,6 +94,7 @@ label{display:block;margin-bottom:4px;font-size:.875rem;color:var(--muted)}
   background:var(--bg);cursor:pointer;
 }
 .img-preview-sm{width:80px;height:60px}
+.img-preview-lg{width:180px;height:135px}
 .img-row{display:flex;align-items:center;gap:12px;margin-bottom:8px;flex-wrap:wrap}
 
 /* Sticky save — fixed at top right */
@@ -862,7 +863,7 @@ function renderEncounters() {
         <div class="field">
           <label>Povezava slike</label>
           <div class="img-row">
-            ${img ? '<img src="'+esc(img)+'" class="img-preview" onerror="this.style.display=\'none\'">' : ''}
+            ${img ? '<img src="'+esc(img)+'" class="img-preview img-preview-lg" onerror="this.style.display=\'none\'">' : ''}
             <input type="text" class="enc-image" value="${esc(img)}" placeholder="https://...">
             <button class="btn btn-outline btn-sm" onclick="uploadForInput(this, 'enc-image')">Naloži</button>
           </div>
