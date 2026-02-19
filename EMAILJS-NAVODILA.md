@@ -1,4 +1,4 @@
-# EmailJS nastavitev za filipjagodic.si
+# EmailJS nastavitev za filipjagodic.com
 
 ## 1. Registracija
 - Pojdi na https://emailjs.com in naredi brezplačen račun (200 mailov/mesec)
@@ -53,7 +53,7 @@
 
         <div style="text-align: center; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); color: #6b7280; font-size: 12px; margin-top: 30px;">
             <p style="margin: 5px 0;"><strong style="color: #a0a0b0;">Filip Jagodič — Glasba presega vse meje</strong></p>
-            <p style="margin: 5px 0;"><a href="https://filipjagodic.si" style="color: #D44040; text-decoration: none;">filipjagodic.si</a></p>
+            <p style="margin: 5px 0;"><a href="https://filipjagodic.com" style="color: #D44040; text-decoration: none;">filipjagodic.com</a></p>
         </div>
     </div>
 </div>
