@@ -57,6 +57,10 @@ const careerPhotos = [
 const motherPhotos = [
   "https://res.cloudinary.com/dewf3zos0/image/upload/v1771450879/21761758_833699250140200_3605137899429653888_n_rpombz.jpg",
   "https://res.cloudinary.com/dewf3zos0/image/upload/v1771450860/10959463_399208300255966_485022783268918936_n_kfqz7s.jpg",
+  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771490829/469235815_2846551268854978_2775173921985612069_n_l38a3y.jpg",
+  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771489763/48426432_1130207687156020_6968695209261531136_n_wyzb3z.jpg",
+  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444837/Filip_2014_RTV_SLO_f2r3xh.jpg",
+  "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444759/33720422_964264490417008_9021151803894398976_n_igtckq.jpg",
 ];
 
 const endPhoto =
