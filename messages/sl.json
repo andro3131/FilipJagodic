@@ -396,7 +396,7 @@
       },
       "somethingStupid": {
         "title": "Something Stupid",
-        "description": "Robin Williams & Nicole Kidman — Something Stupid (cover), duet z Mijo Koritnik."
+        "description": "Robbie Williams & Nicole Kidman — Something Stupid (cover), duet z Mijo Koritnik."
       },
       "zbogJedneDivne": {
         "title": "Zbog jedne divne crne žene",
@@ -477,6 +477,9 @@
     "formMessage": "Sporočilo",
     "formMessagePlaceholder": "Vaše sporočilo...",
     "formSend": "Pošlji sporočilo",
+    "formSending": "Pošiljam...",
+    "formSuccess": "Sporočilo je bilo uspešno poslano! Odgovorili vam bomo v najkrajšem možnem času.",
+    "formError": "Prišlo je do napake pri pošiljanju. Prosimo, poskusite znova.",
     "performances": "Nastopi",
     "performancesDesc": "Koncerti, dogodki, festivali",
     "media": "Mediji",

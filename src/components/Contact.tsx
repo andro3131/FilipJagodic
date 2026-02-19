@@ -1,22 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
+import emailjs from "@emailjs/browser";
 import ScrollReveal from "./ScrollReveal";
 import { useTranslations } from "next-intl";
 
 export default function Contact() {
   const t = useTranslations("contact");
+  const formRef = useRef<HTMLFormElement>(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Sporočilo od ${name}`);
-    const body = encodeURIComponent(
-      `Ime: ${name}\nE-pošta: ${email}\n\n${message}`
-    );
-    window.location.href = `mailto:kontakt@filipjagodic.si?subject=${subject}&body=${body}`;
+    if (!formRef.current) return;
+    setStatus("sending");
+    try {
+      await emailjs.sendForm(
+        "service_b0p5bmu",
+        "template_q63h79k",
+        formRef.current,
+        "KQ0fK1l8uFe_uh_35"
+      );
+      setStatus("success");
+      setName("");
+      setEmail("");
+      setMessage("");
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -48,6 +62,7 @@ export default function Contact() {
         {/* Contact form */}
         <ScrollReveal delay={0.3}>
           <form
+            ref={formRef}
             onSubmit={handleSubmit}
             className="max-w-xl mx-auto text-left space-y-5 mb-12"
           >
@@ -61,6 +76,7 @@ export default function Contact() {
                 </label>
                 <input
                   id="contact-name"
+                  name="from_name"
                   type="text"
                   required
                   value={name}
@@ -78,6 +94,7 @@ export default function Contact() {
                 </label>
                 <input
                   id="contact-email"
+                  name="from_email"
                   type="email"
                   required
                   value={email}
@@ -96,6 +113,7 @@ export default function Contact() {
               </label>
               <textarea
                 id="contact-message"
+                name="message"
                 required
                 rows={5}
                 value={message}
@@ -107,7 +125,8 @@ export default function Contact() {
             <div className="text-center pt-2">
               <button
                 type="submit"
-                className="inline-flex items-center gap-3 px-10 py-4 bg-accent text-white font-semibold text-lg rounded-full hover:bg-accent-light transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-[#141618]"
+                disabled={status === "sending"}
+                className="inline-flex items-center gap-3 px-10 py-4 bg-accent text-white font-semibold text-lg rounded-full hover:bg-accent-light transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-[#141618] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
                 <svg
                   className="w-5 h-5"
@@ -123,8 +142,15 @@ export default function Contact() {
                     d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                   />
                 </svg>
-                {t("formSend")}
+                {status === "sending" ? t("formSending") : t("formSend")}
               </button>
+
+              {status === "success" && (
+                <p className="mt-4 text-green-400 text-sm">{t("formSuccess")}</p>
+              )}
+              {status === "error" && (
+                <p className="mt-4 text-red-400 text-sm">{t("formError")}</p>
+              )}
             </div>
           </form>
         </ScrollReveal>
