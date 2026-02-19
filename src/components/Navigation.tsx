@@ -13,14 +13,25 @@ export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { href: "#o-filipu", label: t("about") },
-    { href: "#srecanja", label: t("encounters") },
-    { href: "#galerija", label: t("gallery") },
-    { href: "#glasba", label: t("music") },
-    { href: "#studio", label: t("studio") },
-    { href: "#zbirke", label: t("collections") },
-    { href: "#kontakt", label: t("contact") },
+    { hash: "o-filipu", label: t("about") },
+    { hash: "srecanja", label: t("encounters") },
+    { hash: "galerija", label: t("gallery") },
+    { hash: "glasba", label: t("music") },
+    { hash: "studio", label: t("studio") },
+    { hash: "zbirke", label: t("collections") },
+    { hash: "kontakt", label: t("contact") },
   ];
+
+  const isMainPage = pathname === `/${locale}` || pathname === `/${locale}/`;
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, hash: string) => {
+    if (isMainPage) {
+      e.preventDefault();
+      const el = document.getElementById(hash);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }
+    // On subpages, let the default <a> navigation happen
+  };
 
   const switchLocale = () => {
     const newLocale = locale === "sl" ? "en" : "sl";
@@ -56,8 +67,9 @@ export default function Navigation() {
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <a
-                key={link.href}
-                href={link.href}
+                key={link.hash}
+                href={`/${locale}/#${link.hash}`}
+                onClick={(e) => handleNavClick(e, link.hash)}
                 className="text-sm font-medium text-white/60 transition-colors duration-300 hover:text-accent focus:text-accent focus:outline-none focus:underline"
               >
                 {link.label}
@@ -119,10 +131,13 @@ export default function Navigation() {
             <div className="px-6 py-4 flex flex-col gap-4">
               {navLinks.map((link) => (
                 <a
-                  key={link.href}
-                  href={link.href}
+                  key={link.hash}
+                  href={`/${locale}/#${link.hash}`}
                   className="text-lg text-white/70 hover:text-accent transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={(e) => {
+                    setIsMobileMenuOpen(false);
+                    handleNavClick(e, link.hash);
+                  }}
                 >
                   {link.label}
                 </a>
