@@ -26,7 +26,7 @@
 ```html
 <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #0a0a0c; padding: 20px;">
     <div style="background: #141618; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; border-bottom: 2px solid #D44040;">
-        <span style="font-size: 32px; font-weight: 900; letter-spacing: 2px; font-family: Georgia, 'Times New Roman', serif;"><span style="color: #D44040;">F</span><span style="color: #ffffff;">ilip </span><span style="color: #D44040;">J</span><span style="color: #ffffff;">agodič</span></span>
+        <span style="font-size: 32px; font-weight: 900; letter-spacing: 2px; font-family: Georgia, 'Times New Roman', serif; color: #D44040;">Filip Jagodič</span>
         <p style="color: rgba(255,255,255,0.5); margin: 10px 0 0 0; font-size: 14px;">Nova kontaktna poizvedba</p>
     </div>
 
