@@ -5,8 +5,7 @@
     "bocelli",
     "studio",
     "mom",
-    "dictaphone",
-    "TEST"
+    "dictaphone"
   ],
   "all": [
     "keyboards",
@@ -91,8 +90,7 @@
     "gal50",
     "gal51",
     "gal52",
-    "gal53",
-    "TEST"
+    "gal53"
   ],
   "images": {
     "keyboards": "https://res.cloudinary.com/dewf3zos0/image/upload/v1771098561/14232370_632665486910245_786561684551610605_n_lrymzy.jpg",
@@ -177,8 +175,7 @@
     "gal50": "https://res.cloudinary.com/dewf3zos0/image/upload/v1771489746/33634197_964264790416978_8342144610000175104_n_mszqzf.jpg",
     "gal51": "https://res.cloudinary.com/dewf3zos0/image/upload/v1771489742/506034138_3026634767513293_3465797022816662485_n_vl1vaf.jpg",
     "gal52": "https://res.cloudinary.com/dewf3zos0/image/upload/v1771489738/505303332_3026055037571266_2018582446342001965_n_lr8xvm.jpg",
-    "gal53": "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444869/zps_2025_Ljubljana_humanitarni_nastop_keefcu.jpg",
-    "TEST": "https://res.cloudinary.com/dewf3zos0/image/upload/v1771528784/ozvocenje7_mjr0jo.jpg"
+    "gal53": "https://res.cloudinary.com/dewf3zos0/image/upload/v1771444869/zps_2025_Ljubljana_humanitarni_nastop_keefcu.jpg"
   },
   "positions": {
     "studio": "top"
