@@ -39,7 +39,75 @@ export async function GET(req: NextRequest) {
   const path = ALLOWED_FILES[file];
   const repo = process.env.GITHUB_REPO!;
   const token = process.env.GITHUB_TOKEN!;
+  const action = req.nextUrl.searchParams.get("action");
 
+  // History: list recent commits for this file
+  if (action === "history") {
+    try {
+      const res = await fetch(
+        `https://api.github.com/repos/${repo}/commits?path=${encodeURIComponent(path)}&per_page=20`,
+        {
+          headers: {
+            Authorization: `token ${token}`,
+            Accept: "application/vnd.github.v3+json",
+          },
+          cache: "no-store",
+        }
+      );
+      if (!res.ok) {
+        return NextResponse.json(
+          { error: "Napaka pri branju zgodovine" },
+          { status: res.status }
+        );
+      }
+      const commits = await res.json();
+      const history = commits.map(
+        (c: { sha: string; commit: { message: string; author: { date: string } } }) => ({
+          sha: c.sha,
+          message: c.commit.message,
+          date: c.commit.author.date,
+        })
+      );
+      return NextResponse.json({ history });
+    } catch {
+      return NextResponse.json({ error: "Napaka strežnika" }, { status: 500 });
+    }
+  }
+
+  // Version: get file content at a specific commit
+  if (action === "version") {
+    const ref = req.nextUrl.searchParams.get("ref");
+    if (!ref) {
+      return NextResponse.json({ error: "Manjka ref parameter" }, { status: 400 });
+    }
+    try {
+      const res = await fetch(
+        `https://api.github.com/repos/${repo}/contents/${path}?ref=${encodeURIComponent(ref)}`,
+        {
+          headers: {
+            Authorization: `token ${token}`,
+            Accept: "application/vnd.github.v3+json",
+          },
+          cache: "no-store",
+        }
+      );
+      if (!res.ok) {
+        return NextResponse.json(
+          { error: "Napaka pri branju verzije" },
+          { status: res.status }
+        );
+      }
+      const ghData = await res.json();
+      const content = JSON.parse(
+        Buffer.from(ghData.content, "base64").toString("utf-8")
+      );
+      return NextResponse.json({ data: content });
+    } catch {
+      return NextResponse.json({ error: "Napaka strežnika" }, { status: 500 });
+    }
+  }
+
+  // Default: get current file content
   try {
     const res = await fetch(
       `https://api.github.com/repos/${repo}/contents/${path}`,
