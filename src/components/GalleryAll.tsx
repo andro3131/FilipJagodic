@@ -13,12 +13,18 @@ const photoKeys = galleryData.all;
 const photoSrcs: Record<string, string> = galleryData.images;
 const photoPositions: Record<string, string> = galleryData.positions;
 
-// Cloudinary: insert transformation params for optimized thumbnails
+// Image optimization: Bunny Optimizer (query params) or Cloudinary (path transforms)
 function thumbUrl(src: string) {
+  if (src.includes("b-cdn.net")) {
+    return src + "?width=600&height=450&aspect_ratio=4:3";
+  }
   return src.replace("/upload/", "/upload/c_fill,w_600,h_450,q_auto,f_auto/");
 }
 
 function fullUrl(src: string) {
+  if (src.includes("b-cdn.net")) {
+    return src;
+  }
   return src.replace("/upload/", "/upload/q_auto,f_auto/");
 }
 

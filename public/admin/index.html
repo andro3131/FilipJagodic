@@ -270,8 +270,6 @@ label{display:block;margin-bottom:4px;font-size:.875rem;color:var(--muted)}
    ========================================================= */
 
 // ---- Config ----
-const CLOUDINARY_CLOUD = 'dewf3zos0';
-const CLOUDINARY_PRESET = 'Filip_galerija';
 
 const SECTIONS = [
   { key: 'hero',         file: 'hero',         label: 'Junak' },
@@ -523,8 +521,9 @@ async function apiPut(fileKey, data, sha) {
   return d;
 }
 
-// ---- Cloudinary Upload ----
-function uploadImage() {
+// ---- Bunny Storage Upload ----
+function uploadImage(folder) {
+  folder = folder || currentSection || 'uploads';
   return new Promise((resolve, reject) => {
     const input = document.createElement('input');
     input.type = 'file';
@@ -532,25 +531,28 @@ function uploadImage() {
     input.onchange = async (e) => {
       const file = e.target.files[0];
       if (!file) return;
-      if (file.size > 10 * 1024 * 1024) {
-        showToast('Datoteka je prevelika (max 10 MB)', 'error');
+      if (file.size > 50 * 1024 * 1024) {
+        showToast('Datoteka je prevelika (max 50 MB)', 'error');
         return;
       }
       showToast('Nalagam...');
       const fd = new FormData();
       fd.append('file', file);
-      fd.append('upload_preset', CLOUDINARY_PRESET);
+      fd.append('folder', folder);
       try {
-        const res = await fetch('https://api.cloudinary.com/v1_1/' + CLOUDINARY_CLOUD + '/auto/upload', {
-          method: 'POST', body: fd
+        const res = await fetch('/api/upload', {
+          method: 'POST',
+          headers: { 'Authorization': 'Bearer ' + getToken() },
+          body: fd
         });
+        if (res.status === 401) { doLogout(); reject(new Error('Unauthorized')); return; }
         const data = await res.json();
-        if (data.secure_url) {
+        if (data.url) {
           showToast('Naloženo!');
-          resolve(data.secure_url);
+          resolve(data.url);
         } else {
-          showToast('Napaka pri nalaganju', 'error');
-          reject(new Error('Upload failed'));
+          showToast('Napaka pri nalaganju: ' + (data.error || ''), 'error');
+          reject(new Error(data.error || 'Upload failed'));
         }
       } catch (err) {
         showToast('Napaka pri nalaganju', 'error');
