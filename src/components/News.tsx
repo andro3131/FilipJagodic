@@ -94,7 +94,7 @@ export default function News() {
                       <h3 className="font-heading text-2xl lg:text-3xl font-bold mb-4 group-hover:text-accent transition-colors">
                         {itemT("title")}
                       </h3>
-                      <div className="text-white/60 text-sm lg:text-base leading-relaxed mb-6 line-clamp-6 lg:line-clamp-none">
+                      <div className="text-white/80 text-sm lg:text-base leading-relaxed mb-6 line-clamp-6 lg:line-clamp-none">
                         {bodyPreview.split("\n\n").map((p: string, i: number) => (
                           <p key={i} className="mb-2 last:mb-0">{p}</p>
                         ))}
