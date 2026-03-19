@@ -53,12 +53,12 @@ export default function News() {
           <div className="w-20 h-0.5 bg-accent mx-auto" />
         </ScrollReveal>
 
-        {/* Single news — video left, text right */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
+        {/* Single news — video top, text below, centered */}
+        <div className="max-w-3xl mx-auto">
           {/* Video */}
           <ScrollReveal>
             {item.video && (
-              <div className="rounded-2xl overflow-hidden">
+              <div className="rounded-2xl overflow-hidden mb-8">
                 <video
                   src={item.video}
                   controls
@@ -89,7 +89,7 @@ export default function News() {
               {itemT("title")}!
             </h3>
 
-            <div className="space-y-4">
+            <div className="space-y-4" style={{ textAlign: "justify" }}>
               {itemT("body")
                 .split("\n\n")
                 .map((paragraph: string, i: number) => (
