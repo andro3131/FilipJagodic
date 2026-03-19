@@ -46,6 +46,16 @@ export async function generateMetadata({
       description: t("ogDescription"),
       type: "website",
       locale: locale === "sl" ? "sl_SI" : "en_US",
+      url: "https://filipjagodic.com",
+      siteName: "Filip Jagodič",
+      images: [
+        {
+          url: "https://filip-jagodic.b-cdn.net/Galerija/Glavna/14232370_632665486910245_786561684551610605_n_lrymzy.jpg",
+          width: 1200,
+          height: 630,
+          alt: "Filip Jagodič",
+        },
+      ],
     },
   };
 }
