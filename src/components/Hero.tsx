@@ -476,7 +476,7 @@ export default function Hero() {
               }}
             >
               <div
-                className="relative py-2"
+                className="relative py-3"
                 style={{
                   background: "linear-gradient(135deg, #D44040 0%, #B83333 40%, #E85555 60%, #D44040 100%)",
                   animation: "banner-glow 3s ease-in-out infinite",
@@ -490,7 +490,7 @@ export default function Hero() {
                     <div key={i} className="flex items-center gap-6 px-4 shrink-0">
                       {[0, 1].map((j) => (
                         <span key={j} className="flex items-center gap-2">
-                          <span className="inline-flex items-center justify-center px-1.5 py-0.5 bg-white/20 rounded text-[9px] font-bold text-white tracking-wider uppercase">
+                          <span className="inline-flex items-center justify-center px-1.5 py-0.5 bg-black rounded text-[9px] font-bold text-white tracking-wider uppercase">
                             NOVO
                           </span>
                           <span
@@ -501,7 +501,7 @@ export default function Hero() {
                           <span className="text-white font-semibold text-xs tracking-wide uppercase">
                             {t("bannerText")}
                           </span>
-                          <span className="text-white/70 text-[10px]">
+                          <span className="text-black font-medium text-[10px]">
                             — {t("bannerCta")} →
                           </span>
                         </span>
@@ -591,7 +591,7 @@ export default function Hero() {
                 <div key={i} className="flex items-center gap-10 px-6 shrink-0">
                   {[0, 1].map((j) => (
                     <span key={j} className="flex items-center gap-3">
-                      <span className="inline-flex items-center justify-center px-2.5 py-1 bg-white/20 rounded text-xs font-bold text-white tracking-wider uppercase">
+                      <span className="inline-flex items-center justify-center px-2.5 py-1 bg-black rounded text-xs font-bold text-white tracking-wider uppercase">
                         NOVO
                       </span>
                       <span
@@ -602,7 +602,7 @@ export default function Hero() {
                       <span className="text-white font-semibold text-lg tracking-wide uppercase">
                         {t("bannerText")}
                       </span>
-                      <span className="text-white/70 text-sm">
+                      <span className="text-black font-medium text-sm">
                         — {t("bannerCta")} →
                       </span>
                     </span>
