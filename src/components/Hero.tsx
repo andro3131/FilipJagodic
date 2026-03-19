@@ -455,9 +455,63 @@ export default function Hero() {
           <p className="text-white/60 text-base font-light italic leading-snug">
             {t("quote")}
           </p>
-          <p className="text-white/35 text-xs mt-1">
+          <p className="text-white/35 text-xs mt-1 mb-3">
             {t("quoteAuthor")}
           </p>
+
+          {/* Mobile banner strip — below quote, above video */}
+          <motion.div
+            className="overflow-hidden rounded-lg mt-2"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 2, duration: 0.8 }}
+          >
+            <a
+              href="#novice"
+              className="block relative"
+              onClick={(e) => {
+                e.preventDefault();
+                const el = document.getElementById("novice");
+                if (el) el.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              <div
+                className="relative py-2"
+                style={{
+                  background: "linear-gradient(135deg, #D44040 0%, #B83333 40%, #E85555 60%, #D44040 100%)",
+                  animation: "banner-glow 3s ease-in-out infinite",
+                }}
+              >
+                <div
+                  className="flex whitespace-nowrap"
+                  style={{ animation: "marquee 12s linear infinite" }}
+                >
+                  {[0, 1].map((i) => (
+                    <div key={i} className="flex items-center gap-6 px-4 shrink-0">
+                      {[0, 1].map((j) => (
+                        <span key={j} className="flex items-center gap-2">
+                          <span className="inline-flex items-center justify-center px-1.5 py-0.5 bg-white/20 rounded text-[9px] font-bold text-white tracking-wider uppercase">
+                            NOVO
+                          </span>
+                          <span
+                            className="inline-block w-1.5 h-1.5 rounded-full bg-white/80"
+                            style={{ animation: "banner-pulse 2s ease-in-out infinite", animationDelay: `${j * 0.5}s` }}
+                            aria-hidden="true"
+                          />
+                          <span className="text-white font-semibold text-xs tracking-wide uppercase">
+                            {t("bannerText")}
+                          </span>
+                          <span className="text-white/70 text-[10px]">
+                            — {t("bannerCta")} →
+                          </span>
+                        </span>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </a>
+          </motion.div>
         </motion.div>
 
         {/* Mobile: buttons below video */}
@@ -493,9 +547,9 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Animated news banner strip */}
+      {/* Desktop news banner strip — above scroll indicator */}
       <motion.div
-        className="absolute left-0 right-0 bottom-32 lg:bottom-16 overflow-hidden"
+        className="hidden lg:block absolute left-0 right-0 bottom-16 overflow-hidden"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2, duration: 0.8 }}
@@ -511,7 +565,7 @@ export default function Hero() {
           }}
         >
           <div
-            className="relative py-3 lg:py-3.5"
+            className="relative py-3.5"
             style={{
               background: "linear-gradient(135deg, #D44040 0%, #B83333 40%, #E85555 60%, #D44040 100%)",
               animation: "banner-glow 3s ease-in-out infinite",
@@ -528,21 +582,27 @@ export default function Hero() {
               aria-hidden="true"
             />
 
-            {/* Marquee text */}
-            <div className="flex whitespace-nowrap" style={{ animation: "marquee 20s linear infinite" }}>
+            {/* Marquee text — 2 copies for seamless loop, 2 items each */}
+            <div
+              className="flex whitespace-nowrap"
+              style={{ animation: "marquee 25s linear infinite" }}
+            >
               {[0, 1].map((i) => (
-                <div key={i} className="flex items-center gap-8 px-4 shrink-0">
-                  {[0, 1, 2, 3].map((j) => (
+                <div key={i} className="flex items-center gap-10 px-6 shrink-0">
+                  {[0, 1].map((j) => (
                     <span key={j} className="flex items-center gap-3">
+                      <span className="inline-flex items-center justify-center px-2.5 py-1 bg-white/20 rounded text-xs font-bold text-white tracking-wider uppercase">
+                        NOVO
+                      </span>
                       <span
                         className="inline-block w-2 h-2 rounded-full bg-white/80"
                         style={{ animation: "banner-pulse 2s ease-in-out infinite", animationDelay: `${j * 0.5}s` }}
                         aria-hidden="true"
                       />
-                      <span className="text-white font-semibold text-sm lg:text-base tracking-wide uppercase">
+                      <span className="text-white font-semibold text-lg tracking-wide uppercase">
                         {t("bannerText")}
                       </span>
-                      <span className="text-white/70 text-sm hidden lg:inline">
+                      <span className="text-white/70 text-sm">
                         — {t("bannerCta")} →
                       </span>
                     </span>
