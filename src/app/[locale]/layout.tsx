@@ -50,10 +50,10 @@ export async function generateMetadata({
       siteName: "Filip Jagodič",
       images: [
         {
-          url: "https://filip-jagodic.b-cdn.net/Galerija/Glavna/14232370_632665486910245_786561684551610605_n_lrymzy.jpg",
+          url: "https://filip-jagodic.b-cdn.net/filip3dslika.jpg",
           width: 1200,
           height: 630,
-          alt: "Filip Jagodič",
+          alt: "Filip Jagodič — Glasba presega vse meje",
         },
       ],
     },
