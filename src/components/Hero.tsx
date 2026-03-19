@@ -200,7 +200,7 @@ export default function Hero() {
           {/* Filip's video with glow */}
           <div
             className="relative flex-shrink-0 mx-auto lg:mx-0 lg:-ml-32"
-            style={{ zIndex: 2, marginTop: isMobile ? "4vh" : "-8vh" }}
+            style={{ zIndex: 2, marginTop: isMobile ? "10vh" : "-8vh" }}
           >
             {/* Red glow behind video */}
             <div
@@ -516,7 +516,7 @@ export default function Hero() {
 
         {/* Mobile: buttons below video */}
         <motion.div
-          className="lg:hidden absolute bottom-20 left-0 right-0 text-center px-6"
+          className="lg:hidden absolute bottom-28 left-0 right-0 text-center px-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1 }}
