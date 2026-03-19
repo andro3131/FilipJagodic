@@ -493,6 +493,67 @@ export default function Hero() {
         </motion.div>
       </div>
 
+      {/* Animated news banner strip */}
+      <motion.div
+        className="absolute left-0 right-0 bottom-32 lg:bottom-16 overflow-hidden"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 2, duration: 0.8 }}
+        style={{ zIndex: 5 }}
+      >
+        <a
+          href="#novice"
+          className="block relative"
+          onClick={(e) => {
+            e.preventDefault();
+            const el = document.getElementById("novice");
+            if (el) el.scrollIntoView({ behavior: "smooth" });
+          }}
+        >
+          <div
+            className="relative py-3 lg:py-3.5"
+            style={{
+              background: "linear-gradient(135deg, #D44040 0%, #B83333 40%, #E85555 60%, #D44040 100%)",
+              animation: "banner-glow 3s ease-in-out infinite",
+            }}
+          >
+            {/* Shimmer overlay */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%)",
+                backgroundSize: "200% 100%",
+                animation: "shimmer-flash 3s ease-in-out infinite",
+              }}
+              aria-hidden="true"
+            />
+
+            {/* Marquee text */}
+            <div className="flex whitespace-nowrap" style={{ animation: "marquee 20s linear infinite" }}>
+              {[0, 1].map((i) => (
+                <div key={i} className="flex items-center gap-8 px-4 shrink-0">
+                  {[0, 1, 2, 3].map((j) => (
+                    <span key={j} className="flex items-center gap-3">
+                      <span
+                        className="inline-block w-2 h-2 rounded-full bg-white/80"
+                        style={{ animation: "banner-pulse 2s ease-in-out infinite", animationDelay: `${j * 0.5}s` }}
+                        aria-hidden="true"
+                      />
+                      <span className="text-white font-semibold text-sm lg:text-base tracking-wide uppercase">
+                        {t("bannerText")}
+                      </span>
+                      <span className="text-white/70 text-sm hidden lg:inline">
+                        — {t("bannerCta")} →
+                      </span>
+                    </span>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        </a>
+      </motion.div>
+
       {/* Bottom blur overlay to hide wheelchair/floor */}
       <div
         className="absolute bottom-0 left-0 right-0 h-[380px] lg:h-[280px] pointer-events-none"

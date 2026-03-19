@@ -7,6 +7,7 @@
   "nav": {
     "home": "Domov",
     "about": "O Filipu",
+    "news": "Novice",
     "encounters": "Srečanja",
     "gallery": "Galerija",
     "music": "Glasba",
@@ -25,7 +26,9 @@
     "quoteAuthor": "— Helen Keller",
     "listenMusic": "Poslušaj glasbo",
     "meetFilip": "Spoznaj Filipa",
-    "videoAlt": "Filip Jagodič"
+    "videoAlt": "Filip Jagodič",
+    "bannerText": "Filip išče novega osebnega asistenta",
+    "bannerCta": "Več informacij"
   },
   "about": {
     "supra": "Spoznaj",
@@ -488,6 +491,26 @@
     "collaborationsDesc": "Glasba, projekti, dobrodelnost",
     "youtubeChannel": "YouTube kanal",
     "facebookProfile": "Facebook profil"
+  },
+  "news": {
+    "supra": "Aktualno",
+    "heading": "Novice",
+    "readMore": "Preberi več",
+    "viewAll": "Vse novice",
+    "backToHome": "Nazaj na novice",
+    "pageTitle": "Novice — Filip Jagodič",
+    "pageDescription": "Novice in obvestila o Filipu Jagodiču.",
+    "sharePrompt": "Z delitvijo pomagaš poiskati pravega.",
+    "items": {
+      "osebni-asistent-2026": {
+        "title": "Filip išče novega osebnega asistenta",
+        "excerpt": "Filip potrebuje novega osebnega asistenta. Če imaš rad glasbo, vodo in balade — preberi več.",
+        "date": "19. marec 2026",
+        "body": "Kaj povedati o Filipu? Ima cerebralno paralizo, je slep in ima Aspergerjev sindrom.\n\nFilipova strast je glasba, voda, koncerti, snemanja, zbirateljstvo, potepi ... Lahko vam bi spisala knjigo, pa vendar ga moramo (s)poznati, da vidimo, ali smo, ali nismo kos izzivom.\n\nFilip je najbolj srčno bitje, kar jih je mogoče srečati, a je hkrati zahteven um in neprestano v raziskovanju, zato včasih sam s seboj v konfliktu.\n\nFilip je star 28 let, tehta 47 kg, torej delo ni fizično naporno. Je pa potrebna vaša miselna prisotnost.\n\nČe imate radi glasbo, je TO TO. Potrebno je poznati delo z računalnikom. Filip je namreč na računalniku opismenjen.\n\nImejte radi vodo, balade in ljubezen v njih. Namreč njegovo začutenje je zelo izrazito in mi smo ob njem v njegovo najvišje dobro.\n\nLjubi angleščino in tuje jezike na sploh. Odlično govori in razume angleško.\n\nČe se prepoznaš, piši na filipandrejaasistenca@gmail.com za dodatne informacije, ali pošlji življenjepis.\n\nDelo se prične po uvajanju, na Filipovem domu v Laškem.\n\nP.S. Filip ima svoje asistente iskreno rad. Nemerljivo. In spoštovanja vredno. Z obeh strani.",
+        "email": "filipandrejaasistenca@gmail.com",
+        "location": "Laško, Slovenija"
+      }
+    }
   },
   "footer": {
     "tagline": "Glasba presega vse meje",

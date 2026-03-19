@@ -13,6 +13,7 @@ export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navLinks = [
+    { hash: "novice", label: t("news") },
     { hash: "o-filipu", label: t("about") },
     { hash: "srecanja", label: t("encounters") },
     { hash: "galerija", label: t("gallery") },

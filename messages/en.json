@@ -7,6 +7,7 @@
   "nav": {
     "home": "Home",
     "about": "About Filip",
+    "news": "News",
     "encounters": "Encounters",
     "gallery": "Gallery",
     "music": "Music",
@@ -25,7 +26,9 @@
     "quoteAuthor": "— Helen Keller",
     "listenMusic": "Listen to Music",
     "meetFilip": "Meet Filip",
-    "videoAlt": "Filip Jagodič"
+    "videoAlt": "Filip Jagodič",
+    "bannerText": "Filip is looking for a new personal assistant",
+    "bannerCta": "Learn more"
   },
   "about": {
     "supra": "Get to Know",
@@ -488,6 +491,26 @@
     "collaborationsDesc": "Music, projects, charity",
     "youtubeChannel": "YouTube Channel",
     "facebookProfile": "Facebook Profile"
+  },
+  "news": {
+    "supra": "Latest",
+    "heading": "News",
+    "readMore": "Read more",
+    "viewAll": "All news",
+    "backToHome": "Back to news",
+    "pageTitle": "News — Filip Jagodič",
+    "pageDescription": "News and announcements about Filip Jagodič.",
+    "sharePrompt": "By sharing you help find the right person.",
+    "items": {
+      "osebni-asistent-2026": {
+        "title": "Filip is looking for a new personal assistant",
+        "excerpt": "Filip needs a new personal assistant. If you love music, water, and ballads — read more.",
+        "date": "March 19, 2026",
+        "body": "What to say about Filip? He has cerebral palsy, is blind, and has Asperger's syndrome.\n\nFilip's passions are music, water, concerts, recordings, collecting, adventures... We could write a book about him, but you need to get to know him to see if you're up for the challenges.\n\nFilip is the most warm-hearted being you could ever meet, yet he has a demanding mind and is constantly exploring, which sometimes puts him in conflict with himself.\n\nFilip is 28 years old and weighs 47 kg, so the work is not physically demanding. However, your mental presence is essential.\n\nIf you love music, this is IT. You need to be comfortable working with computers. Filip is digitally literate.\n\nLove water, ballads, and the love within them. His sensitivity is very pronounced, and we are there for his highest good.\n\nHe loves English and foreign languages in general. He speaks and understands English excellently.\n\nIf this sounds like you, write to filipandrejaasistenca@gmail.com for more information, or send your CV.\n\nWork begins after onboarding, at Filip's home in Laško.\n\nP.S. Filip genuinely loves his assistants. Immeasurably. And that's worthy of respect. From both sides.",
+        "email": "filipandrejaasistenca@gmail.com",
+        "location": "Laško, Slovenia"
+      }
+    }
   },
   "footer": {
     "tagline": "Music Beyond All Boundaries",

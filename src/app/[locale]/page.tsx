@@ -1,5 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
+import News from "@/components/News";
 import About from "@/components/About";
 import Encounters from "@/components/Encounters";
 import Gallery from "@/components/Gallery";
@@ -15,6 +16,7 @@ export default function Home() {
       <Navigation />
       <main id="main-content">
         <Hero />
+        <News />
         <About />
         <Encounters />
         <Gallery />
