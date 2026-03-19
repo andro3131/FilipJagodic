@@ -34,78 +34,65 @@ export default function News() {
           <div className="w-20 h-0.5 bg-accent mx-auto" />
         </ScrollReveal>
 
-        {/* News cards — full width featured layout */}
-        <div className="flex flex-col gap-8">
+        {/* News cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {items.map((item, index) => {
             const itemT = (key: string) =>
               t(`items.${item.key}.${key}` as Parameters<typeof t>[0]);
-
-            // Get first paragraph of body for preview
-            const bodyPreview = (() => {
-              try {
-                return itemT("body").split("\n\n").slice(0, 2).join("\n\n");
-              } catch {
-                return itemT("excerpt");
-              }
-            })();
 
             return (
               <ScrollReveal key={item.key} delay={index * 0.15}>
                 <button
                   onClick={() => setOpenItem(item.key)}
-                  className="group w-full text-left bg-surface border border-border rounded-2xl overflow-hidden transition-all duration-300 hover:border-accent/40 hover:shadow-lg hover:shadow-accent/5"
+                  className="group w-full text-left bg-surface border border-border rounded-2xl overflow-hidden transition-all duration-300 hover:border-accent/40 hover:shadow-lg hover:shadow-accent/5 hover:-translate-y-1"
                 >
-                  <div className="grid grid-cols-1 lg:grid-cols-2">
-                    {/* Video/Image — left side on desktop, top on mobile */}
-                    {item.video && (
-                      <div className="relative aspect-video lg:aspect-auto lg:min-h-[380px] bg-black overflow-hidden">
-                        <video
-                          src={item.video}
-                          muted
-                          playsInline
-                          preload="metadata"
-                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-surface/60 to-transparent" />
-                        {/* Play icon overlay */}
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="w-14 h-14 rounded-full bg-accent/90 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-                            <svg className="w-6 h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M8 5v14l11-7z" />
-                            </svg>
-                          </div>
+                  {/* Video/Image preview */}
+                  {item.video && (
+                    <div className="relative aspect-video bg-black overflow-hidden">
+                      <video
+                        src={item.video}
+                        muted
+                        playsInline
+                        preload="metadata"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-surface/80 to-transparent" />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-12 h-12 rounded-full bg-accent/90 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                          <svg className="w-5 h-5 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z" />
+                          </svg>
                         </div>
                       </div>
+                    </div>
+                  )}
+
+                  <div className="p-6">
+                    {/* NOVO badge */}
+                    {item.pinned && (
+                      <span className="inline-flex items-center gap-1.5 mb-3">
+                        <span
+                          className="inline-flex items-center justify-center px-2 py-0.5 bg-accent rounded text-[10px] font-bold text-white tracking-wider uppercase"
+                          style={{ animation: "banner-pulse 2s ease-in-out infinite" }}
+                        >
+                          NOVO
+                        </span>
+                      </span>
                     )}
 
-                    {/* Text — right side on desktop */}
-                    <div className="p-6 lg:p-8 xl:p-10 flex flex-col justify-center">
-                      {/* Pinned badge */}
-                      {item.pinned && (
-                        <span className="inline-flex items-center gap-1.5 text-accent text-xs font-semibold tracking-wider uppercase mb-3 w-fit">
-                          <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                          </svg>
-                          Pomembno
-                        </span>
-                      )}
-
-                      <p className="text-white/40 text-xs mb-2">{itemT("date")}</p>
-                      <h3 className="font-heading text-2xl lg:text-3xl font-bold mb-4 group-hover:text-accent transition-colors">
-                        {itemT("title")}
-                      </h3>
-                      <div className="text-white text-sm lg:text-base leading-relaxed mb-6 line-clamp-6 lg:line-clamp-none">
-                        {bodyPreview.split("\n\n").map((p: string, i: number) => (
-                          <p key={i} className="mb-2 last:mb-0">{p}</p>
-                        ))}
-                      </div>
-                      <span className="text-accent text-sm font-medium inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-all">
-                        {t("readMore")}
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </span>
-                    </div>
+                    <p className="text-white/40 text-xs mb-2">{itemT("date")}</p>
+                    <h3 className="font-heading text-xl font-bold mb-3 group-hover:text-accent transition-colors">
+                      {itemT("title")}!
+                    </h3>
+                    <p className="text-white/60 text-sm leading-relaxed mb-4">
+                      {itemT("excerpt")}
+                    </p>
+                    <span className="text-accent text-sm font-medium inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-all">
+                      {t("readMore")}
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </span>
                   </div>
                 </button>
               </ScrollReveal>
