@@ -55,16 +55,16 @@ export default function News() {
                   onClick={() => setOpenItem(item.key)}
                   className="group w-full text-left bg-surface border border-border rounded-2xl overflow-hidden transition-all duration-300 hover:border-accent/40 hover:shadow-lg hover:shadow-accent/5"
                 >
-                  <div className="flex flex-col lg:flex-row lg:min-h-[340px]">
+                  <div className="grid grid-cols-1 lg:grid-cols-2">
                     {/* Video/Image — left side on desktop, top on mobile */}
                     {item.video && (
-                      <div className="relative lg:w-1/2 xl:w-[45%] aspect-video lg:aspect-auto bg-black overflow-hidden shrink-0">
+                      <div className="relative aspect-video lg:aspect-auto lg:min-h-[380px] bg-black overflow-hidden">
                         <video
                           src={item.video}
                           muted
                           playsInline
                           preload="metadata"
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 absolute inset-0"
+                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-surface/60 to-transparent" />
                         {/* Play icon overlay */}
@@ -79,7 +79,7 @@ export default function News() {
                     )}
 
                     {/* Text — right side on desktop */}
-                    <div className="flex-1 p-6 lg:p-8 xl:p-10 flex flex-col justify-center">
+                    <div className="p-6 lg:p-8 xl:p-10 flex flex-col justify-center">
                       {/* Pinned badge */}
                       {item.pinned && (
                         <span className="inline-flex items-center gap-1.5 text-accent text-xs font-semibold tracking-wider uppercase mb-3 w-fit">
