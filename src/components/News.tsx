@@ -134,47 +134,35 @@ export default function News() {
               </h3>
               <p className="text-white/40 text-sm mb-6">{itemT("date")}</p>
 
-              {/* Body text */}
+              {/* Body text — emails rendered as red bold mailto links */}
               <div className="prose prose-invert max-w-none mb-8">
                 {itemT("body")
                   .split("\n\n")
-                  .map((paragraph: string, i: number) => (
-                    <p
-                      key={i}
-                      className="text-white/70 leading-relaxed mb-4 last:mb-0"
-                    >
-                      {paragraph}
-                    </p>
-                  ))}
-              </div>
-
-              {/* Email CTA */}
-              {(() => {
-                try {
-                  const email = itemT("email");
-                  if (email) {
+                  .map((paragraph: string, i: number) => {
+                    const emailRegex = /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g;
+                    const parts = paragraph.split(emailRegex);
                     return (
-                      <div className="bg-accent/10 border border-accent/20 rounded-xl p-5 mb-8">
-                        <p className="text-white/80 text-sm mb-3">
-                          {t("sharePrompt")}
-                        </p>
-                        <a
-                          href={`mailto:${email}`}
-                          className="inline-flex items-center gap-2 bg-accent text-white font-semibold px-6 py-3 rounded-full hover:bg-accent-light transition-colors text-sm"
-                        >
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                          </svg>
-                          {email}
-                        </a>
-                      </div>
+                      <p
+                        key={i}
+                        className="text-white/70 leading-relaxed mb-4 last:mb-0"
+                      >
+                        {parts.map((part, j) =>
+                          emailRegex.test(part) ? (
+                            <a
+                              key={j}
+                              href={`mailto:${part}`}
+                              className="text-accent font-bold hover:text-accent-light transition-colors"
+                            >
+                              {part}
+                            </a>
+                          ) : (
+                            <span key={j}>{part}</span>
+                          )
+                        )}
+                      </p>
                     );
-                  }
-                } catch {
-                  return null;
-                }
-                return null;
-              })()}
+                  })}
+              </div>
 
               {/* Video */}
               {item.video && (
