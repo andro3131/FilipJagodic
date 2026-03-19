@@ -34,11 +34,19 @@ export default function News() {
           <div className="w-20 h-0.5 bg-accent mx-auto" />
         </ScrollReveal>
 
-        {/* News cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* News cards — centered, wider single card */}
+        <div className="max-w-3xl mx-auto flex flex-col gap-8">
           {items.map((item, index) => {
             const itemT = (key: string) =>
               t(`items.${item.key}.${key}` as Parameters<typeof t>[0]);
+
+            const bodyPreview = (() => {
+              try {
+                return itemT("body").split("\n\n").slice(0, 2).join("\n\n");
+              } catch {
+                return itemT("excerpt");
+              }
+            })();
 
             return (
               <ScrollReveal key={item.key} delay={index * 0.15}>
@@ -58,8 +66,8 @@ export default function News() {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-surface/80 to-transparent" />
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-12 h-12 rounded-full bg-accent/90 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-                          <svg className="w-5 h-5 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                        <div className="w-16 h-16 rounded-full bg-accent/90 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                          <svg className="w-7 h-7 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M8 5v14l11-7z" />
                           </svg>
                         </div>
@@ -67,12 +75,12 @@ export default function News() {
                     </div>
                   )}
 
-                  <div className="p-6">
+                  <div className="p-6 lg:p-8">
                     {/* NOVO badge */}
                     {item.pinned && (
                       <span className="inline-flex items-center gap-1.5 mb-3">
                         <span
-                          className="inline-flex items-center justify-center px-2 py-0.5 bg-accent rounded text-[10px] font-bold text-white tracking-wider uppercase"
+                          className="inline-flex items-center justify-center px-2.5 py-1 bg-accent rounded text-xs font-bold text-white tracking-wider uppercase"
                           style={{ animation: "banner-pulse 2s ease-in-out infinite" }}
                         >
                           NOVO
@@ -80,13 +88,15 @@ export default function News() {
                       </span>
                     )}
 
-                    <p className="text-white/40 text-xs mb-2">{itemT("date")}</p>
-                    <h3 className="font-heading text-xl font-bold mb-3 group-hover:text-accent transition-colors">
+                    <p className="text-white/40 text-sm mb-2">{itemT("date")}</p>
+                    <h3 className="font-heading text-2xl lg:text-3xl font-bold mb-4 group-hover:text-accent transition-colors">
                       {itemT("title")}!
                     </h3>
-                    <p className="text-white/60 text-sm leading-relaxed mb-4">
-                      {itemT("excerpt")}
-                    </p>
+                    <div className="text-white/70 text-sm lg:text-base leading-relaxed mb-5">
+                      {bodyPreview.split("\n\n").map((p: string, i: number) => (
+                        <p key={i} className="mb-2 last:mb-0">{p}</p>
+                      ))}
+                    </div>
                     <span className="text-accent text-sm font-medium inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-all">
                       {t("readMore")}
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
