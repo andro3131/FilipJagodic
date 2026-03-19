@@ -42,7 +42,7 @@ export async function generateMetadata({
       icon: "/favicon.svg",
     },
     openGraph: {
-      title: t("title"),
+      title: t("ogTitle"),
       description: t("ogDescription"),
       type: "website",
       locale: locale === "sl" ? "sl_SI" : "en_US",
@@ -59,7 +59,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: t("title"),
+      title: t("ogTitle"),
       description: t("ogDescription"),
       images: ["https://filip-jagodic.b-cdn.net/Screenshot%202026-03-19%20at%2022.51%20copy.jpg"],
     },
