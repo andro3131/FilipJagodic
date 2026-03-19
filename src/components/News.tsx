@@ -100,19 +100,17 @@ export default function News() {
         </div>
 
         {/* View all link */}
-        {newsData.items.length > 3 && (
-          <ScrollReveal className="text-center mt-12">
-            <a
-              href={`/${locale}/novice`}
-              className="inline-flex items-center gap-2 text-accent font-medium hover:text-accent-light transition-colors"
-            >
-              {t("viewAll")}
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </a>
-          </ScrollReveal>
-        )}
+        <ScrollReveal className="text-center mt-12">
+          <a
+            href={`/${locale}/novice`}
+            className="inline-flex items-center gap-2 text-accent font-medium hover:text-accent-light transition-colors"
+          >
+            {t("viewAll")}
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        </ScrollReveal>
       </div>
 
       {/* News detail modal */}
@@ -195,18 +193,6 @@ export default function News() {
                 </div>
               )}
 
-              {/* View all button */}
-              <div className="mt-8 pt-6 border-t border-border flex justify-center">
-                <a
-                  href={`/${locale}/novice`}
-                  className="inline-flex items-center gap-2 text-accent font-medium hover:text-accent-light transition-colors"
-                >
-                  {t("viewAll")}
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
-              </div>
             </div>
           </Modal>
         );
