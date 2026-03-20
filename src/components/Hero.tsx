@@ -2,13 +2,14 @@
 
 import { useRef, useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import heroData from '../../content/hero.json';
 
 const VIDEO_URL = heroData.videoUrl;
 
 export default function Hero() {
   const t = useTranslations("hero");
+  const locale = useLocale();
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const videoDurationRef = useRef(0);
@@ -200,7 +201,7 @@ export default function Hero() {
           {/* Filip's video with glow */}
           <div
             className="relative flex-shrink-0 mx-auto lg:mx-0 lg:-ml-32"
-            style={{ zIndex: 2, marginTop: isMobile ? "10vh" : "-8vh" }}
+            style={{ zIndex: 2, marginTop: isMobile ? (locale === "en" ? "16vh" : "10vh") : "-8vh" }}
           >
             {/* Red glow behind video */}
             <div
@@ -516,7 +517,7 @@ export default function Hero() {
 
         {/* Mobile: buttons below video */}
         <motion.div
-          className="lg:hidden absolute bottom-28 left-0 right-0 text-center px-6"
+          className={`lg:hidden absolute ${locale === "en" ? "bottom-24" : "bottom-28"} left-0 right-0 text-center px-6`}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1 }}

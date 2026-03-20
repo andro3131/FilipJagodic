@@ -25,11 +25,19 @@ export default function Navigation() {
 
   const isMainPage = pathname === `/${locale}` || pathname === `/${locale}/`;
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, hash: string) => {
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, hash: string, fromMobile = false) => {
     if (isMainPage) {
       e.preventDefault();
-      const el = document.getElementById(hash);
-      if (el) el.scrollIntoView({ behavior: "smooth" });
+      const doScroll = () => {
+        const el = document.getElementById(hash);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      };
+      // Delay scroll on mobile to let menu close animation finish
+      if (fromMobile) {
+        setTimeout(doScroll, 350);
+      } else {
+        doScroll();
+      }
     }
     // On subpages, let the default <a> navigation happen
   };
@@ -167,7 +175,7 @@ export default function Navigation() {
                   setIsMobileMenuOpen(false);
                   if (isMainPage) {
                     e.preventDefault();
-                    window.scrollTo({ top: 0, behavior: "smooth" });
+                    setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 350);
                   }
                 }}
               >
@@ -180,7 +188,7 @@ export default function Navigation() {
                   className="text-lg text-white/70 hover:text-accent transition-colors"
                   onClick={(e) => {
                     setIsMobileMenuOpen(false);
-                    handleNavClick(e, link.hash);
+                    handleNavClick(e, link.hash, true);
                   }}
                 >
                   {link.label}
