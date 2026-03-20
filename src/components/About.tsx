@@ -79,6 +79,18 @@ export default function About() {
             <div className="w-20 h-0.5 bg-accent mx-auto" />
           </ScrollReveal>
 
+          {/* Hero image */}
+          <ScrollReveal className="mb-16 md:mb-24" delay={0.1}>
+            <div className="max-w-4xl mx-auto rounded-2xl overflow-hidden">
+              <img
+                src="https://filip-jagodic.b-cdn.net/filip-studio2.jpg"
+                alt={t("heading")}
+                className="w-full h-auto"
+                loading="lazy"
+              />
+            </div>
+          </ScrollReveal>
+
           {/* Story */}
           <ScrollReveal
             className="max-w-3xl mx-auto mb-20 md:mb-28"
