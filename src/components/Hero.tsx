@@ -7,6 +7,85 @@ import heroData from '../../content/hero.json';
 
 const VIDEO_URL = heroData.videoUrl;
 
+/** En segment marqueeja (več enakih enot). Dva segmenta = seamless loop. */
+function BannerSegment({
+  badge,
+  text,
+  cta,
+  compact,
+}: {
+  badge: string;
+  text: string;
+  cta: string;
+  compact?: boolean;
+}) {
+  const unit = (
+    <span
+      className={`flex items-center shrink-0 ${compact ? "gap-2 px-3" : "gap-3 px-5"}`}
+    >
+      <span
+        className={`inline-flex items-center justify-center rounded font-bold tracking-wider uppercase text-white bg-accent border border-accent-light/80 ${
+          compact ? "px-1.5 py-0.5 text-[9px]" : "px-2.5 py-1 text-xs"
+        }`}
+      >
+        {badge}
+      </span>
+      <span
+        className={`inline-block rounded-full bg-accent-light ${
+          compact ? "w-1.5 h-1.5" : "w-2 h-2"
+        }`}
+        style={{ animation: "banner-pulse 2.5s ease-in-out infinite" }}
+        aria-hidden="true"
+      />
+      <span
+        className={`text-white font-semibold tracking-wide uppercase ${
+          compact ? "text-xs" : "text-lg"
+        }`}
+      >
+        {text}
+      </span>
+      <span
+        className={`font-semibold text-accent-light ${
+          compact ? "text-[11px]" : "text-sm"
+        }`}
+      >
+        — {cta} →
+      </span>
+    </span>
+  );
+
+  // 3 enote na segment → dovolj široko za tekoč loop
+  return (
+    <div className="hero-banner-segment">
+      {unit}
+      {unit}
+      {unit}
+    </div>
+  );
+}
+
+function BannerTrack({
+  badge,
+  text,
+  cta,
+  compact,
+  duration,
+}: {
+  badge: string;
+  text: string;
+  cta: string;
+  compact?: boolean;
+  duration: string;
+}) {
+  return (
+    <div className="hero-banner-track" style={{ animationDuration: duration }}>
+      <BannerSegment badge={badge} text={text} cta={cta} compact={compact} />
+      {/* Drugi segment = kopija prvega → pri -50% zanka brez skoka */}
+      <BannerSegment badge={badge} text={text} cta={cta} compact={compact} />
+    </div>
+  );
+}
+
 export default function Hero() {
   const t = useTranslations("hero");
   const locale = useLocale();
@@ -477,36 +556,13 @@ export default function Hero() {
               }}
             >
               <div className="hero-banner-strip relative py-3">
-                <div
-                  className="flex whitespace-nowrap"
-                  style={{ animation: "marquee 14s linear infinite" }}
-                >
-                  {[0, 1].map((i) => (
-                    <div key={i} className="flex items-center gap-6 px-4 shrink-0">
-                      {[0, 1].map((j) => (
-                        <span key={j} className="flex items-center gap-2">
-                          <span className="inline-flex items-center justify-center px-1.5 py-0.5 border border-accent/70 rounded text-[9px] font-bold text-accent tracking-wider uppercase">
-                            {t("bannerBadge")}
-                          </span>
-                          <span
-                            className="inline-block w-1.5 h-1.5 rounded-full bg-accent/70"
-                            style={{
-                              animation: "banner-pulse 2.5s ease-in-out infinite",
-                              animationDelay: `${j * 0.5}s`,
-                            }}
-                            aria-hidden="true"
-                          />
-                          <span className="text-white/90 font-semibold text-xs tracking-wide uppercase">
-                            {t("bannerText")}
-                          </span>
-                          <span className="text-accent/90 font-medium text-[10px]">
-                            — {t("bannerCta")} →
-                          </span>
-                        </span>
-                      ))}
-                    </div>
-                  ))}
-                </div>
+                <BannerTrack
+                  badge={t("bannerBadge")}
+                  text={t("bannerText")}
+                  cta={t("bannerCta")}
+                  compact
+                  duration="18s"
+                />
               </div>
             </a>
           </motion.div>
@@ -563,45 +619,12 @@ export default function Hero() {
           }}
         >
           <div className="hero-banner-strip relative py-3.5">
-            <div
-              className="absolute inset-0 pointer-events-none opacity-40"
-              style={{
-                background:
-                  "linear-gradient(90deg, transparent 0%, rgba(212,64,64,0.08) 50%, transparent 100%)",
-                backgroundSize: "200% 100%",
-              }}
-              aria-hidden="true"
+            <BannerTrack
+              badge={t("bannerBadge")}
+              text={t("bannerText")}
+              cta={t("bannerCta")}
+              duration="32s"
             />
-            <div
-              className="flex whitespace-nowrap"
-              style={{ animation: "marquee 28s linear infinite" }}
-            >
-              {[0, 1].map((i) => (
-                <div key={i} className="flex items-center gap-10 px-6 shrink-0">
-                  {[0, 1].map((j) => (
-                    <span key={j} className="flex items-center gap-3">
-                      <span className="inline-flex items-center justify-center px-2.5 py-1 border border-accent/70 rounded text-xs font-bold text-accent tracking-wider uppercase">
-                        {t("bannerBadge")}
-                      </span>
-                      <span
-                        className="inline-block w-2 h-2 rounded-full bg-accent/70"
-                        style={{
-                          animation: "banner-pulse 2.5s ease-in-out infinite",
-                          animationDelay: `${j * 0.5}s`,
-                        }}
-                        aria-hidden="true"
-                      />
-                      <span className="text-white/90 font-semibold text-lg tracking-wide uppercase">
-                        {t("bannerText")}
-                      </span>
-                      <span className="text-accent font-medium text-sm">
-                        — {t("bannerCta")} →
-                      </span>
-                    </span>
-                  ))}
-                </div>
-              ))}
-            </div>
           </div>
         </a>
       </motion.div>

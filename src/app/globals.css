@@ -81,7 +81,7 @@ body {
   50% { transform: translateX(15px); }
 }
 
-/* Hero hiring banner marquee */
+/* Hero hiring banner — seamless loop: track = 2 enaka segmenta, -50% */
 @keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -99,6 +99,21 @@ body {
   border-top: 1px solid rgba(212, 64, 64, 0.55);
   border-bottom: 1px solid rgba(212, 64, 64, 0.55);
   box-shadow: 0 0 24px rgba(212, 64, 64, 0.12);
+  overflow: hidden;
+}
+
+/* Track: width max-content, 2 enaka otroka → animacija -50% brez skoka */
+.hero-banner-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: marquee 22s linear infinite;
+}
+
+.hero-banner-segment {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
 }
 
 /* Mouse-follow shimmer on title text */
