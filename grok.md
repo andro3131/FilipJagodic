@@ -36,6 +36,16 @@
 
 Hero → … → `#novice` (featured) → … (glej `src/app/[locale]/page.tsx`)
 
+### Navigacija (2026-08-12)
+
+- **Active state:** na podstrani se poudari ustrezna postavka (`text-accent` + `aria-current`), npr. `/novice` → Novice.
+- **Domov:** aktivno na `/{locale}/`.
+- **Href logika** (`Navigation.tsx`):
+  - na domači → scroll na `#hash`;
+  - na isti podstrani (npr. že `/novice`) → scroll na vrh;
+  - z druge podstrani, če obstaja full page (`novice`, `o-filipu`, `srecanja`, `galerija`, `glasba`) → gre na to pot;
+  - studio / zbirke / kontakt (samo sekcije) → `/{locale}/#hash`.
+
 ### Jeziki
 
 - Locale routing: `/sl/…`, `/en/…` (`src/i18n/`, middleware).
