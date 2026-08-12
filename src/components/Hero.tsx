@@ -280,7 +280,15 @@ export default function Hero() {
           {/* Filip's video with glow */}
           <div
             className="relative flex-shrink-0 mx-auto lg:mx-0 lg:-ml-32"
-            style={{ zIndex: 2, marginTop: isMobile ? (locale === "en" ? "16vh" : "10vh") : "-8vh" }}
+            style={{
+              zIndex: 2,
+              /* Banner pod citatom potrebuje več prostora — sicer gre čez glavo */
+              marginTop: isMobile
+                ? locale === "en"
+                  ? "26vh"
+                  : "20vh"
+                : "-8vh",
+            }}
           >
             {/* Red glow behind video */}
             <div
@@ -535,13 +543,13 @@ export default function Hero() {
           <p className="text-white/60 text-base font-light italic leading-snug">
             {t("quote")}
           </p>
-          <p className="text-white/35 text-xs mt-1 mb-3">
+          <p className="text-white/35 text-xs mt-1 mb-2">
             {t("quoteAuthor")}
           </p>
 
-          {/* Mobile banner strip — below quote, above video (varianta A) */}
+          {/* Mobile banner — pod citatom; video je pomaknjen nižje, da ne gre čez glavo */}
           <motion.div
-            className="overflow-hidden rounded-lg mt-2"
+            className="overflow-hidden rounded-lg mt-1"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 2, duration: 0.8 }}
@@ -555,7 +563,7 @@ export default function Hero() {
                 if (el) el.scrollIntoView({ behavior: "smooth" });
               }}
             >
-              <div className="hero-banner-strip relative py-3">
+              <div className="hero-banner-strip relative py-2">
                 <BannerTrack
                   badge={t("bannerBadge")}
                   text={t("bannerText")}
@@ -570,7 +578,7 @@ export default function Hero() {
 
         {/* Mobile: buttons below video */}
         <motion.div
-          className={`lg:hidden absolute ${locale === "en" ? "bottom-24" : "bottom-28"} left-0 right-0 text-center px-6`}
+          className={`lg:hidden absolute ${locale === "en" ? "bottom-20" : "bottom-24"} left-0 right-0 text-center px-6`}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1 }}
