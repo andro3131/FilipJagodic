@@ -499,8 +499,14 @@
     "backToHome": "Nazaj na novice",
     "pageTitle": "Novice — Filip Jagodič",
     "pageDescription": "Novice in obvestila o Filipu Jagodiču.",
-    "sharePrompt": "Z delitvijo pomagaš poiskati pravega.",
+    "sharePrompt": "Z delitvijo deliš dobro novico.",
     "items": {
+      "asistent-vili-2026": {
+        "title": "Filip ima novega osebnega asistenta — Vilija",
+        "excerpt": "Dobra novica: našel se je asistent Vili. Filip obožuje njegov smeh in energijo.",
+        "date": "12. avgust 2026",
+        "body": "Dobra novica za Filipa in za vse, ki ste tako množično pozdravili iskanje novega osebnega asistenta: našel se je Vili.\n\nMama Andreja piše, da je Vili prinesel mnogo smeha. Radi ga imajo — Filip pa obožuje njegov smeh in energijo. Tudi takrat, ko mama spi. Smejte se, pravijo — ne veste, koliko smeh daje: razumevanje, spoštovanje in mir v mamino srce.\n\nFilip in Vili. Voda in svoboda.\n(Na fotografiji sta skupaj v vodi — tam, kjer se Filip najbolj počuti doma.)"
+      },
       "osebni-asistent-2026": {
         "title": "Filip išče novega osebnega asistenta",
         "excerpt": "Filip potrebuje novega osebnega asistenta. Če imaš rad glasbo, vodo in balade — preberi več.",

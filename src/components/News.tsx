@@ -1,13 +1,26 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import Link from "next/link";
+import { useTranslations, useLocale } from "next-intl";
 import ScrollReveal from "./ScrollReveal";
 import newsData from "../../content/news.json";
 
+type NewsItem = (typeof newsData.items)[number];
+
+/** Newest first; pinned items float to the top when dates tie. */
+function sortNews(items: NewsItem[]) {
+  return [...items].sort((a, b) => {
+    if (a.pinned !== b.pinned) return a.pinned ? -1 : 1;
+    return b.date.localeCompare(a.date);
+  });
+}
+
 export default function News() {
   const t = useTranslations("news");
+  const locale = useLocale();
 
-  const item = newsData.items[0];
+  const items = sortNews(newsData.items);
+  const item = items[0];
   if (!item) return null;
 
   const itemT = (key: string) =>
@@ -53,10 +66,18 @@ export default function News() {
           <div className="w-20 h-0.5 bg-accent mx-auto" />
         </ScrollReveal>
 
-        {/* Single news — video top, text below, centered */}
+        {/* Featured news — media top, text below, centered */}
         <div className="max-w-3xl mx-auto">
-          {/* Video */}
           <ScrollReveal>
+            {item.image && (
+              <div className="rounded-2xl overflow-hidden mb-8">
+                <img
+                  src={item.image}
+                  alt={itemT("title")}
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            )}
             {item.video && (
               <div className="rounded-2xl overflow-hidden mb-8">
                 <video
@@ -70,9 +91,7 @@ export default function News() {
             )}
           </ScrollReveal>
 
-          {/* Text */}
           <ScrollReveal delay={0.15}>
-            {/* NOVO badge */}
             {item.pinned && (
               <span className="inline-flex items-center gap-1.5 mb-4">
                 <span
@@ -86,23 +105,37 @@ export default function News() {
 
             <p className="text-white/40 text-sm mb-2">{itemT("date")}</p>
             <h3 className="font-heading text-2xl lg:text-3xl font-bold mb-6">
-              {itemT("title")}!
+              {itemT("title")}
             </h3>
 
             <div className="space-y-4" style={{ textAlign: "justify" }}>
               {itemT("body")
                 .split("\n\n")
                 .map((paragraph: string, i: number) => (
-                  <p
-                    key={i}
-                    className="text-white/70 leading-relaxed"
-                  >
+                  <p key={i} className="text-white/70 leading-relaxed">
                     {renderTextWithEmails(paragraph)}
                   </p>
                 ))}
             </div>
           </ScrollReveal>
         </div>
+
+        {/* Archive link when more than one news item */}
+        {items.length > 1 && (
+          <ScrollReveal delay={0.3} className="text-center mt-12">
+            <Link
+              href={`/${locale}/novice`}
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-border hover:border-accent/40 bg-surface hover:bg-accent/5 transition-all duration-300 group"
+            >
+              <span className="text-white/70 group-hover:text-white font-medium transition-colors">
+                {t("viewAll")}
+              </span>
+              <span className="text-accent group-hover:translate-x-1 transition-transform duration-300">
+                &rarr;
+              </span>
+            </Link>
+          </ScrollReveal>
+        )}
       </div>
     </section>
   );

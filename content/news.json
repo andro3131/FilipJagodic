@@ -1,9 +1,17 @@
 {
   "items": [
     {
+      "key": "asistent-vili-2026",
+      "date": "2026-08-12",
+      "pinned": true,
+      "image": "https://filip-jagodic.b-cdn.net/Novice/asistent-in-Filip-slika.jpg",
+      "video": "",
+      "media": []
+    },
+    {
       "key": "osebni-asistent-2026",
       "date": "2026-03-19",
-      "pinned": true,
+      "pinned": false,
       "image": "",
       "video": "https://filip-jagodic.b-cdn.net/Novice/AQNGJ9o93_fWMpvlFoFg2cVnR.mp4",
       "media": []

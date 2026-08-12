@@ -6,10 +6,22 @@ import { motion } from "framer-motion";
 import Modal from "./Modal";
 import newsData from "../../content/news.json";
 
+type NewsItem = (typeof newsData.items)[number];
+
+/** Newest first; pinned items float to the top when dates tie. */
+function sortNews(items: NewsItem[]) {
+  return [...items].sort((a, b) => {
+    if (a.pinned !== b.pinned) return a.pinned ? -1 : 1;
+    return b.date.localeCompare(a.date);
+  });
+}
+
 export default function NewsAll() {
   const t = useTranslations("news");
   const locale = useLocale();
   const [openItem, setOpenItem] = useState<string | null>(null);
+
+  const items = sortNews(newsData.items);
 
   return (
     <section className="relative py-24 md:py-32 px-6 min-h-screen">
@@ -44,9 +56,9 @@ export default function NewsAll() {
           <div className="w-20 h-0.5 bg-accent mx-auto" />
         </motion.div>
 
-        {/* All news items */}
+        {/* All news items — sorted by date */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {newsData.items.map((item, index) => {
+          {items.map((item, index) => {
             const itemT = (key: string) =>
               t(`items.${item.key}.${key}` as Parameters<typeof t>[0]);
 
@@ -61,6 +73,17 @@ export default function NewsAll() {
                   onClick={() => setOpenItem(item.key)}
                   className="group w-full text-left bg-surface border border-border rounded-2xl overflow-hidden transition-all duration-300 hover:border-accent/40 hover:shadow-lg hover:shadow-accent/5 hover:-translate-y-1"
                 >
+                  {item.image && (
+                    <div className="relative aspect-video bg-black overflow-hidden">
+                      <img
+                        src={item.image}
+                        alt={itemT("title")}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-surface/80 to-transparent" />
+                    </div>
+                  )}
+
                   {item.video && (
                     <div className="relative aspect-video bg-black overflow-hidden">
                       <video
@@ -87,7 +110,7 @@ export default function NewsAll() {
                         <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
                           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                         </svg>
-                        Pomembno
+                        NOVO
                       </span>
                     )}
 
@@ -113,7 +136,7 @@ export default function NewsAll() {
       </div>
 
       {/* News detail modal */}
-      {newsData.items.map((item) => {
+      {items.map((item) => {
         const itemT = (key: string) =>
           t(`items.${item.key}.${key}` as Parameters<typeof t>[0]);
 
@@ -130,11 +153,34 @@ export default function NewsAll() {
               </h3>
               <p className="text-white/40 text-sm mb-6">{itemT("date")}</p>
 
+              {item.image && (
+                <div className="rounded-xl overflow-hidden mb-6">
+                  <img
+                    src={item.image}
+                    alt={itemT("title")}
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
+              )}
+
+              {item.video && (
+                <div className="rounded-xl overflow-hidden mb-6">
+                  <video
+                    src={item.video}
+                    controls
+                    playsInline
+                    preload="metadata"
+                    className="w-full"
+                  />
+                </div>
+              )}
+
               <div className="prose prose-invert max-w-none mb-8">
                 {itemT("body")
                   .split("\n\n")
                   .map((paragraph: string, i: number) => {
-                    const emailRegex = /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g;
+                    const emailRegex =
+                      /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g;
                     const parts = paragraph.split(emailRegex);
                     return (
                       <p
@@ -158,18 +204,6 @@ export default function NewsAll() {
                     );
                   })}
               </div>
-
-              {item.video && (
-                <div className="rounded-xl overflow-hidden mb-6">
-                  <video
-                    src={item.video}
-                    controls
-                    playsInline
-                    preload="metadata"
-                    className="w-full"
-                  />
-                </div>
-              )}
 
               {item.media && item.media.length > 0 && (
                 <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
