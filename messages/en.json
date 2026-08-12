@@ -523,7 +523,10 @@
     "about": "About Filip",
     "music": "Music",
     "collections": "Collections",
-    "contact": "Contact"
+    "contact": "Contact",
+    "rights": "All rights reserved.",
+    "contactLabel": "Contact:",
+    "contactName": "mum Andreja"
   },
   "common": {
     "close": "Close",

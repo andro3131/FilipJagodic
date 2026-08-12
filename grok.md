@@ -45,6 +45,8 @@ Hero → … → `#novice` (featured) → … (glej `src/app/[locale]/page.tsx`)
   - na isti podstrani (npr. že `/novice`) → scroll na vrh;
   - z druge podstrani, če obstaja full page (`novice`, `o-filipu`, `srecanja`, `galerija`, `glasba`) → gre na to pot;
   - studio / zbirke / kontakt (samo sekcije) → `/{locale}/#hash`.
+- **Scroll-spy (domača):** med skrolanjem se poudari trenutna sekcija; na heroju = Domov. Podstrani: active po poti (brez spy).
+- **Footer:** © leto + „Vse pravice pridržane.“ + Kontakt: mama Andreja (#kontakt) · Facebook.
 
 ### Jeziki
 

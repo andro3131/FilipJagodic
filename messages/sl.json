@@ -523,7 +523,10 @@
     "about": "O Filipu",
     "music": "Glasba",
     "collections": "Zbirke",
-    "contact": "Kontakt"
+    "contact": "Kontakt",
+    "rights": "Vse pravice pridržane.",
+    "contactLabel": "Kontakt:",
+    "contactName": "mama Andreja"
   },
   "common": {
     "close": "Zapri",

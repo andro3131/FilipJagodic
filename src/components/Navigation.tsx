@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations, useLocale } from "next-intl";
 import { useRouter, usePathname } from "next/navigation";
@@ -13,6 +13,21 @@ const PAGE_ROUTES: Record<string, string> = {
   galerija: "galerija",
   glasba: "glasba",
 };
+
+/** Vrstni red sekcij na domači (za scroll-spy). */
+const SECTION_ORDER = [
+  "novice",
+  "o-filipu",
+  "srecanja",
+  "galerija",
+  "glasba",
+  "studio",
+  "zbirke",
+  "kontakt",
+] as const;
+
+/** Aktivacijska črta pod fixed navo (px od vrha viewporta). */
+const SPY_OFFSET = 120;
 
 function linkClass(active: boolean, mobile = false) {
   const base = mobile
@@ -30,6 +45,8 @@ export default function Navigation() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  /** Na domači: trenutna sekcija ali null = hero / Domov. */
+  const [activeSection, setActiveSection] = useState<string | null>(null);
 
   const navLinks = [
     { hash: "novice", label: t("news") },
@@ -46,15 +63,21 @@ export default function Navigation() {
   const isMainPage =
     pathWithoutLocale === "/" || pathWithoutLocale === "";
 
-  const isHomeActive = isMainPage;
-
-  const isSectionActive = (hash: string) => {
+  const isSectionRouteActive = (hash: string) => {
     const route = PAGE_ROUTES[hash];
     if (!route) return false;
     return (
       pathWithoutLocale === `/${route}` ||
       pathWithoutLocale.startsWith(`/${route}/`)
     );
+  };
+
+  /** Domov: aktivno na heroju domače; na podstrani nikoli. */
+  const isHomeActive = isMainPage && activeSection === null;
+
+  const isLinkActive = (hash: string) => {
+    if (isMainPage) return activeSection === hash;
+    return isSectionRouteActive(hash);
   };
 
   /** Na domači → #hash; na podstrani z lastno potjo → /pot; sicer #hash na domači. */
@@ -71,6 +94,26 @@ export default function Navigation() {
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
+  const updateScrollSpy = useCallback(() => {
+    if (!isMainPage) return;
+
+    // Zelo na vrhu → Domov / hero
+    if (window.scrollY < 80) {
+      setActiveSection(null);
+      return;
+    }
+
+    let current: string | null = null;
+    for (const hash of SECTION_ORDER) {
+      const el = document.getElementById(hash);
+      if (!el) continue;
+      if (el.getBoundingClientRect().top <= SPY_OFFSET) {
+        current = hash;
+      }
+    }
+    setActiveSection(current);
+  }, [isMainPage]);
+
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
     hash: string,
@@ -85,6 +128,7 @@ export default function Navigation() {
     // Domača: vedno smooth scroll na sekcijo
     if (isMainPage) {
       e.preventDefault();
+      setActiveSection(hash);
       const run = () => scrollToId(hash);
       if (fromMobile) setTimeout(run, 350);
       else run();
@@ -99,9 +143,6 @@ export default function Navigation() {
       else run();
       return;
     }
-
-    // Druga podstran + ima lastno pot → href gre na /novice itd. (privzeto)
-    // Hash-only sekcije (studio, zbirke, kontakt) → href gre na /#hash (privzeto)
   };
 
   const goToLocale = (newLocale: string) => {
@@ -113,10 +154,25 @@ export default function Navigation() {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+      updateScrollSpy();
     };
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    window.addEventListener("resize", updateScrollSpy, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", updateScrollSpy);
+    };
+  }, [updateScrollSpy]);
+
+  // Ob zamenjavi poti: na podstrani sprazni spy; na domači osveži
+  useEffect(() => {
+    if (!isMainPage) {
+      setActiveSection(null);
+      return;
+    }
+    updateScrollSpy();
+  }, [isMainPage, pathname, updateScrollSpy]);
 
   return (
     <nav
@@ -139,6 +195,7 @@ export default function Navigation() {
                 onClick={(e) => {
                   if (isMainPage) {
                     e.preventDefault();
+                    setActiveSection(null);
                     window.scrollTo({ top: 0, behavior: "smooth" });
                   }
                 }}
@@ -147,7 +204,7 @@ export default function Navigation() {
                 {t("home")}
               </a>
               {navLinks.map((link) => {
-                const active = isSectionActive(link.hash);
+                const active = isLinkActive(link.hash);
                 return (
                   <a
                     key={link.hash}
@@ -240,6 +297,7 @@ export default function Navigation() {
                   setIsMobileMenuOpen(false);
                   if (isMainPage) {
                     e.preventDefault();
+                    setActiveSection(null);
                     setTimeout(
                       () => window.scrollTo({ top: 0, behavior: "smooth" }),
                       350
@@ -250,7 +308,7 @@ export default function Navigation() {
                 {t("home")}
               </a>
               {navLinks.map((link) => {
-                const active = isSectionActive(link.hash);
+                const active = isLinkActive(link.hash);
                 return (
                   <a
                     key={link.hash}
