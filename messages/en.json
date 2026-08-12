@@ -27,7 +27,10 @@
     "quoteAuthor": "— Helen Keller",
     "listenMusic": "Listen to Music",
     "meetFilip": "Meet Filip",
-    "videoAlt": "Filip Jagodič"
+    "videoAlt": "Filip Jagodič",
+    "bannerBadge": "Hiring",
+    "bannerText": "Andreja is looking for a personal assistant · 20 hours a week",
+    "bannerCta": "More information"
   },
   "about": {
     "supra": "Get to Know",
@@ -499,8 +502,14 @@
     "backToHome": "Back to news",
     "pageTitle": "News — Filip Jagodič",
     "pageDescription": "News and announcements about Filip Jagodič.",
-    "sharePrompt": "Share the good news.",
+    "sharePrompt": "Sharing helps find the right person.",
     "items": {
+      "andreja-asistent-2026": {
+        "title": "Personal assistant wanted for Andreja Pader",
+        "excerpt": "Part-time, 20 hours a week, in Laško. Joining an existing full-time assistant. Requirement: category B driving licence.",
+        "date": "12 August 2026",
+        "body": "A personal assistant is sought for Andreja Pader.\n\nHours: 20 per week (part-time). Location: her home in Laško. Team: you would join an assistant already employed full-time.\n\nProfile: woman, approximately 50–55 years of age (minor flexibility is fine); category B driving licence; reliability, a respectful manner, and readiness to work in a home setting.\n\nInterest in supporting Filip Jagodič is also welcome — occasional help and partial cover for his mother at activities where she cannot be present. Willingness to undertake additional training related to recovery after treatment is an advantage. A calm, constructive working relationship is essential.\n\nHow to apply: by email only — filipandrejaasistenca@gmail.com\n\nPlease introduce yourself briefly (experience, availability, motivation). Messages via other channels (e.g. social messenger) are not answered.\n\nDuring the summer period, response times may be slightly longer. Thank you for your understanding and for sharing this notice if you can."
+      },
       "asistent-vili-2026": {
         "title": "Filip has a new personal assistant — Vili",
         "excerpt": "Good news: Filip has found a new assistant, Vili. Filip loves his laughter and energy.",

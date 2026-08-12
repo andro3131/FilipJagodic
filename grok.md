@@ -80,8 +80,16 @@ Hero → … → `#novice` (featured) → … (glej `src/app/[locale]/page.tsx`)
 
 | key | date | pinned | media | Opomba |
 |-----|------|--------|-------|--------|
-| `asistent-vili-2026` | 2026-08-12 | da | slika CDN | **Aktualna** — Vili (brez priimka) |
-| `osebni-asistent-2026` | 2026-03-19 | ne | video CDN | **Arhiv** — iskanje asistenta |
+| `andreja-asistent-2026` | 2026-08-12 | **da** | — | **Featured** — osebna asistentka za Andrejo Pader (20 h/teden) |
+| `asistent-vili-2026` | 2026-08-12 | ne | slika CDN | Arhiv — Vili |
+| `osebni-asistent-2026` | 2026-03-19 | ne | video CDN | Arhiv — iskanje za Filipa |
+
+### Hero banner (2026-08-12, varianta A)
+
+- Temen pas + rdeč rob (`.hero-banner-strip`), badge **Išče se** / **Hiring**.
+- Hero tekst: *Andreja išče osebno asistentko · 20 ur na teden* (brez priimka).
+- Naslov novice: *Išče se osebna asistentka za Andrejo Pader*.
+- Klik → `#novice`. Desktop + mobile marquee.
 
 **Slika Vili:**  
 `https://filip-jagodic.b-cdn.net/Novice/asistent-in-Filip-slika.jpg`

@@ -27,7 +27,10 @@
     "quoteAuthor": "— Helen Keller",
     "listenMusic": "Poslušaj glasbo",
     "meetFilip": "Spoznaj Filipa",
-    "videoAlt": "Filip Jagodič"
+    "videoAlt": "Filip Jagodič",
+    "bannerBadge": "Išče se",
+    "bannerText": "Andreja išče osebno asistentko · 20 ur na teden",
+    "bannerCta": "Več informacij"
   },
   "about": {
     "supra": "Spoznaj",
@@ -499,8 +502,14 @@
     "backToHome": "Nazaj na novice",
     "pageTitle": "Novice — Filip Jagodič",
     "pageDescription": "Novice in obvestila o Filipu Jagodiču.",
-    "sharePrompt": "Z delitvijo deliš dobro novico.",
+    "sharePrompt": "Z delitvijo pomagaš poiskati pravo osebo.",
     "items": {
+      "andreja-asistent-2026": {
+        "title": "Išče se osebna asistentka za Andrejo Pader",
+        "excerpt": "Polovični delovni čas, 20 ur tedensko, v Laškem. Pridružitev obstoječi asistentki. Pogoj: vozniški izpit B kategorije.",
+        "date": "12. avgust 2026",
+        "body": "Išče se osebna asistentka za Andrejo Pader.\n\nObseg dela: 20 ur na teden (polovični delovni čas). Kraj: njen dom v Laškem. Ekipa: pridružila bi se asistentki, ki je že zaposlena za polni delovni čas.\n\nŽeleni profil: ženska, starost približno 50–55 let (manjša odstopanja so sprejemljiva); vozniški izpit B kategorije; zanesljivost, spoštljiv odnos in pripravljenost na sodelovanje v domačem okolju.\n\nZaželeno je tudi zanimanje za delo z Filipom Jagodičem — občasna podpora in delna nadomestitev mame pri aktivnostih, kjer sama ne more biti prisotna. Prednost ima pripravljenost na morebitno dodatno usposabljanje v povezavi z okrevanjem po zdravljenju. Pomembno je prijetno, mirno sodelovanje in dobro počutje v medsebojnem odnosu.\n\nPrijave izključno po e-pošti: filipandrejaasistenca@gmail.com\n\nV sporočilu se na kratko predstavite (izkušnje, razpoložljivost, motivacija). Na sporočila prek drugih kanalov (npr. ZS) se ne odgovarja.\n\nZaradi poletnega obdobja je odzivni čas lahko nekoliko daljši. Hvala za razumevanje in za morebitno delitev obvestila."
+      },
       "asistent-vili-2026": {
         "title": "Filip ima novega osebnega asistenta — Vilija",
         "excerpt": "Dobra novica: našel se je asistent Vili. Filip obožuje njegov smeh in energijo.",

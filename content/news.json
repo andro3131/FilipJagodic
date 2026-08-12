@@ -1,9 +1,17 @@
 {
   "items": [
     {
-      "key": "asistent-vili-2026",
+      "key": "andreja-asistent-2026",
       "date": "2026-08-12",
       "pinned": true,
+      "image": "",
+      "video": "",
+      "media": []
+    },
+    {
+      "key": "asistent-vili-2026",
+      "date": "2026-08-12",
+      "pinned": false,
       "image": "https://filip-jagodic.b-cdn.net/Novice/asistent-in-Filip-slika.jpg",
       "video": "",
       "media": []

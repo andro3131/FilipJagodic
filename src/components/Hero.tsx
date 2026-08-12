@@ -459,6 +459,57 @@ export default function Hero() {
           <p className="text-white/35 text-xs mt-1 mb-3">
             {t("quoteAuthor")}
           </p>
+
+          {/* Mobile banner strip — below quote, above video (varianta A) */}
+          <motion.div
+            className="overflow-hidden rounded-lg mt-2"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 2, duration: 0.8 }}
+          >
+            <a
+              href="#novice"
+              className="block relative"
+              onClick={(e) => {
+                e.preventDefault();
+                const el = document.getElementById("novice");
+                if (el) el.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              <div className="hero-banner-strip relative py-3">
+                <div
+                  className="flex whitespace-nowrap"
+                  style={{ animation: "marquee 14s linear infinite" }}
+                >
+                  {[0, 1].map((i) => (
+                    <div key={i} className="flex items-center gap-6 px-4 shrink-0">
+                      {[0, 1].map((j) => (
+                        <span key={j} className="flex items-center gap-2">
+                          <span className="inline-flex items-center justify-center px-1.5 py-0.5 border border-accent/70 rounded text-[9px] font-bold text-accent tracking-wider uppercase">
+                            {t("bannerBadge")}
+                          </span>
+                          <span
+                            className="inline-block w-1.5 h-1.5 rounded-full bg-accent/70"
+                            style={{
+                              animation: "banner-pulse 2.5s ease-in-out infinite",
+                              animationDelay: `${j * 0.5}s`,
+                            }}
+                            aria-hidden="true"
+                          />
+                          <span className="text-white/90 font-semibold text-xs tracking-wide uppercase">
+                            {t("bannerText")}
+                          </span>
+                          <span className="text-accent/90 font-medium text-[10px]">
+                            — {t("bannerCta")} →
+                          </span>
+                        </span>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </a>
+          </motion.div>
         </motion.div>
 
         {/* Mobile: buttons below video */}
@@ -493,6 +544,67 @@ export default function Hero() {
           </div>
         </motion.div>
       </div>
+
+      {/* Desktop news banner strip — above scroll indicator (varianta A) */}
+      <motion.div
+        className="hidden lg:block absolute left-0 right-0 bottom-16 overflow-hidden"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 2, duration: 0.8 }}
+        style={{ zIndex: 5 }}
+      >
+        <a
+          href="#novice"
+          className="block relative"
+          onClick={(e) => {
+            e.preventDefault();
+            const el = document.getElementById("novice");
+            if (el) el.scrollIntoView({ behavior: "smooth" });
+          }}
+        >
+          <div className="hero-banner-strip relative py-3.5">
+            <div
+              className="absolute inset-0 pointer-events-none opacity-40"
+              style={{
+                background:
+                  "linear-gradient(90deg, transparent 0%, rgba(212,64,64,0.08) 50%, transparent 100%)",
+                backgroundSize: "200% 100%",
+              }}
+              aria-hidden="true"
+            />
+            <div
+              className="flex whitespace-nowrap"
+              style={{ animation: "marquee 28s linear infinite" }}
+            >
+              {[0, 1].map((i) => (
+                <div key={i} className="flex items-center gap-10 px-6 shrink-0">
+                  {[0, 1].map((j) => (
+                    <span key={j} className="flex items-center gap-3">
+                      <span className="inline-flex items-center justify-center px-2.5 py-1 border border-accent/70 rounded text-xs font-bold text-accent tracking-wider uppercase">
+                        {t("bannerBadge")}
+                      </span>
+                      <span
+                        className="inline-block w-2 h-2 rounded-full bg-accent/70"
+                        style={{
+                          animation: "banner-pulse 2.5s ease-in-out infinite",
+                          animationDelay: `${j * 0.5}s`,
+                        }}
+                        aria-hidden="true"
+                      />
+                      <span className="text-white/90 font-semibold text-lg tracking-wide uppercase">
+                        {t("bannerText")}
+                      </span>
+                      <span className="text-accent font-medium text-sm">
+                        — {t("bannerCta")} →
+                      </span>
+                    </span>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        </a>
+      </motion.div>
 
       {/* Bottom blur overlay to hide wheelchair/floor */}
       <div

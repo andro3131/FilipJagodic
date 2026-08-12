@@ -81,10 +81,24 @@ body {
   50% { transform: translateX(15px); }
 }
 
+/* Hero hiring banner marquee */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 /* Pulse for "NOVO" badge on pinned news */
 @keyframes banner-pulse {
   0%, 100% { opacity: 0.6; }
   50% { opacity: 1; }
+}
+
+/* Varianta A: temen pas + rdeč rob (ne poln rdeč fill) */
+.hero-banner-strip {
+  background: linear-gradient(90deg, #141214 0%, #1a1616 40%, #1e1818 60%, #141214 100%);
+  border-top: 1px solid rgba(212, 64, 64, 0.55);
+  border-bottom: 1px solid rgba(212, 64, 64, 0.55);
+  box-shadow: 0 0 24px rgba(212, 64, 64, 0.12);
 }
 
 /* Mouse-follow shimmer on title text */
